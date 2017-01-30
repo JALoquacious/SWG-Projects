@@ -114,7 +114,7 @@ namespace Warmups.BLL
         public bool HasEven(int[] numbers)
         {
             var evens = numbers.Where(n => n % 2 == 0).ToList();
-            return evens.Count > 0;
+            return (evens.Count > 0);
         }
         
         public int[] KeepLast(int[] numbers)
