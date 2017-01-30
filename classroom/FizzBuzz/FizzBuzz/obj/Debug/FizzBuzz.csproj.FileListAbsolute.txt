@@ -1,0 +1,6 @@
+X:\CODE\Software Guild\C# Tutorial\FizzBuzz\FizzBuzz\bin\Debug\FizzBuzz.exe.config
+X:\CODE\Software Guild\C# Tutorial\FizzBuzz\FizzBuzz\obj\Debug\FizzBuzz.csprojResolveAssemblyReference.cache
+X:\CODE\Software Guild\C# Tutorial\FizzBuzz\FizzBuzz\bin\Debug\FizzBuzz.exe
+X:\CODE\Software Guild\C# Tutorial\FizzBuzz\FizzBuzz\bin\Debug\FizzBuzz.pdb
+X:\CODE\Software Guild\C# Tutorial\FizzBuzz\FizzBuzz\obj\Debug\FizzBuzz.exe
+X:\CODE\Software Guild\C# Tutorial\FizzBuzz\FizzBuzz\obj\Debug\FizzBuzz.pdb

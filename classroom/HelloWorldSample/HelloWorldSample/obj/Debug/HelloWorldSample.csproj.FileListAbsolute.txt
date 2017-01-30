@@ -1,0 +1,6 @@
+X:\CODE\Software Guild\C# Tutorial\HelloWorldSample\HelloWorldSample\bin\Debug\HelloWorldSample.exe.config
+X:\CODE\Software Guild\C# Tutorial\HelloWorldSample\HelloWorldSample\bin\Debug\HelloWorldSample.exe
+X:\CODE\Software Guild\C# Tutorial\HelloWorldSample\HelloWorldSample\bin\Debug\HelloWorldSample.pdb
+X:\CODE\Software Guild\C# Tutorial\HelloWorldSample\HelloWorldSample\obj\Debug\HelloWorldSample.csprojResolveAssemblyReference.cache
+X:\CODE\Software Guild\C# Tutorial\HelloWorldSample\HelloWorldSample\obj\Debug\HelloWorldSample.exe
+X:\CODE\Software Guild\C# Tutorial\HelloWorldSample\HelloWorldSample\obj\Debug\HelloWorldSample.pdb

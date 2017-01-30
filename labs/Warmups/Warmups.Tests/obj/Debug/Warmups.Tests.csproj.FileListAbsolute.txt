@@ -1,0 +1,18 @@
+D:\Git\Curriculum\dotnet\ObjectOrientedProgramming\01-Basics\Assessments\Warmups\Start\Warmups.Tests\bin\Debug\Warmups.Tests.dll
+D:\Git\Curriculum\dotnet\ObjectOrientedProgramming\01-Basics\Assessments\Warmups\Start\Warmups.Tests\bin\Debug\Warmups.Tests.pdb
+D:\Git\Curriculum\dotnet\ObjectOrientedProgramming\01-Basics\Assessments\Warmups\Start\Warmups.Tests\bin\Debug\nunit.framework.dll
+D:\Git\Curriculum\dotnet\ObjectOrientedProgramming\01-Basics\Assessments\Warmups\Start\Warmups.Tests\bin\Debug\Warmups.BLL.dll
+D:\Git\Curriculum\dotnet\ObjectOrientedProgramming\01-Basics\Assessments\Warmups\Start\Warmups.Tests\bin\Debug\Warmups.BLL.pdb
+D:\Git\Curriculum\dotnet\ObjectOrientedProgramming\01-Basics\Assessments\Warmups\Start\Warmups.Tests\bin\Debug\nunit.framework.xml
+D:\Git\Curriculum\dotnet\ObjectOrientedProgramming\01-Basics\Assessments\Warmups\Start\Warmups.Tests\obj\Debug\Warmups.Tests.csprojResolveAssemblyReference.cache
+D:\Git\Curriculum\dotnet\ObjectOrientedProgramming\01-Basics\Assessments\Warmups\Start\Warmups.Tests\obj\Debug\Warmups.Tests.dll
+D:\Git\Curriculum\dotnet\ObjectOrientedProgramming\01-Basics\Assessments\Warmups\Start\Warmups.Tests\obj\Debug\Warmups.Tests.pdb
+X:\CODE\Software Guild\Public\james.a.likoudis\labs\Warmups\Warmups.Tests\bin\Debug\Warmups.Tests.dll
+X:\CODE\Software Guild\Public\james.a.likoudis\labs\Warmups\Warmups.Tests\bin\Debug\Warmups.Tests.pdb
+X:\CODE\Software Guild\Public\james.a.likoudis\labs\Warmups\Warmups.Tests\bin\Debug\nunit.framework.dll
+X:\CODE\Software Guild\Public\james.a.likoudis\labs\Warmups\Warmups.Tests\bin\Debug\Warmups.BLL.dll
+X:\CODE\Software Guild\Public\james.a.likoudis\labs\Warmups\Warmups.Tests\bin\Debug\Warmups.BLL.pdb
+X:\CODE\Software Guild\Public\james.a.likoudis\labs\Warmups\Warmups.Tests\bin\Debug\nunit.framework.xml
+X:\CODE\Software Guild\Public\james.a.likoudis\labs\Warmups\Warmups.Tests\obj\Debug\Warmups.Tests.csprojResolveAssemblyReference.cache
+X:\CODE\Software Guild\Public\james.a.likoudis\labs\Warmups\Warmups.Tests\obj\Debug\Warmups.Tests.dll
+X:\CODE\Software Guild\Public\james.a.likoudis\labs\Warmups\Warmups.Tests\obj\Debug\Warmups.Tests.pdb

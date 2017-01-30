@@ -1,0 +1,10 @@
+D:\Git\Curriculum\dotnet\ObjectOrientedProgramming\01-Basics\Assessments\Warmups\Start\Warmups.BLL\bin\Debug\Warmups.BLL.dll
+D:\Git\Curriculum\dotnet\ObjectOrientedProgramming\01-Basics\Assessments\Warmups\Start\Warmups.BLL\bin\Debug\Warmups.BLL.pdb
+D:\Git\Curriculum\dotnet\ObjectOrientedProgramming\01-Basics\Assessments\Warmups\Start\Warmups.BLL\obj\Debug\Warmups.BLL.csprojResolveAssemblyReference.cache
+D:\Git\Curriculum\dotnet\ObjectOrientedProgramming\01-Basics\Assessments\Warmups\Start\Warmups.BLL\obj\Debug\Warmups.BLL.dll
+D:\Git\Curriculum\dotnet\ObjectOrientedProgramming\01-Basics\Assessments\Warmups\Start\Warmups.BLL\obj\Debug\Warmups.BLL.pdb
+X:\CODE\Software Guild\Public\james.a.likoudis\labs\Warmups\Warmups.BLL\bin\Debug\Warmups.BLL.dll
+X:\CODE\Software Guild\Public\james.a.likoudis\labs\Warmups\Warmups.BLL\bin\Debug\Warmups.BLL.pdb
+X:\CODE\Software Guild\Public\james.a.likoudis\labs\Warmups\Warmups.BLL\obj\Debug\Warmups.BLL.csprojResolveAssemblyReference.cache
+X:\CODE\Software Guild\Public\james.a.likoudis\labs\Warmups\Warmups.BLL\obj\Debug\Warmups.BLL.dll
+X:\CODE\Software Guild\Public\james.a.likoudis\labs\Warmups\Warmups.BLL\obj\Debug\Warmups.BLL.pdb
