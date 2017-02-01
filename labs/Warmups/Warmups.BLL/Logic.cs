@@ -110,7 +110,7 @@ namespace Warmups.BLL
         {
             if (noDoubles && die1 == die2)
             {
-                return (die1 + 1 == 6) ? ++die1 % 5 + die2 : ++die1 + die2;
+                return (die1 + 1 == 6) ? (++die1 % 5 + die2) : (++die1 + die2);
             }
             return die1 + die2;
         }

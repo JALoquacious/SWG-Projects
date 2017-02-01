@@ -16,3 +16,12 @@ X:\CODE\Software Guild\Public\james.a.likoudis\labs\Warmups\Warmups.Tests\bin\De
 X:\CODE\Software Guild\Public\james.a.likoudis\labs\Warmups\Warmups.Tests\obj\Debug\Warmups.Tests.csprojResolveAssemblyReference.cache
 X:\CODE\Software Guild\Public\james.a.likoudis\labs\Warmups\Warmups.Tests\obj\Debug\Warmups.Tests.dll
 X:\CODE\Software Guild\Public\james.a.likoudis\labs\Warmups\Warmups.Tests\obj\Debug\Warmups.Tests.pdb
+X:\CODE\Software Guild\Public\C#\labs\Warmups\Warmups.Tests\bin\Debug\Warmups.Tests.dll
+X:\CODE\Software Guild\Public\C#\labs\Warmups\Warmups.Tests\bin\Debug\Warmups.Tests.pdb
+X:\CODE\Software Guild\Public\C#\labs\Warmups\Warmups.Tests\bin\Debug\nunit.framework.dll
+X:\CODE\Software Guild\Public\C#\labs\Warmups\Warmups.Tests\bin\Debug\Warmups.BLL.dll
+X:\CODE\Software Guild\Public\C#\labs\Warmups\Warmups.Tests\bin\Debug\Warmups.BLL.pdb
+X:\CODE\Software Guild\Public\C#\labs\Warmups\Warmups.Tests\bin\Debug\nunit.framework.xml
+X:\CODE\Software Guild\Public\C#\labs\Warmups\Warmups.Tests\obj\Debug\Warmups.Tests.csprojResolveAssemblyReference.cache
+X:\CODE\Software Guild\Public\C#\labs\Warmups\Warmups.Tests\obj\Debug\Warmups.Tests.dll
+X:\CODE\Software Guild\Public\C#\labs\Warmups\Warmups.Tests\obj\Debug\Warmups.Tests.pdb

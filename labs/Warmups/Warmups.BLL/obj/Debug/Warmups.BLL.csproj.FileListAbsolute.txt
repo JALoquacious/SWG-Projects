@@ -8,3 +8,8 @@ X:\CODE\Software Guild\Public\james.a.likoudis\labs\Warmups\Warmups.BLL\bin\Debu
 X:\CODE\Software Guild\Public\james.a.likoudis\labs\Warmups\Warmups.BLL\obj\Debug\Warmups.BLL.csprojResolveAssemblyReference.cache
 X:\CODE\Software Guild\Public\james.a.likoudis\labs\Warmups\Warmups.BLL\obj\Debug\Warmups.BLL.dll
 X:\CODE\Software Guild\Public\james.a.likoudis\labs\Warmups\Warmups.BLL\obj\Debug\Warmups.BLL.pdb
+X:\CODE\Software Guild\Public\C#\labs\Warmups\Warmups.BLL\bin\Debug\Warmups.BLL.dll
+X:\CODE\Software Guild\Public\C#\labs\Warmups\Warmups.BLL\bin\Debug\Warmups.BLL.pdb
+X:\CODE\Software Guild\Public\C#\labs\Warmups\Warmups.BLL\obj\Debug\Warmups.BLL.csprojResolveAssemblyReference.cache
+X:\CODE\Software Guild\Public\C#\labs\Warmups\Warmups.BLL\obj\Debug\Warmups.BLL.dll
+X:\CODE\Software Guild\Public\C#\labs\Warmups\Warmups.BLL\obj\Debug\Warmups.BLL.pdb
