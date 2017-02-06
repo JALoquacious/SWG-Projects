@@ -15,7 +15,7 @@ namespace DateTimeLab
         /// </summary>
         public DateTime GetTheDateToday()
         {
-            throw new NotImplementedException();
+            return DateTime.Today;
         }
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace DateTimeLab
         /// </summary>
         public string GetShortDateStringFromParamaters(int month, int day, int year)
         {
-            throw new NotImplementedException();
+            return new DateTime(year, month, day).ToString("M/d/yy");
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace DateTimeLab
         /// </summary>
         public DateTime GetDateTimeObjectFromString(string date)
         {
-            throw new NotImplementedException();
+            return DateTime.Parse(date);
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace DateTimeLab
         /// </summary>
         public string GetFormatedDateString(string date)
         {
-            throw new NotImplementedException();
+            return DateTime.Parse(date).ToString("MM.dd.yyyy hh:mm tt");
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace DateTimeLab
         /// </summary>
         public string GetDateInSixMonths(string date)
         {
-            throw new NotImplementedException();
+            return DateTime.Parse(date).AddMonths(6).ToString("MMMM d, yyyy");
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace DateTimeLab
         /// </summary>
         public string GetDateThirtyDaysInPast(string date)
         {
-            throw new NotImplementedException();
+            return DateTime.Parse(date).AddDays(-30).ToString("MMMM d, yyyy");
         }
 
 
@@ -80,7 +80,16 @@ namespace DateTimeLab
         /// <returns>An array of date objects of size count</returns>
         public DateTime[] GetNextWednesdays(int count, string startDate)
         {
-            throw new NotImplementedException();
+            DateTime[] upcomingWednesdays = new DateTime[count];
+            DateTime start = DateTime.Parse(startDate);
+            int difference = (7 + (int) DayOfWeek.Wednesday - (int) start.DayOfWeek) % 7;
+
+            upcomingWednesdays[0] = start.AddDays(difference);
+            for (int i = 1; i < count; i++)
+            {
+                upcomingWednesdays[i] = upcomingWednesdays[i - 1].AddDays(7);
+            }
+            return upcomingWednesdays;
         }
     }
 }
