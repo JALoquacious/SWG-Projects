@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using BattleShip.BLL.GameLogic;
 using BattleShip.BLL.Requests;
 using BattleShip.BLL.Responses;
-using BattleShip.BLL.Ships;
 
 namespace BattleShip.UI
 {
