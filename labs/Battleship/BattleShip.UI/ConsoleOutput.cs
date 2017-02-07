@@ -113,26 +113,26 @@ namespace BattleShip.UI
             switch (response.ShotStatus)
             {
                 case ShotStatus.Victory:
-                    {
-                        Console.WriteLine("\nHit! You sunk the last ship in your enemy's fleet!");
-                        Console.WriteLine($"\nVICTORY IS YOURS, {player.Name}!");
-                        return true;
-                    }
+                {
+                    Console.WriteLine("\nHit! You sunk the last ship in your enemy's fleet!");
+                    Console.WriteLine($"\nVICTORY IS YOURS, {player.Name}!");
+                    return true;
+                }
                 case ShotStatus.HitAndSunk:
-                    {
-                        Console.WriteLine($"\nHit! The enemy's {response.ShipImpacted} has sunk!");
-                        return false;
-                    }
+                {
+                    Console.WriteLine($"\nHit! The enemy's {response.ShipImpacted} has sunk!");
+                    return false;
+                }
                 case ShotStatus.Hit:
-                    {
-                        Console.Write("\nHit! There are reports of major damage from the enemy front.");
-                        return false;
-                    }
+                {
+                    Console.Write("\nHit! There are reports of major damage from the enemy front.");
+                    return false;
+                }
                 case ShotStatus.Miss:
-                    {
-                        Console.WriteLine("\nMiss! Your precious munitions have splashed into the ocean.");
-                        return false;
-                    }
+                {
+                    Console.WriteLine("\nMiss! Your precious munitions have splashed into the ocean.");
+                    return false;
+                }
                 default:
                     return false;
             }
