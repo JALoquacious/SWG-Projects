@@ -18,12 +18,12 @@ namespace LINQ
             //Exercise5();
             //Exercise6();
             //Exercise7();
-            Exercise8();
+            //Exercise8();
             //Exercise9();
-            //Exercise10();
+            Exercise10();
             //Exercise11();
             //Exercise12();
-            Exercise13();
+            //Exercise13();
             //Exercise14();
             //Exercise15();
             //Exercise16();
@@ -41,7 +41,7 @@ namespace LINQ
             //Exercise28();
             //Exercise29();
             //Exercise30();
-            Exercise31();
+            //Exercise31();
 
             Console.WriteLine();
             Console.WriteLine("Press any key to continue...");
