@@ -13,7 +13,7 @@ namespace BattleShip.UI
             Console.ReadLine();
         }
 
-        public static string GetPlayerName(User current)
+        public static string GetPlayerName(IPlayer current)
         {
             Console.Clear();
             do
@@ -51,6 +51,23 @@ namespace BattleShip.UI
             } while (true);
         }
 
+        public static Coordinate GetCoordinate()
+        {
+            do
+            {
+                Console.Write("\nEnter a coordinate <A-J><1-10> (ex: A1, B8, F5, J10): ");
+                string input = Console.ReadLine();
+
+                if (Utilities.IsValidCoordinate(input))
+                {
+                    return Utilities.ConvertToCoordinate(input);
+                }
+
+                Console.WriteLine("That was not a valid coordinate.");
+
+            } while (true);
+        }
+
         public static ShipDirection GetShipDirection()
         {
             var charToAngle = new Dictionary<char, ShipDirection>
@@ -76,7 +93,7 @@ namespace BattleShip.UI
             } while (true);
         }
 
-        public static bool Attack(User player, User opponent, ICoordinateGetter coordinateGetter)
+        public static bool Attack(IPlayer player, IPlayer opponent)
         {
             bool isVictory;
             bool targetAcquired;
@@ -89,7 +106,7 @@ namespace BattleShip.UI
                 ConsoleOutput.DisplayBoard(opponent, true);
                 Console.WriteLine($"\n{player.Name}, fire munitions at {opponent.Name}!");
 
-                radar = coordinateGetter.GetCoordinate();
+                radar = ConsoleInput.GetCoordinate();
                 response = opponent.Board.FireShot(radar);
                 targetAcquired = ConsoleOutput.IsValidShot(response);
 
@@ -111,17 +128,18 @@ namespace BattleShip.UI
             return false;
         }
 
-        public static ICoordinateGetter InputFactory()
+        public static IPlayer PlayerFactory(string playerNumber)
         {
-            Console.Write("Do you want to play with (H)uman or (C)omputer coordinate input? ");
+            Console.Clear();
+            Console.Write($"Player {playerNumber}, do you want to play as a (H)uman or (C)omputer? ");
             do
             {
                 string input = Console.ReadLine().ToUpper();
-                if (input == "H") return new HumanCoordinateInput();
-                if (input == "C") return new ComputerCoordinateInput();
+                if (input == "H") return new HumanPlayer();
+                if (input == "C") return new ComputerPlayer();
 
                 Console.WriteLine("That was not a valid input.");
-                Console.WriteLine("Please enter H for human or C for computer.");
+                Console.Write("Please enter H for human or C for computer. ");
             } while (true);
         }
     }

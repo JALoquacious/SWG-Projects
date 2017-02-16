@@ -15,6 +15,25 @@ namespace BattleShip.UI
             return _generator.Next(100) < 50;
         }
 
+        public static Coordinate GenerateCoordinate()
+        {
+            Console.WriteLine("\nComputer is generating a coordinate...");
+
+            int letter = _generator.Next(1, 11);
+            int number = _generator.Next(1, 11);
+
+            return new Coordinate(letter, number);
+        }
+
+        public static ShipDirection GenerateShipDirection()
+        {
+            Console.WriteLine("\nComputer is generating a ship orientation...");
+
+            int direction = _generator.Next(0, 4);
+
+            return (ShipDirection)direction;
+        }
+
         public static bool IsValidYesNo(string input)
         {
             return new Regex(@"^(y(es)?|n(o)?)$", RegexOptions.IgnoreCase).IsMatch(input);
@@ -48,15 +67,7 @@ namespace BattleShip.UI
             return new Coordinate(row, col);
         }
 
-        public static void ClearScreenPrompt()
-        {
-            Console.WriteLine("\nYour turn is over. To hide your data from your opponent,");
-            Console.WriteLine("hit <Enter> to clear your screen and proceed to his/her turn.");
-            Console.ReadLine();
-            Console.Clear();
-        }
-
-        public static string GetShipHistory(User player, Coordinate coord)
+        public static string GetShipHistory(IPlayer player, Coordinate coord)
         {
             Ship[] ships = player.Board.Ships;
             for (int i = 0; i < ships.Length; i++)
@@ -76,7 +87,7 @@ namespace BattleShip.UI
             return " ";
         }
 
-        public static string GetShotHistory(User opponent, Coordinate coord)
+        public static string GetShotHistory(IPlayer opponent, Coordinate coord)
         {
             if (opponent.Board.ShotHistory.ContainsKey(coord))
             {
@@ -97,50 +108,11 @@ namespace BattleShip.UI
             return " ";
         }
 
-        public static void SetUpBoard(User player, ICoordinateGetter coordinateGetter)
-        {
-            ShipPlacement response;
-
-            var ships = new Dictionary<ShipType, int>()
-            {
-                { ShipType.Destroyer,  2 },
-                { ShipType.Cruiser,    3 },
-                { ShipType.Submarine,  3 },
-                { ShipType.Battleship, 4 },
-                { ShipType.Carrier,    5 }
-            };
-
-            foreach (KeyValuePair<ShipType, int> vessel in ships)
-            {
-                do
-                {
-                    Console.Clear();
-                    ConsoleOutput.DisplayBoard(player, false);
-                    ConsoleOutput.DisplayPlacementMessage(player, vessel.Key, vessel.Value);
-                    var request = new PlaceShipRequest()
-                    {
-                        Coordinate = coordinateGetter.GetCoordinate(),
-                        Direction = ConsoleInput.GetShipDirection(),
-                        ShipType = vessel.Key
-                    };
-
-                    response = player.Board.PlaceShip(request);
-                    Console.Clear();
-                    ConsoleOutput.DisplayBoard(player, false);
-                    ConsoleOutput.DisplayShipResponse(request, response);
-                    ConsoleInput.Continue();
-                } while (response != ShipPlacement.Ok);
-            }
-            Console.Clear();
-            ConsoleOutput.DisplayBoard(player, false);
-            ClearScreenPrompt();
-        }
-
-        public static void Retaliate(bool player1Turn, User player1, User player2, ICoordinateGetter coordinateGetter)
+        public static void Retaliate(bool player1Turn, IPlayer player1, IPlayer player2)
         {
             bool gameOver = false;
-            User player = (player1Turn) ? player1 : player2;
-            User opponent = (player == player1) ? player2 : player1;
+            IPlayer player = (player1Turn) ? player1 : player2;
+            IPlayer opponent = (player == player1) ? player2 : player1;
 
             Console.WriteLine($"{player.Name}, your superior targeting system has given you");
             Console.WriteLine($"first strike advantage. Hit {opponent.Name} before he/she realizes!");
@@ -149,8 +121,8 @@ namespace BattleShip.UI
             while (!gameOver)
             {
                 gameOver = (player1Turn)
-                    ? ConsoleInput.Attack(player1, player2, coordinateGetter)
-                    : ConsoleInput.Attack(player2, player1, coordinateGetter);
+                    ? ConsoleInput.Attack(player1, player2)
+                    : ConsoleInput.Attack(player2, player1);
                  
                 player1Turn = !player1Turn;
             }

@@ -2,13 +2,6 @@
 {
     public class GameFlow
     {
-        private ICoordinateGetter _coordinateGetter;
-        private IDirectionGetter _directionGetter;
-        public GameFlow(ICoordinateGetter coordinateGetter)
-        {
-            _coordinateGetter = coordinateGetter;
-        }
-
         public void Play()
         {
             bool gamePlay = true;
@@ -22,19 +15,19 @@
                 ConsoleOutput.DisplayIntro();
 
                 // Instantiate players
-                User player1 = new User.Player1();
-                User player2 = new User.Player2();
+                IPlayer player1 = ConsoleInput.PlayerFactory("1");
+                IPlayer player2 = ConsoleInput.PlayerFactory("2");
 
                 // Assign user names
                 player1.Name = ConsoleInput.GetPlayerName(player1);
                 player2.Name = ConsoleInput.GetPlayerName(player2);
 
                 // Setup ships
-                Utilities.SetUpBoard(player1, _coordinateGetter);
-                Utilities.SetUpBoard(player2, _coordinateGetter);
+                player1.SetUpBoard();
+                player2.SetUpBoard();
 
                 // Start dueling
-                Utilities.Retaliate(player1Turn, player1, player2, _coordinateGetter);
+                Utilities.Retaliate(player1Turn, player1, player2);
 
                 // Continue / end game
                 gamePlay = ConsoleInput.IsGameEnded();

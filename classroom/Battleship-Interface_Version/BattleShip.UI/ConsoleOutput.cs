@@ -28,7 +28,15 @@ namespace BattleShip.UI
             Console.ReadLine();
         }
 
-        public static void DisplayPlacementMessage(User player, ShipType ship, int length)
+        public static void ClearScreenPrompt()
+        {
+            Console.WriteLine("\nYour turn is over. To hide your data from your opponent,");
+            Console.WriteLine("hit <Enter> to clear your screen and proceed to his/her turn.");
+            Console.ReadLine();
+            Console.Clear();
+        }
+
+        public static void DisplayPlacementMessage(IPlayer player, ShipType ship, int length)
         {
             Console.WriteLine($"\n{player.Name}, place your {ship} on the board.");
             Console.WriteLine($"Your {ship} takes up {length} spots, so plan carefully.");
@@ -50,7 +58,7 @@ namespace BattleShip.UI
             }
         }
 
-        public static void DisplayBoard(User user, bool isOpponent)
+        public static void DisplayBoard(IPlayer user, bool isOpponent)
         {
             string[] xAxisLabels =
             {
@@ -108,7 +116,7 @@ namespace BattleShip.UI
             return true;
         }
 
-        public static bool OpponentFleetSunk(FireShotResponse response, User player)
+        public static bool OpponentFleetSunk(FireShotResponse response, IPlayer player)
         {
             switch (response.ShotStatus)
             {

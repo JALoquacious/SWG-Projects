@@ -9,5 +9,6 @@ namespace BattleShip.UI
         string Name { get; set; }
         Board Board { get; set; }
         PlaceShipRequest GetPlaceShipRequest(ShipType ship);
+        void SetUpBoard();
     }
 }
