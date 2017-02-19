@@ -1,10 +1,6 @@
 ﻿using SGBank.BLL;
 using SGBank.Models.Responses;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SGBank.UI.Workflows
 {
@@ -19,7 +15,8 @@ namespace SGBank.UI.Workflows
             string accountNumber = Console.ReadLine();
 
             Console.Write("Enter a deposit amount: ");
-            decimal amount = decimal.Parse(Console.ReadLine());
+            decimal amount;
+            decimal.TryParse(Console.ReadLine(), out amount);
 
             AccountDepositResponse response = accountManager.Deposit(accountNumber, amount);
 
@@ -28,7 +25,7 @@ namespace SGBank.UI.Workflows
                 Console.WriteLine("Deposit completed!");
                 Console.WriteLine($"Account Number: {response.Account.AccountNumber}");
                 Console.WriteLine($"Old balance: {response.OldBalance:c}");
-                Console.WriteLine($"Amount Deposited: {response.Amount:c}");
+                Console.WriteLine($"Amount deposited: {response.Amount:c}");
                 Console.WriteLine($"New balance: {response.Account.Balance:c}");
             }
             else
