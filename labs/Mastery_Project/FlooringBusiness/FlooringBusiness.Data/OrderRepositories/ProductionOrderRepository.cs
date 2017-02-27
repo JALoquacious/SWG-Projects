@@ -54,11 +54,6 @@ namespace FlooringBusiness.Data.OrderRepositories
                 _errorLog.Annotate($"{DateTime.Now} -- File I/O Error: {error.Message}");
                 return null;
             }
-            catch (FormatException error)
-            {
-                _errorLog.Annotate($"{DateTime.Now} -- Improper Format: {error.Message}");
-                return null;
-            }
             catch (Exception error)
             {
                 _errorLog.Annotate($"{DateTime.Now} -- Unknown Error: {error.Message}");
@@ -93,10 +88,6 @@ namespace FlooringBusiness.Data.OrderRepositories
             catch (IOException error)
             {
                 _errorLog.Annotate($"{DateTime.Now} -- File I/O Error: {error.Message}");
-            }
-            catch (FormatException error)
-            {
-                _errorLog.Annotate($"{DateTime.Now} -- Improper Format: {error.Message}");
             }
             catch (Exception error)
             {
