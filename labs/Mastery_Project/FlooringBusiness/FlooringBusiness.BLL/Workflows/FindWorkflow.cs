@@ -31,8 +31,8 @@ namespace FlooringBusiness.BLL.Workflows
 
             if (target != null)
             {
-                response.Success = true;
                 response.Order = target;
+                response.Success = true;
                 response.Message = "Order(s) matching specification found. Returning to Main Menu...";
                 return response;
             }

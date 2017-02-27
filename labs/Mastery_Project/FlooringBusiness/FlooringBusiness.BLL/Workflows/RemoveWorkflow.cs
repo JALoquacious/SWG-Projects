@@ -32,6 +32,7 @@ namespace FlooringBusiness.BLL.Workflows
                 orders.RemoveAll(o => o.OrderNumber == request.OrderNumber);
                 _orderRepository.SaveOrders(request.Date, orders);
 
+                response.Orders = orders;
                 response.Success = true;
                 response.Message = "Order(s) removed successfully. Returning to Main Menu...";
                 return response;

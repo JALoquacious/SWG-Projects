@@ -66,6 +66,10 @@ namespace FlooringBusiness.BLL.Workflows
             orders[request.OrderNumber - 1] = editedOrder;
             _orderRepository.SaveOrders(request.Date, orders);
 
+            response.Orders = orders;
+            response.Success = true;
+            response.Message = $"Order #{request.OrderNumber} edited successfully. Returning to Main Menu...";
+            
             return response;
         }
     }

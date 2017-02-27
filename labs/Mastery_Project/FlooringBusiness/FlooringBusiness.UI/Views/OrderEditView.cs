@@ -36,10 +36,10 @@ namespace FlooringBusiness.UI.Views
                 Order editTarget = response.Order;
                 Utilities.PrintOrderDetails(editTarget, WorkflowType.Edit);
 
-                string newCustomer = Utilities.GetString("New Company Name", new Regex(@"^$|[\w ,.]{2,20}"), false).Trim().ToTitle(); // ?? editTarget.Customer;
-                string newProduct = Utilities.GetString("New Product Name", new Regex(@"^$|[\w ,.]{2,20}"), false).Trim().ToTitle(); // ?? editTarget.Product.ToString();
+                string newCustomer = Utilities.GetString("New Company Name", new Regex(@"^$|^[\w ,.]{2,20}$"), false).Trim().ToTitle(); // ?? editTarget.Customer;
+                string newProduct = Utilities.GetString("New Product Name", new Regex(@"^$|^[\w ,.]{2,20}$"), false).Trim().ToTitle(); // ?? editTarget.Product.ToString();
                 string newState = Utilities.GetString("New State", new Regex(@"^$|^[A-Za-z]{2}$"), false).ToUpper(); // ?? editTarget.StateTax.StateAbbreviation).ToUpper();
-                string newArea = Utilities.GetString("New Area of Material (sq. ft.)", new Regex(@"^$|^\d+(\.\d+)?$"), false);
+                string newArea = Utilities.GetString("New Area of Material (sq. ft.)", new Regex(@"^$|^\d{3,7}(\.\d+)?$"), false);
 
                 request = new Request
                 {

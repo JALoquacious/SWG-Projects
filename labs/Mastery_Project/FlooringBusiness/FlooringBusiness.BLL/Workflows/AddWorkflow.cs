@@ -35,7 +35,7 @@ namespace FlooringBusiness.BLL.Workflows
                                     $" Actual workflow type in request: {request.Type}.");
             }
 
-            if (request.Date < DateTime.Now)
+            if (request.Date < DateTime.Now.Date)
             {
                 response.Success = false;
                 response.Message = "Order cannot be added to a past date. Ending workflow...";
@@ -72,6 +72,7 @@ namespace FlooringBusiness.BLL.Workflows
             orders.Add(currentOrder);
             _orderRepository.SaveOrders(request.Date, orders);
 
+            response.Orders = orders;
             response.Success = true;
             response.Message = "Order added successfully. Returning to Main Menu...";
             return response;

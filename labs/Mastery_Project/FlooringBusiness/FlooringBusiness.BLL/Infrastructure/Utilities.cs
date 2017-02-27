@@ -35,7 +35,7 @@ namespace FlooringBusiness.BLL.Infrastructure
         {
             while (true)
             {
-                Console.Write($"\nEnter {prompt}. (<Enter> to use current date): ");
+                Console.Write($"\nEnter {prompt} (<Enter> to use current date): ");
 
                 string input = Console.ReadLine();
                 DateTime output = DateTime.Now;
@@ -107,7 +107,7 @@ namespace FlooringBusiness.BLL.Infrastructure
             Indent(Bullet($" Order Number: {order.OrderNumber}"), 4);
             Indent(Bullet($" Customer:     {order.Customer}"), 4);
             Indent(Bullet($" Product:      {order.Product.ProductType}"), 4);
-            Indent(Bullet($" Area:         {order.Area}"), 4);
+            Indent(Bullet($" Area:         {order.Area:0.##}"), 4);
             Indent(Bullet($" State:        {order.StateTax.StateAbbreviation}"), 4);
             Indent(Bullet($" Total Cost:   {order.Total:c}"), 4);
             GenerateSeparator('-', Console.WindowWidth, light);

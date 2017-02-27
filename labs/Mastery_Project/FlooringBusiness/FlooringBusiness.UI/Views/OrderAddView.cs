@@ -25,10 +25,10 @@ namespace FlooringBusiness.UI.Views
             {
                 Type = WorkflowType.Add,
                 Date = Utilities.GetDate("Order Date", true),
-                Customer = Utilities.GetString("Company Name", new Regex(@"[\w ,.]{2,20}"), false).Trim().ToTitle(),
-                Product = Utilities.GetString("Product Name", new Regex(@"[\w ,.]{2,20}"), false).Trim().ToTitle(),
+                Customer = Utilities.GetString("Company Name", new Regex(@"^[\w ,.]{2,20}$"), false).Trim().ToTitle(),
+                Product = Utilities.GetString("Product Name", new Regex(@"^[\w ,.]{2,20}$"), false).Trim().ToTitle(),
                 State = Utilities.GetString("State", new Regex(@"^[A-Za-z]{2}$"), false).ToUpper(),
-                Area = Utilities.GetNumber<decimal>("Area of Material in Sq. Ft. (minimum: 100)", new Regex(@"^\d{3,}(\.\d+)?$"))
+                Area = Utilities.GetNumber<decimal>("Area of Material in Sq. Ft. (minimum: 100)", new Regex(@"^\d{3,7}(\.\d+)?$"))
             };
 
             IWorkflow flow = WorkflowFactory.Create(selection);
