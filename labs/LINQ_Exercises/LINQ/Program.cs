@@ -237,7 +237,7 @@ namespace LINQ
             );
 
             Console.WriteLine(format, "ID", "Product Name", "Category", "Unit", "Stock", "ReOrder");
-            Console.Write(Utilities.separator);
+            Console.Write(Utilities.Separator);
 
             foreach (var line in query)
             {
@@ -286,7 +286,7 @@ namespace LINQ
                 .Select(n => n);
 
             Console.WriteLine("Even numbers in \"Numbers A array\"");
-            Console.Write(Utilities.separator);
+            Console.Write(Utilities.Separator);
 
             foreach (var number in query) Console.WriteLine(number);
         }
@@ -329,7 +329,7 @@ namespace LINQ
                 .Take(3);
 
             Console.WriteLine("3 first odd numbers in \"Numbers C array\"");
-            Console.Write(Utilities.separator);
+            Console.Write(Utilities.Separator);
 
             foreach (var number in query) Console.WriteLine(number);
         }
@@ -344,7 +344,7 @@ namespace LINQ
                 .Skip(3);
 
             Console.WriteLine("Skip 3 first numbers in \"Numbers B array\"");
-            Console.Write(Utilities.separator);
+            Console.Write(Utilities.Separator);
 
             foreach (var number in query) Console.WriteLine(number);
         }
@@ -387,7 +387,7 @@ namespace LINQ
             var query = DataLoader.NumbersC.TakeWhile(n => n <= 6);
 
             Console.WriteLine("Print numbers in \"Numbers B array\" while <= 6");
-            Console.WriteLine(Utilities.separator);
+            Console.WriteLine(Utilities.Separator);
 
             foreach (var number in query) Console.WriteLine(number);
         }
@@ -402,7 +402,7 @@ namespace LINQ
                 .Skip(1);
 
             Console.WriteLine("Numbers in \"Numbers C array\" after first divisible by 3");
-            Console.Write(Utilities.separator);
+            Console.Write(Utilities.Separator);
 
             foreach (var number in query) Console.WriteLine(number);
         }
@@ -484,9 +484,9 @@ namespace LINQ
 
             foreach (var category in query)
             {
-                Console.Write(Utilities.separator);
+                Console.Write(Utilities.Separator);
                 Console.WriteLine(category.Key);
-                Console.Write(Utilities.separator);
+                Console.Write(Utilities.Separator);
 
                 foreach (var product in category)
                 {
@@ -654,9 +654,9 @@ namespace LINQ
                 }
             );
 
-            Console.Write(Utilities.separator);
+            Console.Write(Utilities.Separator);
             Console.WriteLine(format, "ID", "# of Orders");
-            Console.Write(Utilities.separator);
+            Console.Write(Utilities.Separator);
 
             foreach (var customer in query)
             {

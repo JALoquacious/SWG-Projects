@@ -22,7 +22,7 @@ namespace SGBank.UI.Workflows
 
             if (response.Success)
             {
-                Console.WriteLine("Deposit completed!");
+                Console.WriteLine("\nDeposit completed!");
                 Console.WriteLine($"Account Number: {response.Account.AccountNumber}");
                 Console.WriteLine($"Old balance: {response.OldBalance:c}");
                 Console.WriteLine($"Amount deposited: {response.Amount:c}");
@@ -30,11 +30,11 @@ namespace SGBank.UI.Workflows
             }
             else
             {
-                Console.WriteLine("An error occurred: ");
+                Console.WriteLine("\nAn error occurred: ");
                 Console.WriteLine(response.Message);
             }
 
-            Console.WriteLine("Press any key to continue...");
+            Console.WriteLine("\nPress any key to continue...");
             Console.ReadKey();
 
         }

@@ -24,11 +24,11 @@ namespace SGBank.UI.Workflows
             }
             else
             {
-                Console.WriteLine("An error occurred: ");
+                Console.WriteLine("\nAn error occurred: ");
                 Console.WriteLine(response.Message);
             }
 
-            Console.WriteLine("Press any key to continue...");
+            Console.WriteLine("\nPress any key to continue...");
             Console.ReadKey();
         }
     }

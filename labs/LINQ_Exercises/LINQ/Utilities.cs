@@ -5,7 +5,7 @@ namespace LINQ
 {
     public class Utilities
     {
-        public static string separator = GenerateSeparator();
+        public static string Separator = GenerateSeparator();
 
         // generate console-width separator
         private static string GenerateSeparator()
@@ -94,9 +94,9 @@ namespace LINQ
                 header[i] = headerLookup[titles[i]];
             }
 
-            Console.Write(separator);
+            Console.Write(Separator);
             Console.WriteLine(format, header);
-            Console.Write(separator);
+            Console.Write(Separator);
         }
 
         public static void ProductLoop(string[] titles, IEnumerable<dynamic> query)

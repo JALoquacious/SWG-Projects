@@ -12,11 +12,12 @@ namespace SGBank.UI
                 Console.Clear();
                 Console.WriteLine("====================");
                 Console.WriteLine("SG BANK APPLICATION");
-                Console.WriteLine("====================");
+                Console.WriteLine("--------------------");
                 Console.WriteLine("1. Lookup an Account");
                 Console.WriteLine("2. Deposit");
                 Console.WriteLine("3. Withdraw");
                 Console.WriteLine("Q. Quit");
+                Console.WriteLine("====================");
                 Console.Write("\nEnter selection: ");
 
                 string userInput = Console.ReadLine().ToUpper();
