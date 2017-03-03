@@ -1,0 +1,23 @@
+﻿.table-striped > tbody > tr:nth-child(odd) > td,
+.table-striped > tbody > tr:nth-child(odd) > th {
+	background-color: #DDBBBB;
+}
+.width300 {
+    width: 300px;
+}
+
+.index-main {
+    width: 50%;
+    min-width: 300px;
+    background-color:#BBBBDD;
+    padding: 2em;
+}
+
+.result-main {
+    min-width: 360px;
+    width: 30%;
+}
+
+textarea {
+    resize: none;
+}

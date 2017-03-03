@@ -1,0 +1,67 @@
+﻿@model GratuityCalculator.Models.MealReceipt
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <title>Index</title>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row center-block img-rounded index-main">
+            @using (Html.BeginForm("Result", "MealReceipt", FormMethod.Post))
+            {
+                <h1>Quick Meal Tip Calculator</h1>
+                <br /><br />
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Description)
+                    @Html.TextAreaFor(m => m.Description,
+                        new
+                        {
+                            @class = "form-control",
+                            placeholder = "Enter brief (1-10 word) description of meal, using adjectives like \"good\", \"poor\":"
+                        }
+                    )
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.SubTotal, "Subtotal")
+                    @Html.TextAreaFor(m => m.SubTotal,
+                    new
+                    {
+                        @class = "form-control width300",
+                        placeholder = "Enter price of meal before tax and tip:",
+                        type = "number",
+                        step = "any",
+                        min = 0,
+                        required = "true"
+                    }
+                )
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.TaxRate, "Tax Rate")
+                    @Html.TextAreaFor(m => m.TaxRate,
+                    new
+                    {
+                        @class = "form-control width300",
+                        placeholder = "Enter tax rate percentage (ex: 6.25) in your state:",
+                        type = "number",
+                        step = "any",
+                        min = 0,
+                        required = "true"
+                    }
+                )
+                </div>
+                <button type="submit" class="btn btn-primary">Calculate Gratuity</button>
+            }
+    </div>
+</div>
+<script src="~/Scripts/bootstrap.js"></script>
+</body>
+</html>

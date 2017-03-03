@@ -1,0 +1,85 @@
+﻿@model GratuityCalculator.Models.MealReceipt
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <title>Form Result</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row center-block result-main">
+            <h3>Meal Receipt</h3>
+            <br/>
+            <table class="table table-striped table-bordered table-hover">
+                <tbody>
+                <tr>
+                    <td>
+                        Date:
+                    </td>
+                    <td>
+                        @Model.Date
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Description:
+                    </td>
+                    <td>
+                        @Model.Description
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Subtotal:
+                    </td>
+                    <td>
+                        @Model.SubTotal.ToString("C")
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Tax Rate
+                    </td>
+                    <td>
+                        @Model.TaxRate.ToString()%
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Tax Amount
+                    </td>
+                    <td>
+                        @Model.TaxAmount.ToString("C")
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Gratuity:
+                    </td>
+                    <td>
+                        @Model.Gratuity.ToString("C")
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        TOTAL:
+                    </td>
+                    <td>
+                        @Model.Total.ToString("C")
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="~/Scripts/bootstrap.js"></script>
+</body>
+</html>
