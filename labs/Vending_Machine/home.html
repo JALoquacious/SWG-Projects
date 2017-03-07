@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="css/home.css">
+    <title>Vending Machine</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-6 col-md-9" id="product-col">
+                <div class="col-xs-12 col-md-4 product" id="product-1">
+                    <span class="product-id" id="product-1-id"></span>
+                    <h4 id="product-1-title"></h4>
+                    <p id="product-1-price" class="strong"></p>
+                    <p id="product-1-quantity"></p>
+                </div>
+                <div class="col-xs-12 col-md-4 product" id="product-2">
+                    <span class="product-id" id="product-2-id"></span>
+                    <h4 id="product-2-title"></h4>
+                    <p id="product-2-price" class="strong"></p>
+                    <p id="product-2-quantity"></p>
+                </div>
+                <div class="col-xs-12 col-md-4 product" id="product-3">
+                    <span class="product-id" id="product-3-id"></span>
+                    <h4 id="product-3-title"></h4>
+                    <p id="product-3-price" class="strong"></p>
+                    <p id="product-3-quantity"></p>
+                </div>
+                <div class="col-xs-12 col-md-4 product" id="product-4">
+                    <span class="product-id" id="product-4-id"></span>
+                    <h4 id="product-4-title"></h4>
+                    <p id="product-4-price" class="strong"></p>
+                    <p id="product-4-quantity"></p>
+                </div>
+                <div class="col-xs-12 col-md-4 product" id="product-5">
+                    <span class="product-id" id="product-5-id"></span>
+                    <h4 id="product-5-title"></h4>
+                    <p id="product-5-price" class="strong"></p>
+                    <p id="product-5-quantity"></p>
+                </div>
+                <div class="col-xs-12 col-md-4 product" id="product-6">
+                    <span class="product-id" id="product-6-id"></span>
+                    <h4 id="product-6-title"></h4>
+                    <p id="product-6-price" class="strong"></p>
+                    <p id="product-6-quantity"></p>
+                </div>
+                <div class="col-xs-12 col-md-4 product" id="product-7">
+                    <span class="product-id" id="product-7-id"></span>
+                    <h4 id="product-7-title"></h4>
+                    <p id="product-7-price" class="strong"></p>
+                    <p id="product-7-quantity"></p>
+                </div>
+                <div class="col-xs-12 col-md-4 product" id="product-8">
+                    <span class="product-id" id="product-8-id"></span>
+                    <h4 id="product-8-title"></h4>
+                    <p id="product-8-price" class="strong"></p>
+                    <p id="product-8-quantity"></p>
+                </div>
+                <div class="col-xs-12 col-md-4 product" id="product-9">
+                    <span class="product-id" id="product-9-id"></span>
+                    <h4 id="product-9-title"></h4>
+                    <p id="product-9-price" class="strong"></p>
+                    <p id="product-9-quantity"></p>
+                </div>
+            </div>
+            <div id="input-col-fixed" class="col-xs-6 col-md-3">
+                <h3>Total $ In:</h3>
+                <div class="display-container">
+                    <div id="total-in" class="v-align"></div>
+                </div>
+                <div id="currency-controls">
+                    <button class="btn btn-success" id="add-dollar">Add Dollar</button>
+                    <button class="btn btn-success" id="add-quarter">Add Quarter</button>
+                    <button class="btn btn-success" id="add-dime">Add Dime</button>
+                    <button class="btn btn-success" id="add-nickel">Add Nickel</button>
+                </div>
+                <hr/>
+                <h3>Messages:</h3>
+                <div class="display-container">
+                    <div class="v-align" id="display-messages"></div>
+                </div>
+                <div class="display-container bg-white">
+                    <h3 id="item-text">Item:</h3>
+                    <div id="item-container">
+                        <div id="display-item"></div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" id="make-purchase" title="A product must be selected first.">Make Purchase</button>
+                <hr/>
+                <h3>Change:</h3>
+                <div class="display-container">
+                    <div class="v-align" id="display-change"></div>
+                </div>
+                <button class="btn btn-primary" id="return-change" title="A product must be selected first.">Change Return</button>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="scripts/home.js"></script>
+</body>
+
+</html>
