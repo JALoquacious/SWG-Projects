@@ -125,9 +125,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Attributes\AbbreviationRuleAttribute.cs" />
+    <Compile Include="Attributes\AbbreviationLengthAttribute.cs" />
     <Compile Include="Attributes\GpaRangeAttribute.cs" />
     <Compile Include="Attributes\OnlyAlphaAttribute.cs" />
+    <Compile Include="Attributes\OnlyDigitAttribute.cs" />
+    <Compile Include="Attributes\ZipLengthAttribute.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\StudentController.cs" />

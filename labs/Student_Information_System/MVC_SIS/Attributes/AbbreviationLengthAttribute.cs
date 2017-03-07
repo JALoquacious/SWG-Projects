@@ -2,7 +2,7 @@
 
 namespace Exercises.Attributes
 {
-    public class AbbreviationRuleAttribute : ValidationAttribute
+    public class AbbreviationLengthAttribute : ValidationAttribute
     {
         public override bool IsValid(object value)
         {

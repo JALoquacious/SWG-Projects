@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Exercises.Attributes;
 
 namespace Exercises.Models.Data
 {
@@ -8,8 +8,10 @@ namespace Exercises.Models.Data
         public string Street1 { get; set; }
         public string Street2 { get; set; }
         public string City { get; set; }
-        //[Required(ErrorMessage = "Please enter a STATE.")]
         public State State { get; set; }
+
+        // must create new ViewModel to be able to use this attribute here
+        //[ZipLength(ErrorMessage = "Postal code must be 5 digits.")]
         public string PostalCode { get; set; }
     }
 }

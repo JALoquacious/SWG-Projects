@@ -67,8 +67,11 @@ namespace Exercises.Controllers
             viewModel.SetCourseItems(CourseRepository.GetAll());
             viewModel.SetMajorItems(MajorRepository.GetAll());
             viewModel.SetStateItems(StateRepository.GetAll());
-            viewModel.SelectedCourseIds = viewModel.Student.Courses.Select(c => c.CourseId).ToList();
 
+            if (viewModel.Student.Courses != null)
+            {
+                viewModel.SelectedCourseIds = viewModel.Student.Courses.Select(c => c.CourseId).ToList();
+            }
             return View(viewModel);
         }
 
@@ -80,7 +83,9 @@ namespace Exercises.Controllers
                 studentVM.Student.Courses = new List<Course>();
 
                 foreach (var id in studentVM.SelectedCourseIds)
+                {
                     studentVM.Student.Courses.Add(CourseRepository.Get(id));
+                }
 
                 studentVM.Student.Major = MajorRepository.Get(studentVM.Student.Major.MajorId);
                 studentVM.Student.Address.State = StateRepository.Get(studentVM.Student.Address.State.StateAbbreviation);

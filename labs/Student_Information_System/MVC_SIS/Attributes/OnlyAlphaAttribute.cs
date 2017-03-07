@@ -9,7 +9,7 @@ namespace Exercises.Attributes
         {
             if (value is string)
             {
-                Regex pattern = new Regex(@"^[A-Za-z]{1,20}$");
+                Regex pattern = new Regex(@"^[A-Za-z ]+$");
                 string text = (string) value;
 
                 if (pattern.IsMatch(text))

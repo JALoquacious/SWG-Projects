@@ -22,6 +22,8 @@
                                 </div>
                                 <div class="panel-body">
                                     @Html.HiddenFor(m => m.Student.StudentId)
+                                    @Html.HiddenFor(m => m.Student.Address.State.StateName)
+                                    @Html.HiddenFor(m => m.Student.Major.MajorName)
                                     <div class="form-group">
                                         <label>First Name:</label>
                                         @Html.TextBoxFor(m => m.Student.FirstName, new { @class = "form-control" })
@@ -77,6 +79,7 @@
                                     <div class="form-group">
                                         <label>Postal Code:</label>
                                         @Html.TextBoxFor(m => m.Student.Address.PostalCode, new { @class = "form-control" })
+                                        <span class="text-danger">@Html.ValidationMessageFor(m => m.Student.Address.PostalCode)</span>
                                     </div>
                                 </div>
                             </div>

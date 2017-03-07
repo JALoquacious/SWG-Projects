@@ -114,6 +114,7 @@ namespace Exercises.Controllers
             if (ModelState.IsValid)
             {
                 state.StateName = state.StateName.ToTitle();
+                state.StateAbbreviation = state.StateAbbreviation.ToUpper();
                 StateRepository.Edit(state);
                 return RedirectToAction("States");
             }
@@ -152,8 +153,16 @@ namespace Exercises.Controllers
         [HttpPost]
         public ActionResult AddCourse(Course course)
         {
-            CourseRepository.Add(course.CourseName);
-            return RedirectToAction("Courses");
+            if (ModelState.IsValid)
+            {
+                course.CourseName = course.CourseName.ToTitle();
+                CourseRepository.Add(course.CourseName);
+                return RedirectToAction("Courses");
+            }
+            else
+            {
+                return View(course);
+            }
         }
 
         [HttpGet]
@@ -166,8 +175,16 @@ namespace Exercises.Controllers
         [HttpPost]
         public ActionResult EditCourse(Course course)
         {
-            CourseRepository.Edit(course);
-            return RedirectToAction("Courses");
+            if (ModelState.IsValid)
+            {
+                course.CourseName = course.CourseName.ToTitle();
+                CourseRepository.Edit(course);
+                return RedirectToAction("Courses");
+            }
+            else
+            {
+                return View(course);
+            }
         }
 
         [HttpGet]

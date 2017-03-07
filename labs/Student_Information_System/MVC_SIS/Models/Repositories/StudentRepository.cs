@@ -104,7 +104,6 @@ namespace Exercises.Models.Repositories
             selectedStudent.GPA       = student.GPA;
             selectedStudent.Major     = student.Major;
             selectedStudent.Courses   = student.Courses;
-            //selectedStudent.Address.State = student.Address.State;
         }
 
         public static Student Get(int studentId)
