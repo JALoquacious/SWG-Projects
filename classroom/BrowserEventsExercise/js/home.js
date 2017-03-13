@@ -4,7 +4,7 @@ $(document).ready(function () {
     function showPage(pageName) {
         $.each(views, function(idx, view) {
             if (view === pageName) {
-                $(view + 'InfoDiv').show()
+                $(view + 'InfoDiv').show();
             } else {
                 $(view + 'InfoDiv').hide();
                 $(view + 'Weather').hide();
