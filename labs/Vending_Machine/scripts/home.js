@@ -1,17 +1,17 @@
 $(document).ready(function () {
 
-    let totalIn = 0.00,
+    let totalIn      = 0.00,
         selectedItem = 0,
-        insertCoins = new Audio('sounds/insertCoins.mp3'),
-        returnCoins = new Audio('sounds/returnCoins.mp3'),
+        insertCoins  = new Audio('sounds/insertCoins.mp3'),
+        returnCoins  = new Audio('sounds/returnCoins.mp3'),
         registerSale = new Audio('sounds/registerSale.mp3'),
-        currencies = {
+        currencies   = {
             'dollar': 1.00,
             'quarter': 0.25,
             'dime': 0.10,
             'nickel': 0.05
         },
-        hintOptions = {
+        hintOptions  = {
             track: true,
             disabled: false,
             show: "slideDown",
@@ -23,11 +23,6 @@ $(document).ready(function () {
                 );
             }
         };
-
-
-    //    function trim2Places(num) {
-    //        return parseFloat(Math.ceil(num * 100) / 100).toFixed(2);
-    //    }
 
 
     function blinkAlert(color1, color2, number, duration) {
@@ -125,6 +120,10 @@ $(document).ready(function () {
 
 
     function registerMainControls() {
+        // prevent over-registering
+        $('#make-purchase').off('click');
+        $('#return-change').off('click');
+        
         $('#return-change').on('click', function () {
             returnCoins.play();
             reset();
@@ -155,11 +154,17 @@ $(document).ready(function () {
                 d = data.dimes,
                 n = data.nickels,
                 p = data.pennies;
-
-            result += (q) ? `${q} ${pluralize(q, 'Quarter')}, ` : '';
-            result += (d) ? `${d} ${pluralize(d, 'Dime')}, ` : '';
-            result += (n) ? `${n} ${pluralize(n, 'Nickel')}, ` : '';
-            result += (p) ? `${p} ${pluralize(p, 'Penny')}, ` : '';
+            
+            result += (q) ? `${q} ${pluralize(q, 'Quarter')}` : '';
+            
+            result += ((d) ? ', ' : '') +
+                      ((d) ? `${d} ${pluralize(d, 'Dime')}` : '');
+            
+            result += ((n) ? ', ' : '') +
+                      ((n) ? `${n} ${pluralize(n, 'Nickel')}` : '');
+            
+            result += ((p) ? ', ' : '') +
+                      ((p) ? `${p} ${pluralize(p, 'Penny')}` : '');
         }
         return result;
     }
@@ -175,15 +180,15 @@ $(document).ready(function () {
             },
             dataType: 'json',
             success: function (data, status) {
-                //let product = ''
+//let product = ''
                 $.each(data, function (index, item) {
 
-                    // product += `<div class="col-xs-12 col-md-4 product"`;
-                    // product += `id="product-${index+1}">\u00A0 ${index+1} \u00A0</div>`;
-                    // product += `<span class="product-id" id="product-${index+1}-id"></span>`;
-                    // product += `<h4 id="product-${item.name}-title"></h4>`;
-                    // product += `<p id="product-1-price" class="strong">$${item.price.toFixed(2)}</p>`;
-                    // product += `<p id="product-1-quantity">Quantity Left: ${item.quantity}</p>`;
+// product += `<div class="col-xs-12 col-md-4 product"`;
+// product += `id="product-${index+1}">\u00A0 ${index+1} \u00A0</div>`;
+// product += `<span class="product-id" id="product-${index+1}-id"></span>`;
+// product += `<h4 id="product-${item.name}-title"></h4>`;
+// product += `<p id="product-1-price" class="strong">$${item.price.toFixed(2)}</p>`;
+// product += `<p id="product-1-quantity">Quantity Left: ${item.quantity}</p>`;
 
                     $(`#product-${index+1}-id`)
                         .text(`\u00A0 ${index+1} \u00A0`);
@@ -198,7 +203,7 @@ $(document).ready(function () {
                         .text(`Quantity Left: ${item.quantity}`);
                 });
 
-                //$(`#product-col`).append(product);
+//$(`#product-col`).append(product);
 
                 if (initialize) {
                     registerCurrencyControls();
