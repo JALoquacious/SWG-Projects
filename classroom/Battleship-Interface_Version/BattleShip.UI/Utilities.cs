@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using BattleShip.BLL.Requests;
 using BattleShip.BLL.Responses;

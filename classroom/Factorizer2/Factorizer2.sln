@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Factorizer2.UI", "Factorizer2\Factorizer2.UI.csproj", "{628475B7-6C34-4475-96F1-29B76B19F571}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Factorizer.BLL", "Factorizer.BLL\Factorizer.BLL.csproj", "{632F5E9C-783B-44BA-AEA9-E60D41A14AA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Factorizer.Tests", "Factorizer.Tests\Factorizer.Tests.csproj", "{5E6723EF-C6AB-47A4-985C-D2AF83D34E03}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{628475B7-6C34-4475-96F1-29B76B19F571}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{628475B7-6C34-4475-96F1-29B76B19F571}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{628475B7-6C34-4475-96F1-29B76B19F571}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{628475B7-6C34-4475-96F1-29B76B19F571}.Release|Any CPU.Build.0 = Release|Any CPU
+		{632F5E9C-783B-44BA-AEA9-E60D41A14AA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{632F5E9C-783B-44BA-AEA9-E60D41A14AA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{632F5E9C-783B-44BA-AEA9-E60D41A14AA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{632F5E9C-783B-44BA-AEA9-E60D41A14AA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E6723EF-C6AB-47A4-985C-D2AF83D34E03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E6723EF-C6AB-47A4-985C-D2AF83D34E03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E6723EF-C6AB-47A4-985C-D2AF83D34E03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E6723EF-C6AB-47A4-985C-D2AF83D34E03}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

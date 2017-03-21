@@ -14,11 +14,11 @@ $(document).ready(function () {
         hintOptions  = {
             track: true,
             disabled: false,
-            show: "slideDown",
+            show: 'slideDown',
             open: function (event, ui) {
                 ui.tooltip.hover(
                     function () {
-                        $(this).fadeTo("slow", 0.5);
+                        $(this).fadeTo('slow', 0.5);
                     }
                 );
             }
@@ -229,7 +229,7 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (data, status) {
                 $('#display-messages')
-                    .text(data.message ? data.message : "Thank you!");
+                    .text(data.message ? data.message : 'Thank you!');
 
                 $('#display-change').text(displayChange(data));
 
