@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>DVD Library</title>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!----------------------- LIST ----------------------->
+    <div class="container" id="list">
+        <div class="row">
+            <div class="col-xs-12 col-md-3 form-group">
+                <button class="btn btn-custom" id="add-screen-button">Create DVD</button>
+            </div>
+            <div class="col-xs-12 col-md-3 form-group">
+                <button class="btn btn-custom" id="search-button">Search</button>
+            </div>
+            <div class="col-xs-12 col-md-3 form-group">
+                <select class="form-control" id="search-category">
+                    <option value='' disabled='disabled' selected='selected'>Search Category</option>
+                    <option value='title'>Title</option>
+                    <option value='year'>Release Year</option>
+                    <option value='director'>Director Name</option>
+                    <option value='rating'>Rating</option>
+                </select>
+            </div>
+            <div class="col-xs-12 col-md-3 form-group">
+                <input type="text" class="form-control" id="search-term" placeholder="Search Term">
+            </div>
+        </div>
+
+        <hr/>
+        <ul class="list-group error-messages"></ul>
+
+        <div>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th id="col-title">Title</th>
+                        <th id="col-year">Release year</th>
+                        <th id="col-director">Director</th>
+                        <th id="col-rating">Rating</th>
+                        <th id="col-options"></th>
+                    </tr>
+                </thead>
+                <tbody id="result-table"></tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+    <!----------------------- MAKE ----------------------->
+    <div class="container" id="make">
+        <div class="row">
+            <div class="col-xs-12 col-md-12" id="create-dvd">
+                <h1>Create DVD</h1>
+                <hr/>
+                <ul class="list-group error-messages"></ul>
+                <form class="form-horizontal" role="form" id="add-form">
+                    <div class="form-group row">
+                        <label for="title" class="col-md-2 col-form-label">DVD Title:</label>
+                        <div class="col-md-4">
+                            <input class="form-control reqd" id="add-title" type="text" placeholder="Enter Title">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="year" class="col-md-2 col-form-label">Release Year:</label>
+                        <div class="col-md-4">
+                            <input class="form-control reqd" id="add-year" type="text" placeholder="Enter Release Year">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="director" class="col-md-2 col-form-label">Director:</label>
+                        <div class="col-md-4">
+                            <input class="form-control reqd" id="add-director" type="text" placeholder="Enter Director">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="rating" class="col-md-2 col-form-label">Rating:</label>
+                        <div class="col-md-4">
+                            <select class="form-control reqd" id="add-rating">
+                                <option value='' disabled='disabled' selected='selected'>Choose Rating</option>
+                                <option value='G'>G</option>
+                                <option value='PG'>PG</option>
+                                <option value='PG-13'>PG-13</option>
+                                <option value='R'>R</option>
+                                <option value='NC-17'>NC-17</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="notebox" class="col-md-2 col-form-label">Notes:</label>
+                        <div class="col-md-4">
+                            <textarea class="form-control" id="add-notes" rows="3" placeholder="Enter Note"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-6 col-md-2">
+                            <button type="button" class="btn btn-custom cancel-button">
+                                Cancel
+                            </button>
+                        </div>
+                        <div class="col-xs-6 col-md-2">
+                            <button type="button" id="create-button" class="btn btn-custom">
+                                Create DVD
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!----------------------- EDIT ----------------------->
+    <div class="container" id="edit">
+        <div class="row">
+            <div class="col-xs-12 col-md-12" id="create-dvd">
+                <h1>Edit DVD: Movie Title Here</h1>
+                <hr/>
+                <ul class="list-group error-messages"></ul>
+                <form class="form-horizontal" role="form" id="update-form">
+                    <div class="form-group row">
+                        <label for="title" class="col-md-2 col-form-label">DVD Title:</label>
+                        <div class="col-md-4">
+                            <input class="form-control reqd" id="update-title" type="text" placeholder="Enter Title">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="year" class="col-md-2 col-form-label">Release Year:</label>
+                        <div class="col-md-4">
+                            <input class="form-control reqd" id="update-year" type="text" placeholder="Enter Release Year">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="director" class="col-md-2 col-form-label">Director:</label>
+                        <div class="col-md-4">
+                            <input class="form-control reqd" id="update-director" type="text" placeholder="Enter Director">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="rating" class="col-md-2 col-form-label">Rating:</label>
+                        <div class="col-md-4">
+                            <select class="form-control reqd" id="update-rating">
+                                <option value='' disabled='disabled' selected='selected'>Choose Rating</option>
+                                <option value='G'>G</option>
+                                <option value='PG'>PG</option>
+                                <option value='PG-13'>PG-13</option>
+                                <option value='R'>R</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="notebox" class="col-md-2 col-form-label">Notes:</label>
+                        <div class="col-md-4">
+                            <textarea class="form-control" id="update-notes" rows="3" placeholder="Enter Note"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" id="update-id">
+                        <div class="col-xs-6 col-md-2">
+                            <button type="button" class="btn btn-custom cancel-button">
+                                Cancel
+                            </button>
+                        </div>
+                        <div class="col-xs-6 col-md-2">
+                            <button type="button" id="update-button" class="btn btn-custom">
+                                Save Changes
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!----------------------- VIEW ----------------------->
+    <div class="container" id="view">
+        <div class="row">
+            <div class="col-xs-12 col-md-12" id="view-dvd">
+                <h1 id="view-title"></h1>
+                <hr/>
+                <ul class="list-group error-messages"></ul>
+                <form class="form-horizontal" role="form" id="add-form">
+                    <div class="row view-dvd">
+                        <div class="col-xs-3">Release Year:</div>
+                        <div class="col-xs-9" id="view-year"></div>
+                    </div>
+                    <div class="row view-dvd">
+                        <div class="col-xs-3">Director:</div>
+                        <div class="col-xs-9" id="view-director"></div>
+                    </div>
+                    <div class="row view-dvd">
+                        <div class="col-xs-3">Rating:</div>
+                        <div class="col-xs-9" id="view-rating"></div>
+                    </div>
+                    <div class="row view-dvd">
+                        <div class="col-xs-3">Notes:</div>
+                        <div class="col-xs-9" id="view-notes"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6 col-md-2">
+                            <button type="button" class="btn btn-custom cancel-button">
+                                Back
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jquery-2.2.4.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/logic.js"></script>
+</body>
+
+</html>
