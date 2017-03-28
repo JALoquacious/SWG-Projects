@@ -8,7 +8,7 @@ GO
 
 create procedure DvdsSelectAll as
 begin
-	select *
+	select Id, Title, ReleaseYear, Director, LTRIM(RTRIM(Rating)) as Rating, Notes
 	from Dvd
 end
 go
@@ -23,7 +23,7 @@ create procedure DvdSelectById (
 )
 as
 begin
-	select *
+	select Id, Title, ReleaseYear, Director, LTRIM(RTRIM(Rating)) as Rating, Notes
 	from Dvd
 	where Id = @Id
 end
@@ -41,7 +41,7 @@ as
 begin
 	select *
 	from Dvd
-	where Title LIKE '%' + @Title + '%';
+	where (Title LIKE '%' + @Title + '%');
 end
 go
 
@@ -50,14 +50,14 @@ if exists(select * from INFORMATION_SCHEMA.ROUTINES
 		drop procedure DvdsSelectByReleaseYear
 GO
 
-create procedure DvdSelectByReleaseYear (
+create procedure DvdsSelectByReleaseYear (
 	@ReleaseYear int
 )
 as
 begin
 	select *
 	from Dvd
-	where ReleaseYear LIKE '%' + @ReleaseYear + '%';
+	where (ReleaseYear LIKE @ReleaseYear);
 end
 go
 
@@ -73,7 +73,7 @@ as
 begin
 	select *
 	from Dvd
-	where Director LIKE '%' + @Director + '%';
+	where (Director LIKE '%' + @Director + '%');
 end
 go
 
@@ -89,7 +89,7 @@ as
 begin
 	select *
 	from Dvd
-	where Rating LIKE '%' + @Rating + '%';
+	where (Rating LIKE '%' + @Rating + '%');
 end
 go
 
@@ -101,7 +101,7 @@ GO
 create procedure DvdInsert (
 	@Id int output,
 	@Title nvarchar(100),
-	@ReleaseYear int,
+	@ReleaseYear int = null,
 	@Director nvarchar(50),
 	@Rating char(5),
 	@Notes nvarchar(500)
@@ -122,7 +122,7 @@ GO
 create procedure DvdUpdate (
 	@Id int output,
 	@Title nvarchar(100),
-	@ReleaseYear int,
+	@ReleaseYear int = null,
 	@Director nvarchar(50),
 	@Rating char(5),
 	@Notes nvarchar(500)

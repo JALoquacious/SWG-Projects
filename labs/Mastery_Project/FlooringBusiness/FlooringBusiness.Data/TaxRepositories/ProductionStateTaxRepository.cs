@@ -32,8 +32,8 @@ namespace FlooringBusiness.Data.TaxRepositories
                         if (pattern.IsMatch(line))
                         {
                             tax.StateAbbreviation = columns[0].ToUpper();
-                            tax.StateName = Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(columns[1].ToLower());
-                            tax.TaxRate = decimal.Parse(columns[2]);
+                            tax.StateName         = Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(columns[1].ToLower());
+                            tax.TaxRate           = decimal.Parse(columns[2]);
 
                             return tax;
                         }

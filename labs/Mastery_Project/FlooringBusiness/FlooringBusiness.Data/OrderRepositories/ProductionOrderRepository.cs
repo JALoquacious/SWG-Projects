@@ -37,11 +37,11 @@ namespace FlooringBusiness.Data.OrderRepositories
                         if (pattern.IsMatch(line))
                         {
                             order.OrderNumber = int.Parse(columns[0]);
-                            order.Customer = columns[1];
-                            order.StateTax = _stateTaxRepository.GetStateTax(columns[2]);
-                            order.Product = _productRepository.GetProduct(columns[4]);
-                            order.Area = decimal.Parse(columns[5]);
-                            order.Total = decimal.Parse(columns[11]);
+                            order.Customer    = columns[1];
+                            order.StateTax    = _stateTaxRepository.GetStateTax(columns[2]);
+                            order.Product     = _productRepository.GetProduct(columns[4]);
+                            order.Area        = decimal.Parse(columns[5]);
+                            order.Total       = decimal.Parse(columns[11]);
 
                             orders.Add(order);
                         }
@@ -73,8 +73,8 @@ namespace FlooringBusiness.Data.OrderRepositories
                     foreach (Order o in orders)
                     {
                         o.MaterialCost = o.Product.CostPerSquareFoot * o.Area;
-                        o.LaborCost = o.Product.LaborCostPerSquareFoot * o.Area;
-                        decimal tax = (o.MaterialCost + o.LaborCost) * (1 + o.StateTax.TaxRate / 100);
+                        o.LaborCost    = o.Product.LaborCostPerSquareFoot * o.Area;
+                        decimal tax    = (o.MaterialCost + o.LaborCost) * (1 + o.StateTax.TaxRate / 100);
 
                         stream.WriteLine(
                             $"{o.OrderNumber}|{o.Customer}|{o.StateTax.StateAbbreviation}|{o.StateTax.TaxRate:0.##}|" +

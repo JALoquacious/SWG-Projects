@@ -2,40 +2,47 @@ $(document).ready(function () {
     
     const PORT = 14181;
 
-    function errorMessage(type, error) {
-        let map = {
-                'formDataError': 'Form error: Title is a mandatory field.',
-                'webServiceError': 'Web service error: ' + (error || 'Unknown error')
-            }
+    function displayErrorMessages(errorList) {
+        $('.error-messages').empty();
         
-        if (!($('.error-messages').has('li').text().startsWith('Form'))
-            || type !== 'formDataError') {
-            $('.error-messages')
-                .append($('<li>')
-                    .attr({
-                        class: 'list-group-item list-group-item-danger'
-                    })
-                    .text(map[type])
-                );
+        if (errorList.length > 0) {
+            $.each(errorList, function(idx, error) {
+                $('.error-messages')
+                    .append($('<li>')
+                        .attr({
+                            class: 'list-group-item list-group-item-danger'
+                        })
+                        .text(error)
+                    );
+                }
+            );
         }
-
+    }
+    
+    function getModelStatus(xhr, status, error) {
+        let xhrResponse = (JSON.parse(xhr.responseText)),
+            errorList = [];
+        
+        for (let key in xhrResponse.modelState) {
+            if (xhrResponse.modelState.hasOwnProperty(key)) {
+                errorList.push(xhrResponse.modelState[key][0]);
+            }
+        }
+        return errorList;
     }
 
-    function validate(page) {
-        let formFields = ['title'], //, 'year', 'director', 'rating'
-            valid = true;
+    function highlightField(page) {
+        let formFields = ['title']; // 'year', 'director', 'rating'
 
         $.each(formFields, function (index, element) {
             let field = $('#' + page + '-' + element);
 
             if (!field.val() || field.val() === '') {
                 field.addClass('error-outline');
-                valid = false;
             } else {
                 field.removeClass('error-outline');
             }
         });
-        return valid;
     }
 
     function displayScreen(pageId) {
@@ -68,6 +75,7 @@ $(document).ready(function () {
             url: `http://localhost:${PORT}/dvd/${this.id}`,
             success: function (data, status) {
                 $('.error-messages').empty();
+                $('#update-dvd').text('Edit DVD: ' + data.title);
                 $('#update-title').val(data.title);
                 $('#update-year').val(data.releaseYear);
                 $('#update-director').val(data.director);
@@ -78,7 +86,7 @@ $(document).ready(function () {
                 displayScreen('#edit');
             },
             error: function (xhr, status, error) {
-                errorMessage('webServiceError', error);
+                displayErrorMessages(getModelStatus(xhr, status, error));
             }
         });
     }
@@ -98,7 +106,7 @@ $(document).ready(function () {
                 displayScreen('#view');
             },
             error: function (xhr, status, error) {
-                errorMessage('webServiceError', error);
+                displayErrorMessages(getModelStatus(xhr, status, error));
             }
         });
     }
@@ -113,7 +121,7 @@ $(document).ready(function () {
                     loadList();
                 },
                 error: function (xhr, status, error) {
-                    errorMessage('webServiceError', error);
+                    displayErrorMessages(getModelStatus(xhr, status, error));
                 }
             });
         }
@@ -124,32 +132,29 @@ $(document).ready(function () {
     }
 
     function createButtonHandler() {
-        if (validate('add')) {
-            $.ajax({
-                type: 'POST',
-                url: `http://localhost:${PORT}/dvd`,
-                data: JSON.stringify({
-                    title: $('#add-title').val(),
-                    releaseYear: $('#add-year').val(),
-                    director: $('#add-director').val(),
-                    rating: $('#add-rating').val(),
-                    notes: $('#add-notes').val()
-                }),
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                'dataType': 'json',
-                success: function (data, status) {
-                    cancelButtonHandler();
-                },
-                error: function (xhr, status, error) {
-                    errorMessage('webServiceError', error);
-                }
-            });
-        } else {
-            errorMessage('formDataError');
-        }
+        $.ajax({
+            type: 'POST',
+            url: `http://localhost:${PORT}/dvd`,
+            data: JSON.stringify({
+                title: $('#add-title').val(),
+                releaseYear: $('#add-year').val(),
+                director: $('#add-director').val(),
+                rating: $('#add-rating').val(),
+                notes: $('#add-notes').val()
+            }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            'dataType': 'json',
+            success: function (data, status) {
+                cancelButtonHandler();
+            },
+            error: function (xhr, status, error) {
+                displayErrorMessages(getModelStatus(xhr, status, error));
+            }
+        });
+        highlightField('add');
     }
 
     function searchButtonHandler() {
@@ -198,43 +203,42 @@ $(document).ready(function () {
                 });
             },
             error: function (xhr, status, error) {
-                errorMessage('webServiceError', error);
+                displayErrorMessages(getModelStatus(xhr, status, error));
             }
         });
     }
 
     function updateButtonHandler() {
-        if (validate('update')) {
-            $.ajax({
-                type: 'PUT',
-                url: `'http://localhost:${PORT}/dvd/${$('#update-id').val()}`,
-                data: JSON.stringify({
-                    title: $('#update-title').val(),
-                    releaseYear: $('#update-year').val(),
-                    director: $('#update-director').val(),
-                    rating: $('#update-rating').val(),
-                    notes: $('#update-notes').val()
-                }),
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                dataType: 'json',
-                success: function (data, status) {
-                    loadList();
-                },
-                error: function (xhr, status, error) {
-                    errorMessage('webServiceError', error);
-                }
-            });
-        } else {
-            errorMessage('formDataError');
-        }
+        $.ajax({
+            type: 'PUT',
+            url: `http://localhost:${PORT}/dvd/${$('#update-id').val()}`,
+            data: JSON.stringify({
+                id: $('#update-id').val(),
+                title: $('#update-title').val(),
+                releaseYear: $('#update-year').val(),
+                director: $('#update-director').val(),
+                rating: $('#update-rating').val(),
+                notes: $('#update-notes').val()
+            }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            dataType: 'json',
+            success: function (data, status) {
+                loadList();
+            },
+            error: function (xhr, status, error) {
+                displayErrorMessages(getModelStatus(xhr, status, error));
+            }
+        });
+        highlightField('update');
     }
 
     loadList();
     
-    $('.reqd').on('blur', validate.bind(null, 'add'));
+    $('.reqd').on('blur', highlightField.bind(null, 'add'));
+    $('.reqd').on('blur', highlightField.bind(null, 'edit'));
     $('#create-button').on('click', createButtonHandler);
     $('#update-button').on('click', updateButtonHandler);
     $('.cancel-button').on('click', cancelButtonHandler);

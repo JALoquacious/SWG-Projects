@@ -20,8 +20,8 @@ namespace FlooringBusiness.BLL.Workflows
             };
 
             List<Order> orders = _orderRepository.LoadOrders(request.Date);
-            Product product = _orderRepository.LoadProductData(request.Product);
-            StateTax stateTax = _orderRepository.LoadStateTaxData(request.State);
+            Product product    = _orderRepository.LoadProductData(request.Product);
+            StateTax stateTax  = _orderRepository.LoadStateTaxData(request.State);
             
             if (request.Type != WorkflowType.Edit)
             {
@@ -53,11 +53,11 @@ namespace FlooringBusiness.BLL.Workflows
             Order editedOrder = new Order()
             {
                 OrderNumber = request.OrderNumber,
-                Customer = request.Customer,
-                Area = request.Area,
-                Product = product,
-                StateTax = stateTax,
-                Total = (product.CostPerSquareFoot
+                Customer    = request.Customer,
+                Area        = request.Area,
+                Product     = product,
+                StateTax    = stateTax,
+                Total       = (product.CostPerSquareFoot
                                 + product.LaborCostPerSquareFoot)
                                 * request.Area
                                 * (1 + (stateTax.TaxRate / 100))
@@ -66,7 +66,7 @@ namespace FlooringBusiness.BLL.Workflows
             orders[request.OrderNumber - 1] = editedOrder;
             _orderRepository.SaveOrders(request.Date, orders);
 
-            response.Orders = orders;
+            response.Orders  = orders;
             response.Success = true;
             response.Message = $"Order #{request.OrderNumber} edited successfully. Returning to Main Menu...";
             

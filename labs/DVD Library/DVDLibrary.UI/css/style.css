@@ -13,10 +13,10 @@
     width: 25%;
 }
 #col-year {
-    width: 10%;
+    width: 5%;
 }
 #col-director {
-    width: 10%;
+    width: 15%;
 }
 #col-rating {
     width: 5%;
@@ -63,8 +63,8 @@
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
 }
 .error-outline {
-    border-color: #D1912A;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 226, 0, 0.6);
+    border-color: #6e73ea;
+    box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.075), 0 0 8px rgb(0, 10, 255);
 }
 .view-dvd {
     margin-bottom: 2em;
@@ -74,8 +74,11 @@
 /* ---------------- Tags ----------------*/
 
 a {
-    color: #e85d5d;
+    color: #ea6e6e;
     cursor: pointer;
+}
+a:hover {
+    color: #6e73ea;
 }
 body {
     background-color: #777;
@@ -94,17 +97,22 @@ th {
     border-radius: 6px;
     border-color: black;
     border-width: thin;
-}
-td {
-    background-color: #555;
+    border-style: solid;
 }
 th {
     background-color: #333;
+}
+tr:nth-child(odd) {
+    background-color: #555;
+}
+tr:nth-child(even) {
+    background-color: #444;
 }
 textarea {
     resize: none;
 }
 table {
+    border-style: none;
     border-collapse: separate;
     color: white;
     width: 100%;

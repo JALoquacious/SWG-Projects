@@ -43,3 +43,5 @@ BEGIN
 	SET IDENTITY_INSERT Dvd OFF
 END
 ----------------------------------------------------------------------------
+
+EXEC DbReset

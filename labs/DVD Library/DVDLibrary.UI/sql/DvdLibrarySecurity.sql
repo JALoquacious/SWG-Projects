@@ -1,8 +1,9 @@
 USE MASTER
 GO
 
-IF NOT Exists (SELECT LoginName FROM master.dbo.syslogins
+IF Exists (SELECT LoginName FROM master.dbo.syslogins
  WHERE NAME = 'DvdLibraryApp')
+	DROP LOGIN DvdLibraryApp
 	CREATE LOGIN DvdLibraryApp WITH PASSWORD = 'testing123';
 GO
 

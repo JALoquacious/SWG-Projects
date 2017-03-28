@@ -23,8 +23,8 @@ namespace FlooringBusiness.UI.Views
 
             var request = new Request
             {
-                Type = WorkflowType.Remove,
-                Date = Utilities.GetDate("Order Date", false),
+                Type        = WorkflowType.Remove,
+                Date        = Utilities.GetDate("Order Date", false),
                 OrderNumber = Utilities.GetNumber<int>("Order Number", new Regex(@"^\d{1,5}$"))
             };
 

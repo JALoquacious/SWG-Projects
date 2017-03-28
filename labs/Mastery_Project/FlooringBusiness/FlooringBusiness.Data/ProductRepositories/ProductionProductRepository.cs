@@ -31,8 +31,8 @@ namespace FlooringBusiness.Data.ProductRepositories
 
                         if (pattern.IsMatch(line))
                         {
-                            product.ProductType = Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(columns[0].ToLower());
-                            product.CostPerSquareFoot = decimal.Parse(columns[1]);
+                            product.ProductType            = Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(columns[0].ToLower());
+                            product.CostPerSquareFoot      = decimal.Parse(columns[1]);
                             product.LaborCostPerSquareFoot = decimal.Parse(columns[2]);
 
                             return product;

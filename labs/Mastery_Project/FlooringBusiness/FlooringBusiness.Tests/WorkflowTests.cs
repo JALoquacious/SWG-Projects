@@ -21,8 +21,8 @@ namespace FlooringBusiness.Tests
 
             var request = new Request
             {
-                Type = WorkflowType.Find,
-                Date = DateTime.Parse(date),
+                Type        = WorkflowType.Find,
+                Date        = DateTime.Parse(date),
                 OrderNumber = orderNumber
             };
 
@@ -41,8 +41,8 @@ namespace FlooringBusiness.Tests
 
             var request = new Request
             {
-                Type = WorkflowType.Find,
-                Date = DateTime.Parse(date),
+                Type        = WorkflowType.Find,
+                Date        = DateTime.Parse(date),
                 OrderNumber = orderNumber
             };
 
@@ -63,18 +63,17 @@ namespace FlooringBusiness.Tests
 
             var request = new Request
             {
-                Type = WorkflowType.Add,
-                Date = DateTime.Parse(date),
+                Type     = WorkflowType.Add,
+                Date     = DateTime.Parse(date),
                 Customer = customer,
-                Product = product,
-                State = state,
-                Area = area
+                Product  = product,
+                State    = state,
+                Area     = area
             };
 
             Response response = workflow.Execute(request);
 
             Assert.AreEqual(expectedResult, response.Success);
-
         }
 
         [TestCase("1/1/2020", true, 5)]
@@ -113,13 +112,13 @@ namespace FlooringBusiness.Tests
 
             var request = new Request
             {
-                Type = WorkflowType.Edit,
-                Date = DateTime.Parse(date),
+                Type        = WorkflowType.Edit,
+                Date        = DateTime.Parse(date),
                 OrderNumber = orderNumber,
-                Customer = customer,
-                Product = product,
-                State = state,
-                Area = area
+                Customer    = customer,
+                Product     = product,
+                State       = state,
+                Area        = area
             };
 
             Response response = workflow.Execute(request);
@@ -137,8 +136,8 @@ namespace FlooringBusiness.Tests
 
             var request = new Request
             {
-                Type = WorkflowType.Find,
-                Date = DateTime.Parse(date),
+                Type        = WorkflowType.Find,
+                Date        = DateTime.Parse(date),
                 OrderNumber = orderNumber
             };
 
@@ -147,7 +146,7 @@ namespace FlooringBusiness.Tests
             if (response.Success)
             {
                 request.Type = WorkflowType.Remove;
-                response = workflow.Execute(request);
+                response     = workflow.Execute(request);
 
                 Assert.AreEqual(expectedResult, response.Success);
             }

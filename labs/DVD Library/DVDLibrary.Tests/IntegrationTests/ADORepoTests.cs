@@ -30,7 +30,7 @@ namespace DVDLibrary.Tests.IntegrationTests
         }
 
         [Test]
-        public void NotFoundDvdReturnsNull()
+        public void ADONotFoundDvdReturnsNull()
         {
             var repo = new ADORepository();
             var dvd = repo.GetDvdById(9999);
@@ -39,7 +39,7 @@ namespace DVDLibrary.Tests.IntegrationTests
         }
 
         [Test]
-        public void CanLoadDvds()
+        public void ADOCanLoadDvds()
         {
             var repo = new ADORepository();
             var dvds = repo.GetAllDvds();
@@ -52,7 +52,7 @@ namespace DVDLibrary.Tests.IntegrationTests
         [TestCase(1, "Back to the Future")]
         [TestCase(2, "The Wolf of Wall Street")]
         [TestCase(3, "Inception")]
-        public void CanGetDvdById(int id, string expectedTitle)
+        public void ADOCanGetDvdById(int id, string expectedTitle)
         {
             var repo = new ADORepository();
             var actual = repo.GetDvdById(id);
@@ -60,9 +60,31 @@ namespace DVDLibrary.Tests.IntegrationTests
             Assert.AreEqual(expectedTitle, actual.Title);
         }
 
+        [TestCase("Back to the Future", 1)]
+        [TestCase("The Wolf of Wall Street", 2)]
+        [TestCase("Inception", 3)]
+        public void ADOCanGetDvdByTitle(string title, int expectedId)
+        {
+            var repo = new ADORepository();
+            var actual = repo.GetDvdsByTitle(title);
+
+            Assert.AreEqual(expectedId, actual[0].Id);
+        }
+
+        [TestCase(1985, 1)]
+        [TestCase(2013, 2)]
+        [TestCase(2010, 3)]
+        public void ADOCanGetDvdByReleaseYear(int releaseYear, int expectedId)
+        {
+            var repo = new ADORepository();
+            var actual = repo.GetDvdsByReleaseYear(releaseYear);
+
+            Assert.AreEqual(expectedId, actual[0].Id);
+        }
+
         [TestCase("Ridley Scott", "Alien")]
         [TestCase("Roger Allers & Rob Minkoff", "The Lion King")]
-        public void CanGetDvdsByDirector(string director, string expectedTitle)
+        public void ADOCanGetDvdsByDirector(string director, string expectedTitle)
         {
             var repo = new ADORepository();
             var actual = repo.GetDvdsByDirector(director);

@@ -15,29 +15,29 @@ namespace FlooringBusiness.Data.ProductRepositories
 
             Product carpet = new Product()
             {
-                ProductType = "Carpet",
-                CostPerSquareFoot = 2.25m,
+                ProductType            = "Carpet",
+                CostPerSquareFoot      = 2.25m,
                 LaborCostPerSquareFoot = 2.1m
             };
 
             Product laminate = new Product()
             {
-                ProductType = "Laminate",
-                CostPerSquareFoot = 1.75m,
+                ProductType            = "Laminate",
+                CostPerSquareFoot      = 1.75m,
                 LaborCostPerSquareFoot = 2.1m
             };
 
             Product tile = new Product()
             {
-                ProductType = "Tile",
-                CostPerSquareFoot = 3.5m,
+                ProductType            = "Tile",
+                CostPerSquareFoot      = 3.5m,
                 LaborCostPerSquareFoot = 4.15m
             };
 
             Product wood = new Product()
             {
-                ProductType = "Wood",
-                CostPerSquareFoot = 5.15m,
+                ProductType            = "Wood",
+                CostPerSquareFoot      = 5.15m,
                 LaborCostPerSquareFoot = 4.75m
             };
 

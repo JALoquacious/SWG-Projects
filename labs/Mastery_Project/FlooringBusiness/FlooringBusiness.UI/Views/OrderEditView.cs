@@ -37,19 +37,19 @@ namespace FlooringBusiness.UI.Views
                 Utilities.PrintOrderDetails(editTarget, WorkflowType.Edit);
 
                 string newCustomer = Utilities.GetString("New Company Name", new Regex(@"^$|^[\w ,.]{2,20}$"), false).Trim().ToTitle(); // ?? editTarget.Customer;
-                string newProduct = Utilities.GetString("New Product Name", new Regex(@"^$|^[\w ,.]{2,20}$"), false).Trim().ToTitle(); // ?? editTarget.Product.ToString();
-                string newState = Utilities.GetString("New State", new Regex(@"^$|^[A-Za-z]{2}$"), false).ToUpper(); // ?? editTarget.StateTax.StateAbbreviation).ToUpper();
-                string newArea = Utilities.GetString("New Area of Material (sq. ft.)", new Regex(@"^$|^\d{3,7}(\.\d+)?$"), false);
+                string newProduct  = Utilities.GetString("New Product Name", new Regex(@"^$|^[\w ,.]{2,20}$"), false).Trim().ToTitle(); // ?? editTarget.Product.ToString();
+                string newState    = Utilities.GetString("New State", new Regex(@"^$|^[A-Za-z]{2}$"), false).ToUpper(); // ?? editTarget.StateTax.StateAbbreviation).ToUpper();
+                string newArea     = Utilities.GetString("New Area of Material (sq. ft.)", new Regex(@"^$|^\d{3,7}(\.\d+)?$"), false);
 
                 request = new Request
                 {
-                    Type = WorkflowType.Edit,
-                    Date = request.Date,
+                    Type        = WorkflowType.Edit,
+                    Date        = request.Date,
                     OrderNumber = request.OrderNumber,
-                    Customer = string.IsNullOrEmpty(newCustomer) ? editTarget.Customer : newCustomer,
-                    Product = string.IsNullOrEmpty(newProduct) ? editTarget.Product.ProductType : newProduct,
-                    State = string.IsNullOrEmpty(newState) ? editTarget.StateTax.StateAbbreviation : newState,
-                    Area = string.IsNullOrEmpty(newArea) ? editTarget.Area : decimal.Parse(newArea)
+                    Customer    = string.IsNullOrEmpty(newCustomer) ? editTarget.Customer : newCustomer,
+                    Product     = string.IsNullOrEmpty(newProduct) ? editTarget.Product.ProductType : newProduct,
+                    State       = string.IsNullOrEmpty(newState) ? editTarget.StateTax.StateAbbreviation : newState,
+                    Area        = string.IsNullOrEmpty(newArea) ? editTarget.Area : decimal.Parse(newArea)
                 };
 
                 flow = WorkflowFactory.Create(WorkflowType.Find);

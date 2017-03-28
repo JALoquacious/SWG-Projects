@@ -16,7 +16,7 @@ namespace DVDLibrary.Data.Repositories
 
             using (var conn = new SqlConnection(Settings.GetConnectionString()))
             {
-                SqlCommand cmd = new SqlCommand(sproc, conn);
+                var cmd = new SqlCommand(sproc, conn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddRange(paramArray);
 
@@ -26,12 +26,12 @@ namespace DVDLibrary.Data.Repositories
                 {
                     while (dr.Read())
                     {
-                        Dvd dvd = new Dvd();
+                        var dvd = new Dvd();
 
                         dvd.Id = (int) dr["Id"];
                         dvd.Title = dr["Title"].ToString();
 
-                        if (dr["releaseYear"] != DBNull.Value)
+                        if (dr["ReleaseYear"] != DBNull.Value)
                             dvd.ReleaseYear = (int) dr["ReleaseYear"];
 
                         if (dr["Director"] != DBNull.Value)
@@ -41,7 +41,7 @@ namespace DVDLibrary.Data.Repositories
                             dvd.Rating = dr["Rating"].ToString();
 
                         if (dr["Notes"] != DBNull.Value)
-                            dvd.Rating = dr["Notes"].ToString();
+                            dvd.Notes = dr["Notes"].ToString();
 
                         dvds.Add(dvd);
                     }
@@ -113,7 +113,7 @@ namespace DVDLibrary.Data.Repositories
             paramArray[1] = new SqlParameter("@Title", SqlDbType.NVarChar   ) { Value = dvd.Title       };
             paramArray[2] = new SqlParameter("@ReleaseYear", SqlDbType.Int  ) { Value = dvd.ReleaseYear };
             paramArray[3] = new SqlParameter("@Director", SqlDbType.NVarChar) { Value = dvd.Director    };
-            paramArray[4] = new SqlParameter("@Rating", SqlDbType.Char      ) { Value = dvd.Rating      };
+            paramArray[4] = new SqlParameter("@Rating", SqlDbType.NVarChar  ) { Value = dvd.Rating      };
             paramArray[5] = new SqlParameter("@Notes", SqlDbType.NVarChar   ) { Value = dvd.Notes       };
 
             ExecuteStoredProcedure("DvdUpdate", paramArray);

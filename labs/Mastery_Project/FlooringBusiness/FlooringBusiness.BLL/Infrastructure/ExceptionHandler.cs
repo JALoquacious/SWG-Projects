@@ -28,7 +28,7 @@ namespace FlooringBusiness.BLL.Infrastructure
             }
         }
 
-        //public void DoSomething()
+        //public void Execute()
         //{
         //    GlobalTryCatch(() =>
         //    {
