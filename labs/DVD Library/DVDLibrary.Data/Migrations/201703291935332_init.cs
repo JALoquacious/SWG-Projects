@@ -1,5 +1,6 @@
 namespace DVDLibrary.Data.Migrations
 {
+    using System;
     using System.Data.Entity.Migrations;
     
     public partial class init : DbMigration
@@ -7,15 +8,15 @@ namespace DVDLibrary.Data.Migrations
         public override void Up()
         {
             CreateTable(
-                "dbo.Dvds",
+                "dbo.Dvd",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Title = c.String(nullable: false, maxLength: 50),
+                        Title = c.String(),
                         ReleaseYear = c.Int(),
-                        Director = c.String(maxLength: 50),
-                        Rating = c.String(maxLength: 5),
-                        Notes = c.String(maxLength: 500),
+                        Director = c.String(),
+                        Rating = c.String(),
+                        Notes = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -23,7 +24,7 @@ namespace DVDLibrary.Data.Migrations
         
         public override void Down()
         {
-            DropTable("dbo.Dvds");
+            DropTable("dbo.Dvd");
         }
     }
 }

@@ -1,7 +1,9 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DVDLibrary.Models
 {
+    [Table("Dvd")]
     public class Dvd
     {
         public int Id { get; set; }

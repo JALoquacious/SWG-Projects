@@ -1,5 +1,4 @@
-﻿using DVDLibrary.Data;
-using DVDLibrary.Data.Interfaces;
+﻿using DVDLibrary.Data.Interfaces;
 using DVDLibrary.Models;
 using System.Web.Http;
 using System.Web.Http.Cors;
@@ -9,13 +8,22 @@ namespace DVDLibrary.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class DvdController : ApiController
     {
-        private IDvdRepository repo = RepositoryFactory.GetRepository();
+        // Repository factory way
+        // private IDvdRepository _dvdRepository = RepositoryFactory.GetRepository();
+
+        // Unity dependency injection way
+        private IDvdRepository _dvdRepository;
+
+        public DvdController(IDvdRepository concrete)
+        {
+            _dvdRepository = concrete;
+        }
 
         [Route("dvds/")]
         [AcceptVerbs("GET")]
         public IHttpActionResult GetAllDvds()
         {
-            var dvds = repo.GetAllDvds();
+            var dvds = _dvdRepository.GetAllDvds();
             return Ok(dvds);
         }
 
@@ -23,7 +31,7 @@ namespace DVDLibrary.Controllers
         [AcceptVerbs("GET")]
         public IHttpActionResult GetDvdById(int id)
         {
-            var dvd = repo.GetDvdById(id);
+            var dvd = _dvdRepository.GetDvdById(id);
 
             if (dvd != null)
             {
@@ -36,7 +44,7 @@ namespace DVDLibrary.Controllers
         [AcceptVerbs("GET")]
         public IHttpActionResult GetDvdsByTitle(string title)
         {
-            var dvds = repo.GetDvdsByTitle(title);
+            var dvds = _dvdRepository.GetDvdsByTitle(title);
 
             if (dvds != null)
             {
@@ -49,7 +57,7 @@ namespace DVDLibrary.Controllers
         [AcceptVerbs("GET")]
         public IHttpActionResult GetDvdsByReleaseYear(int releaseYear)
         {
-            var dvds = repo.GetDvdsByReleaseYear(releaseYear);
+            var dvds = _dvdRepository.GetDvdsByReleaseYear(releaseYear);
 
             if (dvds != null)
             {
@@ -62,7 +70,7 @@ namespace DVDLibrary.Controllers
         [AcceptVerbs("GET")]
         public IHttpActionResult GetDvdsByDirector(string directorName)
         {
-            var dvds = repo.GetDvdsByDirector(directorName);
+            var dvds = _dvdRepository.GetDvdsByDirector(directorName);
 
             if (dvds != null)
             {
@@ -75,7 +83,7 @@ namespace DVDLibrary.Controllers
         [AcceptVerbs("GET")]
         public IHttpActionResult GetDvdsByRating(string rating)
         {
-            var dvds = repo.GetDvdsByRating(rating);
+            var dvds = _dvdRepository.GetDvdsByRating(rating);
 
             if (dvds != null)
             {
@@ -102,7 +110,7 @@ namespace DVDLibrary.Controllers
                 Notes = request.Notes
             };
 
-            repo.AddDvd(dvd);
+            _dvdRepository.AddDvd(dvd);
             return Created($"dvd/{dvd.Id}", dvd);
         }
 
@@ -115,7 +123,7 @@ namespace DVDLibrary.Controllers
                 return BadRequest(ModelState);
             }
 
-            var dvd = repo.GetDvdById(request.Id);
+            var dvd = _dvdRepository.GetDvdById(request.Id);
 
             if (dvd == null)
             {
@@ -128,7 +136,7 @@ namespace DVDLibrary.Controllers
             dvd.Rating = request.Rating;
             dvd.Notes = request.Notes;
 
-            repo.UpdateDvd(dvd);
+            _dvdRepository.UpdateDvd(dvd);
             return Ok(dvd);
         }
 
@@ -136,14 +144,14 @@ namespace DVDLibrary.Controllers
         [AcceptVerbs("DELETE")]
         public IHttpActionResult Delete(int id)
         {
-            var dvd = repo.GetDvdById(id);
+            var dvd = _dvdRepository.GetDvdById(id);
 
             if (dvd == null)
             {
                 return NotFound();
             }
 
-            repo.DeleteDvd(id);
+            _dvdRepository.DeleteDvd(id);
             return Ok();
         }
     }

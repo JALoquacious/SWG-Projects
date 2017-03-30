@@ -1,10 +1,6 @@
 ﻿using DVDLibrary.Data.Interfaces;
 using DVDLibrary.Data.Repositories;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DVDLibrary.Data
 {
@@ -20,6 +16,8 @@ namespace DVDLibrary.Data
                     return new MockRepository();
                 case "ADO":
                     return new ADORepository();
+                case "DP":
+                    return new DPRepository();
                 case "EF":
                     return new EFRepository();
                 default:

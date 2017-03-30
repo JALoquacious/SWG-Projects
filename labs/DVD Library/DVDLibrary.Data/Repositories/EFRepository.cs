@@ -3,7 +3,7 @@ using DVDLibrary.Models;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DVDLibrary.Data
+namespace DVDLibrary.Data.Repositories
 {
     public class EFRepository : IDvdRepository
     {

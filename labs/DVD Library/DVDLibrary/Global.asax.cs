@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using DVDLibrary.Controllers;
 using System.Web.Http;
-using System.Web.Routing;
 
 namespace DVDLibrary
 {
@@ -11,6 +7,7 @@ namespace DVDLibrary
     {
         protected void Application_Start()
         {
+            UnityConfig.RegisterComponents();
             GlobalConfiguration.Configure(WebApiConfig.Register);
         }
     }
