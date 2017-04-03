@@ -1,4 +1,4 @@
-﻿using CarDealership.Models;
+﻿using CarDealership.Models.Tables;
 using CarDealership.Models.Queries;
 using System.Collections.Generic;
 

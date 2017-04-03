@@ -3,7 +3,7 @@
     public class VehicleDetail
     {
         public int VehicleId        { get; set; }
-//      public int UserId           { get; set; }
+        public int UserId           { get; set; }
         public int Year             { get; set; }
         public bool IsUsed          { get; set; }
         public bool IsAutomatic     { get; set; }

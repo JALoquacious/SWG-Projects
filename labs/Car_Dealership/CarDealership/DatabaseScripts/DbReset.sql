@@ -19,11 +19,6 @@ BEGIN
 		,('Truck')
 		,('Van')
 
-	INSERT INTO Transmissions ([Type])
-	VALUES
-		 ('Automatic')
-		,('Manual')
-
 	INSERT INTO ExteriorColors ([Name])
 	VALUES
 		 ('Black')
@@ -99,9 +94,8 @@ BEGIN
 		,(8, 'Tacoma', 1998)
 
 	INSERT INTO Vehicles (
-		 UserId
-		,ModelId
-		,TransmissionId
+		 --UserId
+		 ModelId
 		,BodyStyleId
 		,InteriorColorId
 		,ExteriorColorId
@@ -116,8 +110,8 @@ BEGIN
 		,[Image]
 		)
 	VALUES (
-		 '00000000-0000-0000-0000-000000000000' -- UserId
-		,1 -- ModelId
+		 --'00000000-0000-0000-0000-000000000000' -- UserId
+		 1 -- ModelId
 		,1 -- TransmissionId
 		,1 -- BodyStyleId
 		,4 -- InteriorColorId
@@ -180,8 +174,8 @@ BEGIN
 		);
 
 	INSERT INTO Customers (
-		 UserId
-		,[Name]
+		 --UserId
+		 [Name]
 		,Phone
 		,Email
 		,Street1
@@ -191,8 +185,8 @@ BEGIN
 		,Zip
 		)
 	VALUES (
-		 '00000000-0000-0000-0000-000000000000' -- UserId
-		,'Jason Bourne' -- [Name]
+		 --'00000000-0000-0000-0000-000000000000' -- UserId
+		 'Jason Bourne' -- [Name]
 		,'5558675309' -- Phone
 		,NULL -- Email
 		,'123 Main Street' -- Street1

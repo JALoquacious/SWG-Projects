@@ -16,11 +16,10 @@ BEGIN
 	WHILE (@@ROWCOUNT > 0)
 		BEGIN
 			EXECUTE('DROP TABLE [' + @TableName + ']')
-
 			SELECT TOP 1 @TableName = TABLE_NAME
 			FROM INFORMATION_SCHEMA.TABLES
 				WHERE TABLE_NAME > @TableName
-			ORDER BY TABLE_NAME ASC 
+			ORDER BY TABLE_NAME DESC
 		END
 END
 GO
@@ -57,17 +56,16 @@ CREATE TABLE Models (
 	[Year] INT NOT NULL
 )
 
-CREATE TABLE Transmissions (
-	TransmissionId INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
-	[Type] NVARCHAR(20) NULL
-)
+--CREATE TABLE Transmissions (
+--	TransmissionId INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+--	[Type] NVARCHAR(20) NULL
+--)
 
 CREATE TABLE Vehicles (
 	VehicleId INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
-	UserId INT FOREIGN KEY REFERENCES AspNetUsers(Id),
-	--PurchaseId INT FOREIGN KEY REFERENCES Sales(SaleId),
+	--UserId INT FOREIGN KEY REFERENCES AspNetUsers(Id),
 	ModelId INT FOREIGN KEY REFERENCES Models(ModelId),
-	TransmissionId INT FOREIGN KEY REFERENCES Transmissions(TransmissionId),
+	--TransmissionId INT FOREIGN KEY REFERENCES Transmissions(TransmissionId),
 	BodyStyleId INT FOREIGN KEY REFERENCES BodyStyles(BodyStyleId),
 	InteriorColorId INT FOREIGN KEY REFERENCES InteriorColors(InteriorColorId),
 	ExteriorColorId INT FOREIGN KEY REFERENCES ExteriorColors(ExteriorColorId),
@@ -86,7 +84,7 @@ CREATE TABLE Vehicles (
 
 /*------------------------------------ SALES INFO ------------------------------------*/
 
-CREATE TABLE PaymentTypes ( -- Bank-financed, Cash, Dealer-financed
+CREATE TABLE PaymentTypes (
 	PaymentTypeId INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
 	[Description] NVARCHAR(25) NOT NULL
 )
@@ -111,7 +109,7 @@ CREATE TABLE States (
 
 CREATE TABLE Customers (
 	CustomerId INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
-	UserId INT FOREIGN KEY REFERENCES AspNetUsers(UserId) NOT NULL,
+	--UserId INT FOREIGN KEY REFERENCES AspNetUsers(UserId) NOT NULL,
 	[Name] NVARCHAR(50) NOT NULL,
 	Phone NVARCHAR(15) NULL, -- required if email not provided
 	Email NVARCHAR(50) NULL, -- required if phone not provided

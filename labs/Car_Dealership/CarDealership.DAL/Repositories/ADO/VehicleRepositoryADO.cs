@@ -1,8 +1,8 @@
 ﻿using CarDealership.DAL.Interfaces;
-using CarDealership.Models;
+using CarDealership.Models.Queries;
+using CarDealership.Models.Tables;
 using System;
 using System.Collections.Generic;
-using CarDealership.Models.Queries;
 
 namespace CarDealership.DAL.Repositories.ADO
 {

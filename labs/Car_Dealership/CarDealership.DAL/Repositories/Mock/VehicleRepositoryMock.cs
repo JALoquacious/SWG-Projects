@@ -1,5 +1,5 @@
 ﻿using CarDealership.DAL.Interfaces;
-using CarDealership.Models;
+using CarDealership.Models.Tables;
 using CarDealership.Models.Queries;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +21,6 @@ namespace CarDealership.DAL.Repositories.Mock
                     VehicleId = 1,
                     UserId = 123,
                     ModelId = 9,
-                    //TransmissionId = 2,
                     BodyStyleId = 1,
                     InteriorColorId = 6,
                     ExteriorColorId = 5,
@@ -41,7 +40,6 @@ namespace CarDealership.DAL.Repositories.Mock
                     VehicleId = 2,
                     UserId = 234,
                     ModelId = 24,
-                    //TransmissionId = 2,
                     BodyStyleId = 3,
                     InteriorColorId = 4,
                     ExteriorColorId = 7,
@@ -61,7 +59,6 @@ namespace CarDealership.DAL.Repositories.Mock
                     VehicleId = 3,
                     UserId = 345,
                     ModelId = 5,
-                    //TransmissionId = 1,
                     BodyStyleId = 2,
                     InteriorColorId = 2,
                     ExteriorColorId = 9,
@@ -81,7 +78,6 @@ namespace CarDealership.DAL.Repositories.Mock
                     VehicleId = 4,
                     UserId = 456,
                     ModelId = 15,
-                    //TransmissionId = 1,
                     BodyStyleId = 1,
                     InteriorColorId = 1,
                     ExteriorColorId = 1,
@@ -106,7 +102,6 @@ namespace CarDealership.DAL.Repositories.Mock
                     VehicleId = 1,
                     Make = "Chevrolet",
                     Model = "Corvette",
-                    //Transmission = "Manual",
                     BodyStyle = "Car",
                     InteriorColor = "DarkRed",
                     ExteriorColor = "Charcoal",
@@ -126,7 +121,6 @@ namespace CarDealership.DAL.Repositories.Mock
                     VehicleId = 2,
                     Make = "Toyota",
                     Model = "Tacoma",
-                    //Transmission = "Manual",
                     BodyStyle = "Truck",
                     InteriorColor = "Tan",
                     ExteriorColor = "Red",
@@ -146,7 +140,6 @@ namespace CarDealership.DAL.Repositories.Mock
                     VehicleId = 3,
                     Make = "BMW",
                     Model = "X5",
-                    //Transmission = "Automatic",
                     BodyStyle = "SUV",
                     InteriorColor = "White",
                     ExteriorColor = "Yellow",
@@ -166,7 +159,6 @@ namespace CarDealership.DAL.Repositories.Mock
                     VehicleId = 4,
                     Make = "Honda",
                     Model = "Odyssey",
-                    //Transmission = "Automatic",
                     BodyStyle = "Van",
                     InteriorColor = "Black",
                     ExteriorColor = "Black",
