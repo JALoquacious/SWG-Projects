@@ -12,96 +12,136 @@ GO
 CREATE PROCEDURE DbReset
 AS
 BEGIN
-	INSERT INTO BodyStyles ([Description])
-	VALUES
-		 ('Car')
-		,('SUV')
-		,('Truck')
-		,('Van')
+	delete from Contacts;
+	delete from Sales;
+	delete from Customers;
+	delete from States;
+	delete from Specials;
+	delete from Salespersons;
+	delete from PaymentTypes;
+	delete from Vehicles;
+	delete from Models;
+	delete from Makes;
+	delete from ExteriorColors;
+	delete from InteriorColors;
+	delete from BodyStyles;
+	delete from AspNetUsers WHERE Id IN ('00000000-0000-0000-0000-000000000000', '11111111-1111-1111-1111-111111111111');
 
-	INSERT INTO ExteriorColors ([Name])
-	VALUES
-		 ('Black')
-		,('White')
-		,('Silver')
-		,('Gray')
-		,('Charcoal')
-		,('Brown')
-		,('Red')
-		,('Orange')
-		,('Yellow')
-		,('Green')
-		,('Blue')
-		,('DarkRed')
-		,('DarkBlue')
+	dbcc checkident ('Vehicles', RESEED, 1)
 
-	INSERT INTO InteriorColors ([Name])
-	VALUES
-		 ('Black')
-		,('White')
-		,('Gray')
-		,('Tan')
-		,('Beige')
-		,('DarkRed')
-		,('DarkBlue')
+	insert into AspNetUsers(Id, EmailConfirmed, PhoneNumberConfirmed, Email, TwoFactorEnabled, LockoutEnabled, AccessFailedCount, UserName)
+	values('00000000-0000-0000-0000-000000000000', 0, 0, 'test1@test.com', 0, 0, 0, 'test1');
+	insert into AspNetUsers(Id, EmailConfirmed, PhoneNumberConfirmed, Email, TwoFactorEnabled, LockoutEnabled, AccessFailedCount, UserName)
+	values('11111111-1111-1111-1111-111111111111', 0, 0, 'test2@test.com', 0, 0, 0, 'test2');
 
-	INSERT INTO Makes ([Name], UserId)
-	VALUES
-		 ('Audi', '00000000-0000-0000-0000-000000000000')
-		,('BMW', '00000000-0000-0000-0000-000000000000')
-		,('Chevrolet', '00000000-0000-0000-0000-000000000000')
-		,('Ford', '00000000-0000-0000-0000-000000000000')
-		,('Honda', '11111111-1111-1111-1111-111111111111')
-		,('Nissan', '11111111-1111-1111-1111-111111111111')
-		,('Tesla', '11111111-1111-1111-1111-111111111111')
-		,('Toyota', '11111111-1111-1111-1111-111111111111')
 
-	INSERT INTO Models (MakeId, [Name], [Year], UserId)
+	set identity_insert BodyStyles on;
+	INSERT INTO BodyStyles (BodyStyleId, [Description])
+	VALUES
+		 (1, 'Car')
+		,(2, 'SUV')
+		,(3, 'Truck')
+		,(4, 'Van')
+	set identity_insert BodyStyles off;
+
+
+	set identity_insert ExteriorColors on;
+	INSERT INTO ExteriorColors (ExteriorColorId, [Name])
+	VALUES
+		 (1, 'Black')
+		,(2, 'White')
+		,(3, 'Silver')
+		,(4, 'Gray')
+		,(5, 'Charcoal')
+		,(6, 'Brown')
+		,(7, 'Red')
+		,(8, 'Orange')
+		,(9, 'Yellow')
+		,(10, 'Green')
+		,(11, 'Blue')
+		,(12, 'DarkRed')
+		,(13, 'DarkBlue')
+	set identity_insert ExteriorColors off;
+
+
+	set identity_insert InteriorColors on;
+	INSERT INTO InteriorColors (InteriorColorId, [Name])
+	VALUES
+		 (1, 'Black')
+		,(2, 'White')
+		,(3, 'Gray')
+		,(4, 'Tan')
+		,(5, 'Beige')
+		,(6, 'DarkRed')
+		,(7, 'DarkBlue')
+	set identity_insert InteriorColors off;
+
+
+	set identity_insert Makes on;
+	INSERT INTO Makes (MakeId, [Name], UserId)
+	VALUES
+		 (1, 'Audi', '00000000-0000-0000-0000-000000000000')
+		,(2, 'BMW', '00000000-0000-0000-0000-000000000000')
+		,(3, 'Chevrolet', '00000000-0000-0000-0000-000000000000')
+		,(4, 'Ford', '00000000-0000-0000-0000-000000000000')
+		,(5, 'Honda', '11111111-1111-1111-1111-111111111111')
+		,(6, 'Nissan', '11111111-1111-1111-1111-111111111111')
+		,(7, 'Tesla', '11111111-1111-1111-1111-111111111111')
+		,(8, 'Toyota', '11111111-1111-1111-1111-111111111111')
+	set identity_insert Makes off;
+
+
+	set identity_insert Models on;
+	INSERT INTO Models (ModelId, MakeId, [Name], [Year], UserId)
 	VALUES
 		 -- Audi
-		 (1, 'A4', 2017, '00000000-0000-0000-0000-000000000000')
-		,(1, 'A4', 2017, '00000000-0000-0000-0000-000000000000')
-		,(1, 'A4', 2017, '00000000-0000-0000-0000-000000000000')
-		,(1, 'Q5', 2015, '00000000-0000-0000-0000-000000000000')
-		,(1, 'R8', 2017, '11111111-1111-1111-1111-111111111111')
+		 (1, 1, 'A4', 2017, '00000000-0000-0000-0000-000000000000')
+		,(2, 1, 'A4', 2017, '00000000-0000-0000-0000-000000000000')
+		,(3, 1, 'A4', 2017, '00000000-0000-0000-0000-000000000000')
+		,(4, 1, 'Q5', 2015, '00000000-0000-0000-0000-000000000000')
+		,(5, 1, 'R8', 2017, '11111111-1111-1111-1111-111111111111')
 		 -- BMW
-		,(2, 'Z4', 2014, '00000000-0000-0000-0000-000000000000')
-		,(2, 'X5', 2017, '00000000-0000-0000-0000-000000000000')
-		,(2, 'M6', 2013, '11111111-1111-1111-1111-111111111111')
-		,(2, 'M6', 2013, '11111111-1111-1111-1111-111111111111')
+		,(6, 2, 'Z4', 2014, '00000000-0000-0000-0000-000000000000')
+		,(7, 2, 'X5', 2017, '00000000-0000-0000-0000-000000000000')
+		,(8, 2, 'M6', 2013, '11111111-1111-1111-1111-111111111111')
+		,(9, 2, 'M6', 2013, '11111111-1111-1111-1111-111111111111')
 		 -- Chevrolet
-		,(3, 'Tahoe', 2011, '00000000-0000-0000-0000-000000000000')
-		,(3, 'Colorado', 2012, '00000000-0000-0000-0000-000000000000')
-		,(3, 'Corvette', 2017, '11111111-1111-1111-1111-111111111111')
-		,(3, 'Corvette', 2017, '11111111-1111-1111-1111-111111111111')
+		,(10, 3, 'Tahoe', 2011, '00000000-0000-0000-0000-000000000000')
+		,(11, 3, 'Colorado', 2012, '00000000-0000-0000-0000-000000000000')
+		,(12, 3, 'Corvette', 2017, '11111111-1111-1111-1111-111111111111')
+		,(13, 3, 'Corvette', 2017, '11111111-1111-1111-1111-111111111111')
 		 -- Ford
-		,(4, 'F-150', 2003, '00000000-0000-0000-0000-000000000000')
-		,(4, 'Fusion', 2009, '00000000-0000-0000-0000-000000000000')
-		,(4, 'Explorer', 2016, '11111111-1111-1111-1111-111111111111')
-		,(4, 'Explorer', 2016, '11111111-1111-1111-1111-111111111111')
+		,(14, 4, 'F-150', 2003, '00000000-0000-0000-0000-000000000000')
+		,(15, 4, 'Fusion', 2009, '00000000-0000-0000-0000-000000000000')
+		,(16, 4, 'Explorer', 2016, '11111111-1111-1111-1111-111111111111')
+		,(17, 4, 'Explorer', 2016, '11111111-1111-1111-1111-111111111111')
 		 -- Honda
-		,(5, 'Accord', 2004, '00000000-0000-0000-0000-000000000000')
-		,(5, 'Ridgeline', 2011, '00000000-0000-0000-0000-000000000000')
-		,(5, 'Odyssey', 2010, '11111111-1111-1111-1111-111111111111')
-		,(5, 'Odyssey', 2010, '11111111-1111-1111-1111-111111111111')
+		,(18, 5, 'Accord', 2004, '00000000-0000-0000-0000-000000000000')
+		,(19, 5, 'Ridgeline', 2011, '00000000-0000-0000-0000-000000000000')
+		,(20, 5, 'Odyssey', 2010, '11111111-1111-1111-1111-111111111111')
+		,(21, 5, 'Odyssey', 2010, '11111111-1111-1111-1111-111111111111')
 		 -- Nissan
-		,(6, 'GT-R', 2015, '00000000-0000-0000-0000-000000000000')
-		,(6, 'Frontier', 2001, '00000000-0000-0000-0000-000000000000')
-		,(6, 'Pathfinder', 2013, '11111111-1111-1111-1111-111111111111')
-		,(6, 'Pathfinder', 2013, '11111111-1111-1111-1111-111111111111')
+		,(22, 6, 'GT-R', 2015, '00000000-0000-0000-0000-000000000000')
+		,(23, 6, 'Frontier', 2001, '00000000-0000-0000-0000-000000000000')
+		,(24, 6, 'Pathfinder', 2013, '11111111-1111-1111-1111-111111111111')
+		,(25, 6, 'Pathfinder', 2013, '11111111-1111-1111-1111-111111111111')
 		 -- Tesla
-		,(7, 'S', 2013, '00000000-0000-0000-0000-000000000000')
-		,(7, 'X', 2016, '00000000-0000-0000-0000-000000000000')
-		,(7, '3', 2018, '11111111-1111-1111-1111-111111111111')
-		,(7, '3', 2018, '11111111-1111-1111-1111-111111111111')
+		,(26, 7, 'S', 2013, '00000000-0000-0000-0000-000000000000')
+		,(27, 7, 'X', 2016, '00000000-0000-0000-0000-000000000000')
+		,(28, 7, '3', 2018, '11111111-1111-1111-1111-111111111111')
+		,(29, 7, '3', 2018, '11111111-1111-1111-1111-111111111111')
 		 -- Toyota
-		,(8, 'Land Cruiser', 2009, '00000000-0000-0000-0000-000000000000')
-		,(8, 'Camry', 2012, '00000000-0000-0000-0000-000000000000')
-		,(8, 'Tacoma', 1998, '11111111-1111-1111-1111-111111111111')
-		,(8, 'Tacoma', 1998, '11111111-1111-1111-1111-111111111111')
+		,(30, 8, 'Land Cruiser', 2009, '00000000-0000-0000-0000-000000000000')
+		,(31, 8, 'Camry', 2012, '00000000-0000-0000-0000-000000000000')
+		,(32, 8, 'Tacoma', 1998, '11111111-1111-1111-1111-111111111111')
+		,(33, 8, 'Tacoma', 1998, '11111111-1111-1111-1111-111111111111')
+	set identity_insert Models off;
 
+
+	set identity_insert Vehicles on;
 	INSERT INTO Vehicles (
-		 UserId
+		VehicleId
+		,UserId
 		,ModelId
 		,BodyStyleId
 		,InteriorColorId
@@ -117,7 +157,8 @@ BEGIN
 		,[Image]
 		)
 	VALUES (
-		 '00000000-0000-0000-0000-000000000000' -- UserId
+		1
+		,'00000000-0000-0000-0000-000000000000' -- UserId
 		,1 -- ModelId
 		,1 -- BodyStyleId
 		,4 -- InteriorColorId
@@ -132,7 +173,10 @@ BEGIN
 		,1 -- IsFeatured
 		,'placeholder.img' -- [Image]
 		)
+	set identity_insert Vehicles off;
 
+
+	set identity_insert Specials on;
 	INSERT INTO Specials (
 		 SpecialId
 		,[Name]
@@ -148,19 +192,27 @@ BEGIN
 		,'Green shirt special'
 		,'You''ve got the luck of a leprechaun! $100 off for wearing a green shirt.'
 		)
+	set identity_insert Specials off;
 
+
+	set identity_insert Salespersons on;
 	INSERT INTO Salespersons (
-		 FirstName
+		SalesPersonId
+		,FirstName
 		,LastName
 		)
 	VALUES (
-		 'John'
+		1
+		,'John'
 		,'Smith'
 		)
 		,(
-		 'Jane'
+		2
+		,'Jane'
 		,'Doe'
 		)
+	set identity_insert Salespersons off;
+
 
 	INSERT INTO States (
 		 StateId
@@ -179,8 +231,11 @@ BEGIN
 		,'Minnesota'
 		);
 
+
+	set identity_insert Customers on;
 	INSERT INTO Customers (
-		 UserId
+		CustomerId
+		,UserId
 		,[Name]
 		,Phone
 		,Email
@@ -191,25 +246,33 @@ BEGIN
 		,Zip
 		)
 	VALUES (
-		 '00000000-0000-0000-0000-000000000000' -- UserId
+		1
+		,'00000000-0000-0000-0000-000000000000' -- UserId
 		,'Jason Bourne' -- [Name]
 		,'5558675309' -- Phone
 		,NULL -- Email
 		,'123 Main Street' -- Street1
 		,'Deposit Box G6Y13' -- Street2
 		,'Podunk' -- City
-		,2 -- StateId
+		,'KY' -- StateId
 		,'75204' -- Zip
 		)
+	set identity_insert Customers off;
 
-	INSERT INTO PaymentTypes ([Description])
+
+	set identity_insert PaymentTypes on;
+	INSERT INTO PaymentTypes (PaymentTypeId, [Description])
 	VALUES
-		 ('Bank-financed')
-		,('Cash')
-		,('Dealer-financed')
+		 (1, 'Bank-financed')
+		,(2, 'Cash')
+		,(3, 'Dealer-financed')
+	set identity_insert PaymentTypes off;
 
+
+	set identity_insert Sales on;
 	INSERT INTO Sales (
-		 VehicleId
+		SaleId
+		,VehicleId
 		,CustomerId
 		,SalesPersonId
 		,PaymentTypeId
@@ -217,24 +280,38 @@ BEGIN
 		,[Date]
 		)
 	VALUES (
-		 11 -- VehicleId
-		,3 -- CustomerId
+		1
+		,1 -- VehicleId
+		,1 -- CustomerId
 		,2 -- SalesPersonId
+		,1 -- PaymentTypeId
 		,23740 -- PurchasePrice
-		,1 -- PurchaseTypeId
 		,'4/1/2017' -- [Date]
 		)
+	set identity_insert Sales off;
 
+
+	set identity_insert Contacts on;
 	INSERT INTO Contacts (
-		 [Name]
+		ContactId
+		,VehicleId
+		,UserId
+		,[Name]
 		,Phone
 		,Email
+		,[Message]
 		)
 	VALUES (
-		'Cornelius Vanderbilt'
+		1
+		,1
+		,'00000000-0000-0000-0000-000000000000'
+		,'Cornelius Vanderbilt'
 		,NULL
 		,'cornelius@grandcentral.com'
+		,'Just how good is that coffee that comes with the special?'
 		)
+	set identity_insert Contacts off;
+
 
 	--INSERT INTO Communications (
 	--	 ContactId

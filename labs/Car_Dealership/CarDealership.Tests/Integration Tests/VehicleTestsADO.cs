@@ -1,6 +1,8 @@
-﻿using NUnit.Framework;
+﻿using CarDealership.DAL.Repositories.ADO;
+using NUnit.Framework;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace CarDealership.Tests.Integration_Tests
 {
@@ -27,6 +29,26 @@ namespace CarDealership.Tests.Integration_Tests
                 cn.Open();
                 cmd.ExecuteNonQuery();
             }
+        }
+
+        [Test]
+        public void ADONotFoundVehicleReturnsNull()
+        {
+            var repo = new VehicleRepositoryADO();
+            var vehicle = repo.GetById(100000);
+
+            Assert.IsNull(vehicle);
+        }
+
+        [Test]
+        public void CanLoadMakes()
+        {
+            var repo = new MakeRepositoryADO();
+            var makes = repo.GetAll().ToList();
+
+            Assert.AreEqual(8, makes.Count);
+            Assert.AreEqual(1, makes[0].MakeId);
+            Assert.AreEqual("Audi", makes[0].Name);
         }
     }
 }
