@@ -14,6 +14,7 @@ namespace CarDealership.Models.Tables
         public DateTime DateAdded { get; set; }
         public int ModelId        { get; set; }
         public int MakeId         { get; set; }
+        public int Year           { get; set; }
         public string UserId      { get; set; }
         public string Name        { get; set; }
     }

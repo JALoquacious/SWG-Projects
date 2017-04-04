@@ -46,6 +46,8 @@
     <Compile Include="Queries\InventoryReport.cs" />
     <Compile Include="Queries\SalesReport.cs" />
     <Compile Include="Queries\VehicleDetail.cs" />
+    <Compile Include="Queries\VehicleFeatured.cs" />
+    <Compile Include="Queries\VehicleSearchParameters.cs" />
     <Compile Include="Tables\BodyStyle.cs" />
     <Compile Include="Tables\Communication.cs" />
     <Compile Include="Tables\Contact.cs" />

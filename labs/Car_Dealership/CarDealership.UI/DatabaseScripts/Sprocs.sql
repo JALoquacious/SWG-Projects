@@ -1,278 +1,466 @@
 USE GuildCars
 
-IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
-   WHERE ROUTINE_NAME = 'StatesSelectAll')
-      DROP PROCEDURE StatesSelectAll
+IF EXISTS (
+		SELECT *
+		FROM INFORMATION_SCHEMA.ROUTINES
+		WHERE ROUTINE_NAME = 'WipeTables'
+		)
+	DROP PROCEDURE WipeTables
 GO
 
-CREATE PROCEDURE StatesSelectAll AS
+CREATE PROCEDURE WipeTables
+AS
 BEGIN
-	SELECT StateId, [Name]
+	DECLARE @TableName NVARCHAR(32)
+
+	SELECT TOP 1 @TableName = TABLE_NAME
+	FROM INFORMATION_SCHEMA.TABLES
+	ORDER BY TABLE_NAME ASC
+
+	WHILE (@@ROWCOUNT > 0)
+	BEGIN
+		EXECUTE ('DROP TABLE [' + @TableName + ']')
+
+		SELECT TOP 1 @TableName = TABLE_NAME
+		FROM INFORMATION_SCHEMA.TABLES
+		WHERE TABLE_NAME > @TableName
+		ORDER BY TABLE_NAME DESC
+	END
+END
+GO
+
+IF EXISTS (
+		SELECT *
+		FROM INFORMATION_SCHEMA.ROUTINES
+		WHERE ROUTINE_NAME = 'StatesSelectAll'
+		)
+	DROP PROCEDURE StatesSelectAll
+GO
+
+CREATE PROCEDURE StatesSelectAll
+AS
+BEGIN
+	SELECT StateId
+		,[Name]
 	FROM States
 END
 GO
 
-IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
-   WHERE ROUTINE_NAME = 'MakesSelectAll')
-      DROP PROCEDURE MakesSelectAll
+IF EXISTS (
+		SELECT *
+		FROM INFORMATION_SCHEMA.ROUTINES
+		WHERE ROUTINE_NAME = 'MakesSelectAll'
+		)
+	DROP PROCEDURE MakesSelectAll
 GO
 
-CREATE PROCEDURE MakesSelectAll AS
+CREATE PROCEDURE MakesSelectAll
+AS
 BEGIN
-	SELECT MakeId, UserId, [Name], DateAdded
+	SELECT MakeId
+		,UserId
+		,[Name]
+		,DateAdded
 	FROM Makes
 	ORDER BY [Name] ASC
 END
 GO
 
-if exists(select * from INFORMATION_SCHEMA.ROUTINES
-	where ROUTINE_NAME = 'MakeSelectById')
-		drop procedure MakeSelectById
+IF EXISTS (
+		SELECT *
+		FROM INFORMATION_SCHEMA.ROUTINES
+		WHERE ROUTINE_NAME = 'MakeSelectById'
+		)
+	DROP PROCEDURE MakeSelectById
 GO
 
-create procedure MakeSelectById (
-	@MakeId int
-) as
-begin
-	select MakeId, UserId, [Name], DateAdded
-	from Makes
-	where MakeId = @MakeId
-end
-go
+CREATE PROCEDURE MakeSelectById (@MakeId INT)
+AS
+BEGIN
+	SELECT MakeId
+		,UserId
+		,[Name]
+		,DateAdded
+	FROM Makes
+	WHERE MakeId = @MakeId
+END
+GO
 
-IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
-   WHERE ROUTINE_NAME = 'MakeInsert')
-      DROP PROCEDURE MakeInsert
+IF EXISTS (
+		SELECT *
+		FROM INFORMATION_SCHEMA.ROUTINES
+		WHERE ROUTINE_NAME = 'MakeInsert'
+		)
+	DROP PROCEDURE MakeInsert
 GO
 
 CREATE PROCEDURE MakeInsert (
-	@MakeId int output,
-	@UserId nvarchar(128),
-	@Name NVARCHAR(25),
-	@DateAdded DATETIME2
-) AS
+	@MakeId INT OUTPUT
+	,@UserId NVARCHAR(128)
+	,@Name NVARCHAR(25)
+	,@DateAdded DATETIME2
+	)
+AS
 BEGIN
-	INSERT INTO Makes (UserId, [Name], DateAdded)
-	VALUES (@UserId, @Name, @DateAdded);
+	INSERT INTO Makes (
+		UserId
+		,[Name]
+		,DateAdded
+		)
+	VALUES (
+		@UserId
+		,@Name
+		,@DateAdded
+		);
 
 	SET @MakeId = SCOPE_IDENTITY();
 END
 GO
 
-IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
-   WHERE ROUTINE_NAME = 'VehicleInsert')
-      DROP PROCEDURE VehicleInsert
+IF EXISTS (
+		SELECT *
+		FROM INFORMATION_SCHEMA.ROUTINES
+		WHERE ROUTINE_NAME = 'VehicleInsert'
+		)
+	DROP PROCEDURE VehicleInsert
 GO
 
 CREATE PROCEDURE VehicleInsert (
-	@VehicleId int output,
-	@UserId nvarchar(128),
-	@ModelId int,
-	@BodyStyleId int,
-	@InteriorColorId int,
-	@ExteriorColorId int,
-	@SalePrice decimal(8,2),
-	@MSRP decimal(8,2),
-	@Mileage decimal(8,2),
-	@VIN char(17),
-	@Description nvarchar(500),
-	@IsUsed bit,
-	@IsAutomatic bit,
-	@IsFeatured bit,
-	@Image nvarchar(100)
-) AS
+	@VehicleId INT OUTPUT
+	,@UserId NVARCHAR(128)
+	,@ModelId INT
+	,@BodyStyleId INT
+	,@InteriorColorId INT
+	,@ExteriorColorId INT
+	,@SalePrice DECIMAL(8, 2)
+	,@MSRP DECIMAL(8, 2)
+	,@Mileage DECIMAL(8, 2)
+	,@VIN CHAR(17)
+	,@Description NVARCHAR(500)
+	,@IsUsed BIT
+	,@IsAutomatic BIT
+	,@IsFeatured BIT
+	,@Image NVARCHAR(100)
+	)
+AS
 BEGIN
-	INSERT INTO Vehicles (UserId, ModelId, BodyStyleId, InteriorColorId, ExteriorColorId,
-		SalePrice, MSRP, Mileage, VIN, [Description], IsUsed, IsAutomatic, IsFeatured, [Image])
-	VALUES (@UserId, @ModelId, @BodyStyleId, @InteriorColorId, @ExteriorColorId, @SalePrice,
-		@MSRP, @VIN, @Description, @IsUsed, @IsAutomatic, @IsFeatured, @Image);
+	INSERT INTO Vehicles (
+		UserId
+		,ModelId
+		,BodyStyleId
+		,InteriorColorId
+		,ExteriorColorId
+		,SalePrice
+		,MSRP
+		,Mileage
+		,VIN
+		,[Description]
+		,IsUsed
+		,IsAutomatic
+		,IsFeatured
+		,[Image]
+		)
+	VALUES (
+		@UserId
+		,@ModelId
+		,@BodyStyleId
+		,@InteriorColorId
+		,@ExteriorColorId
+		,@SalePrice
+		,@MSRP
+		,@Mileage
+		,@VIN
+		,@Description
+		,@IsUsed
+		,@IsAutomatic
+		,@IsFeatured
+		,@Image
+		);
 
 	SET @VehicleId = SCOPE_IDENTITY();
 END
 GO
 
-IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
-   WHERE ROUTINE_NAME = 'VehicleUpdate')
-      DROP PROCEDURE VehicleUpdate
+IF EXISTS (
+		SELECT *
+		FROM INFORMATION_SCHEMA.ROUTINES
+		WHERE ROUTINE_NAME = 'VehicleUpdate'
+		)
+	DROP PROCEDURE VehicleUpdate
 GO
 
 CREATE PROCEDURE VehicleUpdate (
-	@VehicleId int,
-	@UserId nvarchar(128),
-	@ModelId int,
-	@BodyStyleId int,
-	@InteriorColorId int,
-	@ExteriorColorId int,
-	@SalePrice decimal(8,2),
-	@MSRP decimal(8,2),
-	@Mileage decimal(8,2),
-	@VIN char(17),
-	@Description nvarchar(500),
-	@IsUsed bit,
-	@IsAutomatic bit,
-	@IsFeatured bit,
-	@Image nvarchar(100)
-) AS
+	@VehicleId INT
+	,@UserId NVARCHAR(128)
+	,@ModelId INT
+	,@BodyStyleId INT
+	,@InteriorColorId INT
+	,@ExteriorColorId INT
+	,@SalePrice DECIMAL(8, 2)
+	,@MSRP DECIMAL(8, 2)
+	,@Mileage DECIMAL(8, 2)
+	,@VIN CHAR(17)
+	,@Description NVARCHAR(500)
+	,@IsUsed BIT
+	,@IsAutomatic BIT
+	,@IsFeatured BIT
+	,@Image NVARCHAR(100)
+	)
+AS
 BEGIN
-	UPDATE Vehicles SET
-		UserId = @UserId, 
-		ModelId = @ModelId, 
-		BodyStyleId = @BodyStyleId,
-		InteriorColorId = @InteriorColorId,
-		ExteriorColorId = @ExteriorColorId,
-		SalePrice = @SalePrice,
-		MSRP = @MSRP,
-		Mileage = @Mileage,
-		VIN = @VIN,
-		[Description] = @Description,
-		IsUsed = @IsUsed,
-		IsAutomatic = @IsAutomatic,
-		IsFeatured = @IsFeatured,
-		[Image] = @Image
+	UPDATE Vehicles
+	SET UserId = @UserId
+		,ModelId = @ModelId
+		,BodyStyleId = @BodyStyleId
+		,InteriorColorId = @InteriorColorId
+		,ExteriorColorId = @ExteriorColorId
+		,SalePrice = @SalePrice
+		,MSRP = @MSRP
+		,Mileage = @Mileage
+		,VIN = @VIN
+		,[Description] = @Description
+		,IsUsed = @IsUsed
+		,IsAutomatic = @IsAutomatic
+		,IsFeatured = @IsFeatured
+		,[Image] = @Image
 	WHERE VehicleId = @VehicleId
 END
 GO
 
-IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
-   WHERE ROUTINE_NAME = 'VehicleDelete')
-      DROP PROCEDURE VehicleDelete
+IF EXISTS (
+		SELECT *
+		FROM INFORMATION_SCHEMA.ROUTINES
+		WHERE ROUTINE_NAME = 'VehicleDelete'
+		)
+	DROP PROCEDURE VehicleDelete
 GO
 
-CREATE PROCEDURE VehicleDelete (
-	@VehicleId int
-) AS
+CREATE PROCEDURE VehicleDelete (@VehicleId INT)
+AS
 BEGIN
 	BEGIN TRANSACTION
-	DELETE FROM Vehicles WHERE VehicleId = @VehicleId;
+
+	DELETE
+	FROM Vehicles
+	WHERE VehicleId = @VehicleId;
+
 	COMMIT TRANSACTION
 END
 GO
 
-IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
-   WHERE ROUTINE_NAME = 'VehicleSelect')
-      DROP PROCEDURE VehicleSelect
+IF EXISTS (
+		SELECT *
+		FROM INFORMATION_SCHEMA.ROUTINES
+		WHERE ROUTINE_NAME = 'VehicleSelect'
+		)
+	DROP PROCEDURE VehicleSelect
 GO
 
-CREATE PROCEDURE VehicleSelect (
-	@VehicleId int
-) AS
+CREATE PROCEDURE VehicleSelect (@VehicleId INT)
+AS
 BEGIN
-	SELECT UserId, ModelId, BodyStyleId, InteriorColorId, ExteriorColorId, SalePrice,
-		MSRP, Mileage, VIN, [Description], IsUsed, IsAutomatic, IsFeatured, [Image]
+	SELECT UserId
+		,ModelId
+		,BodyStyleId
+		,InteriorColorId
+		,ExteriorColorId
+		,SalePrice
+		,MSRP
+		,Mileage
+		,VIN
+		,[Description]
+		,IsUsed
+		,IsAutomatic
+		,IsFeatured
+		,[Image]
 	FROM Vehicles
 	WHERE VehicleId = @VehicleId
 END
 GO
 
-IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
-   WHERE ROUTINE_NAME = 'VehiclesSelectFeatured')
-      DROP PROCEDURE VehiclesSelectFeatured
+IF EXISTS (
+		SELECT *
+		FROM INFORMATION_SCHEMA.ROUTINES
+		WHERE ROUTINE_NAME = 'VehiclesSelectFeatured'
+		)
+	DROP PROCEDURE VehiclesSelectFeatured
 GO
 
-CREATE PROCEDURE VehiclesSelectFeatured AS
+CREATE PROCEDURE VehiclesSelectFeatured
+AS
 BEGIN
-	SELECT VehicleId, MK.[Name], MD.[Name], MD.[Year], SalePrice, IsFeatured, [Image]
+	SELECT VehicleId
+		,MK.[Name]
+		,MD.[Name]
+		,MD.[Year]
+		,SalePrice
+		,[Image]
 	FROM Vehicles V
-	INNER JOIN Models MD on MD.ModelId = V.ModelId
-	INNER JOIN Makes MK on MK.MakeId = MD.MakeId
+	INNER JOIN Models MD ON MD.ModelId = V.ModelId
+	INNER JOIN Makes MK ON MK.MakeId = MD.MakeId
+	WHERE V.IsFeatured = 1
 END
 GO
 
-IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
-   WHERE ROUTINE_NAME = 'VehicleSelectDetails')
-      DROP PROCEDURE VehicleSelectDetails
+IF EXISTS (
+		SELECT *
+		FROM INFORMATION_SCHEMA.ROUTINES
+		WHERE ROUTINE_NAME = 'VehicleSelectDetails'
+		)
+	DROP PROCEDURE VehicleSelectDetails
 GO
 
-CREATE PROCEDURE VehicleSelectDetails (
-	@VehicleId int
-) AS
+CREATE PROCEDURE VehicleSelectDetails (@VehicleId INT)
+AS
 BEGIN
-	SELECT UserId, [Year], IsUsed, IsAutomatic, IsFeatured, MK.[Name] as Make,
-		MD.[Name] as Model, BS.[Description], IC.[Name] as InteriorColor,
-		EC.[Name] as ExteriorColor, VIN, V.[Description], [Image], SalePrice,
-		MSRP, Mileage
+	SELECT V.UserId
+		,[Year]
+		,IsUsed
+		,IsAutomatic
+		,IsFeatured
+		,MK.[Name] AS Make
+		,MD.[Name] AS Model
+		,BS.[Description]
+		,IC.[Name] AS InteriorColor
+		,EC.[Name] AS ExteriorColor
+		,VIN
+		,V.[Description]
+		,[Image]
+		,SalePrice
+		,MSRP
+		,Mileage
 	FROM Vehicles V
-	INNER JOIN BodyStyles BS on BS.BodyStyleId = V.BodyStyleId
-	INNER JOIN InteriorColors IC on IC.InteriorColorId = V.InteriorColorId
-	INNER JOIN ExteriorColors EC on EC.ExteriorColorId = V.ExteriorColorId
-	INNER JOIN Models MD on MD.ModelId = V.ModelId
-	INNER JOIN Makes MK on MK.MakeId = MK.MakeId
+	INNER JOIN BodyStyles BS ON BS.BodyStyleId = V.BodyStyleId
+	INNER JOIN InteriorColors IC ON IC.InteriorColorId = V.InteriorColorId
+	INNER JOIN ExteriorColors EC ON EC.ExteriorColorId = V.ExteriorColorId
+	INNER JOIN Models MD ON MD.ModelId = V.ModelId
+	INNER JOIN Makes MK ON MK.MakeId = MK.MakeId
 	WHERE VehicleId = @VehicleId
 END
 GO
 
-IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
-   WHERE ROUTINE_NAME = 'VehiclesSelectDetails')
-      DROP PROCEDURE VehiclesSelectDetails
+IF EXISTS (
+		SELECT *
+		FROM INFORMATION_SCHEMA.ROUTINES
+		WHERE ROUTINE_NAME = 'VehiclesSelectDetails'
+		)
+	DROP PROCEDURE VehiclesSelectDetails
 GO
 
-CREATE PROCEDURE VehiclesSelectDetails AS
+CREATE PROCEDURE VehiclesSelectDetails
+AS
 BEGIN
-	SELECT VehicleId, UserId, [Year], IsUsed, IsAutomatic, IsFeatured,
-		MK.[Name] as Make, MD.[Name] as Model, BS.[Description],
-		IC.[Name] as InteriorColor, EC.[Name] as ExteriorColor, VIN,
-		V.[Description], [Image], SalePrice, MSRP, Mileage
+	SELECT VehicleId
+		,V.UserId
+		,[Year]
+		,IsUsed
+		,IsAutomatic
+		,IsFeatured
+		,MK.[Name] AS Make
+		,MD.[Name] AS Model
+		,BS.[Description]
+		,IC.[Name] AS InteriorColor
+		,EC.[Name] AS ExteriorColor
+		,VIN
+		,V.[Description]
+		,[Image]
+		,SalePrice
+		,MSRP
+		,Mileage
 	FROM Vehicles V
-	INNER JOIN BodyStyles BS on BS.BodyStyleId = V.BodyStyleId
-	INNER JOIN InteriorColors IC on IC.InteriorColorId = V.InteriorColorId
-	INNER JOIN ExteriorColors EC on EC.ExteriorColorId = V.ExteriorColorId
-	INNER JOIN Models MD on MD.ModelId = V.ModelId
-	INNER JOIN Makes MK on MK.MakeId = MK.MakeId
+	INNER JOIN BodyStyles BS ON BS.BodyStyleId = V.BodyStyleId
+	INNER JOIN InteriorColors IC ON IC.InteriorColorId = V.InteriorColorId
+	INNER JOIN ExteriorColors EC ON EC.ExteriorColorId = V.ExteriorColorId
+	INNER JOIN Models MD ON MD.ModelId = V.ModelId
+	INNER JOIN Makes MK ON MK.MakeId = MK.MakeId
 END
 GO
 
-IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
-   WHERE ROUTINE_NAME = 'ContactInsert')
-      DROP PROCEDURE ContactInsert
+IF EXISTS (
+		SELECT *
+		FROM INFORMATION_SCHEMA.ROUTINES
+		WHERE ROUTINE_NAME = 'ContactInsert'
+		)
+	DROP PROCEDURE ContactInsert
 GO
 
 CREATE PROCEDURE ContactInsert (
-	@ContactId int output,
-	@VehicleId int,
-	@UserId nvarchar(128),
-	@Name NVARCHAR(50),
-	@Phone NVARCHAR(15),
-	@Email NVARCHAR(50),
-	@Message NVARCHAR(500)
-) AS
+	@ContactId INT OUTPUT
+	,@VehicleId INT
+	,@UserId NVARCHAR(128)
+	,@Name NVARCHAR(50)
+	,@Phone NVARCHAR(15)
+	,@Email NVARCHAR(50)
+	,@Message NVARCHAR(500)
+	)
+AS
 BEGIN
-	INSERT INTO Contacts(VehicleId, UserId, [Name], Phone, Email, [Message])
-	VALUES (@VehicleId, @UserId, @Name, @Phone, @Email, @Message)
+	INSERT INTO Contacts (
+		VehicleId
+		,UserId
+		,[Name]
+		,Phone
+		,Email
+		,[Message]
+		)
+	VALUES (
+		@VehicleId
+		,@UserId
+		,@Name
+		,@Phone
+		,@Email
+		,@Message
+		)
+
 	SET @ContactId = SCOPE_IDENTITY();
 END
 GO
 
-IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
-   WHERE ROUTINE_NAME = 'ContactDelete')
-      DROP PROCEDURE ContactDelete
+IF EXISTS (
+		SELECT *
+		FROM INFORMATION_SCHEMA.ROUTINES
+		WHERE ROUTINE_NAME = 'ContactDelete'
+		)
+	DROP PROCEDURE ContactDelete
 GO
 
-CREATE PROCEDURE ContactDelete (
-	@ContactId int
-) AS
+CREATE PROCEDURE ContactDelete (@ContactId INT)
+AS
 BEGIN
-	DELETE FROM Contacts
-	WHERE ContactId = @ContactId
-END
-GO
-
-IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
-   WHERE ROUTINE_NAME = 'ContactSelect')
-      DROP PROCEDURE ContactSelect
-GO
-
-CREATE PROCEDURE ContactSelect (
-	@ContactId int,
-	@VehicleId int,
-	@UserId nvarchar(128),
-	@Name NVARCHAR(50),
-	@Phone NVARCHAR(15),
-	@Email NVARCHAR(50),
-	@Message NVARCHAR(500)
-) AS
-BEGIN
-	SELECT ContactId, VehicleId, UserId, [Name], Phone, Email, [Message]
+	DELETE
 	FROM Contacts
 	WHERE ContactId = @ContactId
 END
 GO
+
+IF EXISTS (
+		SELECT *
+		FROM INFORMATION_SCHEMA.ROUTINES
+		WHERE ROUTINE_NAME = 'ContactSelect'
+		)
+	DROP PROCEDURE ContactSelect
+GO
+
+CREATE PROCEDURE ContactSelect (
+	@ContactId INT
+	,@VehicleId INT
+	,@UserId NVARCHAR(128)
+	,@Name NVARCHAR(50)
+	,@Phone NVARCHAR(15)
+	,@Email NVARCHAR(50)
+	,@Message NVARCHAR(500)
+	)
+AS
+BEGIN
+	SELECT ContactId
+		,VehicleId
+		,UserId
+		,[Name]
+		,Phone
+		,Email
+		,[Message]
+	FROM Contacts
+	WHERE ContactId = @ContactId
+END
+GO
+
