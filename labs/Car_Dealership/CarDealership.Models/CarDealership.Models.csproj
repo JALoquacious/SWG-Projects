@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -41,10 +42,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries\ContactInquiry.cs" />
+    <Compile Include="Queries\InventoryReport.cs" />
+    <Compile Include="Queries\SalesReport.cs" />
+    <Compile Include="Queries\VehicleDetail.cs" />
+    <Compile Include="Tables\BodyStyle.cs" />
+    <Compile Include="Tables\Communication.cs" />
+    <Compile Include="Tables\Contact.cs" />
+    <Compile Include="Tables\Customer.cs" />
+    <Compile Include="Tables\ExteriorColor.cs" />
+    <Compile Include="Tables\InteriorColor.cs" />
+    <Compile Include="Tables\Make.cs" />
+    <Compile Include="Tables\Model.cs" />
+    <Compile Include="Tables\PaymentType.cs" />
+    <Compile Include="Tables\Sale.cs" />
+    <Compile Include="Tables\Salesperson.cs" />
+    <Compile Include="Tables\State.cs" />
+    <Compile Include="Tables\Vehicle.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Queries\" />
-    <Folder Include="Tables\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

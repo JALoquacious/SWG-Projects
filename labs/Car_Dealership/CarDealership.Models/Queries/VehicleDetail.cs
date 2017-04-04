@@ -3,11 +3,11 @@
     public class VehicleDetail
     {
         public int VehicleId        { get; set; }
-        public int UserId           { get; set; }
         public int Year             { get; set; }
         public bool IsUsed          { get; set; }
         public bool IsAutomatic     { get; set; }
         public bool IsFeatured      { get; set; }
+        public string UserId        { get; set; }
         public string Make          { get; set; }
         public string Model         { get; set; }
         public string BodyStyle     { get; set; }

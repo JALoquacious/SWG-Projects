@@ -12,8 +12,9 @@ namespace CarDealership.Models.Tables
 
         [Column(TypeName = "DATETIME2")]
         public DateTime DateAdded { get; set; }
-        public int ModelId { get; set; }
-        public int MakeId  { get; set; }
-        public string Name { get; set; }
+        public int ModelId        { get; set; }
+        public int MakeId         { get; set; }
+        public string UserId      { get; set; }
+        public string Name        { get; set; }
     }
 }

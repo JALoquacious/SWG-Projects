@@ -5,16 +5,16 @@ using System;
 
 namespace CarDealership.DAL.Factories
 {
-    public class VehicleRepositoryFactory
+    public class MakeRepositoryFactory
     {
-        public static IVehicleRepository GetRepository()
+        public static IMakeRepository GetRepository()
         {
             switch (Settings.GetRepositoryType())
             {
                 case "PROD":
-                    return new VehicleRepositoryADO();
+                    return new MakeRepositoryADO();
                 case "QA":
-                    return new VehicleRepositoryMock();
+                    return new MakeRepositoryMock();
                 default:
                     throw new Exception("Could not find valid RepositoryType configuration value.");
             }

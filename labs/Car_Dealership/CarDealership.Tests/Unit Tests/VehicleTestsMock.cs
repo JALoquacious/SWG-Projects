@@ -8,7 +8,7 @@ namespace CarDealership.Tests.Unit_Tests
     public class VehicleTestsMock
     {
         [Test]
-        public void CanLoadVehicles()
+        public void MockCanLoadVehicles()
         {
             var repo = new VehicleRepositoryMock();
             var vehicleDetails = repo.GetAll();
@@ -17,26 +17,27 @@ namespace CarDealership.Tests.Unit_Tests
             Assert.AreEqual(4, vehicleDetails.Count());
         }
 
-        [TestCase(1, 9, 1, 6, 5, 2017)]
-        [TestCase(2, 24, 3, 4, 7, 1998)]
-        [TestCase(3, 5, 2, 2, 9, 2017)]
-        [TestCase(4, 15, 1, 1, 1, 2010)]
-        public void CanLoadVehicleById(int id, int expectedModelId, int expectedBodyStyleId,
-            int expectedInteriorColorId, int expectedExteriorColorId, int expectedYear)
+        [TestCase(1, "Chevrolet", "Corvette", "Car", "DarkRed", "Charcoal", 2017)]
+        [TestCase(2, "Toyota", "Tacoma", "Truck", "Tan", "Red", 1998)]
+        [TestCase(3, "BMW", "X5", "SUV", "White", "Yellow", 2017)]
+        [TestCase(4, "Honda", "Odyssey", "Van", "Black", "Black", 2010)]
+        public void MockCanLoadVehicleById(int id, string expectedMake, string expectedModel,
+            string expectedBodyStyle, string expectedInteriorColor, string expectedExteriorColor,
+            int expectedYear)
         {
             var repo = new VehicleRepositoryMock();
-            var vehicle = repo.GetById(id);
+            var vehicleDetail = repo.GetById(id);
 
-            Assert.IsNotNull(vehicle);
-            Assert.AreEqual(expectedModelId, vehicle.ModelId);
-            Assert.AreEqual(expectedBodyStyleId, vehicle.BodyStyleId);
-            Assert.AreEqual(expectedExteriorColorId, vehicle.ExteriorColorId);
-            Assert.AreEqual(expectedInteriorColorId, vehicle.InteriorColorId);
-            Assert.AreEqual(expectedYear, vehicle.Year);
+            Assert.IsNotNull(vehicleDetail);
+            Assert.AreEqual(expectedModel, vehicleDetail.Model);
+            Assert.AreEqual(expectedBodyStyle, vehicleDetail.BodyStyle);
+            Assert.AreEqual(expectedExteriorColor, vehicleDetail.ExteriorColor);
+            Assert.AreEqual(expectedInteriorColor, vehicleDetail.InteriorColor);
+            Assert.AreEqual(expectedYear, vehicleDetail.Year);
         }
 
         [Test]
-        public void CanLoadVehiclesByPriceRange()
+        public void MockCanLoadVehiclesByPriceRange()
         {
             var repo = new VehicleRepositoryMock();
             var vehicleDetails = repo.GetByPriceRange(15000, 50000).ToList();
@@ -48,7 +49,7 @@ namespace CarDealership.Tests.Unit_Tests
         }
 
         [Test]
-        public void CanLoadVehiclesByYearRange()
+        public void MockCanLoadVehiclesByYearRange()
         {
             var repo = new VehicleRepositoryMock();
             var vehicleDetails = repo.GetByYearRange(1995, 2015).ToList();
@@ -63,7 +64,7 @@ namespace CarDealership.Tests.Unit_Tests
         [TestCase("2017", 2)]
         [TestCase("9", 1)]
         [TestCase("1", 4)]
-        public void CanLoadVehiclesBySearchTermYear(string year, int expectedCount)
+        public void MockCanLoadVehiclesBySearchTermYear(string year, int expectedCount)
         {
             var repo = new VehicleRepositoryMock();
             var vehicleDetails = repo.GetBySearchTerm(year).ToList();
@@ -76,7 +77,7 @@ namespace CarDealership.Tests.Unit_Tests
         [TestCase("Toy", 2)]
         [TestCase("BM", 3)]
         [TestCase("Hon", 4)]
-        public void CanLoadSingleVehicleBySearchTermMake(string make, int expectedId)
+        public void MockCanLoadSingleVehicleBySearchTermMake(string make, int expectedId)
         {
             var repo = new VehicleRepositoryMock();
             var vehicleDetails = repo.GetBySearchTerm(make).ToList();
@@ -90,7 +91,7 @@ namespace CarDealership.Tests.Unit_Tests
         [TestCase("Tac", 2)]
         [TestCase("X", 3)]
         [TestCase("Ody", 4)]
-        public void CanLoadSingleVehicleBySearchTermModel(string model, int expectedId)
+        public void MockCanLoadSingleVehicleBySearchTermModel(string model, int expectedId)
         {
             var repo = new VehicleRepositoryMock();
             var vehicleDetails = repo.GetBySearchTerm(model).ToList();
@@ -104,7 +105,7 @@ namespace CarDealership.Tests.Unit_Tests
         [TestCase("t", 2)]
         [TestCase("c", 2)]
         [TestCase("o", 3)]
-        public void CanLoadVehiclesBySearchTermAmbiguous(string term, int expectedCount)
+        public void MockCanLoadVehiclesBySearchTermAmbiguous(string term, int expectedCount)
         {
             var repo = new VehicleRepositoryMock();
             var vehicleDetails = repo.GetBySearchTerm(term).ToList();

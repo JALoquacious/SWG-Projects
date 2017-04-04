@@ -1,8 +1,8 @@
-﻿using System;
+﻿using CarDealership.DAL.Interfaces;
+using CarDealership.Models.Tables;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CarDealership.DAL.Repositories.Mock
 {
@@ -34,14 +34,14 @@ namespace CarDealership.DAL.Repositories.Mock
                 },
                 new Make()
                 {
-                    MakeId = 1,
+                    MakeId = 4,
                     Name = "Peugeot",
                     DateAdded = DateTime.Parse("4/4/2004")
                 }
             };
         }
 
-        public List<Make> GetAll()
+        public IEnumerable<Make> GetAll()
         {
             return _makes;
         }

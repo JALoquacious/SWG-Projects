@@ -10,7 +10,6 @@ BEGIN
 	SELECT StateId, [Name]
 	FROM States
 END
-
 GO
 
 IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
@@ -20,11 +19,44 @@ GO
 
 CREATE PROCEDURE MakesSelectAll AS
 BEGIN
-	SELECT MakeId, [Name], DateAdded
+	SELECT MakeId, UserId, [Name], DateAdded
 	FROM Makes
 	ORDER BY [Name] ASC
 END
+GO
 
+if exists(select * from INFORMATION_SCHEMA.ROUTINES
+	where ROUTINE_NAME = 'MakeSelectById')
+		drop procedure MakeSelectById
+GO
+
+create procedure MakeSelectById (
+	@MakeId int
+) as
+begin
+	select MakeId, UserId, [Name], DateAdded
+	from Makes
+	where MakeId = @MakeId
+end
+go
+
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
+   WHERE ROUTINE_NAME = 'MakeInsert')
+      DROP PROCEDURE MakeInsert
+GO
+
+CREATE PROCEDURE MakeInsert (
+	@MakeId int output,
+	@UserId nvarchar(128),
+	@Name NVARCHAR(25),
+	@DateAdded DATETIME2
+) AS
+BEGIN
+	INSERT INTO Makes (UserId, [Name], DateAdded)
+	VALUES (@UserId, @Name, @DateAdded);
+
+	SET @MakeId = SCOPE_IDENTITY();
+END
 GO
 
 IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
@@ -57,7 +89,6 @@ BEGIN
 
 	SET @VehicleId = SCOPE_IDENTITY();
 END
-
 GO
 
 IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
@@ -100,7 +131,6 @@ BEGIN
 		[Image] = @Image
 	WHERE VehicleId = @VehicleId
 END
-
 GO
 
 IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
@@ -114,7 +144,6 @@ CREATE PROCEDURE VehicleDelete (
 BEGIN
 	BEGIN TRANSACTION
 	DELETE FROM Vehicles WHERE VehicleId = @VehicleId;
-	-- Delete additional tables here?
 	COMMIT TRANSACTION
 END
 GO
@@ -142,12 +171,16 @@ GO
 
 CREATE PROCEDURE VehiclesSelectFeatured AS
 BEGIN
-	SELECT mk.MakeId, md.ModelId, md.[Year], SalePrice, IsFeatured, [Image]
-	FROM Vehicles v
-	INNER JOIN Models md on md.ModelId = v.ModelId
-	INNER JOIN Makes mk on mk.MakeId = md.MakeId
+	SELECT VehicleId, MK.[Name], MD.[Name], MD.[Year], SalePrice, IsFeatured, [Image]
+	FROM Vehicles V
+	INNER JOIN Models MD on MD.ModelId = V.ModelId
+	INNER JOIN Makes MK on MK.MakeId = MD.MakeId
 END
+GO
 
+IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
+   WHERE ROUTINE_NAME = 'VehicleSelectDetails')
+      DROP PROCEDURE VehicleSelectDetails
 GO
 
 CREATE PROCEDURE VehicleSelectDetails (
@@ -169,82 +202,77 @@ END
 GO
 
 IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
-   WHERE ROUTINE_NAME = 'ListingsSelectContacts')
-      DROP PROCEDURE ListingsSelectContacts
+   WHERE ROUTINE_NAME = 'VehiclesSelectDetails')
+      DROP PROCEDURE VehiclesSelectDetails
 GO
 
-CREATE PROCEDURE ListingsSelectContacts (
-	@UserId nvarchar(128)
-) AS 
+CREATE PROCEDURE VehiclesSelectDetails AS
 BEGIN
-	SELECT l.ListingId, u.Email, u.Id as UserId, l.[Year], l.City, l.StateId, l.Rate
-	FROM Listings l 
-		INNER JOIN Contacts c ON l.ListingId = c.ListingId
-		INNER JOIN AspNetUsers u ON c.UserId = u.Id
-	WHERE l.UserId = @UserId;
+	SELECT VehicleId, UserId, [Year], IsUsed, IsAutomatic, IsFeatured,
+		MK.[Name] as Make, MD.[Name] as Model, BS.[Description],
+		IC.[Name] as InteriorColor, EC.[Name] as ExteriorColor, VIN,
+		V.[Description], [Image], SalePrice, MSRP, Mileage
+	FROM Vehicles V
+	INNER JOIN BodyStyles BS on BS.BodyStyleId = V.BodyStyleId
+	INNER JOIN InteriorColors IC on IC.InteriorColorId = V.InteriorColorId
+	INNER JOIN ExteriorColors EC on EC.ExteriorColorId = V.ExteriorColorId
+	INNER JOIN Models MD on MD.ModelId = V.ModelId
+	INNER JOIN Makes MK on MK.MakeId = MK.MakeId
 END
-
 GO
 
 IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
-   WHERE ROUTINE_NAME = 'ListingsSelectByUser')
-      DROP PROCEDURE ListingsSelectByUser
+   WHERE ROUTINE_NAME = 'ContactInsert')
+      DROP PROCEDURE ContactInsert
 GO
 
-CREATE PROCEDURE ListingsSelectByUser (
-	@UserId nvarchar(128)
+CREATE PROCEDURE ContactInsert (
+	@ContactId int output,
+	@VehicleId int,
+	@UserId nvarchar(128),
+	@Name NVARCHAR(50),
+	@Phone NVARCHAR(15),
+	@Email NVARCHAR(50),
+	@Message NVARCHAR(500)
 ) AS
 BEGIN
-	SELECT ListingId, UserId, [Year], City, StateId, Rate, Mileage, 
-		isNew, isManual, l.MakesId, MakesName, ImageFileName
-	FROM Listings l 
-		INNER JOIN Makes b ON l.MakesId = b.MakesId
-	WHERE UserId = @UserId
+	INSERT INTO Contacts(VehicleId, UserId, [Name], Phone, Email, [Message])
+	VALUES (@VehicleId, @UserId, @Name, @Phone, @Email, @Message)
+	SET @ContactId = SCOPE_IDENTITY();
 END
 GO
 
 IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
-   WHERE ROUTINE_NAME = 'ContactsInsert')
-      DROP PROCEDURE ContactsInsert
+   WHERE ROUTINE_NAME = 'ContactDelete')
+      DROP PROCEDURE ContactDelete
 GO
 
-CREATE PROCEDURE ContactsInsert (
-	@UserId nvarchar(128),
-	@ListingId int
-) AS
-BEGIN
-	INSERT INTO Contacts(UserId, ListingId)
-	VALUES (@UserId, @ListingId)
-END
-GO
-
-IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
-   WHERE ROUTINE_NAME = 'ContactsDelete')
-      DROP PROCEDURE ContactsDelete
-GO
-
-CREATE PROCEDURE ContactsDelete (
-	@UserId nvarchar(128),
-	@ListingId int
+CREATE PROCEDURE ContactDelete (
+	@ContactId int
 ) AS
 BEGIN
 	DELETE FROM Contacts
-	WHERE UserId = @UserId AND ListingId = @ListingId
+	WHERE ContactId = @ContactId
 END
 GO
 
 IF EXISTS(SELECT * FROM INFORMATION_SCHEMA.ROUTINES
-   WHERE ROUTINE_NAME = 'ContactsSelect')
-      DROP PROCEDURE ContactsSelect
+   WHERE ROUTINE_NAME = 'ContactSelect')
+      DROP PROCEDURE ContactSelect
 GO
 
-CREATE PROCEDURE ContactsSelect (
+CREATE PROCEDURE ContactSelect (
+	@ContactId int,
+	@VehicleId int,
 	@UserId nvarchar(128),
-	@ListingId int
+	@Name NVARCHAR(50),
+	@Phone NVARCHAR(15),
+	@Email NVARCHAR(50),
+	@Message NVARCHAR(500)
 ) AS
 BEGIN
-	SELECT UserId, ListingId 
+	SELECT ContactId, VehicleId, UserId, [Name], Phone, Email, [Message]
 	FROM Contacts
-	WHERE UserId = @UserId AND ListingId = @ListingId
+	WHERE ContactId = @ContactId
 END
 GO

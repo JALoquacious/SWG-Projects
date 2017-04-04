@@ -1,15 +1,15 @@
-﻿using System;
+﻿using CarDealership.DAL.Interfaces;
+using CarDealership.Models.Queries;
+using CarDealership.Models.Tables;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CarDealership.DAL.Repositories.Mock
 {
     public class VehicleRepositoryMock : IVehicleRepository
     {
         private static List<Vehicle> _vehicles;
-        private static List<VehicleDetail> _vehicleDetails;
+        private static List<VehicleDetail> _vehiclesDetail;
 
         static VehicleRepositoryMock()
         {
@@ -19,7 +19,7 @@ namespace CarDealership.DAL.Repositories.Mock
                 new Vehicle()
                 {
                     VehicleId = 1,
-                    UserId = 123,
+                    UserId = "123",
                     ModelId = 9,
                     BodyStyleId = 1,
                     InteriorColorId = 6,
@@ -38,7 +38,7 @@ namespace CarDealership.DAL.Repositories.Mock
                 new Vehicle()
                 {
                     VehicleId = 2,
-                    UserId = 234,
+                    UserId = "234",
                     ModelId = 24,
                     BodyStyleId = 3,
                     InteriorColorId = 4,
@@ -57,7 +57,7 @@ namespace CarDealership.DAL.Repositories.Mock
                 new Vehicle()
                 {
                     VehicleId = 3,
-                    UserId = 345,
+                    UserId = "345",
                     ModelId = 5,
                     BodyStyleId = 2,
                     InteriorColorId = 2,
@@ -76,7 +76,7 @@ namespace CarDealership.DAL.Repositories.Mock
                 new Vehicle()
                 {
                     VehicleId = 4,
-                    UserId = 456,
+                    UserId = "456",
                     ModelId = 15,
                     BodyStyleId = 1,
                     InteriorColorId = 1,
@@ -95,7 +95,7 @@ namespace CarDealership.DAL.Repositories.Mock
             };
 
             // Load static VehicleDetail objects
-            _vehicleDetails = new List<VehicleDetail>()
+            _vehiclesDetail = new List<VehicleDetail>()
             {
                 new VehicleDetail()
                 {
@@ -183,17 +183,17 @@ namespace CarDealership.DAL.Repositories.Mock
 
         public IEnumerable<VehicleDetail> GetAll()
         {
-            return _vehicleDetails;
+            return _vehiclesDetail;
         }
 
-        public Vehicle GetById(int targetId)
+        public VehicleDetail GetById(int targetId)
         {
-            return _vehicles.FirstOrDefault(v => v.VehicleId == targetId);
+            return _vehiclesDetail.FirstOrDefault(v => v.VehicleId == targetId);
         }
 
         public IEnumerable<VehicleDetail> GetBySearchTerm(string term)
         {
-            return _vehicleDetails.Where(v =>
+            return _vehiclesDetail.Where(v =>
                 v.Year.ToString().Contains(term) ||
                 v.Make.ToUpper().Contains(term.ToUpper()) ||
                 v.Model.ToUpper().Contains(term.ToUpper())
@@ -202,12 +202,12 @@ namespace CarDealership.DAL.Repositories.Mock
 
         public IEnumerable<VehicleDetail> GetByPriceRange(decimal min, decimal max)
         {
-            return _vehicleDetails.Where(v => v.SalePrice >= min && v.SalePrice <= max);
+            return _vehiclesDetail.Where(v => v.SalePrice >= min && v.SalePrice <= max);
         }
 
         public IEnumerable<VehicleDetail> GetByYearRange(int min, int max)
         {
-            return _vehicleDetails.Where(v => v.Year >= min && v.Year <= max);
+            return _vehiclesDetail.Where(v => v.Year >= min && v.Year <= max);
         }
 
         public void Insert(Vehicle targetVehicle)

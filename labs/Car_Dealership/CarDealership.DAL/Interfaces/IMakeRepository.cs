@@ -6,7 +6,7 @@ namespace CarDealership.DAL.Interfaces
     public interface IMakeRepository
     {
         Make GetById(int makeId);
-        List<Make> GetAll();
+        IEnumerable<Make> GetAll();
         void Insert(Make make);
     }
 }
