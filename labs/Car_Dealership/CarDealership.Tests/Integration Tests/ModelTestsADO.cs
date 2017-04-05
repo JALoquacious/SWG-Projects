@@ -6,11 +6,13 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace CarDealership.Tests.Integration_Tests
 {
     [TestFixture]
-    public class MakeTestsADO
+    public class ModelTestsADO
     {
         [SetUp]
         public void Init()
@@ -35,31 +37,35 @@ namespace CarDealership.Tests.Integration_Tests
         }
 
         [Test]
-        public void ADOCanLoadMakes()
+        public void ADOCanLoadModels()
         {
-            var repo = new MakeRepositoryADO();
-            var makes = repo.GetAll().ToList();
+            var repo = new ModelRepositoryADO();
+            var models = repo.GetAll().ToList();
 
-            Assert.AreEqual(8, makes.Count);
-            Assert.AreEqual(1, makes[0].MakeId);
-            Assert.AreEqual("Audi", makes[0].Name);
+            Assert.AreEqual(33, models.Count);
+            Assert.AreEqual(1, models[0].ModelId);
+            Assert.AreEqual("A4", models[0].Name);
         }
 
         [Test]
-        public void ADOCanAddMake()
+        public void ADOCanAddModel()
         {
-            var repo = new MakeRepositoryADO();
-            var make = new Make();
+            var repo = new ModelRepositoryADO();
+            var model = new Model();
             
-            make.UserId = "00000000-0000-0000-0000-000000000000";
-            make.Name = "Jaguar";
+            model.UserId = "00000000-0000-0000-0000-000000000000";
+            model.MakeId = 4;
+            model.Year = 2012;
+            model.Name = "Mustang";
 
-            repo.Insert(make);
+            repo.Insert(model);
 
-            Assert.IsNotNull(make);
-            Assert.AreEqual(9, make.MakeId);
-            Assert.AreEqual("Jaguar", make.Name);
-            Assert.AreEqual("00000000-0000-0000-0000-000000000000", make.UserId);
+            Assert.IsNotNull(model);
+            Assert.AreEqual(34, model.ModelId);
+            Assert.AreEqual(4, model.MakeId);
+            Assert.AreEqual(2012, model.Year);
+            Assert.AreEqual("Mustang", model.Name);
+            Assert.AreEqual("00000000-0000-0000-0000-000000000000", model.UserId);
         }
     }
 }

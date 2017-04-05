@@ -78,8 +78,9 @@ namespace CarDealership.DAL.Repositories.ADO
                 };
 
                 cmd.Parameters.Add(param);
-                cmd.Parameters.AddWithValue("@MakeId", model.UserId);
+                cmd.Parameters.AddWithValue("@MakeId", model.MakeId);
                 cmd.Parameters.AddWithValue("@UserId", model.UserId);
+                cmd.Parameters.AddWithValue("@Year", model.Year);
                 cmd.Parameters.AddWithValue("@Name", model.Name);
                 cmd.Parameters.AddWithValue("@DateAdded", model.DateAdded);
 

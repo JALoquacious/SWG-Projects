@@ -159,7 +159,7 @@ CREATE TABLE Sales (
 	,CustomerId INT CONSTRAINT FK__Sales__CustomerId FOREIGN KEY REFERENCES Customers(CustomerId) NOT NULL
 	,SalespersonId INT CONSTRAINT FK__Sales__SalespersonId FOREIGN KEY REFERENCES Salespersons(SalesPersonId) NOT NULL
 	,PaymentTypeId INT CONSTRAINT FK__Sales__PaymentTypeId FOREIGN KEY REFERENCES PaymentTypes(PaymentTypeId) NOT NULL
-	,PurchasePrice DECIMAL(8, 2) NOT NULL
+	,SalePrice DECIMAL(8, 2) NOT NULL
 	,[Date] DATETIME2 NOT NULL
 	)
 

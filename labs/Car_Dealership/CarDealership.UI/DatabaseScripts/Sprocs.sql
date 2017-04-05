@@ -66,6 +66,55 @@ BEGIN
 END
 GO
 
+--IF EXISTS (
+--		SELECT *
+--		FROM INFORMATION_SCHEMA.ROUTINES
+--		WHERE ROUTINE_NAME = 'SalesReport'
+--		)
+--	DROP PROCEDURE SalesReport
+--GO
+
+--CREATE PROCEDURE SalesReport (@UserName NVARCHAR(256), @FromDate DATETIME2, @ToDate DATETIME2)
+--AS
+--BEGIN
+--	SELECT MAX(SP.FirstName + ' ' + SP.LastName) AS [User] -- Change MAX
+--		,U.UserName
+--		,SUM(S.SalePrice) AS TotalSales
+--		,COUNT(S.VehicleId) AS TotalVehicles
+		
+--	FROM Sales AS S
+--	INNER JOIN Salespersons AS SP ON SP.SalespersonId = S.SalespersonId
+--	INNER JOIN Vehicles AS V ON S.VehicleId = V.VehicleId
+--	INNER JOIN AspNetUsers AS U ON U.Id = V.UserId
+--	--WHERE U.UserName = @UserName
+--	GROUP BY U.UserName
+--END
+--GO
+
+IF EXISTS (
+		SELECT *
+		FROM INFORMATION_SCHEMA.ROUTINES
+		WHERE ROUTINE_NAME = 'InventoryReport'
+		)
+	DROP PROCEDURE InventoryReport
+GO
+
+CREATE PROCEDURE InventoryReport (@IsUsed BIT)
+AS
+BEGIN
+	SELECT MD.[Year]
+		,MK.[Name] AS Make
+		,MD.[Name] AS Model
+		,COUNT(MD.[Name]) AS [Count]
+		,SUM(V.SalePrice) AS StockValue
+	FROM Vehicles AS V
+	INNER JOIN Models AS MD ON V.ModelId = MD.ModelId
+	INNER JOIN Makes AS MK ON MK.MakeId = MD.MakeId
+	WHERE V.IsUsed = @IsUsed
+	GROUP BY MK.[Name], MD.[Year], MD.[Name]
+END
+GO
+
 IF EXISTS (
 		SELECT *
 		FROM INFORMATION_SCHEMA.ROUTINES
@@ -151,6 +200,104 @@ BEGIN
 		);
 
 	SET @MakeId = SCOPE_IDENTITY();
+END
+GO
+
+IF EXISTS (
+		SELECT *
+		FROM INFORMATION_SCHEMA.ROUTINES
+		WHERE ROUTINE_NAME = 'MakeAddView'
+		)
+	DROP PROCEDURE MakeAddView
+GO
+
+CREATE PROCEDURE MakeAddView
+AS
+BEGIN
+	SELECT MK.[Name]
+		,DateAdded
+		,Email
+	FROM Makes AS MK
+	INNER JOIN AspNetUsers U ON U.Id = MK.UserId
+END
+GO
+
+IF EXISTS (
+		SELECT *
+		FROM INFORMATION_SCHEMA.ROUTINES
+		WHERE ROUTINE_NAME = 'ModelAddView'
+		)
+	DROP PROCEDURE ModelAddView
+GO
+
+CREATE PROCEDURE ModelAddView
+AS
+BEGIN
+	SELECT MK.[Name]
+		,MD.[Name]
+		,MD.DateAdded
+		,Email
+	FROM Models AS MD
+	INNER JOIN Makes AS MK ON MK.MakeId = MD.MakeId
+	INNER JOIN AspNetUsers U ON U.Id = MD.UserId
+END
+GO
+
+IF EXISTS (
+		SELECT *
+		FROM INFORMATION_SCHEMA.ROUTINES
+		WHERE ROUTINE_NAME = 'ModelsSelectAll'
+		)
+	DROP PROCEDURE ModelsSelectAll
+GO
+
+CREATE PROCEDURE ModelsSelectAll
+AS
+BEGIN
+	SELECT ModelId
+		,MakeId
+		,UserId
+		,[Name]
+		,[Year]
+		,DateAdded
+	FROM Models
+END
+GO
+
+IF EXISTS (
+		SELECT *
+		FROM INFORMATION_SCHEMA.ROUTINES
+		WHERE ROUTINE_NAME = 'ModelInsert'
+		)
+	DROP PROCEDURE ModelInsert
+GO
+
+CREATE PROCEDURE ModelInsert (
+	@ModelId INT OUTPUT
+	,@MakeId INT
+	,@UserId NVARCHAR(128)
+	,@Year INT
+	,@Name NVARCHAR(25)
+	,@DateAdded DATETIME2
+	)
+AS
+BEGIN
+	INSERT INTO Models (
+		MakeId
+		,UserId
+		,[Name]
+		,[Year]
+		,DateAdded
+		)
+	VALUES (
+		@MakeId
+		,@UserId
+		,@Name
+		,@Year
+		,@DateAdded
+		);
+
+	SET @ModelId = SCOPE_IDENTITY();
 END
 GO
 

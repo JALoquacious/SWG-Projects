@@ -191,6 +191,74 @@ BEGIN
 		,1 -- IsAutomatic
 		,0 -- IsFeatured
 		,'chevrolet_tahoe.png' -- [Image]
+		),
+		(
+		3 -- VehicleId
+		,'11111111-1111-1111-1111-111111111111' -- UserId
+		,10 -- ModelId
+		,2 -- BodyStyleId
+		,5 -- InteriorColorId
+		,7 -- ExteriorColorId
+		,33000 -- SalePrice
+		,35000 -- MSRP
+		,25500 -- Mileage
+		,'3456789012ABCDEFG' -- VIN
+		,'Enough space to live in.' -- [Description]
+		,1 -- IsUsed
+		,1 -- IsAutomatic
+		,0 -- IsFeatured
+		,'chevrolet_tahoe.png' -- [Image]
+		),
+		(
+		4 -- VehicleId
+		,'00000000-0000-0000-0000-000000000000' -- UserId
+		,16 -- ModelId
+		,2 -- BodyStyleId
+		,3 -- InteriorColorId
+		,11 -- ExteriorColorId
+		,30000 -- SalePrice
+		,32000 -- MSRP
+		,950 -- Mileage
+		,'4567890123ABCDEFG' -- VIN
+		,'Explore the world.' -- [Description]
+		,0 -- IsUsed
+		,1 -- IsAutomatic
+		,1 -- IsFeatured
+		,'ford_explorer.png' -- [Image]
+		),
+		(
+		5 -- VehicleId
+		,'00000000-0000-0000-0000-000000000000' -- UserId
+		,19 -- ModelId
+		,3 -- BodyStyleId
+		,2 -- InteriorColorId
+		,6 -- ExteriorColorId
+		,19000 -- SalePrice
+		,21000 -- MSRP
+		,62000 -- Mileage
+		,'5678901234ABCDEFG' -- VIN
+		,'Honda''s only pickup model.' -- [Description]
+		,1 -- IsUsed
+		,0 -- IsAutomatic
+		,0 -- IsFeatured
+		,'honda_ridgeline.png' -- [Image]
+		),
+		(
+		6 -- VehicleId
+		,'11111111-1111-1111-1111-111111111111' -- UserId
+		,6 -- ModelId
+		,1 -- BodyStyleId
+		,7 -- InteriorColorId
+		,3 -- ExteriorColorId
+		,42000 -- SalePrice
+		,44000 -- MSRP
+		,25000 -- Mileage
+		,'6789012345ABCDEFG' -- VIN
+		,'A sleek little roadster.' -- [Description]
+		,1 -- IsUsed
+		,0 -- IsAutomatic
+		,1 -- IsFeatured
+		,'bmw_z4.png' -- [Image]
 		)
 	set identity_insert Vehicles off;
 
@@ -295,7 +363,7 @@ BEGIN
 		,CustomerId
 		,SalesPersonId
 		,PaymentTypeId
-		,PurchasePrice
+		,SalePrice
 		,[Date]
 		)
 	VALUES (
@@ -304,7 +372,7 @@ BEGIN
 		,1 -- CustomerId
 		,2 -- SalesPersonId
 		,1 -- PaymentTypeId
-		,23740 -- PurchasePrice
+		,23740 -- SalePrice
 		,'4/1/2017' -- [Date]
 		)
 	set identity_insert Sales off;

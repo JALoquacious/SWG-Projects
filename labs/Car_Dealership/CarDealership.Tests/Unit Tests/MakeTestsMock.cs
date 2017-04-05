@@ -46,7 +46,7 @@ namespace CarDealership.Tests.Unit_Tests
         }
 
         [Test]
-        public void MockCanInsertMake()
+        public void MockCanAddMake()
         {
             var make = new Make()
             {

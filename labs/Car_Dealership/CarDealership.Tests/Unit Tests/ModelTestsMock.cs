@@ -47,7 +47,7 @@ namespace CarDealership.Tests.Unit_Tests
         }
 
         [Test]
-        public void MockCanInsertModel()
+        public void MockCanAddModel()
         {
             var model = new Model()
             {

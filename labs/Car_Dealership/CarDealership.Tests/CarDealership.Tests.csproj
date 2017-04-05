@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Integration Tests\MakeTestsADO.cs" />
+    <Compile Include="Integration Tests\ModelTestsADO.cs" />
     <Compile Include="Integration Tests\VehicleTestsADO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Unit Tests\MakeTestsMock.cs" />
