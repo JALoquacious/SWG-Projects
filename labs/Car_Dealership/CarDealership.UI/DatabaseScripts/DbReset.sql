@@ -27,6 +27,8 @@ BEGIN
 	delete from BodyStyles;
 	delete from AspNetUsers WHERE Id IN ('00000000-0000-0000-0000-000000000000', '11111111-1111-1111-1111-111111111111');
 
+	dbcc checkident ('Makes', RESEED, 1)
+	dbcc checkident ('Models', RESEED, 1)
 	dbcc checkident ('Vehicles', RESEED, 1)
 
 	insert into AspNetUsers(Id, EmailConfirmed, PhoneNumberConfirmed, Email, TwoFactorEnabled, LockoutEnabled, AccessFailedCount, UserName)
@@ -36,7 +38,7 @@ BEGIN
 
 
 	set identity_insert BodyStyles on;
-	INSERT INTO BodyStyles (BodyStyleId, [Description])
+	INSERT INTO BodyStyles (BodyStyleId, [Name])
 	VALUES
 		 (1, 'Car')
 		,(2, 'SUV')
@@ -157,7 +159,7 @@ BEGIN
 		,[Image]
 		)
 	VALUES (
-		1
+		1 -- VehicleId
 		,'00000000-0000-0000-0000-000000000000' -- UserId
 		,1 -- ModelId
 		,1 -- BodyStyleId
@@ -171,7 +173,24 @@ BEGIN
 		,0 -- IsUsed
 		,1 -- IsAutomatic
 		,1 -- IsFeatured
-		,'placeholder.img' -- [Image]
+		,'audi_a4.png' -- [Image]
+		),
+		(
+		2 -- VehicleId
+		,'11111111-1111-1111-1111-111111111111' -- UserId
+		,10 -- ModelId
+		,2 -- BodyStyleId
+		,5 -- InteriorColorId
+		,7 -- ExteriorColorId
+		,28000 -- SalePrice
+		,30000 -- MSRP
+		,67500 -- Mileage
+		,'2345678901ABCDEFG' -- VIN
+		,'Enough space to live in.' -- [Description]
+		,1 -- IsUsed
+		,1 -- IsAutomatic
+		,0 -- IsFeatured
+		,'chevrolet_tahoe.png' -- [Image]
 		)
 	set identity_insert Vehicles off;
 

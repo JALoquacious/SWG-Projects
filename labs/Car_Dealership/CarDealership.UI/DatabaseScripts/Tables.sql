@@ -65,7 +65,7 @@ GO
 /*----------------------------------- VEHICLE INFO -----------------------------------*/
 CREATE TABLE BodyStyles (
 	BodyStyleId INT IDENTITY(1, 1) PRIMARY KEY NOT NULL
-	,[Description] VARCHAR(25) NOT NULL
+	,[Name] VARCHAR(25) NOT NULL
 	)
 
 CREATE TABLE ExteriorColors (

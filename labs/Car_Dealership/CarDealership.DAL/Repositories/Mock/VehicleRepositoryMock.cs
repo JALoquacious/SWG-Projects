@@ -10,6 +10,7 @@ namespace CarDealership.DAL.Repositories.Mock
     {
         private static List<Vehicle> _vehicles;
         private static List<VehicleDetail> _vehiclesDetail;
+        private static List<VehicleFeatured> _vehiclesFeatured;
 
         static VehicleRepositoryMock()
         {
@@ -24,7 +25,6 @@ namespace CarDealership.DAL.Repositories.Mock
                     BodyStyleId = 1,
                     InteriorColorId = 6,
                     ExteriorColorId = 5,
-                    Year = 2017,
                     IsUsed = false,
                     IsAutomatic = false,
                     IsFeatured = true,
@@ -43,7 +43,6 @@ namespace CarDealership.DAL.Repositories.Mock
                     BodyStyleId = 3,
                     InteriorColorId = 4,
                     ExteriorColorId = 7,
-                    Year = 1998,
                     IsUsed = true,
                     IsAutomatic = false,
                     IsFeatured = true,
@@ -62,7 +61,6 @@ namespace CarDealership.DAL.Repositories.Mock
                     BodyStyleId = 2,
                     InteriorColorId = 2,
                     ExteriorColorId = 9,
-                    Year = 2017,
                     IsUsed = false,
                     IsAutomatic = true,
                     IsFeatured = true,
@@ -81,7 +79,6 @@ namespace CarDealership.DAL.Repositories.Mock
                     BodyStyleId = 1,
                     InteriorColorId = 1,
                     ExteriorColorId = 1,
-                    Year = 2010,
                     IsUsed = true,
                     IsAutomatic = true,
                     IsFeatured = true,
@@ -174,6 +171,37 @@ namespace CarDealership.DAL.Repositories.Mock
                     Mileage = 105000m
                 }
             };
+
+            _vehiclesFeatured = new List<VehicleFeatured>()
+            {
+                new VehicleFeatured()
+                {
+                    VehicleId = 1,
+                    Year = 2000,
+                    Make = "Aston Martin",
+                    Model = "DB9",
+                    Image = "aston_martin_db9.png",
+                    SalePrice = 100000m
+                },
+                new VehicleFeatured()
+                {
+                    VehicleId = 2,
+                    Year = 2010,
+                    Make = "Buick",
+                    Model = "Encore",
+                    Image = "buick_encore.png",
+                    SalePrice = 15000m
+                },
+                new VehicleFeatured()
+                {
+                    VehicleId = 3,
+                    Year = 2017,
+                    Make = "Volkswagen",
+                    Model = "Passat",
+                    Image = "volkswagen_passat.png",
+                    SalePrice = 23000m
+                },
+            };
         }
 
         public void Delete(int targetId)
@@ -181,7 +209,7 @@ namespace CarDealership.DAL.Repositories.Mock
             _vehicles.RemoveAll(v => v.VehicleId == targetId);
         }
 
-        public IEnumerable<VehicleDetail> GetAll()
+        public IEnumerable<VehicleDetail> GetAllDetails()
         {
             return _vehiclesDetail;
         }
@@ -227,6 +255,11 @@ namespace CarDealership.DAL.Repositories.Mock
         {
             _vehicles.RemoveAll(v => v.VehicleId == targetVehicle.VehicleId);
             _vehicles.Add(targetVehicle);
+        }
+
+        public IEnumerable<VehicleFeatured> GetFeatured()
+        {
+            return _vehiclesFeatured;
         }
     }
 }

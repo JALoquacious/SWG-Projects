@@ -327,8 +327,8 @@ CREATE PROCEDURE VehiclesSelectFeatured
 AS
 BEGIN
 	SELECT VehicleId
-		,MK.[Name]
-		,MD.[Name]
+		,MK.[Name] AS Make
+		,MD.[Name] AS Model
 		,MD.[Year]
 		,SalePrice
 		,[Image]
@@ -350,14 +350,15 @@ GO
 CREATE PROCEDURE VehicleSelectDetails (@VehicleId INT)
 AS
 BEGIN
-	SELECT V.UserId
+	SELECT VehicleId
+		,V.UserId
 		,[Year]
 		,IsUsed
 		,IsAutomatic
 		,IsFeatured
 		,MK.[Name] AS Make
 		,MD.[Name] AS Model
-		,BS.[Description]
+		,BS.[Name] AS BodyStyle
 		,IC.[Name] AS InteriorColor
 		,EC.[Name] AS ExteriorColor
 		,VIN
@@ -371,7 +372,7 @@ BEGIN
 	INNER JOIN InteriorColors IC ON IC.InteriorColorId = V.InteriorColorId
 	INNER JOIN ExteriorColors EC ON EC.ExteriorColorId = V.ExteriorColorId
 	INNER JOIN Models MD ON MD.ModelId = V.ModelId
-	INNER JOIN Makes MK ON MK.MakeId = MK.MakeId
+	INNER JOIN Makes MK ON MK.MakeId = MD.MakeId
 	WHERE VehicleId = @VehicleId
 END
 GO
@@ -395,7 +396,7 @@ BEGIN
 		,IsFeatured
 		,MK.[Name] AS Make
 		,MD.[Name] AS Model
-		,BS.[Description]
+		,BS.[Name] AS BodyStyle
 		,IC.[Name] AS InteriorColor
 		,EC.[Name] AS ExteriorColor
 		,VIN
@@ -409,7 +410,7 @@ BEGIN
 	INNER JOIN InteriorColors IC ON IC.InteriorColorId = V.InteriorColorId
 	INNER JOIN ExteriorColors EC ON EC.ExteriorColorId = V.ExteriorColorId
 	INNER JOIN Models MD ON MD.ModelId = V.ModelId
-	INNER JOIN Makes MK ON MK.MakeId = MK.MakeId
+	INNER JOIN Makes MK ON MK.MakeId = MD.MakeId
 END
 GO
 

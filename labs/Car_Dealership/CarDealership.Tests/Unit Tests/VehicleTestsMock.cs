@@ -11,17 +11,30 @@ namespace CarDealership.Tests.Unit_Tests
         public void MockCanLoadVehicles()
         {
             var repo = new VehicleRepositoryMock();
-            var vehicleDetails = repo.GetAll();
+            var vehiclesDetail = repo.GetAllDetails();
 
-            Assert.IsNotNull(vehicleDetails);
-            Assert.AreEqual(4, vehicleDetails.Count());
+            Assert.IsNotNull(vehiclesDetail);
+            Assert.AreEqual(4, vehiclesDetail.Count());
+        }
+
+        [Test]
+        public void MockCanLoadFeaturedVehicles()
+        {
+            var repo = new VehicleRepositoryMock();
+            var vehiclesFeatured = repo.GetFeatured().ToList();
+
+            Assert.IsNotNull(vehiclesFeatured);
+            Assert.AreEqual(3, vehiclesFeatured.Count());
+            Assert.AreEqual(100000m, vehiclesFeatured[0].SalePrice);
+            Assert.AreEqual("Buick", vehiclesFeatured[1].Make);
+            Assert.AreEqual("Passat", vehiclesFeatured[2].Model);
         }
 
         [TestCase(1, "Chevrolet", "Corvette", "Car", "DarkRed", "Charcoal", 2017)]
         [TestCase(2, "Toyota", "Tacoma", "Truck", "Tan", "Red", 1998)]
         [TestCase(3, "BMW", "X5", "SUV", "White", "Yellow", 2017)]
         [TestCase(4, "Honda", "Odyssey", "Van", "Black", "Black", 2010)]
-        public void MockCanLoadVehicleById(int id, string expectedMake, string expectedModel,
+        public void MockCanLoadVehicleDetailById(int id, string expectedMake, string expectedModel,
             string expectedBodyStyle, string expectedInteriorColor, string expectedExteriorColor,
             int expectedYear)
         {
@@ -40,24 +53,24 @@ namespace CarDealership.Tests.Unit_Tests
         public void MockCanLoadVehiclesByPriceRange()
         {
             var repo = new VehicleRepositoryMock();
-            var vehicleDetails = repo.GetByPriceRange(15000, 50000).ToList();
+            var vehiclesDetail = repo.GetByPriceRange(15000, 50000).ToList();
 
-            Assert.IsNotEmpty(vehicleDetails);
-            Assert.AreEqual(2, vehicleDetails.Count());
-            Assert.AreEqual(3, vehicleDetails[0].VehicleId);
-            Assert.AreEqual(4, vehicleDetails[1].VehicleId);
+            Assert.IsNotEmpty(vehiclesDetail);
+            Assert.AreEqual(2, vehiclesDetail.Count());
+            Assert.AreEqual(3, vehiclesDetail[0].VehicleId);
+            Assert.AreEqual(4, vehiclesDetail[1].VehicleId);
         }
 
         [Test]
         public void MockCanLoadVehiclesByYearRange()
         {
             var repo = new VehicleRepositoryMock();
-            var vehicleDetails = repo.GetByYearRange(1995, 2015).ToList();
+            var vehiclesDetail = repo.GetByYearRange(1995, 2015).ToList();
 
-            Assert.IsNotEmpty(vehicleDetails);
-            Assert.AreEqual(2, vehicleDetails.Count());
-            Assert.AreEqual(2, vehicleDetails[0].VehicleId);
-            Assert.AreEqual(4, vehicleDetails[1].VehicleId);
+            Assert.IsNotEmpty(vehiclesDetail);
+            Assert.AreEqual(2, vehiclesDetail.Count());
+            Assert.AreEqual(2, vehiclesDetail[0].VehicleId);
+            Assert.AreEqual(4, vehiclesDetail[1].VehicleId);
         }
 
         [TestCase("20", 3)]
@@ -67,10 +80,10 @@ namespace CarDealership.Tests.Unit_Tests
         public void MockCanLoadVehiclesBySearchTermYear(string year, int expectedCount)
         {
             var repo = new VehicleRepositoryMock();
-            var vehicleDetails = repo.GetBySearchTerm(year).ToList();
+            var vehiclesDetail = repo.GetBySearchTerm(year).ToList();
 
-            Assert.IsNotEmpty(vehicleDetails);
-            Assert.AreEqual(expectedCount, vehicleDetails.Count());
+            Assert.IsNotEmpty(vehiclesDetail);
+            Assert.AreEqual(expectedCount, vehiclesDetail.Count());
         }
 
         [TestCase("Chev", 1)]
@@ -80,11 +93,11 @@ namespace CarDealership.Tests.Unit_Tests
         public void MockCanLoadSingleVehicleBySearchTermMake(string make, int expectedId)
         {
             var repo = new VehicleRepositoryMock();
-            var vehicleDetails = repo.GetBySearchTerm(make).ToList();
+            var vehiclesDetail = repo.GetBySearchTerm(make).ToList();
 
-            Assert.IsNotEmpty(vehicleDetails);
-            Assert.AreEqual(1, vehicleDetails.Count());
-            Assert.AreEqual(expectedId, vehicleDetails[0].VehicleId);
+            Assert.IsNotEmpty(vehiclesDetail);
+            Assert.AreEqual(1, vehiclesDetail.Count());
+            Assert.AreEqual(expectedId, vehiclesDetail[0].VehicleId);
         }
 
         [TestCase("Cor", 1)]
@@ -94,11 +107,11 @@ namespace CarDealership.Tests.Unit_Tests
         public void MockCanLoadSingleVehicleBySearchTermModel(string model, int expectedId)
         {
             var repo = new VehicleRepositoryMock();
-            var vehicleDetails = repo.GetBySearchTerm(model).ToList();
+            var vehiclesDetail = repo.GetBySearchTerm(model).ToList();
 
-            Assert.IsNotEmpty(vehicleDetails);
-            Assert.AreEqual(1, vehicleDetails.Count());
-            Assert.AreEqual(expectedId, vehicleDetails[0].VehicleId);
+            Assert.IsNotEmpty(vehiclesDetail);
+            Assert.AreEqual(1, vehiclesDetail.Count());
+            Assert.AreEqual(expectedId, vehiclesDetail[0].VehicleId);
         }
 
         [TestCase("a", 2)]
@@ -108,10 +121,10 @@ namespace CarDealership.Tests.Unit_Tests
         public void MockCanLoadVehiclesBySearchTermAmbiguous(string term, int expectedCount)
         {
             var repo = new VehicleRepositoryMock();
-            var vehicleDetails = repo.GetBySearchTerm(term).ToList();
+            var vehiclesDetail = repo.GetBySearchTerm(term).ToList();
 
-            Assert.IsNotEmpty(vehicleDetails);
-            Assert.AreEqual(expectedCount, vehicleDetails.Count());
+            Assert.IsNotEmpty(vehiclesDetail);
+            Assert.AreEqual(expectedCount, vehiclesDetail.Count());
         }
     }
 }

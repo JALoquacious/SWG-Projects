@@ -25,13 +25,13 @@ namespace CarDealership.DAL.Repositories.ADO
             }
         }
 
-        public IEnumerable<VehicleDetail> GetAll()
+        public IEnumerable<VehicleDetail> GetAllDetails()
         {
             var vehicles = new List<VehicleDetail>();
 
             using (var cn = new SqlConnection(Settings.GetConnectionString()))
             {
-                SqlCommand cmd = new SqlCommand("ListingsSelectFront", cn);
+                SqlCommand cmd = new SqlCommand("VehiclesSelectDetails", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cn.Open();
@@ -59,10 +59,10 @@ namespace CarDealership.DAL.Repositories.ADO
                             VIN           = dr["VIN"].ToString()
                         };
 
-                        if (dr["VehicleDescription"] != DBNull.Value)
+                        if (dr["Description"] != DBNull.Value)
                             row.Description = dr["Description"].ToString();
 
-                        if (dr["ImageFileName"] != DBNull.Value)
+                        if (dr["Image"] != DBNull.Value)
                             row.Image = dr["Image"].ToString();
 
                         vehicles.Add(row);
@@ -88,22 +88,23 @@ namespace CarDealership.DAL.Repositories.ADO
                 {
                     if (dr.Read())
                     {
-                        vehicle = new VehicleDetail()
-                        {
-                            VehicleId     = (int)dr["VehicleId"],
-                            IsUsed        = (bool)dr["IsUsed"],
-                            IsAutomatic   = (bool)dr["IsAutomatic"],
-                            IsFeatured    = (bool)dr["IsFeatured"],
-                            SalePrice     = (decimal)dr["SalePrice"],
-                            MSRP          = (decimal)dr["MSRP"],
-                            Mileage       = (decimal)dr["Mileage"],
-                            Model         = dr["Model"].ToString(),
-                            BodyStyle     = dr["BodyStyle"].ToString(),
-                            InteriorColor = dr["InteriorColor"].ToString(),
-                            ExteriorColor = dr["ExteriorColor"].ToString(),
-                            UserId        = dr["UserId"].ToString(),
-                            VIN           = dr["VIN"].ToString()
-                        };
+                        vehicle               = new VehicleDetail();
+                        vehicle.VehicleId     = (int)dr["VehicleId"];
+                        vehicle.Year          = (int)dr["Year"];
+                        vehicle.IsUsed        = (bool)dr["IsUsed"];
+                        vehicle.IsAutomatic   = (bool)dr["IsAutomatic"];
+                        vehicle.IsFeatured    = (bool)dr["IsFeatured"];
+                        vehicle.SalePrice     = (decimal)dr["SalePrice"];
+                        vehicle.MSRP          = (decimal)dr["MSRP"];
+                        vehicle.Mileage       = (decimal)dr["Mileage"];
+                        vehicle.Make          = dr["Make"].ToString();
+                        vehicle.Model         = dr["Model"].ToString();
+                        vehicle.BodyStyle     = dr["BodyStyle"].ToString();
+                        vehicle.InteriorColor = dr["InteriorColor"].ToString();
+                        vehicle.ExteriorColor = dr["ExteriorColor"].ToString();
+                        vehicle.UserId        = dr["UserId"].ToString();
+                        vehicle.VIN           = dr["VIN"].ToString();
+
                         if (dr["Description"] != DBNull.Value)
                             vehicle.Description = dr["Description"].ToString();
 
@@ -141,7 +142,6 @@ namespace CarDealership.DAL.Repositories.ADO
                 param.Direction = ParameterDirection.Output;
 
                 cmd.Parameters.Add(param);
-                
                 cmd.Parameters.AddWithValue("@UserId"         , vehicle.UserId);
                 cmd.Parameters.AddWithValue("@ModelId"        , vehicle.ModelId);
                 cmd.Parameters.AddWithValue("@BodyStyleId"    , vehicle.BodyStyleId);
@@ -201,6 +201,38 @@ namespace CarDealership.DAL.Repositories.ADO
 
                 cmd.ExecuteNonQuery();
             }
+        }
+
+        public IEnumerable<VehicleFeatured> GetFeatured()
+        {
+            var vehiclesFeatured = new List<VehicleFeatured>();
+
+            using (var cn = new SqlConnection(Settings.GetConnectionString()))
+            {
+                SqlCommand cmd = new SqlCommand("VehiclesSelectFeatured", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        var row       = new VehicleFeatured();
+                        row.VehicleId = (int)dr["VehicleId"];
+                        row.Year      = (int)dr["Year"];
+                        row.SalePrice = (decimal)dr["SalePrice"];
+                        row.Make      = dr["Make"].ToString();
+                        row.Model     = dr["Model"].ToString();
+
+                        if (dr["Image"] != DBNull.Value)
+                            row.Image = dr["Image"].ToString();
+
+                        vehiclesFeatured.Add(row);
+                    }
+                }
+            }
+            return vehiclesFeatured;
         }
     }
 }
