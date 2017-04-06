@@ -41,8 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Repositories\ADO\ContactRepositoryADO.cs" />
+    <Compile Include="Factories\ContactRepositoryFactory.cs" />
     <Compile Include="Factories\MakeRepositoryFactory.cs" />
     <Compile Include="Factories\ModelRepositoryFactory.cs" />
+    <Compile Include="Interfaces\IContactRepository.cs" />
+    <Compile Include="Repositories\Mock\ContactRepositoryMock.cs" />
     <Compile Include="Repositories\Mock\SpecialRepositoryMock.cs" />
     <Compile Include="Repositories\ADO\SpecialRepositoryADO.cs" />
     <Compile Include="Factories\SpecialRepositoryFactory.cs" />

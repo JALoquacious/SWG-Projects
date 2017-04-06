@@ -1,0 +1,110 @@
+﻿@model CarDealership.Models.Queries.VehicleDetail
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Vehicle Details</h2>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">@Model.Year  @Model.Make  @Model.Model</div>
+    <div class="row">
+        <div class="col-xs-12 col-md-3">
+            <img class="featured-img" src="@Url.Content("~/Images/Vehicles/" + Model.Image)" />
+        </div>
+        <div class="col-xs-12 col-md-3">
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <td class="strong r-align">Body Style:</td>
+                        <td>@Model.BodyStyle</td>
+                    </tr>
+                    <tr>
+                        <td class="strong r-align">Trans:</td>
+                        <td>
+                            @if (Model.IsAutomatic)
+                            {
+                                <text>Automatic</text>
+                            }
+                            else
+                            {
+                                <text>Manual</text>
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="strong r-align">Color:</td>
+                        <td>@Model.ExteriorColor</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-xs-12 col-md-3">
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <td class="strong r-align">Interior:</td>
+                        <td>@Model.InteriorColor</td>
+                    </tr>
+                    <tr>
+                        <td class="strong r-align">Mileage:</td>
+                        <td>
+                            @if (Model.Mileage > 1000m)
+                            {
+                                @Model.Mileage
+                            }
+                            else
+                            {
+                                <text>New</text>
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="strong r-align">VIN:</td>
+                        <td>@Model.VIN</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-xs-12 col-md-3">
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <td class="strong r-align">Sale Price:</td>
+                        <td>@Model.SalePrice</td>
+                    </tr>
+                    <tr>
+                        <td class="strong r-align">MSRP:</td>
+                        <td>@Model.MSRP</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="hidden-xs col-md-3"></div>
+        <div class="col-xs-12 col-md-9">
+            <table class="table table-hover">
+                <tbody>
+                    <tr>
+                        <td class="strong r-align">Description:</td>
+                        <td>@Model.Description</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <p>
+                @if (!Request.IsAuthenticated)
+                {
+                    <a href="@Url.Action("Contact", "Home", new { VIN = Model.VIN })" id="btnContact" class="btn btn-warning pull-right">Contact Us</a>
+                }
+            </p>
+            <p id="statusMessage">
+
+            </p>
+        </div>
+    </div>
+</div>

@@ -13,7 +13,6 @@ namespace CarDealership.Models.Tables
         [Column(TypeName = "DATETIME2")]
         public DateTime Date     { get; set; }
         public int SaleId        { get; set; }
-        public int VehicleId     { get; set; }
         public int CustomerId    { get; set; }
         public int SalespersonId { get; set; }
         public int PaymentTypeId { get; set; }

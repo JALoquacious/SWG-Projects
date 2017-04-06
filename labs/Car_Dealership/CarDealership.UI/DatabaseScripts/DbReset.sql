@@ -148,6 +148,7 @@ BEGIN
 		,BodyStyleId
 		,InteriorColorId
 		,ExteriorColorId
+		,SaleId
 		,SalePrice
 		,MSRP
 		,Mileage
@@ -165,6 +166,7 @@ BEGIN
 		,1 -- BodyStyleId
 		,4 -- InteriorColorId
 		,11 -- ExteriorColorId
+		,NULL -- SaleId
 		,32000 -- SalePrice
 		,34900 -- MSRP
 		,236 -- Mileage
@@ -182,6 +184,7 @@ BEGIN
 		,2 -- BodyStyleId
 		,5 -- InteriorColorId
 		,7 -- ExteriorColorId
+		,NULL -- SaleId
 		,28000 -- SalePrice
 		,30000 -- MSRP
 		,67500 -- Mileage
@@ -199,6 +202,7 @@ BEGIN
 		,2 -- BodyStyleId
 		,5 -- InteriorColorId
 		,7 -- ExteriorColorId
+		,NULL -- SaleId
 		,33000 -- SalePrice
 		,35000 -- MSRP
 		,25500 -- Mileage
@@ -216,6 +220,7 @@ BEGIN
 		,2 -- BodyStyleId
 		,3 -- InteriorColorId
 		,11 -- ExteriorColorId
+		,NULL -- SaleId
 		,30000 -- SalePrice
 		,32000 -- MSRP
 		,950 -- Mileage
@@ -233,6 +238,7 @@ BEGIN
 		,3 -- BodyStyleId
 		,2 -- InteriorColorId
 		,6 -- ExteriorColorId
+		,NULL -- SaleId
 		,19000 -- SalePrice
 		,21000 -- MSRP
 		,62000 -- Mileage
@@ -250,6 +256,7 @@ BEGIN
 		,1 -- BodyStyleId
 		,7 -- InteriorColorId
 		,3 -- ExteriorColorId
+		,NULL -- SaleId
 		,42000 -- SalePrice
 		,44000 -- MSRP
 		,25000 -- Mileage
@@ -369,7 +376,6 @@ BEGIN
 	set identity_insert Sales on;
 	INSERT INTO Sales (
 		SaleId
-		,VehicleId
 		,CustomerId
 		,SalesPersonId
 		,PaymentTypeId
@@ -377,8 +383,7 @@ BEGIN
 		,[Date]
 		)
 	VALUES (
-		1
-		,1 -- VehicleId
+		1 -- SaleId
 		,1 -- CustomerId
 		,2 -- SalesPersonId
 		,1 -- PaymentTypeId
@@ -391,7 +396,6 @@ BEGIN
 	set identity_insert Contacts on;
 	INSERT INTO Contacts (
 		ContactId
-		,VehicleId
 		,UserId
 		,[Name]
 		,Phone
@@ -400,7 +404,6 @@ BEGIN
 		)
 	VALUES (
 		1
-		,1
 		,'00000000-0000-0000-0000-000000000000'
 		,'Cornelius Vanderbilt'
 		,NULL
@@ -409,15 +412,4 @@ BEGIN
 		)
 	set identity_insert Contacts off;
 
-
-	--INSERT INTO Communications (
-	--	 ContactId
-	--	,VehicleId
-	--	,[Message]
-	--	)
-	--VALUES (
-	--	 1
-	--	,NULL
-	--	,'Just how good is that coffee that comes with the special?'
-	--	)
 END

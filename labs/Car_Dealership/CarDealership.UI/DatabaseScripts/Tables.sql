@@ -94,29 +94,7 @@ CREATE TABLE Models (
 	,DateAdded DATETIME2
 	)
 
-CREATE TABLE Vehicles (
-	VehicleId INT IDENTITY(1, 1) PRIMARY KEY NOT NULL
-	,UserId NVARCHAR(128) CONSTRAINT FK__Vehicles__UserId FOREIGN KEY REFERENCES AspNetUsers(Id)
-	,ModelId INT CONSTRAINT FK__Vehicles__ModelId FOREIGN KEY REFERENCES Models(ModelId)
-	,BodyStyleId INT CONSTRAINT FK__Vehicles__BodyStyleId FOREIGN KEY REFERENCES BodyStyles(BodyStyleId)
-	,InteriorColorId INT CONSTRAINT FK__Vehicles__InteriorColorId FOREIGN KEY REFERENCES InteriorColors(InteriorColorId)
-	,ExteriorColorId INT CONSTRAINT FK__Vehicles__ExteriorColorId FOREIGN KEY REFERENCES ExteriorColors(ExteriorColorId)
-	,SalePrice DECIMAL(8, 2) NOT NULL
-	,MSRP DECIMAL(8, 2) NOT NULL
-	,Mileage DECIMAL(8, 2) NOT NULL
-	,VIN CHAR(17) NOT NULL
-	,[Description] NVARCHAR(500) NULL
-	,IsUsed BIT NOT NULL
-	,IsAutomatic BIT NOT NULL
-	,IsFeatured BIT NOT NULL
-	,[Image] NVARCHAR(100) NULL
-	)
-
-/*------------------------------------------------------------------------------------*/
-
-
-/*------------------------------------ SALES INFO ------------------------------------*/
-CREATE TABLE PaymentTypes (
+	CREATE TABLE PaymentTypes (
 	PaymentTypeId INT IDENTITY(1, 1) PRIMARY KEY NOT NULL
 	,[Description] NVARCHAR(25) NOT NULL
 	)
@@ -155,7 +133,6 @@ CREATE TABLE Customers (
 
 CREATE TABLE Sales (
 	SaleId INT IDENTITY(1, 1) PRIMARY KEY NOT NULL
-	,VehicleId INT CONSTRAINT FK__Sales__VehicleId FOREIGN KEY REFERENCES Vehicles(VehicleId) NOT NULL
 	,CustomerId INT CONSTRAINT FK__Sales__CustomerId FOREIGN KEY REFERENCES Customers(CustomerId) NOT NULL
 	,SalespersonId INT CONSTRAINT FK__Sales__SalespersonId FOREIGN KEY REFERENCES Salespersons(SalesPersonId) NOT NULL
 	,PaymentTypeId INT CONSTRAINT FK__Sales__PaymentTypeId FOREIGN KEY REFERENCES PaymentTypes(PaymentTypeId) NOT NULL
@@ -163,18 +140,30 @@ CREATE TABLE Sales (
 	,[Date] DATETIME2 NOT NULL
 	)
 
-/*------------------------------------------------------------------------------------*/
+CREATE TABLE Vehicles (
+	VehicleId INT IDENTITY(1, 1) PRIMARY KEY NOT NULL
+	,UserId NVARCHAR(128) CONSTRAINT FK__Vehicles__UserId FOREIGN KEY REFERENCES AspNetUsers(Id)
+	,ModelId INT CONSTRAINT FK__Vehicles__ModelId FOREIGN KEY REFERENCES Models(ModelId)
+	,BodyStyleId INT CONSTRAINT FK__Vehicles__BodyStyleId FOREIGN KEY REFERENCES BodyStyles(BodyStyleId)
+	,InteriorColorId INT CONSTRAINT FK__Vehicles__InteriorColorId FOREIGN KEY REFERENCES InteriorColors(InteriorColorId)
+	,ExteriorColorId INT CONSTRAINT FK__Vehicles__ExteriorColorId FOREIGN KEY REFERENCES ExteriorColors(ExteriorColorId)
+	,SaleId INT CONSTRAINT FK__Vehicles__SaleId FOREIGN KEY REFERENCES Sales(SaleId) NULL
+	,SalePrice DECIMAL(8, 2) NOT NULL
+	,MSRP DECIMAL(8, 2) NOT NULL
+	,Mileage DECIMAL(8, 2) NOT NULL
+	,VIN CHAR(17) NOT NULL
+	,[Description] NVARCHAR(500) NULL
+	,IsUsed BIT NOT NULL
+	,IsAutomatic BIT NOT NULL
+	,IsFeatured BIT NOT NULL
+	,[Image] NVARCHAR(100) NULL
+	)
 
-
-/*----------------------------------- CONTACT INFO -----------------------------------*/
 CREATE TABLE Contacts (
 	ContactId INT IDENTITY(1, 1) PRIMARY KEY NOT NULL
-	,VehicleId INT CONSTRAINT FK__Contacts__VehicleId FOREIGN KEY REFERENCES Vehicles(VehicleId) NOT NULL
 	,UserId NVARCHAR(128) CONSTRAINT FK__Contacts__UserId FOREIGN KEY REFERENCES AspNetUsers(Id)
 	,[Name] NVARCHAR(50) NOT NULL
 	,Phone NVARCHAR(15) NULL -- required if email not provided
 	,Email NVARCHAR(50) NULL -- required if phone not provided
 	,[Message] NVARCHAR(500) NOT NULL
 	)
-
-/*------------------------------------------------------------------------------------*/

@@ -15,9 +15,9 @@
     <div>
         @foreach (var vehicle in Model)
         {
-            <div class="col-xs-12 col-md-3 featured">
+            <div class="col-xs-12 col-md-3 featured-div">
                 <a href="@Url.Action("Details", "Inventory", new { id = vehicle.VehicleId })">
-                    <p><img src="@Url.Content("~/Images/Vehicles/" + vehicle.Image)" /></p>
+                    <p><img class="featured-img" src="@Url.Content("~/Images/Vehicles/" + vehicle.Image)" /></p>
                     <p>@vehicle.Year @vehicle.Make @vehicle.Model</p>
                     <p>@vehicle.SalePrice.ToString("c")</p>
                 </a>

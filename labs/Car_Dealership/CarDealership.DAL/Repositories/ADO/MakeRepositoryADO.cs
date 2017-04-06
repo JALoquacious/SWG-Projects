@@ -23,7 +23,7 @@ namespace CarDealership.DAL.Repositories.ADO
                 {
                     while (dr.Read())
                     {
-                        var row   = new Make();
+                        var row    = new Make();
                         row.MakeId = (int)dr["MakeId"];
                         row.UserId = dr["UserId"].ToString();
                         row.Name   = dr["Name"].ToString();

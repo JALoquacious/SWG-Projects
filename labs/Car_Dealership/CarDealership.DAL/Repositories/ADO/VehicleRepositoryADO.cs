@@ -60,6 +60,9 @@ namespace CarDealership.DAL.Repositories.ADO
                             VIN           = dr["VIN"].ToString()
                         };
 
+                        if (dr["SaleId"] != DBNull.Value)
+                            row.SaleId = (int)dr["SaleId"];
+
                         if (dr["Description"] != DBNull.Value)
                             row.Description = dr["Description"].ToString();
 
@@ -106,6 +109,9 @@ namespace CarDealership.DAL.Repositories.ADO
                         vehicle.UserId        = dr["UserId"].ToString();
                         vehicle.VIN           = dr["VIN"].ToString();
 
+                        if (dr["SaleId"] != DBNull.Value)
+                            vehicle.SaleId = (int)dr["SaleId"];
+
                         if (dr["Description"] != DBNull.Value)
                             vehicle.Description = dr["Description"].ToString();
 
@@ -142,6 +148,15 @@ namespace CarDealership.DAL.Repositories.ADO
                 cmd.Parameters.AddWithValue("@IsAutomatic"    , vehicle.IsAutomatic);
                 cmd.Parameters.AddWithValue("@IsFeatured"     , vehicle.IsFeatured);
 
+                if (vehicle.SaleId == null)
+                {
+                    cmd.Parameters.AddWithValue("@SaleId", DBNull.Value);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@SaleId", vehicle.SaleId);
+                }
+
                 if (string.IsNullOrEmpty(vehicle.Image))
                 {
                     cmd.Parameters.AddWithValue("@Image", DBNull.Value);
@@ -173,6 +188,7 @@ namespace CarDealership.DAL.Repositories.ADO
                 cmd.Parameters.AddWithValue("@BodyStyleId"    , vehicle.BodyStyleId);
                 cmd.Parameters.AddWithValue("@InteriorColorId", vehicle.InteriorColorId);
                 cmd.Parameters.AddWithValue("@ExteriorColorId", vehicle.ExteriorColorId);
+                cmd.Parameters.AddWithValue("@SaleId"         , vehicle.SaleId);
                 cmd.Parameters.AddWithValue("@SalePrice"      , vehicle.SalePrice);
                 cmd.Parameters.AddWithValue("@MSRP"           , vehicle.MSRP);
                 cmd.Parameters.AddWithValue("@Mileage"        , vehicle.Mileage);

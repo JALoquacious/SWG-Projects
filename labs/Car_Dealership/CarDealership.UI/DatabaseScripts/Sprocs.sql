@@ -128,11 +128,11 @@ CREATE PROCEDURE SpecialInsert (
 AS
 BEGIN
 	INSERT INTO Specials (
-		,[Name]
+		[Name]
 		,[Description]
 		)
 	VALUES (
-		,@Name
+		@Name
 		,@Description
 		);
 
@@ -383,6 +383,7 @@ CREATE PROCEDURE VehicleInsert (
 	,@BodyStyleId INT
 	,@InteriorColorId INT
 	,@ExteriorColorId INT
+	,@SaleId INT
 	,@SalePrice DECIMAL(8, 2)
 	,@MSRP DECIMAL(8, 2)
 	,@Mileage DECIMAL(8, 2)
@@ -401,6 +402,7 @@ BEGIN
 		,BodyStyleId
 		,InteriorColorId
 		,ExteriorColorId
+		,SaleId
 		,SalePrice
 		,MSRP
 		,Mileage
@@ -417,6 +419,7 @@ BEGIN
 		,@BodyStyleId
 		,@InteriorColorId
 		,@ExteriorColorId
+		,@SaleId
 		,@SalePrice
 		,@MSRP
 		,@Mileage
@@ -447,6 +450,7 @@ CREATE PROCEDURE VehicleUpdate (
 	,@BodyStyleId INT
 	,@InteriorColorId INT
 	,@ExteriorColorId INT
+	,@SaleId INT = null
 	,@SalePrice DECIMAL(8, 2)
 	,@MSRP DECIMAL(8, 2)
 	,@Mileage DECIMAL(8, 2)
@@ -465,6 +469,7 @@ BEGIN
 		,BodyStyleId = @BodyStyleId
 		,InteriorColorId = @InteriorColorId
 		,ExteriorColorId = @ExteriorColorId
+		,SaleId = @SaleId
 		,SalePrice = @SalePrice
 		,MSRP = @MSRP
 		,Mileage = @Mileage
@@ -515,6 +520,7 @@ BEGIN
 		,BodyStyleId
 		,InteriorColorId
 		,ExteriorColorId
+		,SaleId
 		,SalePrice
 		,MSRP
 		,Mileage
@@ -565,6 +571,7 @@ CREATE PROCEDURE VehicleSelectDetails (@VehicleId INT)
 AS
 BEGIN
 	SELECT VehicleId
+		,SaleId
 		,V.UserId
 		,[Year]
 		,IsUsed
@@ -603,6 +610,7 @@ CREATE PROCEDURE VehiclesSelectDetails
 AS
 BEGIN
 	SELECT VehicleId
+		,SaleId
 		,V.UserId
 		,[Year]
 		,IsUsed
@@ -638,7 +646,6 @@ GO
 
 CREATE PROCEDURE ContactInsert (
 	@ContactId INT OUTPUT
-	,@VehicleId INT
 	,@UserId NVARCHAR(128)
 	,@Name NVARCHAR(50)
 	,@Phone NVARCHAR(15)
@@ -648,16 +655,14 @@ CREATE PROCEDURE ContactInsert (
 AS
 BEGIN
 	INSERT INTO Contacts (
-		VehicleId
-		,UserId
+		UserId
 		,[Name]
 		,Phone
 		,Email
 		,[Message]
 		)
 	VALUES (
-		@VehicleId
-		,@UserId
+		@UserId
 		,@Name
 		,@Phone
 		,@Email
@@ -695,7 +700,6 @@ GO
 
 CREATE PROCEDURE ContactSelect (
 	@ContactId INT
-	,@VehicleId INT
 	,@UserId NVARCHAR(128)
 	,@Name NVARCHAR(50)
 	,@Phone NVARCHAR(15)
@@ -705,7 +709,6 @@ CREATE PROCEDURE ContactSelect (
 AS
 BEGIN
 	SELECT ContactId
-		,VehicleId
 		,UserId
 		,[Name]
 		,Phone

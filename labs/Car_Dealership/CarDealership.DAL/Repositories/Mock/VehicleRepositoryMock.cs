@@ -25,12 +25,13 @@ namespace CarDealership.DAL.Repositories.Mock
                     BodyStyleId = 1,
                     InteriorColorId = 6,
                     ExteriorColorId = 5,
+                    SaleId = null,
                     IsUsed = false,
                     IsAutomatic = false,
                     IsFeatured = true,
                     VIN = "1234567890ABCDEFG",
                     Description = "This one will make everyone look.",
-                    Image = "Images/vehicle9.jpg",
+                    Image = "chevrolet_corvette.jpg",
                     SalePrice = 54000m,
                     MSRP = 55450m,
                     Mileage = 110m
@@ -43,12 +44,13 @@ namespace CarDealership.DAL.Repositories.Mock
                     BodyStyleId = 3,
                     InteriorColorId = 4,
                     ExteriorColorId = 7,
+                    SaleId = null,
                     IsUsed = true,
                     IsAutomatic = false,
                     IsFeatured = true,
                     VIN = "2345678901ABCDEFG",
                     Description = "A rugged, rusty, reliable old friend.",
-                    Image = "Images/vehicle24.jpg",
+                    Image = "vehicle24.jpg",
                     SalePrice = 2800,
                     MSRP = 3000,
                     Mileage = 350000m
@@ -61,12 +63,13 @@ namespace CarDealership.DAL.Repositories.Mock
                     BodyStyleId = 2,
                     InteriorColorId = 2,
                     ExteriorColorId = 9,
+                    SaleId = null,
                     IsUsed = false,
                     IsAutomatic = true,
                     IsFeatured = true,
                     VIN = "3456789012ABCDEFG",
                     Description = "Luxury and sport, all in one package.",
-                    Image = "Images/vehicle5.jpg",
+                    Image = "vehicle5.jpg",
                     SalePrice = 47000m,
                     MSRP = 48400m,
                     Mileage = 212m
@@ -79,12 +82,13 @@ namespace CarDealership.DAL.Repositories.Mock
                     BodyStyleId = 1,
                     InteriorColorId = 1,
                     ExteriorColorId = 1,
+                    SaleId = null,
                     IsUsed = true,
                     IsAutomatic = true,
                     IsFeatured = true,
                     VIN = "4567890123ABCDEFG",
                     Description = "Something for the whole family.",
-                    Image = "Images/vehicle15.jpg",
+                    Image = "vehicle15.jpg",
                     SalePrice = 18000m,
                     MSRP = 20000m,
                     Mileage = 105000m
@@ -97,6 +101,7 @@ namespace CarDealership.DAL.Repositories.Mock
                 new VehicleDetail()
                 {
                     VehicleId = 1,
+                    SaleId = null,
                     Make = "Chevrolet",
                     Model = "Corvette",
                     BodyStyle = "Car",
@@ -108,7 +113,7 @@ namespace CarDealership.DAL.Repositories.Mock
                     IsFeatured = true,
                     VIN = "1234567890ABCDEFG",
                     Description = "This one will make everyone look.",
-                    Image = "Images/vehicle9.jpg",
+                    Image = "chevrolet_corvette.jpg",
                     SalePrice = 54000m,
                     MSRP = 55450m,
                     Mileage = 110m
@@ -116,6 +121,7 @@ namespace CarDealership.DAL.Repositories.Mock
                 new VehicleDetail()
                 {
                     VehicleId = 2,
+                    SaleId = null,
                     Make = "Toyota",
                     Model = "Tacoma",
                     BodyStyle = "Truck",
@@ -127,7 +133,7 @@ namespace CarDealership.DAL.Repositories.Mock
                     IsFeatured = true,
                     VIN = "2345678901ABCDEFG",
                     Description = "A rugged, rusty, reliable old friend.",
-                    Image = "Images/vehicle24.jpg",
+                    Image = "toyota_tacoma.jpg",
                     SalePrice = 2800,
                     MSRP = 3000,
                     Mileage = 350000m
@@ -135,6 +141,7 @@ namespace CarDealership.DAL.Repositories.Mock
                 new VehicleDetail()
                 {
                     VehicleId = 3,
+                    SaleId = null,
                     Make = "BMW",
                     Model = "X5",
                     BodyStyle = "SUV",
@@ -146,7 +153,7 @@ namespace CarDealership.DAL.Repositories.Mock
                     IsFeatured = false,
                     VIN = "3456789012ABCDEFG",
                     Description = "Luxury and sport, all in one package.",
-                    Image = "Images/vehicle5.jpg",
+                    Image = "bmw_x5.jpg",
                     SalePrice = 47000m,
                     MSRP = 48400m,
                     Mileage = 212m
@@ -154,6 +161,7 @@ namespace CarDealership.DAL.Repositories.Mock
                 new VehicleDetail()
                 {
                     VehicleId = 4,
+                    SaleId = null,
                     Make = "Honda",
                     Model = "Odyssey",
                     BodyStyle = "Van",
@@ -165,7 +173,7 @@ namespace CarDealership.DAL.Repositories.Mock
                     IsFeatured = false,
                     VIN = "4567890123ABCDEFG",
                     Description = "Something for the whole family.",
-                    Image = "Images/vehicle15.jpg",
+                    Image = "honda_odyssey.jpg",
                     SalePrice = 18000m,
                     MSRP = 20000m,
                     Mileage = 105000m

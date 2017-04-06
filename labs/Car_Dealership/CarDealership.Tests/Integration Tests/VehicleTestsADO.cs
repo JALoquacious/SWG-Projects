@@ -107,6 +107,7 @@ namespace CarDealership.Tests.Integration_Tests
             vehicle.BodyStyleId     = 4;
             vehicle.InteriorColorId = 2;
             vehicle.ExteriorColorId = 5;
+            vehicle.SaleId          = null;
             vehicle.IsUsed          = true;
             vehicle.IsAutomatic     = false;
             vehicle.IsFeatured      = false;
@@ -134,6 +135,7 @@ namespace CarDealership.Tests.Integration_Tests
             vehicle.BodyStyleId     = 4;
             vehicle.InteriorColorId = 2;
             vehicle.ExteriorColorId = 5;
+            vehicle.SaleId          = null;
             vehicle.IsUsed          = true;
             vehicle.IsAutomatic     = false;
             vehicle.IsFeatured      = false;
@@ -151,6 +153,7 @@ namespace CarDealership.Tests.Integration_Tests
             vehicle.BodyStyleId     = 1;
             vehicle.InteriorColorId = 1;
             vehicle.ExteriorColorId = 4;
+            vehicle.SaleId          = null;
             vehicle.IsUsed          = false;
             vehicle.IsAutomatic     = true;
             vehicle.IsFeatured      = true;
@@ -175,6 +178,7 @@ namespace CarDealership.Tests.Integration_Tests
             Assert.AreEqual("0123456789ABCDEFG", updatedVehicle.VIN);
             Assert.AreEqual("Updated vehicle", updatedVehicle.Description);
             Assert.AreEqual("updated.jpg", updatedVehicle.Image);
+            Assert.AreEqual(null, updatedVehicle.SaleId);
             Assert.AreEqual(false, updatedVehicle.IsUsed);
             Assert.AreEqual(true, updatedVehicle.IsAutomatic);
             Assert.AreEqual(true, updatedVehicle.IsFeatured);
@@ -190,20 +194,21 @@ namespace CarDealership.Tests.Integration_Tests
             var repo = new VehicleRepositoryADO();
             var vehicle = new Vehicle();
 
-            vehicle.ModelId = 9;
-            vehicle.BodyStyleId = 4;
+            vehicle.ModelId         = 9;
+            vehicle.BodyStyleId     = 4;
             vehicle.InteriorColorId = 2;
             vehicle.ExteriorColorId = 5;
-            vehicle.IsUsed = true;
-            vehicle.IsAutomatic = false;
-            vehicle.IsFeatured = false;
-            vehicle.UserId = "00000000-0000-0000-0000-000000000000";
-            vehicle.VIN = "9012345678ABCDEFG";
-            vehicle.Description = "Added vehicle";
-            vehicle.Image = "added.jpg";
-            vehicle.SalePrice = 15000m;
-            vehicle.MSRP = 16000m;
-            vehicle.Mileage = 90000m;
+            vehicle.SaleId          = null;
+            vehicle.IsUsed          = true;
+            vehicle.IsAutomatic     = false;
+            vehicle.IsFeatured      = false;
+            vehicle.UserId          = "00000000-0000-0000-0000-000000000000";
+            vehicle.VIN             = "9012345678ABCDEFG";
+            vehicle.Description     = "Added vehicle";
+            vehicle.Image           = "added.jpg";
+            vehicle.SalePrice       = 15000m;
+            vehicle.MSRP            = 16000m;
+            vehicle.Mileage         = 90000m;
 
             repo.Insert(vehicle);
 

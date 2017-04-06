@@ -23,7 +23,7 @@ textarea {
     max-width: 280px;
 }
 
-.featured {
+.featured-div {
     border-color: white;
     border-width: thick;
     border-style: solid;
@@ -35,11 +35,11 @@ textarea {
     min-height: 350px;
 }
 
-.featured a {
+.featured-div a {
     color: white;
 }
 
-.featured img {
+.featured-img {
     border-color: black;
     border-width: medium;
     border-style: solid;
@@ -55,4 +55,12 @@ hr {
 
 .body-content {
     width: 80%;
+}
+
+.strong {
+    font-weight: bold;
+}
+
+.r-align {
+    text-align: right;
 }
