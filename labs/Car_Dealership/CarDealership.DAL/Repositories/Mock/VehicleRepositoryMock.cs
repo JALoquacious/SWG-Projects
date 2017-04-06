@@ -30,7 +30,7 @@ namespace CarDealership.DAL.Repositories.Mock
                     IsFeatured = true,
                     VIN = "1234567890ABCDEFG",
                     Description = "This one will make everyone look.",
-                    Image = "Images/vehicle9.png",
+                    Image = "Images/vehicle9.jpg",
                     SalePrice = 54000m,
                     MSRP = 55450m,
                     Mileage = 110m
@@ -48,7 +48,7 @@ namespace CarDealership.DAL.Repositories.Mock
                     IsFeatured = true,
                     VIN = "2345678901ABCDEFG",
                     Description = "A rugged, rusty, reliable old friend.",
-                    Image = "Images/vehicle24.png",
+                    Image = "Images/vehicle24.jpg",
                     SalePrice = 2800,
                     MSRP = 3000,
                     Mileage = 350000m
@@ -66,7 +66,7 @@ namespace CarDealership.DAL.Repositories.Mock
                     IsFeatured = true,
                     VIN = "3456789012ABCDEFG",
                     Description = "Luxury and sport, all in one package.",
-                    Image = "Images/vehicle5.png",
+                    Image = "Images/vehicle5.jpg",
                     SalePrice = 47000m,
                     MSRP = 48400m,
                     Mileage = 212m
@@ -84,7 +84,7 @@ namespace CarDealership.DAL.Repositories.Mock
                     IsFeatured = true,
                     VIN = "4567890123ABCDEFG",
                     Description = "Something for the whole family.",
-                    Image = "Images/vehicle15.png",
+                    Image = "Images/vehicle15.jpg",
                     SalePrice = 18000m,
                     MSRP = 20000m,
                     Mileage = 105000m
@@ -108,7 +108,7 @@ namespace CarDealership.DAL.Repositories.Mock
                     IsFeatured = true,
                     VIN = "1234567890ABCDEFG",
                     Description = "This one will make everyone look.",
-                    Image = "Images/vehicle9.png",
+                    Image = "Images/vehicle9.jpg",
                     SalePrice = 54000m,
                     MSRP = 55450m,
                     Mileage = 110m
@@ -127,7 +127,7 @@ namespace CarDealership.DAL.Repositories.Mock
                     IsFeatured = true,
                     VIN = "2345678901ABCDEFG",
                     Description = "A rugged, rusty, reliable old friend.",
-                    Image = "Images/vehicle24.png",
+                    Image = "Images/vehicle24.jpg",
                     SalePrice = 2800,
                     MSRP = 3000,
                     Mileage = 350000m
@@ -146,7 +146,7 @@ namespace CarDealership.DAL.Repositories.Mock
                     IsFeatured = false,
                     VIN = "3456789012ABCDEFG",
                     Description = "Luxury and sport, all in one package.",
-                    Image = "Images/vehicle5.png",
+                    Image = "Images/vehicle5.jpg",
                     SalePrice = 47000m,
                     MSRP = 48400m,
                     Mileage = 212m
@@ -165,7 +165,7 @@ namespace CarDealership.DAL.Repositories.Mock
                     IsFeatured = false,
                     VIN = "4567890123ABCDEFG",
                     Description = "Something for the whole family.",
-                    Image = "Images/vehicle15.png",
+                    Image = "Images/vehicle15.jpg",
                     SalePrice = 18000m,
                     MSRP = 20000m,
                     Mileage = 105000m
@@ -178,29 +178,38 @@ namespace CarDealership.DAL.Repositories.Mock
                 {
                     VehicleId = 1,
                     Year = 2000,
-                    Make = "Aston Martin",
-                    Model = "DB9",
-                    Image = "aston_martin_db9.png",
-                    SalePrice = 100000m
+                    Make = "Toyota",
+                    Model = "Tacoma",
+                    Image = "toyota_tacoma.jpg",
+                    SalePrice = 11000m
                 },
                 new VehicleFeatured()
                 {
                     VehicleId = 2,
                     Year = 2010,
-                    Make = "Buick",
-                    Model = "Encore",
-                    Image = "buick_encore.png",
-                    SalePrice = 15000m
+                    Make = "BMW",
+                    Model = "M6",
+                    Image = "bmw_m6.jpg",
+                    SalePrice = 80000m
                 },
                 new VehicleFeatured()
                 {
                     VehicleId = 3,
                     Year = 2017,
-                    Make = "Volkswagen",
-                    Model = "Passat",
-                    Image = "volkswagen_passat.png",
-                    SalePrice = 23000m
+                    Make = "Nissan",
+                    Model = "Frontier",
+                    Image = "nissan_frontier.jpg",
+                    SalePrice = 32000m
                 },
+                new VehicleFeatured()
+                {
+                    VehicleId = 4,
+                    Year = 2013,
+                    Make = "Honda",
+                    Model = "Accord",
+                    Image = "honda_accord.jpg",
+                    SalePrice = 16000m
+                }
             };
         }
 

@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using CarDealership.DAL.Factories;
+using System.Web.Mvc;
 
 namespace CarDealership.UI.Controllers
 {
@@ -6,14 +7,8 @@ namespace CarDealership.UI.Controllers
     {
         public ActionResult Index()
         {
-            return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            var model = VehicleRepositoryFactory.GetRepository().GetFeatured();
+            return View(model);
         }
 
         public ActionResult Contact()

@@ -449,7 +449,7 @@ namespace CarDealership.UI.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        internal class ChallengeResult : HttpUnauthorizedResult
+        public class ChallengeResult : HttpUnauthorizedResult
         {
             public ChallengeResult(string provider, string redirectUri)
                 : this(provider, redirectUri, null)

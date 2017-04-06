@@ -22,3 +22,37 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.featured {
+    border-color: white;
+    border-width: thick;
+    border-style: solid;
+    background-color: #636363;
+    color: white;
+    margin-top: 1em;
+    text-align: center;
+    font-weight: bold;
+    min-height: 350px;
+}
+
+.featured a {
+    color: white;
+}
+
+.featured img {
+    border-color: black;
+    border-width: medium;
+    border-style: solid;
+    margin: 1em 0 1em 0;
+    width: 100%;
+    height: 75%;
+    min-height: 240px;
+}
+
+hr {
+    border-color: black;
+}
+
+.body-content {
+    width: 80%;
+}

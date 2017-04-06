@@ -1,4 +1,5 @@
 ﻿using CarDealership.DAL.Interfaces;
+using CarDealership.Models.Enums;
 using CarDealership.Models.Queries;
 using CarDealership.Models.Tables;
 using System;
@@ -116,21 +117,6 @@ namespace CarDealership.DAL.Repositories.ADO
             return vehicle;
         }
 
-        public IEnumerable<VehicleDetail> GetBySearchTerm(string term)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<VehicleDetail> GetByPriceRange(decimal min, decimal max)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<VehicleDetail> GetByYearRange(int min, int max)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Insert(Vehicle vehicle)
         {
             using (var cn = new SqlConnection(Settings.GetConnectionString()))
@@ -233,6 +219,122 @@ namespace CarDealership.DAL.Repositories.ADO
                 }
             }
             return vehiclesFeatured;
+        }
+
+        public IEnumerable<VehicleDetail> Search(VehicleSearchParameters parameters)
+        {
+            var vehicles = new List<VehicleDetail>();
+
+            using (var cn = new SqlConnection(Settings.GetConnectionString()))
+            {
+                string query = (
+                    @"SELECT TOP 20 VehicleId
+	                    ,V.UserId
+	                    ,[Year]
+	                    ,IsUsed
+	                    ,IsAutomatic
+	                    ,IsFeatured
+	                    ,MK.[Name] AS Make
+	                    ,MD.[Name] AS Model
+	                    ,BS.[Name] AS BodyStyle
+	                    ,IC.[Name] AS InteriorColor
+	                    ,EC.[Name] AS ExteriorColor
+	                    ,VIN
+	                    ,V.[Description]
+	                    ,[Image]
+	                    ,SalePrice
+	                    ,MSRP
+	                    ,Mileage
+                    FROM Vehicles V
+                    INNER JOIN BodyStyles BS ON BS.BodyStyleId = V.BodyStyleId
+                    INNER JOIN InteriorColors IC ON IC.InteriorColorId = V.InteriorColorId
+                    INNER JOIN ExteriorColors EC ON EC.ExteriorColorId = V.ExteriorColorId
+                    INNER JOIN Models MD ON MD.ModelId = V.ModelId
+                    INNER JOIN Makes MK ON MK.MakeId = MD.MakeId
+                    WHERE 1 = 1 
+                ");
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = cn;
+
+                if (parameters.Condition == (int)Condition.New ||
+                    parameters.Condition == (int)Condition.Used)
+                {
+                    query += "AND IsUsed = @Condition ";
+                    cmd.Parameters.AddWithValue("@Condition", parameters.Condition);
+                }
+
+                if (parameters.MinPrice.HasValue)
+                {
+                    query += "AND SalePrice >= @MinPrice ";
+                    cmd.Parameters.AddWithValue("@MinPrice", parameters.MinPrice.Value);
+                }
+
+                if (parameters.MaxPrice.HasValue)
+                {
+                    query += "AND SalePrice <= @MaxPrice ";
+                    cmd.Parameters.AddWithValue("@MaxPrice", parameters.MaxPrice.Value);
+                }
+
+                if (parameters.MinYear.HasValue)
+                {
+                    query += "AND [Year] >= @MinYear ";
+                    cmd.Parameters.AddWithValue("@MinYear", parameters.MinYear.Value);
+                }
+
+                if (parameters.MaxYear.HasValue)
+                {
+                    query += "AND [Year] <= @MaxYear ";
+                    cmd.Parameters.AddWithValue("@MaxYear", parameters.MaxYear.Value);
+                }
+
+                if (!string.IsNullOrEmpty(parameters.SearchTerm))
+                {
+                    query += @"AND MK.[Name] LIKE '%@SearchTerm%'
+                        OR MD.[Name] LIKE '%@SearchTerm%'
+                        OR [Year] LIKE '%@SearchTerm%'";
+                    cmd.Parameters.AddWithValue("@SearchTerm", parameters.SearchTerm);
+                }
+
+                query += "ORDER BY MSRP DESC";
+
+                cmd.CommandText = query;
+
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        var row = new VehicleDetail();
+
+                        row.VehicleId     = (int)dr["VehicleId"];
+                        row.Year          = (int)dr["Year"];
+                        row.IsUsed        = (bool)dr["IsUsed"];
+                        row.IsAutomatic   = (bool)dr["IsAutomatic"];
+                        row.IsFeatured    = (bool)dr["IsFeatured"];
+                        row.SalePrice     = (decimal)dr["SalePrice"];
+                        row.MSRP          = (decimal)dr["MSRP"];
+                        row.Mileage       = (decimal)dr["Mileage"];
+                        row.Make          = dr["Make"].ToString();
+                        row.Model         = dr["Model"].ToString();
+                        row.BodyStyle     = dr["BodyStyle"].ToString();
+                        row.InteriorColor = dr["InteriorColor"].ToString();
+                        row.ExteriorColor = dr["ExteriorColor"].ToString();
+                        row.UserId        = dr["UserId"].ToString();
+                        row.VIN           = dr["VIN"].ToString();
+
+                        if (dr["Description"] != DBNull.Value)
+                            row.Description = dr["Description"].ToString();
+
+                        if (dr["Image"] != DBNull.Value)
+                            row.Image = dr["Image"].ToString();
+
+                        vehicles.Add(row);
+                    }
+                }
+            }
+            return vehicles;
         }
     }
 }

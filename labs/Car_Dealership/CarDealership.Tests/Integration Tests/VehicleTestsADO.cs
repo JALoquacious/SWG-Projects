@@ -64,7 +64,7 @@ namespace CarDealership.Tests.Integration_Tests
             Assert.AreEqual(236M, vehicle.Mileage);
             Assert.AreEqual("1234567890ABCDEFG", vehicle.VIN);
             Assert.AreEqual("A shiny new Audi sedan, just waiting for you.", vehicle.Description);
-            Assert.AreEqual("audi_a4.png", vehicle.Image);
+            Assert.AreEqual("audi_a4.jpg", vehicle.Image);
         }
 
         [Test]
@@ -79,7 +79,7 @@ namespace CarDealership.Tests.Integration_Tests
             Assert.AreEqual(2017, vehiclesFeatured[0].Year);
             Assert.AreEqual("Audi", vehiclesFeatured[0].Make);
             Assert.AreEqual("A4", vehiclesFeatured[0].Model);
-            Assert.AreEqual("audi_a4.png", vehiclesFeatured[0].Image);
+            Assert.AreEqual("audi_a4.jpg", vehiclesFeatured[0].Image);
             Assert.AreEqual(32000m, vehiclesFeatured[0].SalePrice);
         }
 
@@ -113,7 +113,7 @@ namespace CarDealership.Tests.Integration_Tests
             vehicle.UserId          = "00000000-0000-0000-0000-000000000000";
             vehicle.VIN             = "9012345678ABCDEFG";
             vehicle.Description     = "Added vehicle";
-            vehicle.Image           = "added.png";
+            vehicle.Image           = "added.jpg";
             vehicle.SalePrice       = 15000m;
             vehicle.MSRP            = 16000m;
             vehicle.Mileage         = 90000m;
@@ -140,7 +140,7 @@ namespace CarDealership.Tests.Integration_Tests
             vehicle.UserId          = "00000000-0000-0000-0000-000000000000";
             vehicle.VIN             = "9012345678ABCDEFG";
             vehicle.Description     = "Added vehicle";
-            vehicle.Image           = "added.png";
+            vehicle.Image           = "added.jpg";
             vehicle.SalePrice       = 15000m;
             vehicle.MSRP            = 16000m;
             vehicle.Mileage         = 90000m;
@@ -157,7 +157,7 @@ namespace CarDealership.Tests.Integration_Tests
             vehicle.UserId          = "11111111-1111-1111-1111-111111111111";
             vehicle.VIN             = "0123456789ABCDEFG";
             vehicle.Description     = "Updated vehicle";
-            vehicle.Image           = "updated.png";
+            vehicle.Image           = "updated.jpg";
             vehicle.SalePrice       = 38000m;
             vehicle.MSRP            = 40000m;
             vehicle.Mileage         = 800m;
@@ -174,7 +174,7 @@ namespace CarDealership.Tests.Integration_Tests
             Assert.AreEqual("11111111-1111-1111-1111-111111111111", updatedVehicle.UserId);
             Assert.AreEqual("0123456789ABCDEFG", updatedVehicle.VIN);
             Assert.AreEqual("Updated vehicle", updatedVehicle.Description);
-            Assert.AreEqual("updated.png", updatedVehicle.Image);
+            Assert.AreEqual("updated.jpg", updatedVehicle.Image);
             Assert.AreEqual(false, updatedVehicle.IsUsed);
             Assert.AreEqual(true, updatedVehicle.IsAutomatic);
             Assert.AreEqual(true, updatedVehicle.IsFeatured);
@@ -200,7 +200,7 @@ namespace CarDealership.Tests.Integration_Tests
             vehicle.UserId = "00000000-0000-0000-0000-000000000000";
             vehicle.VIN = "9012345678ABCDEFG";
             vehicle.Description = "Added vehicle";
-            vehicle.Image = "added.png";
+            vehicle.Image = "added.jpg";
             vehicle.SalePrice = 15000m;
             vehicle.MSRP = 16000m;
             vehicle.Mileage = 90000m;

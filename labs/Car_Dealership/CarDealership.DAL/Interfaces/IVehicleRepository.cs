@@ -9,9 +9,6 @@ namespace CarDealership.DAL.Interfaces
         VehicleDetail GetById(int vehicleId);
         IEnumerable<VehicleFeatured> GetFeatured();
         IEnumerable<VehicleDetail> GetAllDetails();
-        IEnumerable<VehicleDetail> GetBySearchTerm(string term);
-        IEnumerable<VehicleDetail> GetByPriceRange(decimal min, decimal max);
-        IEnumerable<VehicleDetail> GetByYearRange(int min, int max);
         void Delete(int vehicleId);
         void Insert(Vehicle vehicle);
         void Update(Vehicle vehicle);

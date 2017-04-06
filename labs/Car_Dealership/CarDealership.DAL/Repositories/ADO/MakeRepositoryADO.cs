@@ -23,7 +23,7 @@ namespace CarDealership.DAL.Repositories.ADO
                 {
                     while (dr.Read())
                     {
-                        Make row   = new Make();
+                        var row   = new Make();
                         row.MakeId = (int)dr["MakeId"];
                         row.UserId = dr["UserId"].ToString();
                         row.Name   = dr["Name"].ToString();
@@ -65,12 +65,12 @@ namespace CarDealership.DAL.Repositories.ADO
         {
             using (var cn = new SqlConnection(Settings.GetConnectionString()))
             {
-                SqlCommand cmd = new SqlCommand("MakeInsert", cn)
+                var cmd = new SqlCommand("MakeInsert", cn)
                 {
                     CommandType = CommandType.StoredProcedure
                 };
 
-                SqlParameter param = new SqlParameter("@MakeId", SqlDbType.Int)
+                var param = new SqlParameter("@MakeId", SqlDbType.Int)
                 {
                     Direction = ParameterDirection.Output
                 };

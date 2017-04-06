@@ -24,10 +24,10 @@ namespace CarDealership.Tests.Unit_Tests
             var vehiclesFeatured = repo.GetFeatured().ToList();
 
             Assert.IsNotNull(vehiclesFeatured);
-            Assert.AreEqual(3, vehiclesFeatured.Count());
-            Assert.AreEqual(100000m, vehiclesFeatured[0].SalePrice);
-            Assert.AreEqual("Buick", vehiclesFeatured[1].Make);
-            Assert.AreEqual("Passat", vehiclesFeatured[2].Model);
+            Assert.AreEqual(4, vehiclesFeatured.Count());
+            Assert.AreEqual(11000m, vehiclesFeatured[0].SalePrice);
+            Assert.AreEqual("BMW", vehiclesFeatured[1].Make);
+            Assert.AreEqual("Frontier", vehiclesFeatured[2].Model);
         }
 
         [TestCase(1, "Chevrolet", "Corvette", "Car", "DarkRed", "Charcoal", 2017)]

@@ -94,6 +94,73 @@ GO
 IF EXISTS (
 		SELECT *
 		FROM INFORMATION_SCHEMA.ROUTINES
+		WHERE ROUTINE_NAME = 'SpecialDelete'
+		)
+	DROP PROCEDURE SpecialDelete
+GO
+
+CREATE PROCEDURE SpecialDelete (@SpecialId INT)
+AS
+BEGIN
+	BEGIN TRANSACTION
+
+	DELETE
+	FROM Specials
+	WHERE SpecialId = @SpecialId;
+
+	COMMIT TRANSACTION
+END
+GO
+
+IF EXISTS (
+		SELECT *
+		FROM INFORMATION_SCHEMA.ROUTINES
+		WHERE ROUTINE_NAME = 'SpecialInsert'
+		)
+	DROP PROCEDURE SpecialInsert
+GO
+
+CREATE PROCEDURE SpecialInsert (
+	@SpecialId INT OUTPUT
+	,@Name NVARCHAR(25)
+	,@Description NVARCHAR(500)
+	)
+AS
+BEGIN
+	INSERT INTO Specials (
+		,[Name]
+		,[Description]
+		)
+	VALUES (
+		,@Name
+		,@Description
+		);
+
+	SET @SpecialId = SCOPE_IDENTITY();
+END
+GO
+
+IF EXISTS (
+		SELECT *
+		FROM INFORMATION_SCHEMA.ROUTINES
+		WHERE ROUTINE_NAME = 'SpecialsSelectAll'
+		)
+	DROP PROCEDURE SpecialsSelectAll
+GO
+
+CREATE PROCEDURE SpecialsSelectAll
+AS
+BEGIN
+	SELECT SpecialId
+		,[Name]
+		,[Description]
+	FROM Specials
+END
+GO
+
+IF EXISTS (
+		SELECT *
+		FROM INFORMATION_SCHEMA.ROUTINES
 		WHERE ROUTINE_NAME = 'InventoryReport'
 		)
 	DROP PROCEDURE InventoryReport

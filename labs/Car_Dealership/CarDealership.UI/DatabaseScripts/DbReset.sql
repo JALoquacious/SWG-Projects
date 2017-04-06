@@ -173,7 +173,7 @@ BEGIN
 		,0 -- IsUsed
 		,1 -- IsAutomatic
 		,1 -- IsFeatured
-		,'audi_a4.png' -- [Image]
+		,'audi_a4.jpg' -- [Image]
 		),
 		(
 		2 -- VehicleId
@@ -190,7 +190,7 @@ BEGIN
 		,1 -- IsUsed
 		,1 -- IsAutomatic
 		,0 -- IsFeatured
-		,'chevrolet_tahoe.png' -- [Image]
+		,'chevrolet_tahoe.jpg' -- [Image]
 		),
 		(
 		3 -- VehicleId
@@ -207,7 +207,7 @@ BEGIN
 		,1 -- IsUsed
 		,1 -- IsAutomatic
 		,0 -- IsFeatured
-		,'chevrolet_tahoe.png' -- [Image]
+		,'chevrolet_tahoe.jpg' -- [Image]
 		),
 		(
 		4 -- VehicleId
@@ -224,7 +224,7 @@ BEGIN
 		,0 -- IsUsed
 		,1 -- IsAutomatic
 		,1 -- IsFeatured
-		,'ford_explorer.png' -- [Image]
+		,'ford_explorer.jpg' -- [Image]
 		),
 		(
 		5 -- VehicleId
@@ -240,8 +240,8 @@ BEGIN
 		,'Honda''s only pickup model.' -- [Description]
 		,1 -- IsUsed
 		,0 -- IsAutomatic
-		,0 -- IsFeatured
-		,'honda_ridgeline.png' -- [Image]
+		,1 -- IsFeatured
+		,'honda_ridgeline.jpg' -- [Image]
 		),
 		(
 		6 -- VehicleId
@@ -258,7 +258,7 @@ BEGIN
 		,1 -- IsUsed
 		,0 -- IsAutomatic
 		,1 -- IsFeatured
-		,'bmw_z4.png' -- [Image]
+		,'bmw_z4.jpg' -- [Image]
 		)
 	set identity_insert Vehicles off;
 
@@ -271,13 +271,23 @@ BEGIN
 		)
 	VALUES (
 		 1
-		,'Free cup of joe'
+		,'Free cup o'' joe'
 		,'Get a steaming hot cup of coffee with the purchase of a new car.'
 		)
 		,(
 		 2
 		,'Green shirt special'
 		,'You''ve got the luck of a leprechaun! $100 off for wearing a green shirt.'
+		)
+		,(
+		 3
+		,'No shirt special'
+		,'Other dealers require a shirt. Not us. $200 off your purchase for being brave.'
+		)
+		,(
+		 4
+		,'Recycling special'
+		,'Bring in your recycling and get $25 off of a recycled car.'
 		)
 	set identity_insert Specials off;
 
