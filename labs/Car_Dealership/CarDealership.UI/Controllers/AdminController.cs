@@ -1,12 +1,11 @@
 ﻿using CarDealership.DAL.Factories;
-using CarDealership.Models.Tables;
 using System.Web.Mvc;
 
 namespace CarDealership.UI.Controllers
 {
     public class AdminController : Controller
     {
-        //[HttpGet]
+        [HttpGet]
         public ActionResult Specials()
         {
             var repo = SpecialRepositoryFactory.GetRepository();
@@ -14,19 +13,19 @@ namespace CarDealership.UI.Controllers
             return View(model);
         }
 
-        //[HttpGet]
+        [HttpGet]
         public ActionResult Vehicles()
         {
             return View();
         }
 
-        //[HttpGet]
+        [HttpGet]
         public ActionResult AddVehicle()
         {
             return View();
         }
 
-        //[HttpPost]
+        [HttpPost]
         public ActionResult AddVehicle(int vehicleId)
         {
             //var repo = VehicleRepositoryFactory.GetRepository();

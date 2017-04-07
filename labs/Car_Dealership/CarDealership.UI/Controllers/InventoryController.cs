@@ -6,21 +6,21 @@ namespace CarDealership.UI.Controllers
 {
     public class InventoryController : Controller
     {
-        //[HttpGet]
+        [HttpGet]
         public ActionResult New()
         {
             //var model = VehicleRepositoryFactory.GetRepository();
             return View();
         }
 
-        //[HttpGet]
+        [HttpGet]
         public ActionResult Used()
         {
             //var model = VehicleRepositoryFactory.GetRepository();
             return View();
         }
 
-        //[HttpGet]
+        [HttpGet]
         public ActionResult Details(int id)
         {
             if (Request.IsAuthenticated)
