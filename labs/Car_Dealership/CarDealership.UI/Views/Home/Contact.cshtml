@@ -25,7 +25,7 @@
                 @Html.LabelFor(m => m.Message)
                 @Html.TextAreaFor(m => m.Message, new { @class = "form-control", placeholder = "Your message here"})
             </div>
-            <button type="submit" class="btn btn-primary" id="contact-submit">Submit</button>
+            <button type="submit" class="btn btn-custom" id="contact-submit">Submit</button>
             <p>This is the VIN NUMBER: @Request.QueryString["VIN"]</p>
         }
     </div>

@@ -14,9 +14,12 @@ namespace CarDealership.UI.Controllers
         }
 
         [HttpGet]
-        public ActionResult Contact()
+        public ActionResult Contact(string VIN = null)
         {
-            return View();
+            Contact c = new Contact();
+            c.Message = VIN;
+
+            return View(c);
         }
 
         [HttpPost]
@@ -24,7 +27,7 @@ namespace CarDealership.UI.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View();
+                return View(newContact);
             }
 
             var repo = ContactRepositoryFactory.GetRepository();

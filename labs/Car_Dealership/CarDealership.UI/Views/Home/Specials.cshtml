@@ -1,0 +1,22 @@
+﻿@model IEnumerable<CarDealership.Models.Tables.Special>
+
+@{
+    ViewBag.Title = "Specials";
+}
+
+<h2>Specials</h2>
+
+@foreach (var special in Model)
+{
+    <div class="panel panel-darkslategray">
+        <div class="panel-heading">@special.Name</div>
+        <div class="row">
+            <div class="col-xs-2">
+                <img class="dollar-img" src="@Url.Content("~/Images/dollar-sign.png")" />
+            </div>
+            <div class="col-xs-10">
+                <p>@special.Description</p>
+            </div>
+        </div>
+    </div>
+}
