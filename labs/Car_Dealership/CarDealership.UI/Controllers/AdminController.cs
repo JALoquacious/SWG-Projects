@@ -1,4 +1,6 @@
 ﻿using CarDealership.DAL.Factories;
+using CarDealership.Models.Tables;
+using CarDealership.UI.Models;
 using System.Web.Mvc;
 
 namespace CarDealership.UI.Controllers
@@ -9,8 +11,20 @@ namespace CarDealership.UI.Controllers
         public ActionResult Specials()
         {
             var repo = SpecialRepositoryFactory.GetRepository();
-            var model = repo.GetAll();
-            return View(model);
+            var vm = new SpecialAddViewModel();
+
+            vm.SpecialsList = repo.GetAll();
+            vm.NewSpecial = new Special();
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult Specials(Special newSpecial)
+        {
+            var repo = SpecialRepositoryFactory.GetRepository();
+            repo.Insert(newSpecial);
+            return RedirectToAction("Specials");
         }
 
         [HttpGet]

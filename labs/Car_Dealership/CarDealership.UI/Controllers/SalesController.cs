@@ -1,4 +1,6 @@
 ﻿using CarDealership.DAL.Factories;
+using CarDealership.Models.Tables;
+using CarDealership.UI.Models;
 using CarDealership.UI.Utilities;
 using System.Web.Mvc;
 
@@ -15,16 +17,17 @@ namespace CarDealership.UI.Controllers
         [HttpGet]
         public ActionResult Purchase(int id)
         {
-            if (Request.IsAuthenticated)
-            {
-                ViewBag.UserId = AuthorizeUtilities.GetUserId(this);
-            }
-
-            // need to pass VehiclePurchaseViewModel rather than VehicleDetail model?
             var repo = VehicleRepositoryFactory.GetRepository();
-            var model = repo.GetById(id);
+            var vm   = new PurchaseAddViewModel();
 
-            return View(model);
+            vm.Customer      = new Customer();
+            vm.PaymentType   = new PaymentType();
+            vm.Sale          = new Sale();
+            vm.State         = new State();
+            vm.VehicleDetail = repo.GetById(id);
+
+
+            return View(vm);
         }
 
         [HttpPost]

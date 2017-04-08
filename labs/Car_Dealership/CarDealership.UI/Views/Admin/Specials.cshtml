@@ -1,0 +1,69 @@
+﻿@model CarDealership.UI.Models.SpecialAddViewModel
+
+@{
+    ViewBag.Title = "Specials";
+}
+
+<h2>Specials</h2>
+<p class="status-message">
+
+</p>
+
+<div class="row">
+    <div class="col-xs-12 col-md-6">
+        @using (Html.BeginForm("Specials", "Admin", FormMethod.Post))
+        {
+            @Html.ValidationSummary()
+            <div class="form-group">
+                @Html.LabelFor(m => m.NewSpecial.Name)
+                @Html.TextBoxFor(m => m.NewSpecial.Name, new { @class = "form-control", placeholder = "ex: New Year's special" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.NewSpecial.Description)
+                @Html.TextAreaFor(m => m.NewSpecial.Description, new { @class = "form-control", placeholder = "Your description here" })
+            </div>
+            <button type="submit" class="btn btn-custom" id="contact-submit">Submit</button>
+        }
+    </div>
+</div>
+
+@foreach (var special in Model.SpecialsList)
+{
+    <div class="panel panel-darkslategray">
+        <div class="panel-heading">@special.Name</div>
+        <div class="row">
+            <div class="col-xs-2">
+                <img class="dollar-img" src="@Url.Content("~/Images/dollar-sign.png")" />
+            </div>
+            <div class="col-xs-10">
+                <button class="btn btn-custom special-delete-btn pull-right" data-specialId="@special.SpecialId">Delete</button>
+                <p>@special.Description</p>
+            </div>
+        </div>
+    </div>
+}
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('.special-delete-btn').on('click', function () {
+                if (window.confirm('Are you sure you want to delete this special?')) {
+                    deleteSpecial($(this).data("specialId"));
+                }
+            });
+
+            function deleteSpecial(specialId) {
+                $.ajax({
+                    type: 'DELETE',
+                    url: 'http://localhost:55178/api/special/' + specialId,
+                    success: function () {
+                        window.alert('Special deleted!');
+                    },
+                    error: function () {
+                        window.alert('Server error: Could not delete special.');
+                    }
+                });
+            }
+        });
+    </script>
+}

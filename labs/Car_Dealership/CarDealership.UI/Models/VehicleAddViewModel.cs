@@ -20,7 +20,7 @@ namespace CarDealership.UI.Models
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            List<ValidationResult> errors = new List<ValidationResult>();
+            var errors = new List<ValidationResult>();
 
             if (Model.Year < 2000 || Model.Year > DateTime.Today.Year + 1)
             {

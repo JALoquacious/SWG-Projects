@@ -8,15 +8,15 @@ namespace CarDealership.UI.Controllers
     {
         [HttpGet]
         public ActionResult New()
-        {
-            //var model = VehicleRepositoryFactory.GetRepository();
+        {   
+            // to be filled out
             return View();
         }
 
         [HttpGet]
         public ActionResult Used()
         {
-            //var model = VehicleRepositoryFactory.GetRepository();
+            // to be filled out
             return View();
         }
 
