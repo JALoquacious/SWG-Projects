@@ -9,14 +9,33 @@ using System.Web.Mvc;
 
 namespace CarDealership.UI.Models
 {
-    public class VehicleAddViewModel : IValidatableObject
+    public class VehicleAdminViewModel : IValidatableObject
     {
-        public Make Make                          { get; set; }
-        public Model Model                        { get; set; }
-        public Vehicle Vehicle                    { get; set; }
-        public HttpPostedFileBase ImageUpload     { get; set; }
-        public IEnumerable<SelectListItem> Makes  { get; set; }
-        public IEnumerable<SelectListItem> Models { get; set; }
+        public Make Make                             { get; set; }
+        public Model Model                           { get; set; }
+        public Vehicle Vehicle                       { get; set; }
+        public HttpPostedFileBase ImageUpload        { get; set; }
+        public IEnumerable<SelectListItem> BodyStyle { get; set; }
+        public IEnumerable<SelectListItem> Condition { get; set; }
+        public IEnumerable<SelectListItem> Makes     { get; set; }
+        public IEnumerable<SelectListItem> Models    { get; set; }
+
+        public VehicleAdminViewModel()
+        {
+            Condition = new List<SelectListItem>()
+            {
+                new SelectListItem() { Value = "false", Text = "New" },
+                new SelectListItem() { Value = "true", Text = "Used" }
+            };
+
+            BodyStyle = new List<SelectListItem>()
+            {
+                new SelectListItem() { Value = "1", Text = "Car"   },
+                new SelectListItem() { Value = "2", Text = "SUV"   },
+                new SelectListItem() { Value = "3", Text = "Truck" },
+                new SelectListItem() { Value = "4", Text = "Van"   }
+            };
+        }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

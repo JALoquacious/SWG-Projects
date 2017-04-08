@@ -15,7 +15,7 @@ namespace CarDealership.UI.Models
         public State State                               { get; set; }
         public VehicleDetail VehicleDetail               { get; set; }
         public IEnumerable<SelectListItem> States        { get; set; }
-        public IEnumerable<SelectListItem> PurchaseTypes { get; set; }
+        public IEnumerable<SelectListItem> PaymentTypes  { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

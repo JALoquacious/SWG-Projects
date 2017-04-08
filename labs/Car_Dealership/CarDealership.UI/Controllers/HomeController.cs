@@ -9,17 +9,17 @@ namespace CarDealership.UI.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var model = VehicleRepositoryFactory.GetRepository().GetFeatured();
-            return View(model);
+            var featuredList = VehicleRepositoryFactory.GetRepository().GetFeatured();
+            return View(featuredList);
         }
 
         [HttpGet]
         public ActionResult Contact(string VIN = null)
         {
-            Contact c = new Contact();
-            c.Message = VIN;
+            var contact = new Contact();
+            contact.Message = VIN;
 
-            return View(c);
+            return View(contact);
         }
 
         [HttpPost]
@@ -40,8 +40,8 @@ namespace CarDealership.UI.Controllers
         [HttpGet]
         public ActionResult Specials()
         {
-            var model = SpecialRepositoryFactory.GetRepository().GetAll();
-            return View(model);
+            var specialsList = SpecialRepositoryFactory.GetRepository().GetAll();
+            return View(specialsList);
         }
     }
 }
