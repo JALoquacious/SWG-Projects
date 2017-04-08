@@ -211,9 +211,12 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CustomValidation\ValidPasswordAttribute.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PurchaseAddViewModel.cs" />
     <Compile Include="Models\SpecialAddViewModel.cs" />
+    <Compile Include="Models\UserAddViewModel.cs" />
     <Compile Include="Models\VehicleAddViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />

@@ -10,7 +10,7 @@ namespace CarDealership.UI.Models.CustomValidation
             if (input is string)
             {
                 string password = input.ToString();
-                return (password.Length <= 50 && password.Length >= 5) &&
+                return (password.Length >= 5 && password.Length <= 50) &&
                         password.Any(c => char.IsUpper(c)) &&
                         password.Any(c => char.IsLower(c)) &&
                         password.Any(c => char.IsDigit(c));

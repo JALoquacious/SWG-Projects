@@ -3,19 +3,17 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CarDealership.UI.Models
 {
-    public class UserAddViewModel : UserAdminViewModel
+    public class UserEditViewModel : UserAdminViewModel
     {
-        public UserAddViewModel() : base() { }
+        public UserEditViewModel() : base() { }
 
-        [Required(ErrorMessage = "Password is required.")]
         [DataType(DataType.Password)]
-        [ValidPassword]
+        [ValidOrNullPassword]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "Confirmation password is required.")]
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        [ValidPassword]
+        [ValidOrNullPassword]
         public string ConfirmPassword { get; set; }
     }
 }
