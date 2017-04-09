@@ -17,30 +17,35 @@ namespace CarDealership.DAL.Repositories.Mock
                 new Model()
                 {
                     ModelId = 1,
-                    Name = "GT-R",
+                    MakeId = 1,
+                    Name = "Accord",
                     DateAdded = DateTime.Parse("1/1/2001")
                 },
                 new Model()
                 {
                     ModelId = 2,
+                    MakeId = 1,
                     Name = "Pilot",
                     DateAdded = DateTime.Parse("2/2/2002")
                 },
                 new Model()
                 {
                     ModelId = 3,
+                    MakeId = 2,
                     Name = "Solara",
                     DateAdded = DateTime.Parse("3/3/2003")
                 },
                 new Model()
                 {
                     ModelId = 4,
+                    MakeId = 3,
                     Name = "Century",
                     DateAdded = DateTime.Parse("4/4/2004")
                 },
                 new Model()
                 {
                     ModelId = 5,
+                    MakeId = 4,
                     Name = "Fiesta",
                     DateAdded = DateTime.Parse("5/5/2005")
                 }
@@ -55,6 +60,11 @@ namespace CarDealership.DAL.Repositories.Mock
         public Model GetById(int targetId)
         {
             return _models.FirstOrDefault(m => m.ModelId == targetId);
+        }
+
+        public IEnumerable<Model> GetByMakeId(int makeId)
+        {
+            return _models.Where(m => m.MakeId == makeId);
         }
 
         public void Insert(Model targetModel)

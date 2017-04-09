@@ -17,27 +17,34 @@ namespace CarDealership.UI.Models
         public InteriorColor InteriorColor                { get; set; }
         public ExteriorColor ExteriorColor                { get; set; }
         public HttpPostedFileBase ImageUpload             { get; set; }
-        public IEnumerable<SelectListItem> BodyStyle      { get; set; }
-        public IEnumerable<SelectListItem> Condition      { get; set; }
+        public IEnumerable<SelectListItem> BodyStyles     { get; set; }
+        public IEnumerable<SelectListItem> Conditions     { get; set; }
+        public IEnumerable<SelectListItem> ExteriorColors { get; set; }
+        public IEnumerable<SelectListItem> InteriorColors { get; set; }
         public IEnumerable<SelectListItem> Makes          { get; set; }
         public IEnumerable<SelectListItem> Models         { get; set; }
-        public IEnumerable<SelectListItem> InteriorColors { get; set; }
-        public IEnumerable<SelectListItem> ExteriorColors { get; set; }
+        public IEnumerable<SelectListItem> Transmissions  { get; set; }
 
         public VehicleAdminViewModel()
         {
-            Condition = new List<SelectListItem>()
-            {
-                new SelectListItem() { Value = "false", Text = "New" },
-                new SelectListItem() { Value = "true", Text = "Used" }
-            };
-
-            BodyStyle = new List<SelectListItem>()
+            BodyStyles = new List<SelectListItem>()
             {
                 new SelectListItem() { Value = "1", Text = "Car"   },
                 new SelectListItem() { Value = "2", Text = "SUV"   },
                 new SelectListItem() { Value = "3", Text = "Truck" },
                 new SelectListItem() { Value = "4", Text = "Van"   }
+            };
+
+            Conditions = new List<SelectListItem>()
+            {
+                new SelectListItem() { Value = "false", Text = "New"  },
+                new SelectListItem() { Value = "true",  Text = "Used" }
+            };
+
+            Transmissions = new List<SelectListItem>()
+            {
+                new SelectListItem() { Value = "false", Text = "Manual"    },
+                new SelectListItem() { Value = "true",  Text = "Automatic" }
             };
         }
 

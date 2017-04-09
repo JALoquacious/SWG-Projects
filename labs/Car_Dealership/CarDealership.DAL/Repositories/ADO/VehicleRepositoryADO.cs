@@ -134,6 +134,7 @@ namespace CarDealership.DAL.Repositories.ADO
                 param.Direction = ParameterDirection.Output;
 
                 cmd.Parameters.Add(param);
+                cmd.Parameters.AddWithValue("@SaleId"         , DBNull.Value);
                 cmd.Parameters.AddWithValue("@UserId"         , vehicle.UserId);
                 cmd.Parameters.AddWithValue("@ModelId"        , vehicle.ModelId);
                 cmd.Parameters.AddWithValue("@BodyStyleId"    , vehicle.BodyStyleId);
@@ -147,15 +148,6 @@ namespace CarDealership.DAL.Repositories.ADO
                 cmd.Parameters.AddWithValue("@IsUsed"         , vehicle.IsUsed);
                 cmd.Parameters.AddWithValue("@IsAutomatic"    , vehicle.IsAutomatic);
                 cmd.Parameters.AddWithValue("@IsFeatured"     , vehicle.IsFeatured);
-
-                if (vehicle.SaleId == null)
-                {
-                    cmd.Parameters.AddWithValue("@SaleId", DBNull.Value);
-                }
-                else
-                {
-                    cmd.Parameters.AddWithValue("@SaleId", vehicle.SaleId);
-                }
 
                 if (string.IsNullOrEmpty(vehicle.Image))
                 {
@@ -183,6 +175,7 @@ namespace CarDealership.DAL.Repositories.ADO
                     CommandType = CommandType.StoredProcedure
                 };
                 cmd.Parameters.AddWithValue("@VehicleId"      , vehicle.VehicleId);
+                cmd.Parameters.AddWithValue("@SaleId"         , vehicle.SaleId);
                 cmd.Parameters.AddWithValue("@UserId"         , vehicle.UserId);
                 cmd.Parameters.AddWithValue("@ModelId"        , vehicle.ModelId);
                 cmd.Parameters.AddWithValue("@BodyStyleId"    , vehicle.BodyStyleId);
@@ -339,6 +332,9 @@ namespace CarDealership.DAL.Repositories.ADO
                         row.ExteriorColor = dr["ExteriorColor"].ToString();
                         row.UserId        = dr["UserId"].ToString();
                         row.VIN           = dr["VIN"].ToString();
+
+                        if (dr["SaleId"] != DBNull.Value)
+                            row.SaleId = (int)dr["SaleId"];
 
                         if (dr["Description"] != DBNull.Value)
                             row.Description = dr["Description"].ToString();

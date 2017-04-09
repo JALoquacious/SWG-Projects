@@ -46,7 +46,30 @@ namespace CarDealership.UI.Controllers
         [HttpGet]
         public ActionResult AddVehicle()
         {
+
+            //var model = new ListingAddViewModel();
+
+            //var statesRepo = StatesRepositoryFactory.GetRepository();
+            //var bathroomRepo = BathroomTypesRepositoryFactory.GetRepository();
+
+            //model.States = new SelectList(statesRepo.GetAll(), "StateId", "StateId");
+            //model.BathroomTypes = new SelectList(bathroomRepo.GetAll(), "BathroomTypeId", "BathroomTypeName");
+            //model.Listing = new Listing();
+
+            //return View(model);
+
             var vm = new VehicleAdminViewModel();
+
+            var colorRepo   = ColorRepositoryFactory.GetRepository();
+            var makeRepo    = MakeRepositoryFactory.GetRepository();
+            var modelRepo   = ModelRepositoryFactory.GetRepository();
+            var vehicleRepo = VehicleRepositoryFactory.GetRepository();
+
+            vm.Makes          = new SelectList(makeRepo.GetAll(), "MakeId", "Name");
+            vm.InteriorColors = new SelectList(colorRepo.GetAllInterior(), "InteriorColorId", "Name");
+            vm.ExteriorColors = new SelectList(colorRepo.GetAllExterior(), "ExteriorColorId", "Name");
+            vm.Vehicle        = new Vehicle();
+
             return View(vm);
         }
 

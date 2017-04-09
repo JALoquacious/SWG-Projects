@@ -3,6 +3,7 @@ using CarDealership.Models.Tables;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System;
 
 namespace CarDealership.DAL.Repositories.ADO
 {
@@ -55,12 +56,43 @@ namespace CarDealership.DAL.Repositories.ADO
                         model         = new Model();
                         model.ModelId = (int)dr["ModelId"];
                         model.MakeId  = (int)dr["MakeId"];
+                        model.Year    = (int)dr["Year"];
                         model.UserId  = dr["UserId"].ToString();
                         model.Name    = dr["Name"].ToString();
                     }
                 }
             }
             return model;
+        }
+
+        public IEnumerable<Model> GetByMakeId(int makeId)
+        {
+            var models = new List<Model>();
+
+            using (var cn = new SqlConnection(Settings.GetConnectionString()))
+            {
+                var cmd = new SqlCommand("ModelSelectByMakeId", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@MakeId", makeId);
+
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        Model row   = new Model();
+                        row.ModelId = (int)dr["ModelId"];
+                        row.MakeId  = (int)dr["MakeId"];
+                        row.Year    = (int)dr["Year"];
+                        row.UserId  = dr["UserId"].ToString();
+                        row.Name    = dr["Name"].ToString();
+
+                        models.Add(row);
+                    }
+                }
+            }
+            return models;
         }
 
         public void Insert(Model model)

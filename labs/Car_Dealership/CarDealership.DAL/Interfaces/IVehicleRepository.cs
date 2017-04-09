@@ -9,6 +9,7 @@ namespace CarDealership.DAL.Interfaces
         VehicleDetail GetById(int vehicleId);
         IEnumerable<VehicleFeatured> GetFeatured();
         IEnumerable<VehicleDetail> GetAllDetails();
+        IEnumerable<VehicleDetail> Search(VehicleSearchParameters parameters);
         void Delete(int vehicleId);
         void Insert(Vehicle vehicle);
         void Update(Vehicle vehicle);

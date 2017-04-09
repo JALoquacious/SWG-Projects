@@ -200,6 +200,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventoryController.cs" />
+    <Compile Include="Controllers\MainAPIController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SalesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -220,7 +221,7 @@
     <Compile Include="Models\UserAddViewModel.cs" />
     <Compile Include="Models\UserAdminViewModel.cs" />
     <Compile Include="Models\UserEditViewModel.cs" />
-    <Compile Include="Models\VehicleAddViewModel.cs" />
+    <Compile Include="Models\VehicleAdminViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utilities\AuthorizeUtilities.cs" />

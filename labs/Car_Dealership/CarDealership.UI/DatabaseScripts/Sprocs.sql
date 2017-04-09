@@ -206,7 +206,7 @@ BEGIN
 	SELECT MD.[Year]
 		,MK.[Name] AS Make
 		,MD.[Name] AS Model
-		,COUNT(MD.[Name]) AS [Count]
+		,COUNT(V.ModelId) AS [Count]
 		,SUM(V.SalePrice) AS StockValue
 	FROM Vehicles AS V
 	INNER JOIN Models AS MD ON V.ModelId = MD.ModelId
@@ -341,6 +341,27 @@ BEGIN
 	FROM Models AS MD
 	INNER JOIN Makes AS MK ON MK.MakeId = MD.MakeId
 	INNER JOIN AspNetUsers U ON U.Id = MD.UserId
+END
+GO
+
+IF EXISTS (
+		SELECT *
+		FROM INFORMATION_SCHEMA.ROUTINES
+		WHERE ROUTINE_NAME = 'ModelSelectByMakeId'
+		)
+	DROP PROCEDURE ModelSelectByMakeId
+GO
+
+CREATE PROCEDURE ModelSelectByMakeId (@MakeId INT)
+AS
+BEGIN
+	BEGIN TRANSACTION
+
+	select MD.ModelId, MD.MakeId, MD.UserId, MD.[Name], MD.[Year] from Models AS MD
+	inner join Makes as MK on MK.MakeId = MD.MakeId
+	where MK.MakeId = '@MakeId'
+
+	COMMIT TRANSACTION
 END
 GO
 

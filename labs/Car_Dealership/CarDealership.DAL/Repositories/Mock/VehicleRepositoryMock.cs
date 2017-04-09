@@ -3,6 +3,7 @@ using CarDealership.Models.Queries;
 using CarDealership.Models.Tables;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace CarDealership.DAL.Repositories.Mock
 {
@@ -277,6 +278,11 @@ namespace CarDealership.DAL.Repositories.Mock
         public IEnumerable<VehicleFeatured> GetFeatured()
         {
             return _vehiclesFeatured;
+        }
+
+        public IEnumerable<VehicleDetail> Search(VehicleSearchParameters parameters)
+        {
+            throw new NotImplementedException();
         }
     }
 }
