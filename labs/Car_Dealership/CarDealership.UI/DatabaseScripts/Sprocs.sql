@@ -161,6 +161,40 @@ GO
 IF EXISTS (
 		SELECT *
 		FROM INFORMATION_SCHEMA.ROUTINES
+		WHERE ROUTINE_NAME = 'InteriorColorsSelectAll'
+		)
+	DROP PROCEDURE InteriorColorsSelectAll
+GO
+
+CREATE PROCEDURE InteriorColorsSelectAll
+AS
+BEGIN
+	SELECT InteriorColorId
+		,[Name]
+	FROM InteriorColors
+END
+GO
+
+IF EXISTS (
+		SELECT *
+		FROM INFORMATION_SCHEMA.ROUTINES
+		WHERE ROUTINE_NAME = 'ExteriorColorsSelectAll'
+		)
+	DROP PROCEDURE ExteriorColorsSelectAll
+GO
+
+CREATE PROCEDURE ExteriorColorsSelectAll
+AS
+BEGIN
+	SELECT ExteriorColorId
+		,[Name]
+	FROM ExteriorColors
+END
+GO
+
+IF EXISTS (
+		SELECT *
+		FROM INFORMATION_SCHEMA.ROUTINES
 		WHERE ROUTINE_NAME = 'InventoryReport'
 		)
 	DROP PROCEDURE InventoryReport

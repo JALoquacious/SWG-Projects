@@ -44,10 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Integration Tests\ColorTestsADO.cs" />
     <Compile Include="Integration Tests\MakeTestsADO.cs" />
     <Compile Include="Integration Tests\ModelTestsADO.cs" />
     <Compile Include="Integration Tests\VehicleTestsADO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Unit Tests\ColorTestsMock.cs" />
     <Compile Include="Unit Tests\MakeTestsMock.cs" />
     <Compile Include="Unit Tests\ModelTestsMock.cs" />
     <Compile Include="Unit Tests\VehicleTestsMock.cs" />

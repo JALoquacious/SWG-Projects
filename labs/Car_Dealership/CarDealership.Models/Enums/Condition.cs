@@ -3,7 +3,6 @@
     public enum Condition
     {
         New,
-        Used,
-        All
+        Used
     }
 }

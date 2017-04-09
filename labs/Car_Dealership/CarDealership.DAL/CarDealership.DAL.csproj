@@ -41,6 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Repositories\ADO\ColorRepositoryADO.cs" />
+    <Compile Include="Factories\ColorRepositoryFactory.cs" />
+    <Compile Include="Repositories\Mock\ColorRepositoryMock.cs" />
+    <Compile Include="Interfaces\IColorRepository.cs" />
     <Compile Include="Repositories\ADO\ContactRepositoryADO.cs" />
     <Compile Include="Factories\ContactRepositoryFactory.cs" />
     <Compile Include="Factories\MakeRepositoryFactory.cs" />
