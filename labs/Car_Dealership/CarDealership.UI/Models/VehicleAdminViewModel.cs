@@ -11,14 +11,18 @@ namespace CarDealership.UI.Models
 {
     public class VehicleAdminViewModel : IValidatableObject
     {
-        public Make Make                             { get; set; }
-        public Model Model                           { get; set; }
-        public Vehicle Vehicle                       { get; set; }
-        public HttpPostedFileBase ImageUpload        { get; set; }
-        public IEnumerable<SelectListItem> BodyStyle { get; set; }
-        public IEnumerable<SelectListItem> Condition { get; set; }
-        public IEnumerable<SelectListItem> Makes     { get; set; }
-        public IEnumerable<SelectListItem> Models    { get; set; }
+        public Make Make                                  { get; set; }
+        public Model Model                                { get; set; }
+        public Vehicle Vehicle                            { get; set; }
+        public InteriorColor InteriorColor                { get; set; }
+        public ExteriorColor ExteriorColor                { get; set; }
+        public HttpPostedFileBase ImageUpload             { get; set; }
+        public IEnumerable<SelectListItem> BodyStyle      { get; set; }
+        public IEnumerable<SelectListItem> Condition      { get; set; }
+        public IEnumerable<SelectListItem> Makes          { get; set; }
+        public IEnumerable<SelectListItem> Models         { get; set; }
+        public IEnumerable<SelectListItem> InteriorColors { get; set; }
+        public IEnumerable<SelectListItem> ExteriorColors { get; set; }
 
         public VehicleAdminViewModel()
         {
