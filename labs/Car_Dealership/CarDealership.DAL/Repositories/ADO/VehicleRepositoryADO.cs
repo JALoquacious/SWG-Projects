@@ -345,9 +345,9 @@ namespace CarDealership.DAL.Repositories.ADO
 
                 if (!string.IsNullOrEmpty(parameters.SearchTerm))
                 {
-                    query += @"AND MK.[Name] LIKE '%@SearchTerm%'
-                        OR MD.[Name] LIKE '%@SearchTerm%'
-                        OR [Year] LIKE '%@SearchTerm%'";
+                    query += @"AND MK.[Name] LIKE '%' + @SearchTerm + '%'
+                        OR MD.[Name] LIKE '%' + @SearchTerm + '%'
+                        OR [Year] LIKE '%' + @SearchTerm + '%'";
                     cmd.Parameters.AddWithValue("@SearchTerm", parameters.SearchTerm);
                 }
 

@@ -24,23 +24,30 @@ namespace CarDealership.UI.Controllers
             vm.PaymentType   = new PaymentType();
             vm.Sale          = new Sale();
             vm.State         = new State();
-            vm.VehicleDetail = repo.GetById(id);
-
+            vm.Vehicle       = repo.GetById(id);
+            vm.VehicleDetail = repo.GetDetailById(id);
 
             return View(vm);
         }
 
         [HttpPost]
-        public ActionResult Purchase()
+        public ActionResult Purchase(PurchaseAddViewModel vm)
         {
             if (Request.IsAuthenticated)
             {
                 ViewBag.UserId = AuthorizeUtilities.GetUserId(this);
             }
 
-            // need to pass VehiclePurchaseViewModel?
-
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                // assign SaleId to vehicle
+                // create stored procedure for making sale?
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(vm);
+            }            
         }
     }
 }

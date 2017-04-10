@@ -9,25 +9,25 @@
 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 <div class="row">
-    <div class="form-group col-xs-12 col-md-6">
-        @Html.LabelFor(m => m.MakeId, htmlAttributes: new { @class = "control-label" })
+    <div class="form-group col-xs-12 col-md-4">
+        @Html.LabelFor(m => m.MakeId, "Make", htmlAttributes: new { @class = "control-label" })
         @Html.DropDownListFor(m => m.MakeId, new SelectList(Model.Make, "Value", "Text"), new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.MakeId, "", new { @class = "text-danger" })
     </div>
-    @*<div class="form-group col-xs-12 col-md-6">
-        @Html.LabelFor(m => m.ModelId, htmlAttributes: new { @class = "control-label" })
-        @Html.DropDownListFor(m => m.ModelId, new SelectList(Model.Model), new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.ModelId, "", new { @class = "text-danger" })
-    </div>*@
+    <div class="form-group col-xs-12 col-md-4">
+        <label class="control-label" for="ModelId">Model</label>
+        <select class="form-control" data-val="true" data-val-number="The field ModelId must be a number." data-val-required="The Model field is required." id="ModelId" name="ModelId"></select>
+        <span class="field-validation-valid text-danger" data-valmsg-for="ModelId" data-valmsg-replace="true"></span>
+    </div>
 </div>
 <div class="row">
     <div class="form-group col-xs-12 col-md-4">
-        @Html.LabelFor(m => m.IsUsed, htmlAttributes: new { @class = "control-label" })
+        @Html.LabelFor(m => m.IsUsed, "Condition", htmlAttributes: new { @class = "control-label" })
         @Html.DropDownListFor(m => m.IsUsed, new SelectList(Model.Condition, "Value", "Text"), new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.IsUsed, "", new { @class = "text-danger" })
     </div>
     <div class="form-group col-xs-12 col-md-4">
-        @Html.LabelFor(m => m.BodyStyleId, htmlAttributes: new { @class = "control-label" })
+        @Html.LabelFor(m => m.BodyStyleId, "Body Style", htmlAttributes: new { @class = "control-label" })
         @Html.DropDownListFor(m => m.BodyStyleId, new SelectList(Model.BodyStyle, "Value", "Text"), new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.BodyStyleId, "", new { @class = "text-danger" })
     </div>
@@ -35,48 +35,48 @@
 <div class="row">
     <div class="form-group col-xs-12 col-md-4">
         @Html.LabelFor(m => m.Year, htmlAttributes: new { @class = "control-label" })
-        @Html.TextBoxFor(m => m.Year, new { @class = "form-control" })
+        @Html.TextBoxFor(m => m.Year, new { @class = "form-control", @Value = "" })
         @Html.ValidationMessageFor(m => m.Year, "", new { @class = "text-danger" })
     </div>
     <div class="form-group col-xs-12 col-md-4">
-        @Html.LabelFor(m => m.IsAutomatic, htmlAttributes: new { @class = "control-label" })
+        @Html.LabelFor(m => m.IsAutomatic, "Transmission", htmlAttributes: new { @class = "control-label" })
         @Html.DropDownListFor(m => m.IsAutomatic, new SelectList(Model.Transmission, "Value", "Text"), new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.IsAutomatic, "", new { @class = "text-danger" })
     </div>
 </div>
 <div class="row">
     <div class="form-group col-xs-12 col-md-4">
-        @Html.LabelFor(m => m.InteriorColorId, htmlAttributes: new { @class = "control-label" })
-        @Html.DropDownListFor(m => m.InteriorColorId, new SelectList(Model.InteriorColor, "Value", "Text"), new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.InteriorColorId, "", new { @class = "text-danger" })
-    </div>
-    <div class="form-group col-xs-12 col-md-4">
-        @Html.LabelFor(m => m.ExteriorColorId, htmlAttributes: new { @class = "control-label" })
+        @Html.LabelFor(m => m.ExteriorColorId, "Color", htmlAttributes: new { @class = "control-label" })
         @Html.DropDownListFor(m => m.ExteriorColorId, new SelectList(Model.ExteriorColor, "Value", "Text"), new { @class = "form-control" })
         @Html.ValidationMessageFor(m => m.ExteriorColorId, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group col-xs-12 col-md-4">
+        @Html.LabelFor(m => m.InteriorColorId, "Interior", htmlAttributes: new { @class = "control-label" })
+        @Html.DropDownListFor(m => m.InteriorColorId, new SelectList(Model.InteriorColor, "Value", "Text"), new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.InteriorColorId, "", new { @class = "text-danger" })
     </div>
 </div>
 <div class="row">
     <div class="form-group col-xs-12 col-md-4">
         @Html.LabelFor(m => m.Mileage, htmlAttributes: new { @class = "control-label" })
-        @Html.TextBoxFor(m => m.Mileage, new { @class = "form-control" })
+        @Html.TextBoxFor(m => m.Mileage, new { @class = "form-control", @Value = "" })
         @Html.ValidationMessageFor(m => m.Mileage, "", new { @class = "text-danger" })
     </div>
     <div class="form-group col-xs-12 col-md-4">
-        @Html.LabelFor(m => m.VIN, htmlAttributes: new { @class = "control-label" })
-        @Html.TextBoxFor(m => m.VIN, new { @class = "form-control" })
+        @Html.LabelFor(m => m.VIN, "VIN #", htmlAttributes: new { @class = "control-label" })
+        @Html.TextBoxFor(m => m.VIN, new { @class = "form-control", @Value = "" })
         @Html.ValidationMessageFor(m => m.VIN, "", new { @class = "text-danger" })
     </div>
 </div>
 <div class="row">
     <div class="form-group col-xs-12 col-md-4">
         @Html.LabelFor(m => m.MSRP, htmlAttributes: new { @class = "control-label" })
-        @Html.TextBoxFor(m => m.MSRP, new { @class = "form-control" })
+        @Html.TextBoxFor(m => m.MSRP, new { @class = "form-control", @Value = "" })
         @Html.ValidationMessageFor(m => m.MSRP, "", new { @class = "text-danger" })
     </div>
     <div class="form-group col-xs-12 col-md-4">
-        @Html.LabelFor(m => m.SalePrice, htmlAttributes: new { @class = "control-label" })
-        @Html.TextBoxFor(m => m.SalePrice, new { @class = "form-control" })
+        @Html.LabelFor(m => m.SalePrice, "Sale Price", htmlAttributes: new { @class = "control-label" })
+        @Html.TextBoxFor(m => m.SalePrice, new { @class = "form-control", @Value = "" })
         @Html.ValidationMessageFor(m => m.SalePrice, "", new { @class = "text-danger" })
     </div>
 </div>
@@ -108,6 +108,8 @@
             var userId = '@ViewBag.UserId'; // used later in API call?
 
             $(document).ready(function () {
+                // listen for make change event
+
                 @*@Model.Make = getMakes();*@
             });
 

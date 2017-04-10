@@ -110,3 +110,17 @@ textarea {
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.99);
     -webkit-font-smoothing: antialiased;
 }
+
+#search-btn {
+    width: 100%;
+}
+#MinPrice,
+#MaxPrice,
+#MinYear,
+#MaxYear {
+    min-width: 100px;
+}
+
+#search-panel {
+    background-color: lightgrey;
+}

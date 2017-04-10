@@ -1,4 +1,6 @@
 ﻿using CarDealership.DAL.Factories;
+using CarDealership.Models.Enums;
+using CarDealership.UI.Models;
 using CarDealership.UI.Utilities;
 using System.Web.Mvc;
 
@@ -8,16 +10,18 @@ namespace CarDealership.UI.Controllers
     {
         [HttpGet]
         public ActionResult New()
-        {   
-            // to be filled out
-            return View();
+        {
+            var vm = new VehicleSearchViewModel();
+            vm.SearchParams.Condition = (int)Condition.New;
+            return View(vm);
         }
 
         [HttpGet]
         public ActionResult Used()
         {
-            // to be filled out
-            return View();
+            var vm = new VehicleSearchViewModel();
+            vm.SearchParams.Condition = (int)Condition.Used;
+            return View(vm);
         }
 
         [HttpGet]
@@ -29,7 +33,7 @@ namespace CarDealership.UI.Controllers
             }
 
             var repo = VehicleRepositoryFactory.GetRepository();
-            var model = repo.GetById(id);
+            var model = repo.GetDetailById(id);
 
             return View(model);
         }

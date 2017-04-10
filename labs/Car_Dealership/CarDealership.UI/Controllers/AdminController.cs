@@ -147,9 +147,21 @@ namespace CarDealership.UI.Controllers
         [HttpGet]
         public ActionResult EditVehicle(int id)
         {
-            var vm      = new VehicleAdminViewModel();
-            var repo    = VehicleRepositoryFactory.GetRepository();
-            var vehicle = repo.GetById(id);
+            var vm             = new VehicleAdminViewModel();
+            var vehicleRepo    = VehicleRepositoryFactory.GetRepository();
+            var colorRepo      = ColorRepositoryFactory.GetRepository();
+            var makeRepo       = MakeRepositoryFactory.GetRepository();
+            var modelRepo      = ModelRepositoryFactory.GetRepository();
+
+            vm.Make          = new SelectList(makeRepo.GetAll(), "MakeId", "Name");
+            vm.InteriorColor = new SelectList(colorRepo.GetAllInterior(), "InteriorColorId", "Name");
+            vm.ExteriorColor = new SelectList(colorRepo.GetAllExterior(), "ExteriorColorId", "Name");
+            vm.Vehicle       = vehicleRepo.GetById(id);
+
+            if (vm.Vehicle.UserId != AuthorizeUtilities.GetUserId(this))
+            {
+                throw new Exception("Application User is not logged in.");
+            }
 
             return View(vm);
         }

@@ -39,7 +39,7 @@ namespace CarDealership.Tests.Unit_Tests
             int expectedYear)
         {
             var repo = new VehicleRepositoryMock();
-            var vehicleDetail = repo.GetById(id);
+            var vehicleDetail = repo.GetDetailById(id);
 
             Assert.IsNotNull(vehicleDetail);
             Assert.AreEqual(expectedModel, vehicleDetail.Model);

@@ -13,6 +13,7 @@ namespace CarDealership.UI.Models
         public PaymentType PaymentType                  { get; set; }
         public Sale Sale                                { get; set; }
         public State State                              { get; set; }
+        public Vehicle Vehicle                          { get; set; }
         public VehicleDetail VehicleDetail              { get; set; }
         public IEnumerable<SelectListItem> States       { get; set; }
         public IEnumerable<SelectListItem> PaymentTypes { get; set; }
