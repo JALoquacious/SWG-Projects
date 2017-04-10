@@ -3,6 +3,8 @@ using CarDealership.Models.Tables;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using CarDealership.Models.Queries;
+using System;
 
 namespace CarDealership.DAL.Repositories.ADO
 {
@@ -59,6 +61,33 @@ namespace CarDealership.DAL.Repositories.ADO
                 }
             }
             return make;
+        }
+
+        public IEnumerable<MakeUserQueryRow> GetMakeUserTable()
+        {
+            var makes = new List<MakeUserQueryRow>();
+
+            using (var cn = new SqlConnection(Settings.GetConnectionString()))
+            {
+                var cmd = new SqlCommand("MakeAddView", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        var row       = new MakeUserQueryRow();
+                        row.Make      = dr["Name"].ToString();
+                        row.DateAdded = (DateTime)dr["DateAdded"];
+                        row.User      = dr["Email"].ToString();
+
+                        makes.Add(row);
+                    }
+                }
+            }
+            return makes;
         }
 
         public void Insert(Make make)

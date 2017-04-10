@@ -9,7 +9,7 @@ namespace CarDealership.UI.Controllers
     {
         [Route("api/vehicles/search")]
         [AcceptVerbs("GET")]
-        public IHttpActionResult Search(int condition, decimal? minPrice, decimal? maxPrice,
+        public IHttpActionResult Search(int? condition, decimal? minPrice, decimal? maxPrice,
             int? minYear, int? maxYear, string searchTerm)
         {
             var repo = VehicleRepositoryFactory.GetRepository();

@@ -33,12 +33,12 @@
 
             function getMakes() {
                 $.ajax({
-                    type:'GET',
+                    type: 'GET',
+                    dataType: "json",
                     url:'http://localhost:59373/api/makes/',
-                    success: function(response) {
-                        if(response == true) {
-                            window.alert("Success!")
-                        }
+                    success: function(data) {
+                        window.alert("Success!");
+                        console.log(data);
                     },
                     error: function() {
                         $('#statusMessage').removeClass('bg-success').addClass('bg-danger').text('Could not retrieve vehicle makes.');

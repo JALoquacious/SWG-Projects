@@ -6,7 +6,10 @@ namespace CarDealership.UI.Models
 {
     public class SpecialAddViewModel
     {
+        [Required]
         public Special NewSpecial { get; set; }
+
+        [Required]
         public IEnumerable<Special> SpecialsList { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

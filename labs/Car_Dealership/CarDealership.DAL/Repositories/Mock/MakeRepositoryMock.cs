@@ -3,12 +3,14 @@ using CarDealership.Models.Tables;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using CarDealership.Models.Queries;
 
 namespace CarDealership.DAL.Repositories.Mock
 {
     public class MakeRepositoryMock : IMakeRepository
     {
         private static List<Make> _makes;
+        private static List<MakeUserQueryRow> _makeUserQueryRows;
 
         static MakeRepositoryMock()
         {
@@ -39,6 +41,34 @@ namespace CarDealership.DAL.Repositories.Mock
                     DateAdded = DateTime.Parse("4/4/2004")
                 }
             };
+
+            _makeUserQueryRows = new List<MakeUserQueryRow>()
+            {
+                new MakeUserQueryRow()
+                {
+                    Make = "Toyota",
+                    User = "test1@test.com",
+                    DateAdded = DateTime.Parse("1/1/2001")
+                },
+                new MakeUserQueryRow()
+                {
+                    Make = "GM",
+                    User = "test2@test.com",
+                    DateAdded = DateTime.Parse("2/2/2002")
+                },
+                new MakeUserQueryRow()
+                {
+                    Make = "Hyundai",
+                    User = "test3@test.com",
+                    DateAdded = DateTime.Parse("3/3/2003")
+                },
+                new MakeUserQueryRow()
+                {
+                    Make = "Fiat",
+                    User = "test4@test.com",
+                    DateAdded = DateTime.Parse("4/4/2004")
+                }
+            };
         }
 
         public IEnumerable<Make> GetAll()
@@ -49,6 +79,11 @@ namespace CarDealership.DAL.Repositories.Mock
         public Make GetById(int targetId)
         {
             return _makes.FirstOrDefault(m => m.MakeId == targetId);
+        }
+
+        public IEnumerable<MakeUserQueryRow> GetMakeUserTable()
+        {
+            return _makeUserQueryRows;
         }
 
         public void Insert(Make targetMake)
