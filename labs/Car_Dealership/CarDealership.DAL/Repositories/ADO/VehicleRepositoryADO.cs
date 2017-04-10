@@ -76,7 +76,53 @@ namespace CarDealership.DAL.Repositories.ADO
             return vehicles;
         }
 
-        public VehicleDetail GetById(int vehicleId)
+
+        public Vehicle GetById(int vehicleId)
+        {
+            Vehicle vehicle = null;
+
+            using (var cn = new SqlConnection(Settings.GetConnectionString()))
+            {
+                SqlCommand cmd = new SqlCommand("VehicleSelect", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@VehicleId", vehicleId);
+
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    if (dr.Read())
+                    {
+                        vehicle = new Vehicle();
+
+                        vehicle.VehicleId       = (int)dr["VehicleId"];
+                        vehicle.ModelId         = (int)dr["ModelId"];
+                        vehicle.BodyStyleId     = (int)dr["BodyStyleId"];
+                        vehicle.InteriorColorId = (int)dr["InteriorColorId"];
+                        vehicle.ExteriorColorId = (int)dr["ExteriorColorId"];
+                        vehicle.IsAutomatic     = (bool)dr["IsUsed"];
+                        vehicle.IsUsed          = (bool)dr["IsAutomatic"];
+                        vehicle.IsFeatured      = (bool)dr["IsFeatured"];
+                        vehicle.SalePrice       = (decimal)dr["SalePrice"];
+                        vehicle.MSRP            = (decimal)dr["MSRP"];
+                        vehicle.Mileage         = (decimal)dr["Mileage"];
+                        vehicle.UserId          = dr["UserId"].ToString();
+                        vehicle.VIN             = dr["VIN"].ToString();
+
+                        if (dr["VehicleDescription"] != DBNull.Value)
+                            vehicle.Description = dr["Description"].ToString();
+
+                        if (dr["ImageFileName"] != DBNull.Value)
+                            vehicle.Image = dr["Image"].ToString();
+                    }
+                }
+            }
+
+            return vehicle;
+        }
+
+        public VehicleDetail GetDetailById(int vehicleId)
         {
             VehicleDetail vehicle = null;
 

@@ -45,7 +45,7 @@ namespace CarDealership.Tests.Integration_Tests
         public void ADOCanLoadVehicleDetail()
         {
             var repo = new VehicleRepositoryADO();
-            var vehicle = repo.GetById(1);
+            var vehicle = repo.GetDetailById(1);
 
             Assert.IsNotNull(vehicle);
             Assert.AreEqual(1, vehicle.VehicleId);
@@ -167,7 +167,7 @@ namespace CarDealership.Tests.Integration_Tests
 
             repo.Update(vehicle);
 
-            var updatedVehicle = repo.GetById(3);
+            var updatedVehicle = repo.GetDetailById(3);
 
             Assert.AreEqual("Tesla", updatedVehicle.Make);
             Assert.AreEqual("3", updatedVehicle.Model);

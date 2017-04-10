@@ -232,7 +232,12 @@ namespace CarDealership.DAL.Repositories.Mock
             return _vehiclesDetail;
         }
 
-        public VehicleDetail GetById(int targetId)
+        public Vehicle GetById(int targetId)
+        {
+            return _vehicles.FirstOrDefault(v => v.VehicleId == targetId);
+        }
+
+        public VehicleDetail GetDetailById(int targetId)
         {
             return _vehiclesDetail.FirstOrDefault(v => v.VehicleId == targetId);
         }

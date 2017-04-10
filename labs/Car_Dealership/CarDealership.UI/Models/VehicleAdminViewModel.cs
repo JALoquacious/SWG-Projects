@@ -15,6 +15,7 @@ namespace CarDealership.UI.Models
         public int BodyStyleId                            { get; set; }
         public int ExteriorColorId                        { get; set; }
         public int InteriorColorId                        { get; set; }
+        public int MakeId                                 { get; set; }
         public int ModelId                                { get; set; }
         public int Year                                   { get; set; }
         public bool IsAutomatic                           { get; set; }
@@ -29,17 +30,17 @@ namespace CarDealership.UI.Models
         public decimal Mileage                            { get; set; }
         public Vehicle Vehicle                            { get; set; }
         public HttpPostedFileBase ImageUpload             { get; set; }
-        public IEnumerable<SelectListItem> BodyStyles     { get; set; }
-        public IEnumerable<SelectListItem> Conditions     { get; set; }
-        public IEnumerable<SelectListItem> ExteriorColors { get; set; }
-        public IEnumerable<SelectListItem> InteriorColors { get; set; }
-        public IEnumerable<SelectListItem> Makes          { get; set; }
-        public IEnumerable<SelectListItem> Models         { get; set; }
-        public IEnumerable<SelectListItem> Transmissions  { get; set; }
+        public IEnumerable<SelectListItem> BodyStyle      { get; set; }
+        public IEnumerable<SelectListItem> Condition      { get; set; }
+        public IEnumerable<SelectListItem> ExteriorColor  { get; set; }
+        public IEnumerable<SelectListItem> InteriorColor  { get; set; }
+        public IEnumerable<SelectListItem> Make           { get; set; }
+        public IEnumerable<SelectListItem> Model          { get; set; }
+        public IEnumerable<SelectListItem> Transmission   { get; set; }
 
         public VehicleAdminViewModel()
         {
-            BodyStyles = new List<SelectListItem>()
+            BodyStyle = new List<SelectListItem>()
             {
                 new SelectListItem() { Value = "1", Text = "Car"   },
                 new SelectListItem() { Value = "2", Text = "SUV"   },
@@ -47,13 +48,13 @@ namespace CarDealership.UI.Models
                 new SelectListItem() { Value = "4", Text = "Van"   }
             };
 
-            Conditions = new List<SelectListItem>()
+            Condition = new List<SelectListItem>()
             {
                 new SelectListItem() { Value = "false", Text = "New"  },
                 new SelectListItem() { Value = "true",  Text = "Used" }
             };
 
-            Transmissions = new List<SelectListItem>()
+            Transmission = new List<SelectListItem>()
             {
                 new SelectListItem() { Value = "false", Text = "Manual"    },
                 new SelectListItem() { Value = "true",  Text = "Automatic" }
@@ -62,10 +63,10 @@ namespace CarDealership.UI.Models
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            var errors              = new List<ValidationResult>();
-            var decimalConstraint   = new Regex(@"^[0-9]+(\.[0-9]+)?$");
-            var integerConstraint   = new Regex(@"^[0-9]+$");
-            var vehicleIdConstraint = new Regex(@"^(\w|\d){17}$");
+            var errors                 = new List<ValidationResult>();
+            var decimalConstraint      = new Regex(@"^[0-9]+(\.[0-9]+)?$");
+            var integerConstraint      = new Regex(@"^[0-9]+$");
+            var alphaNumericConstraint = new Regex(@"^(\w|\d)+$");
 
             if (!integerConstraint.IsMatch(Year.ToString()) || Year < 2000 || Year > DateTime.Today.Year + 1)
             {
@@ -87,7 +88,7 @@ namespace CarDealership.UI.Models
                 errors.Add(new ValidationResult("Sale price must be between 0 and $1,000,000."));
             }
 
-            if (!vehicleIdConstraint.IsMatch(VIN) || VIN.Length != 17)
+            if (!alphaNumericConstraint.IsMatch(VIN) || VIN.Length != 17)
             {
                 errors.Add(new ValidationResult("VIN must be 17 digits in length."));
             }

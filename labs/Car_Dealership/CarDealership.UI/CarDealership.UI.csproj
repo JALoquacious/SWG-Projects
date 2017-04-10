@@ -215,6 +215,7 @@
     <Compile Include="Models\CustomValidation\ValidOrNullPasswordAttribute.cs" />
     <Compile Include="Models\CustomValidation\ValidPasswordAttribute.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\MakeAddViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\PurchaseAddViewModel.cs" />
     <Compile Include="Models\SpecialAddViewModel.cs" />

@@ -45,8 +45,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queries\ContactInquiry.cs" />
     <Compile Include="Queries\InventoryReport.cs" />
-    <Compile Include="Queries\MakeAdd.cs" />
-    <Compile Include="Queries\ModelAdd.cs" />
+    <Compile Include="Queries\MakeUserQueryRow.cs" />
+    <Compile Include="Queries\ModelUserQueryRow.cs" />
     <Compile Include="Queries\SalesReport.cs" />
     <Compile Include="Queries\VehicleDetail.cs" />
     <Compile Include="Queries\VehicleFeatured.cs" />

@@ -1,9 +1,12 @@
 ﻿using CarDealership.DAL.Factories;
 using CarDealership.Models.Tables;
 using CarDealership.UI.Models;
+using CarDealership.UI.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
+using System;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -78,13 +81,13 @@ namespace CarDealership.UI.Controllers
         {
             var vm = new VehicleAdminViewModel();
 
-            var colorRepo   = ColorRepositoryFactory.GetRepository();
-            var makeRepo    = MakeRepositoryFactory.GetRepository();
-            var modelRepo   = ModelRepositoryFactory.GetRepository();
+            var colorRepo = ColorRepositoryFactory.GetRepository();
+            var makeRepo  = MakeRepositoryFactory.GetRepository();
+            var modelRepo = ModelRepositoryFactory.GetRepository();
 
-            vm.Makes          = new SelectList(makeRepo.GetAll(), "MakeId", "Name");
-            vm.InteriorColors = new SelectList(colorRepo.GetAllInterior(), "InteriorColorId", "Name");
-            vm.ExteriorColors = new SelectList(colorRepo.GetAllExterior(), "ExteriorColorId", "Name");
+            vm.Make          = new SelectList(makeRepo.GetAll(), "MakeId", "Name");
+            vm.InteriorColor = new SelectList(colorRepo.GetAllInterior(), "InteriorColorId", "Name");
+            vm.ExteriorColor = new SelectList(colorRepo.GetAllExterior(), "ExteriorColorId", "Name");
 
             return View(vm);
         }
@@ -92,48 +95,72 @@ namespace CarDealership.UI.Controllers
         [HttpPost]
         public ActionResult AddVehicle(VehicleAdminViewModel vm)
         {
-            var repo = VehicleRepositoryFactory.GetRepository();
-
             if (ModelState.IsValid)
             {
-                var newVehicle = new Vehicle();
+                var repo = VehicleRepositoryFactory.GetRepository();
 
-                newVehicle.UserId          = User.Identity.GetUserId();
-                newVehicle.ModelId         = vm.ModelId;
-                newVehicle.BodyStyleId     = vm.BodyStyleId;
-                newVehicle.InteriorColorId = vm.InteriorColorId;
-                newVehicle.ExteriorColorId = vm.ExteriorColorId;
-                newVehicle.IsUsed          = vm.IsUsed;
-                newVehicle.IsAutomatic     = vm.IsAutomatic;
-                newVehicle.VIN             = vm.VIN;
-                newVehicle.Description     = vm.Description;
-                newVehicle.Image           = vm.Image;
-                newVehicle.SalePrice       = vm.SalePrice;
-                newVehicle.MSRP            = vm.MSRP;
-                newVehicle.Mileage         = vm.Mileage;                
+                try
+                {
+                    vm.Vehicle.UserId = AuthorizeUtilities.GetUserId(this);
 
-                repo.Insert(newVehicle);
-                return RedirectToAction("Vehicles");
+                    if (vm.ImageUpload != null && vm.ImageUpload.ContentLength > 0)
+                    {
+                        var savepath  = Server.MapPath("~/Images/Vehicles");
+                        var fileName  = Path.GetFileNameWithoutExtension(vm.ImageUpload.FileName);
+                        var extension = Path.GetExtension(vm.ImageUpload.FileName);
+                        var filePath  = Path.Combine(savepath, fileName + extension);
+                        var counter   = 1;
+
+                        while (System.IO.File.Exists(filePath))
+                        {
+                            filePath = Path.Combine(savepath, fileName + counter.ToString() + extension);
+                            counter++;
+                        }
+
+                        vm.ImageUpload.SaveAs(filePath);
+                        vm.Vehicle.Image = Path.GetFileName(filePath);
+                    }
+
+                    repo.Insert(vm.Vehicle);
+
+                    return RedirectToAction("Edit", new { id = vm.Vehicle.VehicleId });
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
             }
-            return View();
+            else
+            {
+                var colorRepo = ColorRepositoryFactory.GetRepository();
+                var makeRepo  = MakeRepositoryFactory.GetRepository();
+                var modelRepo = ModelRepositoryFactory.GetRepository();
+
+                vm.Make          = new SelectList(makeRepo.GetAll(), "MakeId", "Name");
+                vm.InteriorColor = new SelectList(colorRepo.GetAllInterior(), "InteriorColorId", "Name");
+                vm.ExteriorColor = new SelectList(colorRepo.GetAllExterior(), "ExteriorColorId", "Name");
+
+                return View(vm);
+            }
         }
 
         [HttpGet]
         public ActionResult EditVehicle(int id)
         {
-            var vm = new VehicleAdminViewModel();
-            var repo = VehicleRepositoryFactory.GetRepository();
+            var vm      = new VehicleAdminViewModel();
+            var repo    = VehicleRepositoryFactory.GetRepository();
             var vehicle = repo.GetById(id);
+
             return View(vm);
         }
 
         [HttpPost]
         public ActionResult EditVehicle(VehicleAdminViewModel vm)
         {
-            var repo = VehicleRepositoryFactory.GetRepository();
-
             if (ModelState.IsValid)
             {
+                var repo = VehicleRepositoryFactory.GetRepository();
+
                 repo.Insert(vm.Vehicle);
                 return RedirectToAction("Vehicles");
             }

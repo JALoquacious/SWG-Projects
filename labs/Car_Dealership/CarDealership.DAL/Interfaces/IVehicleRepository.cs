@@ -6,7 +6,8 @@ namespace CarDealership.DAL.Interfaces
 {
     public interface IVehicleRepository
     {
-        VehicleDetail GetById(int vehicleId);
+        Vehicle GetById(int vehicleId);
+        VehicleDetail GetDetailById(int vehicleId);
         IEnumerable<VehicleFeatured> GetFeatured();
         IEnumerable<VehicleDetail> GetAllDetails();
         IEnumerable<VehicleDetail> Search(VehicleSearchParameters parameters);
