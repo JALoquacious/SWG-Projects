@@ -358,9 +358,9 @@ BEGIN
 	set identity_insert PaymentTypes on;
 	INSERT INTO PaymentTypes (PaymentTypeId, [Description])
 	VALUES
-		 (1, 'Bank-financed')
+		 (1, 'Bank Finance')
 		,(2, 'Cash')
-		,(3, 'Dealer-financed')
+		,(3, 'Dealer Finance')
 	set identity_insert PaymentTypes off;
 
 

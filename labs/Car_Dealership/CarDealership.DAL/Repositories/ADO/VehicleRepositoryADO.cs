@@ -85,7 +85,6 @@ namespace CarDealership.DAL.Repositories.ADO
             {
                 SqlCommand cmd = new SqlCommand("VehicleSelect", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
-
                 cmd.Parameters.AddWithValue("@VehicleId", vehicleId);
 
                 cn.Open();

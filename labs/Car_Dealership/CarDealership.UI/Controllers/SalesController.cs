@@ -18,15 +18,12 @@ namespace CarDealership.UI.Controllers
         [HttpGet]
         public ActionResult Purchase(int id)
         {
-            var repo = VehicleRepositoryFactory.GetRepository();
-            var vm   = new PurchaseAddViewModel();
+            var vehicleRepo = VehicleRepositoryFactory.GetRepository();
+            var stateRepo = StateRepositoryFactory.GetRepository();
+            var vm = new PurchaseAddViewModel();
 
-            vm.Customer      = new Customer();
-            vm.PaymentType   = new PaymentType();
-            vm.Sale          = new Sale();
-            vm.State         = new State();
-            //vm.Vehicle       = repo.GetById(id);
-            vm.VehicleDetail = repo.GetDetailById(id);
+            vm.States = new SelectList(stateRepo.GetAll(), "StateId", "Name");
+            vm.VehicleDetail = vehicleRepo.GetDetailById(id);
 
             return View(vm);
         }
@@ -47,6 +44,12 @@ namespace CarDealership.UI.Controllers
             }
             else
             {
+                var vehicleRepo = VehicleRepositoryFactory.GetRepository();
+                var stateRepo = StateRepositoryFactory.GetRepository();
+                vm = new PurchaseAddViewModel();
+
+                vm.States = new SelectList(stateRepo.GetAll(), "StateId", "Name");
+                //vm.VehicleDetail = vehicleRepo.GetDetailById(id);
                 return View(vm);
             }            
         }

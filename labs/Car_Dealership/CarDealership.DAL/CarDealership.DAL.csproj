@@ -41,8 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Factories\StateRepositoryFactory.cs" />
+    <Compile Include="Interfaces\IStateRepository.cs" />
     <Compile Include="Repositories\ADO\ColorRepositoryADO.cs" />
     <Compile Include="Factories\ColorRepositoryFactory.cs" />
+    <Compile Include="Repositories\ADO\StateRepositoryADO.cs" />
     <Compile Include="Repositories\Mock\ColorRepositoryMock.cs" />
     <Compile Include="Interfaces\IColorRepository.cs" />
     <Compile Include="Repositories\ADO\ContactRepositoryADO.cs" />
@@ -65,6 +68,7 @@
     <Compile Include="Repositories\ADO\VehicleRepositoryADO.cs" />
     <Compile Include="Repositories\Mock\MakeRepositoryMock.cs" />
     <Compile Include="Repositories\Mock\ModelRepositoryMock.cs" />
+    <Compile Include="Repositories\Mock\StateRepositoryMock.cs" />
     <Compile Include="Repositories\Mock\VehicleRepositoryMock.cs" />
     <Compile Include="Settings.cs" />
   </ItemGroup>

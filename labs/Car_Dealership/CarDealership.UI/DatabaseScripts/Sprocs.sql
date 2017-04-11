@@ -570,7 +570,8 @@ GO
 CREATE PROCEDURE VehicleSelect (@VehicleId INT)
 AS
 BEGIN
-	SELECT UserId
+	SELECT VehicleId
+		,UserId
 		,ModelId
 		,BodyStyleId
 		,InteriorColorId
@@ -722,6 +723,85 @@ BEGIN
 		)
 
 	SET @ContactId = SCOPE_IDENTITY();
+END
+GO
+
+IF EXISTS (
+		SELECT *
+		FROM INFORMATION_SCHEMA.ROUTINES
+		WHERE ROUTINE_NAME = 'SaleInsert'
+		)
+	DROP PROCEDURE SaleInsert
+GO
+
+CREATE PROCEDURE SaleInsert (
+	-- Customer fields
+	@CustomerId INT OUTPUT
+	,@UserId NVARCHAR(128)
+	,@Name NVARCHAR(50)
+	,@Phone NVARCHAR(15)
+	,@Email NVARCHAR(50)
+	,@Street1 NVARCHAR(50)
+	,@Street2 NVARCHAR(50)
+	,@City NVARCHAR(50)
+	,@StateId CHAR(2)
+	,@Zip CHAR(5)
+
+	-- Sale fields
+	,@SaleId INT OUTPUT
+	,@SalespersonId INT
+	,@PaymentTypeId INT
+	,@SalePrice DECIMAL(8,2)
+	,@Date DATETIME2
+
+	-- Vehicle fields
+	,@VehicleId INT
+	)
+AS
+BEGIN
+	INSERT INTO Customers (
+		UserId
+		,[Name]
+		,Phone
+		,Email
+		,Street1
+		,Street2
+		,City
+		,StateId
+		,Zip
+		)
+	VALUES (
+		@UserId
+		,@Name
+		,@Phone
+		,@Email
+		,@Street1
+		,@Street2
+		,@City
+		,@StateId
+		,@Zip
+		)
+	SET @CustomerId = SCOPE_IDENTITY();
+
+	INSERT INTO Sales (
+		CustomerId
+		,SalespersonId
+		,PaymentTypeId
+		,SalePrice
+		,[Date]
+		)
+	VALUES (
+		@CustomerId
+		,@SalespersonId
+		,@PaymentTypeId
+		,@SalePrice
+		,@DateAdded
+		)
+	SET @SaleId = SCOPE_IDENTITY();
+
+	UPDATE Vehicles
+	SET SaleId = @SaleId
+	WHERE VehicleId = @VehicleId
 END
 GO
 

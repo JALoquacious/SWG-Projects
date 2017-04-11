@@ -14,23 +14,23 @@ namespace CarDealership.DAL.Repositories.Mock
             {
                 new State()
                 {
-                    StateId = 1,
-                    Name = "OH"
+                    StateId = "OH",
+                    Name = "Ohio"
                 },
                 new State()
                 {
-                    StateId = 2,
-                    Name = "KY"
+                    StateId = "KY",
+                    Name = "Kentucky"
                 },
                 new State()
                 {
-                    StateId = 3,
-                    Name = "MN"
+                    StateId = "MN",
+                    Name = "Minnesota"
                 },
                 new State()
                 {
-                    StateId = 4,
-                    Name = "MI"
+                    StateId = "MI",
+                    Name = "Michigan"
                 }
             };
         }

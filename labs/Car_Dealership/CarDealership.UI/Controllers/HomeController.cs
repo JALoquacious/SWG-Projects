@@ -18,8 +18,8 @@ namespace CarDealership.UI.Controllers
         public ActionResult Contact(string VIN = null)
         {
             var vm = new ContactAddViewModel();
-            vm.Message = "I'm inquiring about vehicle ID#: " + VIN;
             vm.Contact = new Contact();
+            vm.Contact.Message = "I'm inquiring about vehicle ID#: " + VIN;
 
             return View(vm);
         }
@@ -33,9 +33,8 @@ namespace CarDealership.UI.Controllers
             }
 
             var repo = ContactRepositoryFactory.GetRepository();
-            var newContact = vm.Contact;
 
-            repo.Insert(newContact);
+            repo.Insert(vm.Contact);
 
             return RedirectToAction("Index");
         }

@@ -24,7 +24,7 @@ namespace CarDealership.DAL.Repositories.ADO
                     while (dr.Read())
                     {
                         var row = new State();
-                        row.StateId = (int)dr["StateId"];
+                        row.StateId = dr["StateId"].ToString();
                         row.Name = dr["Name"].ToString();
 
                         states.Add(row);
