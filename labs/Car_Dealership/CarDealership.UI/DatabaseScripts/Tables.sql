@@ -161,7 +161,6 @@ CREATE TABLE Vehicles (
 
 CREATE TABLE Contacts (
 	ContactId INT IDENTITY(1, 1) PRIMARY KEY NOT NULL
-	,UserId NVARCHAR(128) CONSTRAINT FK__Contacts__UserId FOREIGN KEY REFERENCES AspNetUsers(Id)
 	,[Name] NVARCHAR(50) NOT NULL
 	,Phone NVARCHAR(15) NULL -- required if email not provided
 	,Email NVARCHAR(50) NULL -- required if phone not provided

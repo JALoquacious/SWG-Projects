@@ -23,7 +23,6 @@ namespace CarDealership.DAL.Factories
                 };
 
                 cmd.Parameters.Add(param);
-                cmd.Parameters.AddWithValue("@UserId", contact.UserId);
                 cmd.Parameters.AddWithValue("@Name", contact.Name);
                 cmd.Parameters.AddWithValue("@Message", contact.Message);
 

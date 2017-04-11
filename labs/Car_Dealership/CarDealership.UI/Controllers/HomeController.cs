@@ -17,7 +17,7 @@ namespace CarDealership.UI.Controllers
         public ActionResult Contact(string VIN = null)
         {
             var contact = new Contact();
-            contact.Message = VIN;
+            contact.Message = "I'm inquiring about vehicle ID#: " + VIN;
 
             return View(contact);
         }

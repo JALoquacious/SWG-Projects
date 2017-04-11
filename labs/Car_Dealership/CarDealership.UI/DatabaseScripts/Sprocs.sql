@@ -701,7 +701,6 @@ GO
 
 CREATE PROCEDURE ContactInsert (
 	@ContactId INT OUTPUT
-	,@UserId NVARCHAR(128)
 	,@Name NVARCHAR(50)
 	,@Phone NVARCHAR(15)
 	,@Email NVARCHAR(50)
@@ -710,14 +709,12 @@ CREATE PROCEDURE ContactInsert (
 AS
 BEGIN
 	INSERT INTO Contacts (
-		UserId
 		,[Name]
 		,Phone
 		,Email
 		,[Message]
 		)
 	VALUES (
-		@UserId
 		,@Name
 		,@Phone
 		,@Email
@@ -755,7 +752,6 @@ GO
 
 CREATE PROCEDURE ContactSelect (
 	@ContactId INT
-	,@UserId NVARCHAR(128)
 	,@Name NVARCHAR(50)
 	,@Phone NVARCHAR(15)
 	,@Email NVARCHAR(50)
@@ -764,7 +760,6 @@ CREATE PROCEDURE ContactSelect (
 AS
 BEGIN
 	SELECT ContactId
-		,UserId
 		,[Name]
 		,Phone
 		,Email
