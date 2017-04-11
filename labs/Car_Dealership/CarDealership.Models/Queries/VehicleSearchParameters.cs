@@ -11,15 +11,7 @@ namespace CarDealership.Models.Queries
             var tiers = new int[] { 2500, 5000, 7500, 10000, 15000, 20000, 25000, 30000, 35000,
                                     40000, 45000, 50000, 60000, 70000, 80000, 90000, 100000 };
 
-            PriceList = new List<SelectListItem>()
-            {
-                new SelectListItem()
-                {
-                    Text  = "---",
-                    Value = null
-                }
-            };
-            
+            PriceList = new List<SelectListItem>();
             foreach (int price in tiers)
             {
                 PriceList.Add(
@@ -30,9 +22,6 @@ namespace CarDealership.Models.Queries
                     }
                 );
             }
-
-            MinYear = 2000;
-            MaxYear = DateTime.Now.Year + 1;
         }
 
         public decimal? MinPrice              { get; set; }

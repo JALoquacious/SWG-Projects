@@ -309,11 +309,12 @@
     <Content Include="Views\Shared\_SearchBar.cshtml" />
     <Content Include="Views\Inventory\New.cshtml" />
     <Content Include="Views\Inventory\Used.cshtml" />
+    <Content Include="Views\Reports\Index.cshtml" />
+    <Content Include="Views\Sales\Index.cshtml" />
+    <Content Include="Views\Shared\_InventoryDetailList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Reports\" />
-    <Folder Include="Views\Sales\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

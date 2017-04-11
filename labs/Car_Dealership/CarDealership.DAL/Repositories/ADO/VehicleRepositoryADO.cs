@@ -297,6 +297,7 @@ namespace CarDealership.DAL.Repositories.ADO
 	                    ,VIN
 	                    ,V.[Description]
 	                    ,[Image]
+                        ,SaleId
 	                    ,SalePrice
 	                    ,MSRP
 	                    ,Mileage

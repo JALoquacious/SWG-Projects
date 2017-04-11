@@ -11,7 +11,8 @@ namespace CarDealership.UI.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            var vm = new VehicleSearchViewModel();
+            return View(vm);
         }
 
         [HttpGet]

@@ -1,10 +1,4 @@
-﻿@model CarDealership.Models.Queries.VehicleDetail
-
-@{
-    ViewBag.Title = "Vehicle Details";
-}
-
-<h2>Vehicle Details</h2>
+﻿﻿@model CarDealership.Models.Queries.VehicleDetail
 
 <div class="panel panel-darkslategray">
     <div class="panel-heading">@Model.Year  @Model.Make  @Model.Model</div>
@@ -82,28 +76,9 @@
         </div>
     </div>
     <div class="row">
-        <div class="hidden-xs col-md-3"></div>
-        <div class="col-xs-12 col-md-9">
-            <table class="table table-hover">
-                <tbody>
-                    <tr>
-                        <td class="strong">Description:</td>
-                        <td>@Model.Description</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="row">
         <div class="col-xs-12">
             <p>
-                @if (!Request.IsAuthenticated)
-                {
-                    <a href="@Url.Action("Contact", "Home", new { VIN = Model.VIN })" id="contact-us-btn" class="btn btn-custom btn-large pull-right">Contact Us</a>
-                }
-            </p>
-            <p class="status-message">
-
+                <a href="@Url.Action("Details", new { id = Model.VehicleId })" class="btn btn-custom btn-large pull-right details-btn">Details</a>
             </p>
         </div>
     </div>

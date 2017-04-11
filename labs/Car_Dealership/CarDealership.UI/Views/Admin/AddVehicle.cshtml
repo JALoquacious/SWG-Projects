@@ -99,34 +99,3 @@
     <input type="submit" value="Save" class="btn btn-custom btn-lg" />
     @Html.ActionLink("Cancel", "Vehicles", routeValues: null, htmlAttributes: new { @class = "btn btn-default btn-lg" })
 </div>
-
-@section Scripts
-{
-    @if (Request.IsAuthenticated)
-    {
-        <script>
-            var userId = '@ViewBag.UserId'; // used later in API call?
-
-            $(document).ready(function () {
-                // listen for make change event
-
-                @*@Model.Make = getMakes();*@
-            });
-
-            function getMakes() {
-                $.ajax({
-                    type: 'GET',
-                    dataType: "json",
-                    url:'http://localhost:59373/api/makes/',
-                    success: function(data) {
-                        window.alert("Success!");
-                        console.log(data);
-                    },
-                    error: function() {
-                        $('#statusMessage').removeClass('bg-success').addClass('bg-danger').text('Could not retrieve vehicle makes.');
-                    }
-                });
-            }
-        </script>
-    }
-}

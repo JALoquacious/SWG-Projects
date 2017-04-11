@@ -11,18 +11,24 @@
         <div class="col-xs-12 col-md-4">
             <div class="form-group form-inline">
                 <label>Price</label>
-                @Html.DropDownListFor(m => m.MinPrice, Model.PriceList, new { @class = "form-control" })
+                @Html.DropDownListFor(m => m.MinPrice, Model.PriceList, "No Min", new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.MinPrice, "", new { @class = "text-danger" })
-                @Html.DropDownListFor(m => m.MaxPrice, Model.PriceList, new { @class = "form-control" })
+                @Html.DropDownListFor(m => m.MaxPrice, Model.PriceList, "No Max", new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.MaxPrice, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="col-xs-12 col-md-4">
             <div class="form-group form-inline">
                 <label>Year</label>
-                @Html.DropDownListFor(m => m.MinYear, new SelectList(Enumerable.Range(2000, (int)DateTime.Now.Year - 1999).ToList()), new { @class = "form-control" })
+                @Html.DropDownListFor(m => m.MinYear,
+                    new SelectList(Enumerable.Range(2000, (int)DateTime.Now.Year + 1 - 2000).ToList()),
+                    "No Min",
+                    new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.MinYear, "", new { @class = "text-danger" })
-                @Html.DropDownListFor(m => m.MaxYear, new SelectList(Enumerable.Range(2000, (int)DateTime.Now.Year - 1999).ToList()), new { @class = "form-control" })
+                @Html.DropDownListFor(m => m.MaxYear,
+                    new SelectList(Enumerable.Range(2000, (int)DateTime.Now.Year + 1 - 2000).ToList()),
+                    "No Max",
+                    new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.MaxYear, "", new { @class = "text-danger" })
             </div>
         </div>

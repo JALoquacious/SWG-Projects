@@ -18,29 +18,18 @@
 
 <h2>Search Results</h2>
 
-<div class="search-results">
-</div>
+<div class="search-results"></div>
 
 @section Scripts {
+    <script src="~/Scripts/Logic.js"></script>
     <script>
-        $(document).ready(function () {
-            $('#search').on('click', function () {
-                alert("Search button was clicked.");
-                $.ajax({
-                    url: 'http://localhost:59373/vehicles/search/',
-                    type: 'GET',
-                    contentType: "application/json",
-                    //data: JSON.stringify({}),
-                })
-                .done(function (results) {
-                    $.each(results, function (index, vehicle) {
-                        $('.search-results').append("<div class='row'>" + vehicle.make + "</div>");
-                    });
-                })
-                .fail(function () {
+        let imgPath = '@Url.Content("~/Images/Vehicles")';
 
-                });
-            })
+        $(document).ready(function () {
+            $('#search-btn').on('click', function () {
+                $('.search-results').empty();
+                queryVehicles(imgPath, @((int)CarDealership.Models.Enums.Condition.New));
+            });
         });
     </script>
 }
