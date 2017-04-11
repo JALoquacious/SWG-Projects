@@ -709,13 +709,13 @@ CREATE PROCEDURE ContactInsert (
 AS
 BEGIN
 	INSERT INTO Contacts (
-		,[Name]
+		[Name]
 		,Phone
 		,Email
 		,[Message]
 		)
 	VALUES (
-		,@Name
+		@Name
 		,@Phone
 		,@Email
 		,@Message

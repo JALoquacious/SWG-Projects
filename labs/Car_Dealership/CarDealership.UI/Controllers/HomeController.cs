@@ -1,5 +1,6 @@
 ﻿using CarDealership.DAL.Factories;
 using CarDealership.Models.Tables;
+using CarDealership.UI.Models;
 using System.Web.Mvc;
 
 namespace CarDealership.UI.Controllers
@@ -16,21 +17,23 @@ namespace CarDealership.UI.Controllers
         [HttpGet]
         public ActionResult Contact(string VIN = null)
         {
-            var contact = new Contact();
-            contact.Message = "I'm inquiring about vehicle ID#: " + VIN;
+            var vm = new ContactAddViewModel();
+            vm.Message = "I'm inquiring about vehicle ID#: " + VIN;
+            vm.Contact = new Contact();
 
-            return View(contact);
+            return View(vm);
         }
 
         [HttpPost]
-        public ActionResult Contact(Contact newContact)
+        public ActionResult Contact(ContactAddViewModel vm)
         {
             if (!ModelState.IsValid)
             {
-                return View(newContact);
+                return View(vm);
             }
 
             var repo = ContactRepositoryFactory.GetRepository();
+            var newContact = vm.Contact;
 
             repo.Insert(newContact);
 

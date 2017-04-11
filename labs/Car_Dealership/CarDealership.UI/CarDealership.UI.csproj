@@ -213,6 +213,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ContactAddViewModel.cs" />
     <Compile Include="Models\CustomValidation\ValidOrNullPasswordAttribute.cs" />
     <Compile Include="Models\CustomValidation\ValidPasswordAttribute.cs" />
     <Compile Include="Models\IdentityModels.cs" />

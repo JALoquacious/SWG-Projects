@@ -119,5 +119,22 @@ namespace CarDealership.UI.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [Route("api/special/{id}")]
+        [AcceptVerbs("DELETE")]
+        public IHttpActionResult Special(int id)
+        {
+            var repo = SpecialRepositoryFactory.GetRepository();
+
+            try
+            {
+                repo.Delete(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

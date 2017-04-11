@@ -99,7 +99,16 @@
             <p>
                 @if (!Request.IsAuthenticated)
                 {
-                    <a href="@Url.Action("Contact", "Home", new { VIN = Model.VIN })" id="contact-us-btn" class="btn btn-custom btn-large pull-right">Contact Us</a>
+                    if (Model.SaleId == null)
+                    {
+                        <a href="@Url.Action("Contact", "Home", new { VIN = Model.VIN })" id="contact-us-btn" class="btn btn-custom btn-large pull-right">Contact Us</a>
+                    }
+                    else
+                    {
+                        <div class="col-md-4 alert alert-warning pull-right">
+                            <strong>Unavailable -- Sold</strong>
+                        </div>
+                    }
                 }
             </p>
             <p class="status-message">
