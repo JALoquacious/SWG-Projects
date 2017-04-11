@@ -7,11 +7,14 @@ namespace CarDealership.UI.Models
 {
     public class ContactAddViewModel
     {
-        public Contact Contact { get; set; }
+        [Required]
         public string Name     { get; set; }
+        [Required]
+        public string Message  { get; set; }
+
         public string Email    { get; set; }
         public string Phone    { get; set; }
-        public string Message  { get; set; }
+        public Contact Contact { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

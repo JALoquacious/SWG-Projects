@@ -25,7 +25,7 @@ namespace CarDealership.UI.Controllers
             vm.PaymentType   = new PaymentType();
             vm.Sale          = new Sale();
             vm.State         = new State();
-            vm.Vehicle       = repo.GetById(id);
+            //vm.Vehicle       = repo.GetById(id);
             vm.VehicleDetail = repo.GetDetailById(id);
 
             return View(vm);
