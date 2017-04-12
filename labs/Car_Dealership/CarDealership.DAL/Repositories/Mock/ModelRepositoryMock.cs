@@ -1,4 +1,5 @@
 ﻿using CarDealership.DAL.Interfaces;
+using CarDealership.Models.Queries;
 using CarDealership.Models.Tables;
 using System;
 using System.Collections.Generic;
@@ -65,6 +66,11 @@ namespace CarDealership.DAL.Repositories.Mock
         public IEnumerable<Model> GetByMakeId(int makeId)
         {
             return _models.Where(m => m.MakeId == makeId);
+        }
+
+        public IEnumerable<ModelUserQueryRow> GetModelUserTable()
+        {
+            throw new NotImplementedException();
         }
 
         public void Insert(Model targetModel)

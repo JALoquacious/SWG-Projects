@@ -219,6 +219,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\MakeAddViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ModelAddViewModel.cs" />
     <Compile Include="Models\PurchaseAddViewModel.cs" />
     <Compile Include="Models\SpecialAddViewModel.cs" />
     <Compile Include="Models\UserAddViewModel.cs" />
@@ -314,6 +315,7 @@
     <Content Include="Views\Sales\Index.cshtml" />
     <Content Include="Views\Sales\Purchase.cshtml" />
     <Content Include="Views\Admin\Makes.cshtml" />
+    <Content Include="Views\Admin\Models.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

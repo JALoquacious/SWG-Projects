@@ -12,7 +12,6 @@ namespace CarDealership.UI.Models
         public string NewMakeName { get; set; }
 
         public IEnumerable<MakeUserQueryRow> MakeUserTable { get; set; }
-
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             var errors = new List<ValidationResult>();

@@ -20,10 +20,10 @@ namespace CarDealership.UI.Controllers
         public ActionResult Specials()
         {
             var repo = SpecialRepositoryFactory.GetRepository();
-            var vm = new SpecialAddViewModel();
+            var vm   = new SpecialAddViewModel();
 
             vm.SpecialsList = repo.GetAll();
-            vm.NewSpecial = new Special();
+            vm.NewSpecial   = new Special();
 
             return View(vm);
         }
@@ -51,7 +51,7 @@ namespace CarDealership.UI.Controllers
         public ActionResult Makes()
         {
             var repo = MakeRepositoryFactory.GetRepository();
-            var vm = new MakeAddViewModel();
+            var vm   = new MakeAddViewModel();
 
             vm.MakeUserTable = repo.GetMakeUserTable();
 
@@ -65,11 +65,12 @@ namespace CarDealership.UI.Controllers
 
             if (ModelState.IsValid)
             {
-                var newMake = new Make();
+                var newMake    = new Make();
                 newMake.UserId = "00000000-0000-0000-0000-000000000000"; // load ASP.Net User here
-                newMake.Name = vm.NewMakeName;
+                newMake.Name   = vm.NewMakeName;
 
                 repo.Insert(newMake);
+
                 return RedirectToAction("Makes");
             }
             else
@@ -79,7 +80,49 @@ namespace CarDealership.UI.Controllers
                 vm.MakeUserTable = repo.GetMakeUserTable();
                 return View(vm);
             }
-            
+        }
+
+        [HttpGet]
+        public ActionResult Models()
+        {
+            var modelRepo = ModelRepositoryFactory.GetRepository();
+            var makeRepo  = MakeRepositoryFactory.GetRepository();
+            var vm        = new ModelAddViewModel();
+
+            vm.ModelUserTable = modelRepo.GetModelUserTable();
+            vm.Makes          = new SelectList(makeRepo.GetAll(), "MakeId", "Name");
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult Models(ModelAddViewModel vm)
+        {
+            var repo = ModelRepositoryFactory.GetRepository();
+
+            if (ModelState.IsValid)
+            {
+                var newModel    = new Model();
+                newModel.UserId = "11111111-1111-1111-1111-111111111111"; // load ASP.Net User here
+                newModel.MakeId = vm.Make.MakeId;
+                newModel.Name   = vm.NewModelName;
+                newModel.Year   = DateTime.Now.Year; // can add possible Year option later
+
+                repo.Insert(newModel);
+
+                return RedirectToAction("Models");
+            }
+            else
+            {
+                var modelRepo = ModelRepositoryFactory.GetRepository();
+                var makeRepo  = MakeRepositoryFactory.GetRepository();
+
+                vm = new ModelAddViewModel();
+                vm.ModelUserTable = modelRepo.GetModelUserTable();
+                vm.Makes = new SelectList(makeRepo.GetAll(), "MakeId", "Name");
+
+                return View(vm);
+            }
         }
 
         [HttpGet]

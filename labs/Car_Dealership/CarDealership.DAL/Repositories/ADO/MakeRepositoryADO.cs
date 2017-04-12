@@ -79,7 +79,7 @@ namespace CarDealership.DAL.Repositories.ADO
                     while (dr.Read())
                     {
                         var row  = new MakeUserQueryRow();
-                        row.Make = dr["Name"].ToString();
+                        row.Make = dr["MakeName"].ToString();
                         row.User = dr["Email"].ToString();
 
                         if (dr["DateAdded"] != DBNull.Value)

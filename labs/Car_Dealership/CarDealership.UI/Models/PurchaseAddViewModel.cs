@@ -53,7 +53,7 @@ namespace CarDealership.UI.Models
 
             if (string.IsNullOrEmpty(Customer.Name) || Customer.Name.Length > 50 || !namePattern.IsMatch(Customer.Name))
             {
-                errors.Add(new ValidationResult("Name must be less than 50 characters.", new[] { "Customer.Name" }));
+                errors.Add(new ValidationResult("Name must be 1-50 characters.", new[] { "Customer.Name" }));
             }
 
             if (string.IsNullOrEmpty(Customer.Phone) && string.IsNullOrEmpty(Customer.Email))

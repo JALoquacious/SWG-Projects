@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System;
+using CarDealership.Models.Queries;
 
 namespace CarDealership.DAL.Repositories.ADO
 {
@@ -87,6 +88,36 @@ namespace CarDealership.DAL.Repositories.ADO
                         row.Year    = (int)dr["Year"];
                         row.UserId  = dr["UserId"].ToString();
                         row.Name    = dr["Name"].ToString();
+
+                        models.Add(row);
+                    }
+                }
+            }
+            return models;
+        }
+
+        public IEnumerable<ModelUserQueryRow> GetModelUserTable()
+        {
+            var models = new List<ModelUserQueryRow>();
+
+            using (var cn = new SqlConnection(Settings.GetConnectionString()))
+            {
+                var cmd = new SqlCommand("ModelAddView", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        var row   = new ModelUserQueryRow();
+                        row.Make  = dr["MakeName"].ToString();
+                        row.Model = dr["ModelName"].ToString();
+                        row.User  = dr["Email"].ToString();
+
+                        if (dr["DateAdded"] != DBNull.Value)
+                            row.DateAdded = DateTime.Parse(dr["DateAdded"].ToString());
 
                         models.Add(row);
                     }

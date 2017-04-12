@@ -315,7 +315,7 @@ GO
 CREATE PROCEDURE MakeAddView
 AS
 BEGIN
-	SELECT MK.[Name]
+	SELECT MK.[Name] AS MakeName
 		,DateAdded
 		,Email
 	FROM Makes AS MK
@@ -335,14 +335,14 @@ GO
 CREATE PROCEDURE ModelAddView
 AS
 BEGIN
-	SELECT MK.[Name]
-		,MD.[Name]
+	SELECT MK.[Name] AS MakeName
+		,MD.[Name] AS ModelName
 		,MD.DateAdded
 		,Email
 	FROM Models AS MD
 	INNER JOIN Makes AS MK ON MK.MakeId = MD.MakeId
 	INNER JOIN AspNetUsers U ON U.Id = MD.UserId
-	ORDER BY MK.[Name] DESC, MD.[Name]
+	ORDER BY MakeName, ModelName
 END
 GO
 
