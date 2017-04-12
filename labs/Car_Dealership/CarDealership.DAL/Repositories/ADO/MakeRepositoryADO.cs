@@ -78,10 +78,12 @@ namespace CarDealership.DAL.Repositories.ADO
                 {
                     while (dr.Read())
                     {
-                        var row       = new MakeUserQueryRow();
-                        row.Make      = dr["Name"].ToString();
-                        row.DateAdded = (DateTime)dr["DateAdded"];
-                        row.User      = dr["Email"].ToString();
+                        var row  = new MakeUserQueryRow();
+                        row.Make = dr["Name"].ToString();
+                        row.User = dr["Email"].ToString();
+
+                        if (dr["DateAdded"] != DBNull.Value)
+                            row.DateAdded = DateTime.Parse(dr["DateAdded"].ToString());
 
                         makes.Add(row);
                     }

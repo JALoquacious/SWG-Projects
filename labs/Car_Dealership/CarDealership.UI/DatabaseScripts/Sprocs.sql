@@ -320,6 +320,7 @@ BEGIN
 		,Email
 	FROM Makes AS MK
 	INNER JOIN AspNetUsers U ON U.Id = MK.UserId
+	ORDER BY MK.[Name]
 END
 GO
 
@@ -341,6 +342,7 @@ BEGIN
 	FROM Models AS MD
 	INNER JOIN Makes AS MK ON MK.MakeId = MD.MakeId
 	INNER JOIN AspNetUsers U ON U.Id = MD.UserId
+	ORDER BY MK.[Name] DESC, MD.[Name]
 END
 GO
 
@@ -795,7 +797,7 @@ BEGIN
 		,@SalespersonId
 		,@PaymentTypeId
 		,@SalePrice
-		,@DateAdded
+		,@Date
 		)
 	SET @SaleId = SCOPE_IDENTITY();
 

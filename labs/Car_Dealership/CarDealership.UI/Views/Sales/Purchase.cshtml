@@ -7,7 +7,7 @@
 <h2>Purchase Vehicle</h2>
 
 <div class="panel panel-darkslategray">
-    <div class="panel-heading">@Model.VehicleDetail.Year  @Model.VehicleDetail.Make  @Model.VehicleDetail.Model</div>
+    <div class="panel-heaing">@Model.VehicleDetail.Year  @Model.VehicleDetail.Make  @Model.VehicleDetail.Model</div>
     <div class="row">
         <div class="col-xs-12 col-md-3">
             <img class="featured-img" src="@Url.Content("~/Images/Vehicles/" + Model.VehicleDetail.Image)" />
@@ -100,6 +100,8 @@
 
 @using (Html.BeginForm())
 {
+    @Html.HiddenFor(m => m.Customer.UserId)
+    @Html.HiddenFor(m => m.VehicleDetail.VehicleId)
     <div class="row">
         <div class="form-group col-xs-12 col-md-6">
             @Html.LabelFor(m => m.Customer.Name)

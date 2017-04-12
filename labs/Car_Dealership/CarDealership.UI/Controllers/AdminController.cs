@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace CarDealership.UI.Controllers
 {
@@ -64,16 +65,21 @@ namespace CarDealership.UI.Controllers
 
             if (ModelState.IsValid)
             {
-                var newMake = new Make()
-                {
-                    UserId = User.Identity.GetUserId(), // correct GUID?
-                    Name = vm.NewMakeName // Data binding here?
-                };
+                var newMake = new Make();
+                newMake.UserId = "00000000-0000-0000-0000-000000000000"; // load ASP.Net User here
+                newMake.Name = vm.NewMakeName;
 
                 repo.Insert(newMake);
                 return RedirectToAction("Makes");
             }
-            return View(vm);
+            else
+            {
+                repo = MakeRepositoryFactory.GetRepository();
+
+                vm.MakeUserTable = repo.GetMakeUserTable();
+                return View(vm);
+            }
+            
         }
 
         [HttpGet]

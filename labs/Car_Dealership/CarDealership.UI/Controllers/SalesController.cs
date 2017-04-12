@@ -1,5 +1,4 @@
 ﻿using CarDealership.DAL.Factories;
-using CarDealership.Models.Tables;
 using CarDealership.UI.Models;
 using CarDealership.UI.Utilities;
 using System.Web.Mvc;
@@ -38,18 +37,19 @@ namespace CarDealership.UI.Controllers
 
             if (ModelState.IsValid)
             {
-                // assign SaleId to vehicle
-                // create stored procedure for making sale?
+                var repo = VehicleRepositoryFactory.GetRepository();
+                repo.Purchase(vm.Sale, vm.Customer);
+
                 return RedirectToAction("Index");
             }
             else
             {
                 var vehicleRepo = VehicleRepositoryFactory.GetRepository();
                 var stateRepo = StateRepositoryFactory.GetRepository();
-                vm = new PurchaseAddViewModel();
 
                 vm.States = new SelectList(stateRepo.GetAll(), "StateId", "Name");
-                //vm.VehicleDetail = vehicleRepo.GetDetailById(id);
+                vm.VehicleDetail = vehicleRepo.GetDetailById(vm.VehicleDetail.VehicleId);
+
                 return View(vm);
             }            
         }

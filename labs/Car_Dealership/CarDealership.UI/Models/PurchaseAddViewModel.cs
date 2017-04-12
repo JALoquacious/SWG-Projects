@@ -53,42 +53,47 @@ namespace CarDealership.UI.Models
 
             if (string.IsNullOrEmpty(Customer.Name) || Customer.Name.Length > 50 || !namePattern.IsMatch(Customer.Name))
             {
-                errors.Add(new ValidationResult("Name must be less than 50 characters."));
+                errors.Add(new ValidationResult("Name must be less than 50 characters.", new[] { "Customer.Name" }));
             }
 
             if (string.IsNullOrEmpty(Customer.Phone) && string.IsNullOrEmpty(Customer.Email))
             {
-                errors.Add(new ValidationResult("Customer phone or email must be provided."));
+                errors.Add(new ValidationResult("Customer phone or email must be provided.", new[] { "Customer.Phone", "Customer.Email" }));
             }
 
             if (!string.IsNullOrEmpty(Customer.Phone) && (Customer.Phone.Length > 11 || !phonePattern.IsMatch(Customer.Phone)))
             {
-                errors.Add(new ValidationResult("Phone must be a valid US number."));
+                errors.Add(new ValidationResult("Phone must be a valid US number.", new[] { "Customer.Phone" }));
             }
 
             if (!string.IsNullOrEmpty(Customer.Email) && (Customer.Email.Length > 50 || !emailPattern.IsMatch(Customer.Email)))
             {
-                errors.Add(new ValidationResult("Email address must be less than 50 characters."));
+                errors.Add(new ValidationResult("Email address must be less than 50 characters.", new[] { "Customer.Email" }));
             }
 
             if (string.IsNullOrEmpty(Customer.Street1) || Customer.Street1.Length > 50 || !streetPattern.IsMatch(Customer.Street1))
             {
-                errors.Add(new ValidationResult("Street address 1 must be a valid address and less than 50 characters."));
+                errors.Add(new ValidationResult("Street address 1 must be a valid address and less than 50 characters.", new[] { "Customer.Street1" }));
             }
 
             if (string.IsNullOrEmpty(Customer.City) || Customer.City.Length > 50)
             {
-                errors.Add(new ValidationResult("City name must be less than 50 characters."));
+                errors.Add(new ValidationResult("City name must be less than 50 characters.", new[] { "Customer.City" }));
             }
 
             if (string.IsNullOrEmpty(Customer.Zip) || Customer.Zip.Length > 5 || !zipPattern.IsMatch(Customer.Zip))
             {
-                errors.Add(new ValidationResult("City name must be less than 50 characters."));
+                errors.Add(new ValidationResult("Zip code must be 5 characters.", new[] { "Customer.Zip" }));
             }
 
             if (Sale.SalePrice < 0 || Sale.SalePrice > 999999m || !pricePattern.IsMatch(Sale.SalePrice.ToString()))
             {
-                errors.Add(new ValidationResult("Sale price must be between 0 and $999,999."));
+                errors.Add(new ValidationResult("Sale price must be between 0 and $999,999.", new[] { "Sale.SalePrice" }));
+            }
+
+            if (PaymentType.PaymentTypeId > 3)
+            {
+                errors.Add(new ValidationResult("Payment ID error.", new[] { "PaymentType.PaymentTypeId" }));
             }
 
             return errors;

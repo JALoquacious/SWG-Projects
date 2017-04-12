@@ -128,7 +128,7 @@ textarea {
     width: 100%;
 }
 
-#search-panel {
+.search-panel {
     background-color: lightgrey;
     border-color: darkslategray;
 }

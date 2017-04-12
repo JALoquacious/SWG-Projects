@@ -289,5 +289,10 @@ namespace CarDealership.DAL.Repositories.Mock
         {
             throw new NotImplementedException();
         }
+
+        public void Purchase(Sale sale, Customer customer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

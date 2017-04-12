@@ -14,6 +14,6 @@ namespace CarDealership.DAL.Interfaces
         void Delete(int vehicleId);
         void Insert(Vehicle vehicle);
         void Update(Vehicle vehicle);
-        void Purchase(Vehicle vehicle, Sale sale, Customer customer);
+        void Purchase(Sale sale, Customer customer);
     }
 }
