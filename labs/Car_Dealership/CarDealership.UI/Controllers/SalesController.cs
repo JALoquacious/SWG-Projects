@@ -23,6 +23,7 @@ namespace CarDealership.UI.Controllers
 
             vm.States = new SelectList(stateRepo.GetAll(), "StateId", "Name");
             vm.VehicleDetail = vehicleRepo.GetDetailById(id);
+            //vm.Customer.UserId = "00000000-0000-0000-0000-000000000000"; // load ASP.Net User here
 
             return View(vm);
         }
@@ -30,6 +31,9 @@ namespace CarDealership.UI.Controllers
         [HttpPost]
         public ActionResult Purchase(PurchaseAddViewModel vm)
         {
+            var vehicleRepo = VehicleRepositoryFactory.GetRepository();
+            vm.VehicleDetail = vehicleRepo.GetDetailById(vm.VehicleDetail.VehicleId);
+
             if (Request.IsAuthenticated)
             {
                 ViewBag.UserId = AuthorizeUtilities.GetUserId(this);
@@ -38,13 +42,14 @@ namespace CarDealership.UI.Controllers
             if (ModelState.IsValid)
             {
                 var repo = VehicleRepositoryFactory.GetRepository();
-                repo.Purchase(vm.Sale, vm.Customer);
 
+                repo.Purchase(vm.VehicleDetail, vm.Sale, vm.Customer);
+                //vm.Sale.UserId = ViewBag.UserId; get User Id this way?
                 return RedirectToAction("Index");
             }
             else
             {
-                var vehicleRepo = VehicleRepositoryFactory.GetRepository();
+                vehicleRepo = VehicleRepositoryFactory.GetRepository();
                 var stateRepo = StateRepositoryFactory.GetRepository();
 
                 vm.States = new SelectList(stateRepo.GetAll(), "StateId", "Name");

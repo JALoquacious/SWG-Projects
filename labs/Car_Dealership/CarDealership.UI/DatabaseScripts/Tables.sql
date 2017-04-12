@@ -99,12 +99,6 @@ CREATE TABLE Models (
 	,[Description] NVARCHAR(25) NOT NULL
 	)
 
-CREATE TABLE Salespersons (
-	SalesPersonId INT IDENTITY(1, 1) PRIMARY KEY NOT NULL
-	,FirstName NVARCHAR(25) NOT NULL
-	,LastName NVARCHAR(25) NOT NULL
-	)
-
 CREATE TABLE Specials (
 	SpecialId INT IDENTITY(1, 1) PRIMARY KEY NOT NULL
 	,[Name] NVARCHAR(75) NOT NULL
@@ -134,9 +128,9 @@ CREATE TABLE Customers (
 CREATE TABLE Sales (
 	SaleId INT IDENTITY(1, 1) PRIMARY KEY NOT NULL
 	,CustomerId INT CONSTRAINT FK__Sales__CustomerId FOREIGN KEY REFERENCES Customers(CustomerId) NOT NULL
-	,SalespersonId INT CONSTRAINT FK__Sales__SalespersonId FOREIGN KEY REFERENCES Salespersons(SalesPersonId) NOT NULL
+	,UserId NVARCHAR(128) CONSTRAINT FK__Sales__UserId FOREIGN KEY REFERENCES AspNetUsers(Id)
 	,PaymentTypeId INT CONSTRAINT FK__Sales__PaymentTypeId FOREIGN KEY REFERENCES PaymentTypes(PaymentTypeId) NOT NULL
-	,SalePrice DECIMAL(8, 2) NOT NULL
+	,PurchasePrice DECIMAL(8, 2) NOT NULL
 	,[Date] DATETIME2 NOT NULL
 	)
 

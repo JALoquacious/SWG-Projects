@@ -26,7 +26,6 @@ BEGIN
 	ALTER TABLE dbo.[Models] DROP CONSTRAINT FK__Models__UserId
 	ALTER TABLE dbo.[Sales] DROP CONSTRAINT FK__Sales__VehicleId
 	ALTER TABLE dbo.[Sales] DROP CONSTRAINT FK__Sales__CustomerId
-	ALTER TABLE dbo.[Sales] DROP CONSTRAINT FK__Sales__SalespersonId
 	ALTER TABLE dbo.[Sales] DROP CONSTRAINT FK__Sales__PaymentTypeId
 	ALTER TABLE dbo.[Vehicles] DROP CONSTRAINT FK__Vehicles__UserId
 	ALTER TABLE dbo.[Vehicles] DROP CONSTRAINT FK__Vehicles__ModelId
@@ -79,11 +78,10 @@ GO
 --BEGIN
 --	SELECT MAX(SP.FirstName + ' ' + SP.LastName) AS [User] -- Change MAX
 --		,U.UserName
---		,SUM(S.SalePrice) AS TotalSales
+--		,SUM(S.PurchasePrice) AS TotalSales
 --		,COUNT(S.VehicleId) AS TotalVehicles
 		
 --	FROM Sales AS S
---	INNER JOIN Salespersons AS SP ON SP.SalespersonId = S.SalespersonId
 --	INNER JOIN Vehicles AS V ON S.VehicleId = V.VehicleId
 --	INNER JOIN AspNetUsers AS U ON U.Id = V.UserId
 --	--WHERE U.UserName = @UserName
@@ -744,16 +742,15 @@ CREATE PROCEDURE SaleInsert (
 	,@Phone NVARCHAR(15)
 	,@Email NVARCHAR(50)
 	,@Street1 NVARCHAR(50)
-	,@Street2 NVARCHAR(50)
+	,@Street2 NVARCHAR(50) = null
 	,@City NVARCHAR(50)
 	,@StateId CHAR(2)
 	,@Zip CHAR(5)
 
 	-- Sale fields
 	,@SaleId INT OUTPUT
-	,@SalespersonId INT
 	,@PaymentTypeId INT
-	,@SalePrice DECIMAL(8,2)
+	,@PurchasePrice DECIMAL(8,2)
 	,@Date DATETIME2
 
 	-- Vehicle fields
@@ -787,16 +784,16 @@ BEGIN
 
 	INSERT INTO Sales (
 		CustomerId
-		,SalespersonId
+		,UserId
 		,PaymentTypeId
-		,SalePrice
+		,PurchasePrice
 		,[Date]
 		)
 	VALUES (
 		@CustomerId
-		,@SalespersonId
+		,@UserId
 		,@PaymentTypeId
-		,@SalePrice
+		,@PurchasePrice
 		,@Date
 		)
 	SET @SaleId = SCOPE_IDENTITY();

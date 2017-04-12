@@ -243,7 +243,7 @@ namespace CarDealership.DAL.Repositories.ADO
             }
         }
 
-        public void Purchase(Sale sale, Customer customer)
+        public void Purchase(VehicleDetail vehicleDetail, Sale sale, Customer customer)
         {
             using (var cn = new SqlConnection(Settings.GetConnectionString()))
             {
@@ -258,22 +258,23 @@ namespace CarDealership.DAL.Repositories.ADO
 
                 // update Customer
                 cmd.Parameters.Add(customerId);
-                cmd.Parameters.AddWithValue("@UserId" , customer.UserId);
+                cmd.Parameters.AddWithValue("@UserId" , "00000000-0000-0000-0000-000000000000");
                 cmd.Parameters.AddWithValue("@Name"   , customer.Name);
                 cmd.Parameters.AddWithValue("@Phone"  , customer.Phone);
                 cmd.Parameters.AddWithValue("@Email"  , customer.Email);
                 cmd.Parameters.AddWithValue("@Street1", customer.Street1);
                 cmd.Parameters.AddWithValue("@Street2", customer.Street2);
                 cmd.Parameters.AddWithValue("@City"   , customer.City);
-                cmd.Parameters.AddWithValue("@State"  , customer.State);
+                cmd.Parameters.AddWithValue("@StateId", customer.State);
                 cmd.Parameters.AddWithValue("@Zip"    , customer.Zip);
 
                 // update Sale
                 cmd.Parameters.Add(saleId);
-                cmd.Parameters.AddWithValue("@SalespersonId", sale.SalespersonId);
                 cmd.Parameters.AddWithValue("@PaymentTypeId", sale.PaymentTypeId);
-                cmd.Parameters.AddWithValue("@SalespersonId", sale.SalePrice);
+                cmd.Parameters.AddWithValue("@PurchasePrice", sale.PurchasePrice);
                 cmd.Parameters.AddWithValue("@Date"         , sale.Date);
+
+                cmd.Parameters.AddWithValue("@VehicleId", vehicleDetail.VehicleId);
 
                 cn.Open();
 

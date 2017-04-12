@@ -11,7 +11,7 @@ namespace CarDealership.UI.Models
     {
         public Customer Customer                        { get; set; }
         public State State                              { get; set; }
-        public PaymentType PaymentType                  { get; set; }
+        //public PaymentType PaymentType                  { get; set; }
         public Sale Sale                                { get; set; }
         public VehicleDetail VehicleDetail              { get; set; }
         public IEnumerable<SelectListItem> States       { get; set; }
@@ -19,6 +19,7 @@ namespace CarDealership.UI.Models
 
         public PurchaseAddViewModel()
         {
+            Customer = new Customer();
             PaymentTypes = new List<SelectListItem>()
             {
                 new SelectListItem()
@@ -86,14 +87,19 @@ namespace CarDealership.UI.Models
                 errors.Add(new ValidationResult("Zip code must be 5 characters.", new[] { "Customer.Zip" }));
             }
 
-            if (Sale.SalePrice < 0 || Sale.SalePrice > 999999m || !pricePattern.IsMatch(Sale.SalePrice.ToString()))
+            if (string.IsNullOrEmpty(Sale.PurchasePrice.ToString()) || !pricePattern.IsMatch(Sale.PurchasePrice.ToString()))
             {
-                errors.Add(new ValidationResult("Sale price must be between 0 and $999,999.", new[] { "Sale.SalePrice" }));
+                errors.Add(new ValidationResult("Sale price must be between 0 and $999,999.", new[] { "Sale.PurchasePrice" }));
             }
 
-            if (PaymentType.PaymentTypeId > 3)
+            if (Sale.PurchasePrice > VehicleDetail.MSRP)
             {
-                errors.Add(new ValidationResult("Payment ID error.", new[] { "PaymentType.PaymentTypeId" }));
+                errors.Add(new ValidationResult("Sale price cannot exceed vehicle MSRP.", new[] { "Sale.PurchasePrice" }));
+            }
+
+            if (Sale.PurchasePrice < .95m * VehicleDetail.SalePrice)
+            {
+                errors.Add(new ValidationResult("Purchase price cannot be less than 95% of original salesfloor price.", new[] { "Sale.PurchasePrice" }));
             }
 
             return errors;

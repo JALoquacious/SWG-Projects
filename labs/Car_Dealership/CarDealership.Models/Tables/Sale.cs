@@ -11,11 +11,11 @@ namespace CarDealership.Models.Tables
         }
 
         [Column(TypeName = "DATETIME2")]
-        public DateTime Date     { get; set; }
-        public int SaleId        { get; set; }
-        public int CustomerId    { get; set; }
-        public int SalespersonId { get; set; }
-        public int PaymentTypeId { get; set; }
-        public decimal SalePrice { get; set; }
+        public DateTime Date         { get; set; }
+        public int SaleId            { get; set; }
+        public int CustomerId        { get; set; }
+        public int PaymentTypeId     { get; set; }
+        public string UserId         { get; set; }
+        public decimal PurchasePrice { get; set; }
     }
 }

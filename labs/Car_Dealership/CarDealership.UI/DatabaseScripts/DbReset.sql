@@ -17,7 +17,6 @@ BEGIN
 	delete from Customers;
 	delete from States;
 	delete from Specials;
-	delete from Salespersons;
 	delete from PaymentTypes;
 	delete from Vehicles;
 	delete from Models;
@@ -32,9 +31,9 @@ BEGIN
 	dbcc checkident ('Vehicles', RESEED, 1)
 
 	insert into AspNetUsers(Id, EmailConfirmed, PhoneNumberConfirmed, Email, TwoFactorEnabled, LockoutEnabled, AccessFailedCount, UserName)
-	values('00000000-0000-0000-0000-000000000000', 0, 0, 'test1@test.com', 0, 0, 0, 'test1');
+	values('00000000-0000-0000-0000-000000000000', 0, 0, 'One1ABC@test.com', 0, 0, 0, 'test1');
 	insert into AspNetUsers(Id, EmailConfirmed, PhoneNumberConfirmed, Email, TwoFactorEnabled, LockoutEnabled, AccessFailedCount, UserName)
-	values('11111111-1111-1111-1111-111111111111', 0, 0, 'test2@test.com', 0, 0, 0, 'test2');
+	values('11111111-1111-1111-1111-111111111111', 0, 0, 'Two2XYZ@test.com', 0, 0, 0, 'test2');
 
 
 	set identity_insert BodyStyles on;
@@ -290,25 +289,6 @@ BEGIN
 	set identity_insert Specials off;
 
 
-	set identity_insert Salespersons on;
-	INSERT INTO Salespersons (
-		SalesPersonId
-		,FirstName
-		,LastName
-		)
-	VALUES (
-		1
-		,'John'
-		,'Smith'
-		)
-		,(
-		2
-		,'Jane'
-		,'Doe'
-		)
-	set identity_insert Salespersons off;
-
-
 	INSERT INTO States (
 		 StateId
 		,[Name]
@@ -368,17 +348,17 @@ BEGIN
 	INSERT INTO Sales (
 		SaleId
 		,CustomerId
-		,SalesPersonId
+		,UserId
 		,PaymentTypeId
-		,SalePrice
+		,PurchasePrice
 		,[Date]
 		)
 	VALUES (
 		1 -- SaleId
 		,1 -- CustomerId
-		,2 -- SalesPersonId
+		,'00000000-0000-0000-0000-000000000000' -- UserId
 		,1 -- PaymentTypeId
-		,23740 -- SalePrice
+		,23740 -- PurchasePrice
 		,'4/1/2017' -- [Date]
 		)
 	set identity_insert Sales off;
