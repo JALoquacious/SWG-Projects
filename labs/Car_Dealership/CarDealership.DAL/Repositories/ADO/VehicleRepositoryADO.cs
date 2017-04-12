@@ -351,6 +351,12 @@ namespace CarDealership.DAL.Repositories.ADO
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = cn;
 
+                if (parameters.IsAspNetUser)
+                {
+                    query += "AND SaleId IS NULL ";
+                    cmd.Parameters.AddWithValue("@IsAspNetUser", parameters.IsAspNetUser);
+                }
+
                 if (parameters.Condition == (int)Condition.New ||
                     parameters.Condition == (int)Condition.Used)
                 {

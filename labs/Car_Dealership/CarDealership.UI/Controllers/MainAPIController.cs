@@ -10,7 +10,7 @@ namespace CarDealership.UI.Controllers
         [Route("api/vehicles/search")]
         [AcceptVerbs("GET")]
         public IHttpActionResult Search(int? condition, decimal? minPrice, decimal? maxPrice,
-            int? minYear, int? maxYear, string searchTerm)
+            int? minYear, int? maxYear, bool isAspNetUser, string searchTerm)
         {
             var repo = VehicleRepositoryFactory.GetRepository();
 
@@ -18,12 +18,13 @@ namespace CarDealership.UI.Controllers
             {
                 var parameters = new VehicleSearchParameters()
                 {
-                    Condition  = condition,
-                    MinPrice   = minPrice,
-                    MaxPrice   = maxPrice,
-                    MinYear    = minYear,
-                    MaxYear    = maxYear,
-                    SearchTerm = searchTerm
+                    Condition    = condition,
+                    MinPrice     = minPrice,
+                    MaxPrice     = maxPrice,
+                    MinYear      = minYear,
+                    MaxYear      = maxYear,
+                    IsAspNetUser = isAspNetUser,
+                    SearchTerm   = searchTerm
                 };
 
                 var result = repo.Search(parameters);

@@ -11,6 +11,7 @@ namespace CarDealership.UI.Controllers
         public ActionResult Index()
         {
             var vm = new VehicleSearchViewModel();
+            vm.SearchParams.IsAspNetUser = true;
             return View(vm);
         }
 

@@ -28,7 +28,7 @@
         $(document).ready(function () {
             $('#search-btn').on('click', function () {
                 $('.search-results').empty();
-                queryVehicles(imgPath, @((int)CarDealership.Models.Enums.Condition.Used));
+                queryVehicles(imgPath, @((int)CarDealership.Models.Enums.Condition.Used), false, "Details");
             });
         });
     </script>

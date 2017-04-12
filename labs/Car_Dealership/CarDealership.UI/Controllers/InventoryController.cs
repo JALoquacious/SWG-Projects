@@ -13,6 +13,7 @@ namespace CarDealership.UI.Controllers
         {
             var vm = new VehicleSearchViewModel();
             vm.SearchParams.Condition = (int)Condition.New;
+            vm.SearchParams.IsAspNetUser = false;
             return View(vm);
         }
 
@@ -21,6 +22,7 @@ namespace CarDealership.UI.Controllers
         {
             var vm = new VehicleSearchViewModel();
             vm.SearchParams.Condition = (int)Condition.Used;
+            vm.SearchParams.IsAspNetUser = false;
             return View(vm);
         }
 

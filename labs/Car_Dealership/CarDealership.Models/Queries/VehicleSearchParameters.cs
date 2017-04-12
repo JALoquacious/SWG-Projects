@@ -28,6 +28,7 @@ namespace CarDealership.Models.Queries
         public int? MinYear                   { get; set; }
         public int? MaxYear                   { get; set; }
         public int? Condition                 { get; set; }
+        public bool IsAspNetUser              { get; set; }
         public string SearchTerm              { get; set; }
         public List<SelectListItem> PriceList { get; set; }
     }

@@ -1,8 +1,9 @@
 ﻿
-function queryVehicles(imgPath, isUsed) {
+function queryVehicles(imgPath, isUsed, isAspNetUser, action) {
     $.ajax({
         url: 'http://localhost:59373/api/vehicles/search?condition='
             + ((isUsed == 0 || isUsed == 1) ? isUsed : '')
+            + '&isAspNetUser=' + ((isAspNetUser) ? 'true' : 'false')
             + '&searchTerm=' + $('#SearchTerm').val()
             + '&minPrice=' + $('#MinPrice').val()
             + '&maxPrice=' + $('#MaxPrice').val()
@@ -12,14 +13,16 @@ function queryVehicles(imgPath, isUsed) {
         contentType: "application/json"
     })
     .done(function (data) {
-        $.each(data, getResultList);
+        $.each(data, function (index, vehicle) {
+            getResultList(index, vehicle, action);
+        });
     })
     .fail(function () {
         window.alert("Search failed.");
     });
 }
 
-function getResultList(index, vehicle) {
+function getResultList(index, vehicle, action) {
     $('.search-results').append(
         `<div class='panel panel-darkslategray'>
             <div class='panel-heading'> ${vehicle.Year} ${vehicle.Make} ${vehicle.Model}</div>
@@ -81,8 +84,8 @@ function getResultList(index, vehicle) {
             <div class='row'>
                 <div class='col-xs-12'>
                     <p>
-                        <a href='Details/${vehicle.VehicleId}'
-                            class='btn btn-custom btn-large pull-right details-btn'>Details</a>
+                        <a href='${action}/${vehicle.VehicleId}'
+                            class='btn btn-custom btn-large pull-right details-btn'>${action}</a>
                     </p>
                 </div>
             </div>
