@@ -43,7 +43,9 @@ namespace CarDealership.UI.Controllers
         [HttpGet]
         public ActionResult Vehicles()
         {
-            return View();
+            var vm = new VehicleSearchViewModel();
+            vm.SearchParams.IsAspNetUser = true;
+            return View(vm);
         }
 
         [HttpGet]
@@ -133,9 +135,9 @@ namespace CarDealership.UI.Controllers
             var makeRepo  = MakeRepositoryFactory.GetRepository();
             var modelRepo = ModelRepositoryFactory.GetRepository();
 
-            vm.Make          = new SelectList(makeRepo.GetAll(), "MakeId", "Name");
-            vm.InteriorColor = new SelectList(colorRepo.GetAllInterior(), "InteriorColorId", "Name");
-            vm.ExteriorColor = new SelectList(colorRepo.GetAllExterior(), "ExteriorColorId", "Name");
+            vm.Makes          = new SelectList(makeRepo.GetAll(), "MakeId", "Name");
+            vm.InteriorColors = new SelectList(colorRepo.GetAllInterior(), "InteriorColorId", "Name");
+            vm.ExteriorColors = new SelectList(colorRepo.GetAllExterior(), "ExteriorColorId", "Name");
 
             return View(vm);
         }
@@ -149,7 +151,8 @@ namespace CarDealership.UI.Controllers
 
                 try
                 {
-                    vm.Vehicle.UserId = AuthorizeUtilities.GetUserId(this);
+                    vm.Vehicle.UserId = "00000000-0000-0000-0000-000000000000"; //AuthorizeUtilities.GetUserId(this);
+                    //vm.Vehicle.ModelId = 8;
 
                     if (vm.ImageUpload != null && vm.ImageUpload.ContentLength > 0)
                     {
@@ -171,7 +174,7 @@ namespace CarDealership.UI.Controllers
 
                     repo.Insert(vm.Vehicle);
 
-                    return RedirectToAction("Edit", new { id = vm.Vehicle.VehicleId });
+                    return RedirectToAction("EditVehicle", new { id = vm.Vehicle.VehicleId });
                 }
                 catch (Exception ex)
                 {
@@ -180,13 +183,15 @@ namespace CarDealership.UI.Controllers
             }
             else
             {
-                var colorRepo = ColorRepositoryFactory.GetRepository();
-                var makeRepo  = MakeRepositoryFactory.GetRepository();
-                var modelRepo = ModelRepositoryFactory.GetRepository();
-
-                vm.Make          = new SelectList(makeRepo.GetAll(), "MakeId", "Name");
-                vm.InteriorColor = new SelectList(colorRepo.GetAllInterior(), "InteriorColorId", "Name");
-                vm.ExteriorColor = new SelectList(colorRepo.GetAllExterior(), "ExteriorColorId", "Name");
+                var vehicleRepo = VehicleRepositoryFactory.GetRepository();
+                var colorRepo   = ColorRepositoryFactory.GetRepository();
+                var makeRepo    = MakeRepositoryFactory.GetRepository();
+                var modelRepo   = ModelRepositoryFactory.GetRepository();
+                
+                vm.Makes          = new SelectList(makeRepo.GetAll(), "MakeId", "Name");
+                vm.InteriorColors = new SelectList(colorRepo.GetAllInterior(), "InteriorColorId", "Name");
+                vm.ExteriorColors = new SelectList(colorRepo.GetAllExterior(), "ExteriorColorId", "Name");
+                vm.Vehicle        = vehicleRepo.GetById(vm.Vehicle.VehicleId);
 
                 return View(vm);
             }
@@ -195,21 +200,21 @@ namespace CarDealership.UI.Controllers
         [HttpGet]
         public ActionResult EditVehicle(int id)
         {
-            var vm             = new VehicleAdminViewModel();
-            var vehicleRepo    = VehicleRepositoryFactory.GetRepository();
-            var colorRepo      = ColorRepositoryFactory.GetRepository();
-            var makeRepo       = MakeRepositoryFactory.GetRepository();
-            var modelRepo      = ModelRepositoryFactory.GetRepository();
+            var vm          = new VehicleAdminViewModel();
+            var vehicleRepo = VehicleRepositoryFactory.GetRepository();
+            var colorRepo   = ColorRepositoryFactory.GetRepository();
+            var makeRepo    = MakeRepositoryFactory.GetRepository();
+            var modelRepo   = ModelRepositoryFactory.GetRepository();
 
-            vm.Make          = new SelectList(makeRepo.GetAll(), "MakeId", "Name");
-            vm.InteriorColor = new SelectList(colorRepo.GetAllInterior(), "InteriorColorId", "Name");
-            vm.ExteriorColor = new SelectList(colorRepo.GetAllExterior(), "ExteriorColorId", "Name");
-            vm.Vehicle       = vehicleRepo.GetById(id);
+            vm.Makes          = new SelectList(makeRepo.GetAll(), "MakeId", "Name");
+            vm.InteriorColors = new SelectList(colorRepo.GetAllInterior(), "InteriorColorId", "Name");
+            vm.ExteriorColors = new SelectList(colorRepo.GetAllExterior(), "ExteriorColorId", "Name");
+            vm.Vehicle        = vehicleRepo.GetById(id);
 
-            if (vm.Vehicle.UserId != AuthorizeUtilities.GetUserId(this))
-            {
-                throw new Exception("Application User is not logged in.");
-            }
+            //if (vm.Vehicle.UserId != AuthorizeUtilities.GetUserId(this))
+            //{
+            //    throw new Exception("Application User is not logged in.");
+            //}
 
             return View(vm);
         }
@@ -221,7 +226,7 @@ namespace CarDealership.UI.Controllers
             {
                 var repo = VehicleRepositoryFactory.GetRepository();
 
-                repo.Insert(vm.Vehicle);
+                repo.Update(vm.Vehicle);
                 return RedirectToAction("Vehicles");
             }
             return View();

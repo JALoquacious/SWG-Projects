@@ -70,6 +70,23 @@ namespace CarDealership.UI.Controllers
             }
         }
 
+        [Route("api/vehicles/models/makes/{makeId}")]
+        [AcceptVerbs("GET")]
+        public IHttpActionResult ModelsByMake(int makeId)
+        {
+            var repo = ModelRepositoryFactory.GetRepository();
+
+            try
+            {
+                var result = repo.GetByMakeId(makeId);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [Route("api/vehicles/interiorcolors")]
         [AcceptVerbs("GET")]
         public IHttpActionResult InteriorColors()

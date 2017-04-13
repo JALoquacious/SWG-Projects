@@ -1,4 +1,22 @@
-﻿
+﻿function getModelsByMake(makeId) {
+    $.ajax({
+        url: 'http://localhost:59373/api/vehicles/models/makes/' + makeId,
+        type: 'GET',
+        contentType: "application/json"
+    })
+    .done(function (data) {
+        let modelList = $('#Model_ModelId');
+
+        modelList.empty();
+        $.each(data, function (index, item) {
+            modelList.append($('<option>').text(item.Name).val(item.ModelId));
+        });
+    })
+    .fail(function () {
+        window.alert("Search failed.");
+    });
+}
+
 function queryVehicles(imgPath, isUsed, isAspNetUser, action) {
     $.ajax({
         url: 'http://localhost:59373/api/vehicles/search?condition='

@@ -1,16 +1,15 @@
 ﻿@model CarDealership.UI.Models.VehicleAdminViewModel
 
 @{
-    ViewBag.Title = "Add Vehicle";
+    ViewBag.Title = "Edit Vehicle";
 }
 
-<h2>Add Vehicle</h2>
+<h2>Edit Vehicle</h2>
 
 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 @using (Html.BeginForm())
 {
-    @Html.HiddenFor(m => m.Vehicle.VehicleId)
     <div class="row">
         <div class="form-group col-xs-12 col-md-4">
             @Html.LabelFor(m => m.Model.MakeId, "Make", htmlAttributes: new { @class = "control-label" })

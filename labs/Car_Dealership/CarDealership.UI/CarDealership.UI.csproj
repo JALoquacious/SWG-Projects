@@ -351,6 +351,8 @@
     <Content Include="Views\Sales\Purchase.cshtml" />
     <Content Include="Views\Admin\Makes.cshtml" />
     <Content Include="Views\Admin\Models.cshtml" />
+    <Content Include="Views\Admin\Vehicles.cshtml" />
+    <Content Include="Views\Admin\EditVehicle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

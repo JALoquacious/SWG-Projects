@@ -12,35 +12,20 @@ namespace CarDealership.UI.Models
 {
     public class VehicleAdminViewModel : IValidatableObject
     {
-        public int BodyStyleId                            { get; set; }
-        public int ExteriorColorId                        { get; set; }
-        public int InteriorColorId                        { get; set; }
-        public int MakeId                                 { get; set; }
-        public int ModelId                                { get; set; }
-        public int Year                                   { get; set; }
-        public bool IsAutomatic                           { get; set; }
-        public bool IsUsed                                { get; set; }
-        public bool IsFeatured                            { get; set; }
-        public string UserId                              { get; set; }
-        public string VIN                                 { get; set; }
-        public string Description                         { get; set; }
-        public string Image                               { get; set; }
-        public decimal SalePrice                          { get; set; }
-        public decimal MSRP                               { get; set; }
-        public decimal Mileage                            { get; set; }
-        public Vehicle Vehicle                            { get; set; }
-        public HttpPostedFileBase ImageUpload             { get; set; }
-        public IEnumerable<SelectListItem> BodyStyle      { get; set; }
-        public IEnumerable<SelectListItem> Condition      { get; set; }
-        public IEnumerable<SelectListItem> ExteriorColor  { get; set; }
-        public IEnumerable<SelectListItem> InteriorColor  { get; set; }
-        public IEnumerable<SelectListItem> Make           { get; set; }
-        public IEnumerable<SelectListItem> Model          { get; set; }
-        public IEnumerable<SelectListItem> Transmission   { get; set; }
+        public Model Model                                 { get; set; }
+        public Vehicle Vehicle                             { get; set; }
+        public HttpPostedFileBase ImageUpload              { get; set; }
+        public IEnumerable<SelectListItem> BodyStyles      { get; set; }
+        public IEnumerable<SelectListItem> Conditions      { get; set; }
+        public IEnumerable<SelectListItem> ExteriorColors  { get; set; }
+        public IEnumerable<SelectListItem> InteriorColors  { get; set; }
+        public IEnumerable<SelectListItem> Makes           { get; set; }
+        public IEnumerable<SelectListItem> Models          { get; set; }
+        public IEnumerable<SelectListItem> Transmissions   { get; set; }
 
         public VehicleAdminViewModel()
         {
-            BodyStyle = new List<SelectListItem>()
+            BodyStyles = new List<SelectListItem>()
             {
                 new SelectListItem() { Value = "1", Text = "Car"   },
                 new SelectListItem() { Value = "2", Text = "SUV"   },
@@ -48,13 +33,13 @@ namespace CarDealership.UI.Models
                 new SelectListItem() { Value = "4", Text = "Van"   }
             };
 
-            Condition = new List<SelectListItem>()
+            Conditions = new List<SelectListItem>()
             {
                 new SelectListItem() { Value = "false", Text = "New"  },
                 new SelectListItem() { Value = "true",  Text = "Used" }
             };
 
-            Transmission = new List<SelectListItem>()
+            Transmissions = new List<SelectListItem>()
             {
                 new SelectListItem() { Value = "false", Text = "Manual"    },
                 new SelectListItem() { Value = "true",  Text = "Automatic" }
@@ -68,40 +53,55 @@ namespace CarDealership.UI.Models
             var integerConstraint      = new Regex(@"^[0-9]+$");
             var alphaNumericConstraint = new Regex(@"^(\w|\d)+$");
 
-            if (!integerConstraint.IsMatch(Year.ToString()) || Year < 2000 || Year > DateTime.Today.Year + 1)
+            if (!integerConstraint.IsMatch(Model.Year.ToString()) || Model.Year < 2000 || Model.Year > DateTime.Today.Year + 1)
             {
-                errors.Add(new ValidationResult("Year must be between 2000 and next year."));
+                errors.Add(new ValidationResult("Year must be between 2000 and next year.", new[] { "Model.Year" }));
             }
 
-            if (!decimalConstraint.IsMatch(Mileage.ToString()) || Mileage < 0m || Mileage > 1000000m)
+            if (!decimalConstraint.IsMatch(Vehicle.Mileage.ToString()) || Vehicle.Mileage < 0m || Vehicle.Mileage > 1000000m)
             {
-                errors.Add(new ValidationResult("Mileage must be between 0 and 1,000,000."));
+                errors.Add(new ValidationResult("Mileage must be between 0 and 1,000,000.", new[] { "Customer.Name" }));
             }
 
-            if (!decimalConstraint.IsMatch(Mileage.ToString()) || MSRP <= 0m || MSRP >= 1000000m)
+            if (!decimalConstraint.IsMatch(Vehicle.MSRP.ToString()) || Vehicle.MSRP <= 0m || Vehicle.MSRP >= 1000000m)
             {
-                errors.Add(new ValidationResult("MSRP must be between 0 and $1,000,000."));
+                errors.Add(new ValidationResult("MSRP must be between 0 and $1,000,000.", new[] { "Vehicle.MSRP" }));
             }
 
-            if (!decimalConstraint.IsMatch(Mileage.ToString()) || SalePrice <= 0m || SalePrice >= 1000000m)
+            if (!decimalConstraint.IsMatch(Vehicle.SalePrice.ToString()) || Vehicle.SalePrice <= 0m || Vehicle.SalePrice >= 1000000m)
             {
-                errors.Add(new ValidationResult("Sale price must be between 0 and $1,000,000."));
+                errors.Add(new ValidationResult("Sale price must be between 0 and $1,000,000.", new[] { "Vehicle.SalePrice" }));
             }
 
-            if (!alphaNumericConstraint.IsMatch(VIN) || VIN.Length != 17)
+            if (Vehicle.SalePrice > Vehicle.MSRP)
             {
-                errors.Add(new ValidationResult("VIN must be 17 digits in length."));
+                errors.Add(new ValidationResult("Sale price cannot exceed vehicle MSRP.", new[] { "Vehicle.SalePrice" }));
+            }
+
+            if (!alphaNumericConstraint.IsMatch(Vehicle.VIN) || Vehicle.VIN.Length != 17)
+            {
+                errors.Add(new ValidationResult("VIN must be 17 digits in length.", new[] { "Vehicle.VIN" }));
+            }
+
+            if ((Vehicle.IsUsed && (Vehicle.Mileage < 1000)) || (!Vehicle.IsUsed && (Vehicle.Mileage > 1000)))
+            {
+                errors.Add(new ValidationResult("New vehicles mileage must be 0-1000; Used must be 1000+.", new[] { "Vehicle.Mileage" }));
+            }
+
+            if (string.IsNullOrEmpty(Vehicle.Description))
+            {
+                errors.Add(new ValidationResult("Description is required.", new[] { "Vehicle.Description" }));
             }
 
             if (ImageUpload != null && ImageUpload.ContentLength > 0)
             {
-                var extensions = new string[] { ".jpg", ".png", ".gif", ".jpeg" };
+                var extensions = new string[] { ".jpg", ".png", ".jpeg" };
 
                 var extension = Path.GetExtension(ImageUpload.FileName);
 
                 if (!extensions.Contains(extension))
                 {
-                    errors.Add(new ValidationResult("Image file must be a jpg, png, gif, or jpeg."));
+                    errors.Add(new ValidationResult("Image file must be a jpg, png, gif, or jpeg.", new[] { "ImageUpload" }));
                 }
             } // image is NULLABLE
             //else

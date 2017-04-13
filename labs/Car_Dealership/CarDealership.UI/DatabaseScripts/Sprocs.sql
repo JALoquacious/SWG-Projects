@@ -355,13 +355,10 @@ GO
 CREATE PROCEDURE ModelSelectByMakeId (@MakeId INT)
 AS
 BEGIN
-	BEGIN TRANSACTION
-
 	select MD.ModelId, MD.MakeId, MD.UserId, MD.[Name], MD.[Year] from Models AS MD
 	inner join Makes as MK on MK.MakeId = MD.MakeId
-	where MK.MakeId = '@MakeId'
-
-	COMMIT TRANSACTION
+	where MK.MakeId = @MakeId
+	order by MD.[Name]
 END
 GO
 

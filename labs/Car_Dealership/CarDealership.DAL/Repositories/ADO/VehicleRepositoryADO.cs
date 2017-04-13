@@ -109,10 +109,13 @@ namespace CarDealership.DAL.Repositories.ADO
                         vehicle.UserId          = dr["UserId"].ToString();
                         vehicle.VIN             = dr["VIN"].ToString();
 
-                        if (dr["VehicleDescription"] != DBNull.Value)
+                        if (dr["SaleId"] != DBNull.Value)
+                            vehicle.SaleId = (int)dr["SaleId"];
+
+                        if (dr["Description"] != DBNull.Value)
                             vehicle.Description = dr["Description"].ToString();
 
-                        if (dr["ImageFileName"] != DBNull.Value)
+                        if (dr["Image"] != DBNull.Value)
                             vehicle.Image = dr["Image"].ToString();
                     }
                 }

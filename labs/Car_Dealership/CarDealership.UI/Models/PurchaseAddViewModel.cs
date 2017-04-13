@@ -11,7 +11,6 @@ namespace CarDealership.UI.Models
     {
         public Customer Customer                        { get; set; }
         public State State                              { get; set; }
-        //public PaymentType PaymentType                  { get; set; }
         public Sale Sale                                { get; set; }
         public VehicleDetail VehicleDetail              { get; set; }
         public IEnumerable<SelectListItem> States       { get; set; }

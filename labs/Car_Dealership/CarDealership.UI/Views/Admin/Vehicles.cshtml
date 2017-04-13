@@ -1,0 +1,36 @@
+﻿@model CarDealership.UI.Models.VehicleSearchViewModel
+
+@{
+    ViewBag.Title = "Admin";
+}
+
+<h2>Admin</h2>
+@Html.ActionLink("Add a new vehicle", "AddVehicle")
+
+<div class="row">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            @Html.Partial("_SearchBar", Model.SearchParams)
+        </div>
+    }
+</div>
+
+<h2>Search Results</h2>
+
+<div class="search-results"></div>
+
+@section Scripts {
+    <script src="~/Scripts/Logic.js"></script>
+    <script>
+        let imgPath = '@Url.Content("~/Images/Vehicles")';
+
+        $(document).ready(function () {
+            $('#search-btn').on('click', function () {
+                $('.search-results').empty();
+                queryVehicles(imgPath, null, true, "Purchase");
+            });
+        });
+    </script>
+}
