@@ -191,7 +191,7 @@ namespace CarDealership.UI.Controllers
                 vm.Makes          = new SelectList(makeRepo.GetAll(), "MakeId", "Name");
                 vm.InteriorColors = new SelectList(colorRepo.GetAllInterior(), "InteriorColorId", "Name");
                 vm.ExteriorColors = new SelectList(colorRepo.GetAllExterior(), "ExteriorColorId", "Name");
-                vm.Vehicle        = vehicleRepo.GetById(vm.Vehicle.VehicleId);
+                //vm.Vehicle        = vehicleRepo.GetById(vm.Vehicle.VehicleId);
 
                 return View(vm);
             }

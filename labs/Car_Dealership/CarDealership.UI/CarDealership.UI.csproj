@@ -217,6 +217,7 @@
     <Compile Include="Models\CustomValidation\ValidOrNullPasswordAttribute.cs" />
     <Compile Include="Models\CustomValidation\ValidPasswordAttribute.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\InventoryReportViewModel.cs" />
     <Compile Include="Models\MakeAddViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ModelAddViewModel.cs" />
@@ -353,6 +354,7 @@
     <Content Include="Views\Admin\Models.cshtml" />
     <Content Include="Views\Admin\Vehicles.cshtml" />
     <Content Include="Views\Admin\EditVehicle.cshtml" />
+    <Content Include="Views\Admin\Users.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

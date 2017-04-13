@@ -78,7 +78,7 @@ namespace CarDealership.UI.Models
                 errors.Add(new ValidationResult("Sale price cannot exceed vehicle MSRP.", new[] { "Vehicle.SalePrice" }));
             }
 
-            if (!alphaNumericConstraint.IsMatch(Vehicle.VIN) || Vehicle.VIN.Length != 17)
+            if (string.IsNullOrEmpty(Vehicle.VIN) || !alphaNumericConstraint.IsMatch(Vehicle.VIN) || Vehicle.VIN.Length != 17)
             {
                 errors.Add(new ValidationResult("VIN must be 17 digits in length.", new[] { "Vehicle.VIN" }));
             }

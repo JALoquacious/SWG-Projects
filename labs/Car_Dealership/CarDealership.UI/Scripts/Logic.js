@@ -5,7 +5,7 @@
         contentType: "application/json"
     })
     .done(function (data) {
-        let modelList = $('#Model_ModelId');
+        let modelList = $('#Vehicle_ModelId');
 
         modelList.empty();
         $.each(data, function (index, item) {

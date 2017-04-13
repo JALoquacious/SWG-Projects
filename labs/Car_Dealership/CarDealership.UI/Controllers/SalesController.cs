@@ -32,7 +32,8 @@ namespace CarDealership.UI.Controllers
         [HttpPost]
         public ActionResult Purchase(PurchaseAddViewModel vm)
         {
-            var vehicleRepo = VehicleRepositoryFactory.GetRepository();
+            var adminManager = AdminManagerFactory.GetRepository();
+            var vehicleRepo  = VehicleRepositoryFactory.GetRepository();
             vm.VehicleDetail = vehicleRepo.GetDetailById(vm.VehicleDetail.VehicleId);
 
             if (Request.IsAuthenticated)
@@ -42,16 +43,14 @@ namespace CarDealership.UI.Controllers
 
             if (ModelState.IsValid)
             {
-                var repo = VehicleRepositoryFactory.GetRepository();
-
-                repo.Purchase(vm.VehicleDetail, vm.Sale, vm.Customer);
+                adminManager.Purchase(vm.VehicleDetail, vm.Sale, vm.Customer);
                 //vm.Sale.UserId = ViewBag.UserId; get User Id this way?
                 return RedirectToAction("Index");
             }
             else
             {
-                vehicleRepo = VehicleRepositoryFactory.GetRepository();
                 var stateRepo = StateRepositoryFactory.GetRepository();
+                vehicleRepo = VehicleRepositoryFactory.GetRepository();
 
                 vm.States = new SelectList(stateRepo.GetAll(), "StateId", "Name");
                 vm.VehicleDetail = vehicleRepo.GetDetailById(vm.VehicleDetail.VehicleId);

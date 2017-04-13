@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using CarDealership.Models.Queries;
+using System.Web.Mvc;
 
 namespace CarDealership.UI.Controllers
 {
@@ -19,7 +20,8 @@ namespace CarDealership.UI.Controllers
         [HttpGet]
         public ActionResult Inventory()
         {
-            return View();
+            var vm = new InventoryReport();
+            return View(vm);
         }
     }
 }

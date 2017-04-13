@@ -10,7 +10,6 @@
 
 @using (Html.BeginForm())
 {
-    @Html.HiddenFor(m => m.Vehicle.VehicleId)
     <div class="row">
         <div class="form-group col-xs-12 col-md-4">
             @Html.LabelFor(m => m.Model.MakeId, "Make", htmlAttributes: new { @class = "control-label" })
@@ -18,9 +17,9 @@
             @Html.ValidationMessageFor(m => m.Model.MakeId, "", new { @class = "text-danger" })
         </div>
         <div class="form-group col-xs-12 col-md-4">
-            <label class="control-label" for="Model_ModelId">Model</label>
-            <select class="form-control" data-val="true" data-val-number="The field ModelId must be a number." data-val-required="The Model field is required." id="Model_ModelId" name="Model.ModelId"></select>
-            <span class="field-validation-valid text-danger" data-valmsg-for="Model.ModelId" data-valmsg-replace="true"></span>
+            @Html.LabelFor(m => m.Vehicle.ModelId, "Model", htmlAttributes: new { @class = "control-label" })
+            @Html.DropDownListFor(m => m.Vehicle.ModelId, Enumerable.Empty<SelectListItem>(), new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Vehicle.ModelId, "", new { @class = "text-danger" })
         </div>
     </div>
     <div class="row">

@@ -41,11 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Factories\AdminManagerFactory.cs" />
     <Compile Include="Factories\StateRepositoryFactory.cs" />
+    <Compile Include="Interfaces\IAdminManager.cs" />
     <Compile Include="Interfaces\IStateRepository.cs" />
+    <Compile Include="Repositories\ADO\AdminManagerADO.cs" />
     <Compile Include="Repositories\ADO\ColorRepositoryADO.cs" />
     <Compile Include="Factories\ColorRepositoryFactory.cs" />
     <Compile Include="Repositories\ADO\StateRepositoryADO.cs" />
+    <Compile Include="Repositories\Mock\AdminManagerMock.cs" />
     <Compile Include="Repositories\Mock\ColorRepositoryMock.cs" />
     <Compile Include="Interfaces\IColorRepository.cs" />
     <Compile Include="Repositories\ADO\ContactRepositoryADO.cs" />

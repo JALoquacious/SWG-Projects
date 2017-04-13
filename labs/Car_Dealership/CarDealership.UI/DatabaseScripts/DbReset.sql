@@ -170,7 +170,7 @@ BEGIN
 		(
 		2 -- VehicleId
 		,'11111111-1111-1111-1111-111111111111' -- UserId
-		,10 -- ModelId
+		,7 -- ModelId
 		,2 -- BodyStyleId
 		,5 -- InteriorColorId
 		,7 -- ExteriorColorId
@@ -188,7 +188,7 @@ BEGIN
 		(
 		3 -- VehicleId
 		,'11111111-1111-1111-1111-111111111111' -- UserId
-		,10 -- ModelId
+		,7 -- ModelId
 		,2 -- BodyStyleId
 		,5 -- InteriorColorId
 		,7 -- ExteriorColorId
@@ -206,7 +206,7 @@ BEGIN
 		(
 		4 -- VehicleId
 		,'00000000-0000-0000-0000-000000000000' -- UserId
-		,16 -- ModelId
+		,12 -- ModelId
 		,2 -- BodyStyleId
 		,3 -- InteriorColorId
 		,11 -- ExteriorColorId
@@ -224,7 +224,7 @@ BEGIN
 		(
 		5 -- VehicleId
 		,'00000000-0000-0000-0000-000000000000' -- UserId
-		,19 -- ModelId
+		,14 -- ModelId
 		,3 -- BodyStyleId
 		,2 -- InteriorColorId
 		,6 -- ExteriorColorId
@@ -242,7 +242,7 @@ BEGIN
 		(
 		6 -- VehicleId
 		,'11111111-1111-1111-1111-111111111111' -- UserId
-		,6 -- ModelId
+		,4 -- ModelId
 		,1 -- BodyStyleId
 		,7 -- InteriorColorId
 		,3 -- ExteriorColorId
