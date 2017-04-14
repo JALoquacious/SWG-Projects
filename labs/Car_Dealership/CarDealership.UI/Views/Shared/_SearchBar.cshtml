@@ -4,14 +4,14 @@
     <div class="panel panel-body text-center search-panel">
         <div class="col-xs-12 col-md-4">
             <div class="form-group form-inline">
-                <label>Quick Search</label>
+                @Html.LabelFor(m => m.SearchTerm, "Quick Search")
                 @Html.EditorFor(m => m.SearchTerm, new { htmlAttributes = new { @class = "form-control", placeholder = "Make, model, or year" } })
                 @Html.ValidationMessageFor(m => m.SearchTerm, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="col-xs-12 col-md-4">
             <div class="form-group form-inline">
-                <label>Price</label>
+                @Html.LabelFor(m => m.MinPrice, "Price")
                 @Html.DropDownListFor(m => m.MinPrice, Model.PriceList, "No Min", new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.MinPrice, "", new { @class = "text-danger" })
                 @Html.DropDownListFor(m => m.MaxPrice, Model.PriceList, "No Max", new { @class = "form-control" })
@@ -20,7 +20,7 @@
         </div>
         <div class="col-xs-12 col-md-4">
             <div class="form-group form-inline">
-                <label>Year</label>
+                @Html.LabelFor(m => m.MinYear, "Year")
                 @Html.DropDownListFor(m => m.MinYear,
                     new SelectList(Enumerable.Range(2000, (int)DateTime.Now.Year + 1 - 2000).ToList()),
                     "No Min",

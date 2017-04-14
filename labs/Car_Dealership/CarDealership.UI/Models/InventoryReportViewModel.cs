@@ -1,13 +1,11 @@
 ﻿using CarDealership.Models.Queries;
-using CarDealership.Models.Tables;
+using System.Collections.Generic;
 
 namespace CarDealership.UI.Models
 {
     public class InventoryReportViewModel
     {
-        public Make Make { get; set; }
-        public Model Model { get; set; }
-        public Vehicle Vehicle { get; set; }
-        public InventoryReport InventoryReport { get; set; }
+        public IEnumerable<InventoryReportQueryRow> NewInventory  { get; set; }
+        public IEnumerable<InventoryReportQueryRow> UsedInventory { get; set; }
     }
 }

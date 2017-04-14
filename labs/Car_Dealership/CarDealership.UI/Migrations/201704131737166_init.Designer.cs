@@ -13,7 +13,7 @@ namespace CarDealership.UI.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201704030052236_init"; }
+            get { return "201704131737166_init"; }
         }
         
         string IMigrationMetadata.Source

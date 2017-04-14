@@ -8,12 +8,17 @@ namespace CarDealership.DAL.Repositories.Mock
 {
     public class AdminManagerMock : IAdminManager
     {
-        public IEnumerable<InventoryReport> GetInventoryReport()
+        public IEnumerable<SalesReportQueryRow> FilterSalesReport(string user, DateTime? fromDate, DateTime? toDate)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<SalesReport> GetSalesReport()
+        public IEnumerable<InventoryReportQueryRow> GetInventoryReport(bool isUsed)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<SalesReportQueryRow> GetSalesReport()
         {
             throw new NotImplementedException();
         }

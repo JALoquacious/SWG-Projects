@@ -1,10 +1,12 @@
 ﻿function getModelsByMake(makeId) {
+    console.log("getModelsByMake");
     $.ajax({
         url: 'http://localhost:59373/api/vehicles/models/makes/' + makeId,
         type: 'GET',
         contentType: "application/json"
     })
-    .done(function (data) {
+        .done(function (data) {
+            console.log("done");
         let modelList = $('#Vehicle_ModelId');
 
         modelList.empty();
@@ -46,7 +48,7 @@ function getResultList(index, vehicle, action) {
             <div class='panel-heading'> ${vehicle.Year} ${vehicle.Make} ${vehicle.Model}</div>
             <div class='row'>
                 <div class='col-xs-12 col-md-3'>
-                    <img class='featured-img' src='${imgPath}/${vehicle.Image}'/>
+                    <img class='detail-img' src='${imgPath}/${vehicle.Image}'/>
                 </div>"
                 <div class='col-xs-12 col-md-3'>
                     <table class='table table-hover'>
@@ -97,14 +99,8 @@ function getResultList(index, vehicle, action) {
                             </tr>
                         </tbody>
                     </table>
-                </div>
-            </div>
-            <div class='row'>
-                <div class='col-xs-12'>
-                    <p>
-                        <a href='${action}/${vehicle.VehicleId}'
-                            class='btn btn-custom btn-large pull-right details-btn'>${action}</a>
-                    </p>
+                    <a href='${action}/${vehicle.VehicleId}'
+                        class='btn btn-custom btn-large pull-right details-btn'>${action}</a>
                 </div>
             </div>
         </div>`

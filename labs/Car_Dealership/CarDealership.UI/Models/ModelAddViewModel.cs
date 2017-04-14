@@ -25,7 +25,7 @@ namespace CarDealership.UI.Models
 
             if (!string.IsNullOrEmpty(NewModelName) && !modelNameConstraint.IsMatch(NewModelName))
             {
-                errors.Add(new ValidationResult("Model name allows letters, numbers, hyphens, and apostrophes).", new[] { "NewModelName" }));
+                errors.Add(new ValidationResult("Model name allows letters, numbers, hyphens, and apostrophes.", new[] { "NewModelName" }));
             }
 
             return errors;

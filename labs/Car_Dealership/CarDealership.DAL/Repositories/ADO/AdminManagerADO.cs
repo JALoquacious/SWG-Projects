@@ -10,14 +10,122 @@ namespace CarDealership.DAL.Repositories.ADO
 {
     public class AdminManagerADO : IAdminManager
     {
-        public IEnumerable<InventoryReport> GetInventoryReport()
+        public IEnumerable<InventoryReportQueryRow> GetInventoryReport(bool isUsed)
         {
-            throw new NotImplementedException();
+            var inventories = new List<InventoryReportQueryRow>();
+
+            using (var cn = new SqlConnection(Settings.GetConnectionString()))
+            {
+                var cmd = new SqlCommand("InventoryReport", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@IsUsed", isUsed);
+
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        var row        = new InventoryReportQueryRow();
+                        row.Year       = (int)dr["Year"];
+                        row.Count      = (int)dr["Count"];
+                        row.StockValue = (decimal)dr["StockValue"];
+                        row.Make       = dr["Make"].ToString();
+                        row.Model      = dr["Model"].ToString();
+
+                        inventories.Add(row);
+                    }
+                }
+            }
+            return inventories;
         }
 
-        public IEnumerable<SalesReport> GetSalesReport()
+        public IEnumerable<SalesReportQueryRow> GetSalesReport()
         {
-            throw new NotImplementedException();
+            var sales = new List<SalesReportQueryRow>();
+
+            using (var cn = new SqlConnection(Settings.GetConnectionString()))
+            {
+                var cmd = new SqlCommand("SalesReport", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        var row           = new SalesReportQueryRow();
+                        row.TotalVehicles = (int)dr["TotalVehicles"];
+                        row.TotalSales    = (decimal)dr["TotalSales"];
+                        row.UserName      = dr["UserName"].ToString();
+
+                        sales.Add(row);
+                    }
+                }
+            }
+            return sales;
+        }
+
+        public IEnumerable<SalesReportQueryRow> FilterSalesReport(string user, DateTime? fromDate, DateTime? toDate)
+        {
+            var sales = new List<SalesReportQueryRow>();
+
+            using (var cn = new SqlConnection(Settings.GetConnectionString()))
+            {
+                string query = (
+                    @"SELECT U.UserName
+		                ,SUM(S.PurchasePrice) AS TotalSales
+                        ,COUNT(V.VehicleId) AS TotalVehicles
+                    FROM Sales AS S
+                    INNER JOIN Vehicles AS V ON S.SaleId = V.SaleId
+                    INNER JOIN AspNetUsers AS U ON U.Id = V.UserId
+                    WHERE 1 = 1
+                ");
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = cn;
+
+                if (!string.IsNullOrEmpty(user))
+                {
+                    query += "AND U.Id = @UserId ";
+                    cmd.Parameters.AddWithValue("@UserId", user);
+                }
+
+                if (fromDate.HasValue)
+                {
+                    query += "AND S.Date >= @FromDate ";
+                    cmd.Parameters.AddWithValue("@FromDate", fromDate.Value);
+                }
+
+                if (toDate.HasValue)
+                {
+                    query += "AND S.Date <= @ToDate ";
+                    cmd.Parameters.AddWithValue("@ToDate", toDate.Value);
+                }
+
+                query += "GROUP BY U.UserName ";
+                query += "ORDER BY TotalSales DESC";
+
+                cmd.CommandText = query;
+
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        var row = new SalesReportQueryRow();
+
+                        row.TotalVehicles = (int)dr["TotalVehicles"];
+                        row.TotalSales    = (decimal)dr["TotalSales"];
+                        row.UserName      = dr["UserName"].ToString();
+
+                        sales.Add(row);
+                    }
+                }
+            }
+            return sales;
         }
 
         public void Purchase(VehicleDetail vehicleDetail, Sale sale, Customer customer)
@@ -35,7 +143,7 @@ namespace CarDealership.DAL.Repositories.ADO
 
                 // update Customer
                 cmd.Parameters.Add(customerId);
-                cmd.Parameters.AddWithValue("@UserId", "00000000-0000-0000-0000-000000000000");
+                cmd.Parameters.AddWithValue("@UserId", customer.UserId);
                 cmd.Parameters.AddWithValue("@Name", customer.Name);
                 cmd.Parameters.AddWithValue("@Phone", customer.Phone);
                 cmd.Parameters.AddWithValue("@Email", customer.Email);
@@ -44,13 +152,12 @@ namespace CarDealership.DAL.Repositories.ADO
                 cmd.Parameters.AddWithValue("@City", customer.City);
                 cmd.Parameters.AddWithValue("@StateId", customer.State);
                 cmd.Parameters.AddWithValue("@Zip", customer.Zip);
-
                 // update Sale
                 cmd.Parameters.Add(saleId);
                 cmd.Parameters.AddWithValue("@PaymentTypeId", sale.PaymentTypeId);
                 cmd.Parameters.AddWithValue("@PurchasePrice", sale.PurchasePrice);
                 cmd.Parameters.AddWithValue("@Date", sale.Date);
-
+                // update Vehicle
                 cmd.Parameters.AddWithValue("@VehicleId", vehicleDetail.VehicleId);
 
                 cn.Open();

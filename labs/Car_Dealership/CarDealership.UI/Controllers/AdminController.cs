@@ -1,7 +1,6 @@
 ﻿using CarDealership.DAL.Factories;
 using CarDealership.Models.Tables;
 using CarDealership.UI.Models;
-using CarDealership.UI.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -15,6 +14,21 @@ namespace CarDealership.UI.Controllers
 {
     public class AdminController : Controller
     {
+        private ApplicationUserManager _userManager;
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+
+        [Authorize]
         [HttpGet]
         public ActionResult Specials()
         {
@@ -27,6 +41,7 @@ namespace CarDealership.UI.Controllers
             return View(vm);
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult Specials(Special newSpecial)
         {
@@ -40,6 +55,7 @@ namespace CarDealership.UI.Controllers
             return View(newSpecial);
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult Vehicles()
         {
@@ -48,6 +64,7 @@ namespace CarDealership.UI.Controllers
             return View(vm);
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult Makes()
         {
@@ -59,6 +76,7 @@ namespace CarDealership.UI.Controllers
             return View(vm);
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult Makes(MakeAddViewModel vm)
         {
@@ -67,7 +85,7 @@ namespace CarDealership.UI.Controllers
             if (ModelState.IsValid)
             {
                 var newMake    = new Make();
-                newMake.UserId = "00000000-0000-0000-0000-000000000000"; // load ASP.Net User here
+                newMake.UserId = User.Identity.GetUserId();
                 newMake.Name   = vm.NewMakeName;
 
                 repo.Insert(newMake);
@@ -83,6 +101,7 @@ namespace CarDealership.UI.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult Models()
         {
@@ -96,6 +115,7 @@ namespace CarDealership.UI.Controllers
             return View(vm);
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult Models(ModelAddViewModel vm)
         {
@@ -104,7 +124,7 @@ namespace CarDealership.UI.Controllers
             if (ModelState.IsValid)
             {
                 var newModel    = new Model();
-                newModel.UserId = "11111111-1111-1111-1111-111111111111"; // load ASP.Net User here
+                newModel.UserId = User.Identity.GetUserId();
                 newModel.MakeId = vm.Make.MakeId;
                 newModel.Name   = vm.NewModelName;
                 newModel.Year   = DateTime.Now.Year; // can add possible Year option later
@@ -126,6 +146,7 @@ namespace CarDealership.UI.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult AddVehicle()
         {
@@ -142,6 +163,7 @@ namespace CarDealership.UI.Controllers
             return View(vm);
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult AddVehicle(VehicleAdminViewModel vm)
         {
@@ -151,8 +173,7 @@ namespace CarDealership.UI.Controllers
 
                 try
                 {
-                    vm.Vehicle.UserId = "00000000-0000-0000-0000-000000000000"; //AuthorizeUtilities.GetUserId(this);
-                    //vm.Vehicle.ModelId = 8;
+                    vm.Vehicle.UserId = User.Identity.GetUserId();
 
                     if (vm.ImageUpload != null && vm.ImageUpload.ContentLength > 0)
                     {
@@ -191,12 +212,12 @@ namespace CarDealership.UI.Controllers
                 vm.Makes          = new SelectList(makeRepo.GetAll(), "MakeId", "Name");
                 vm.InteriorColors = new SelectList(colorRepo.GetAllInterior(), "InteriorColorId", "Name");
                 vm.ExteriorColors = new SelectList(colorRepo.GetAllExterior(), "ExteriorColorId", "Name");
-                //vm.Vehicle        = vehicleRepo.GetById(vm.Vehicle.VehicleId);
 
                 return View(vm);
             }
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult EditVehicle(int id)
         {
@@ -211,14 +232,10 @@ namespace CarDealership.UI.Controllers
             vm.ExteriorColors = new SelectList(colorRepo.GetAllExterior(), "ExteriorColorId", "Name");
             vm.Vehicle        = vehicleRepo.GetById(id);
 
-            //if (vm.Vehicle.UserId != AuthorizeUtilities.GetUserId(this))
-            //{
-            //    throw new Exception("Application User is not logged in.");
-            //}
-
             return View(vm);
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult EditVehicle(VehicleAdminViewModel vm)
         {
@@ -229,15 +246,29 @@ namespace CarDealership.UI.Controllers
                 repo.Update(vm.Vehicle);
                 return RedirectToAction("Vehicles");
             }
-            return View();
+            else
+            {
+                var colorRepo = ColorRepositoryFactory.GetRepository();
+                var makeRepo  = MakeRepositoryFactory.GetRepository();
+                var modelRepo = ModelRepositoryFactory.GetRepository();
+
+                vm.Makes          = new SelectList(makeRepo.GetAll(), "MakeId", "Name");
+                vm.InteriorColors = new SelectList(colorRepo.GetAllInterior(), "InteriorColorId", "Name");
+                vm.ExteriorColors = new SelectList(colorRepo.GetAllExterior(), "ExteriorColorId", "Name");
+
+                return View(vm);
+            }
+            
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult Users()
         {
             return View();
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult AddUser()
         {
@@ -245,6 +276,7 @@ namespace CarDealership.UI.Controllers
             return View(vm);
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult AddUser(UserAddViewModel vm)
         {
@@ -296,6 +328,7 @@ namespace CarDealership.UI.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult EditUser(string id)
         {
@@ -307,6 +340,7 @@ namespace CarDealership.UI.Controllers
             return View(vm);
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult EditUser(UserEditViewModel vm)
         {

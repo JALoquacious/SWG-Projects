@@ -7,7 +7,7 @@ namespace CarDealership.DAL.Factories
 {
     public class AdminManagerFactory
     {
-        public static IAdminManager GetRepository()
+        public static IAdminManager GetManager()
         {
             switch (Settings.GetRepositoryType())
             {

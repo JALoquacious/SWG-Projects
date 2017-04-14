@@ -38,6 +38,23 @@ GO
 IF EXISTS (
 		SELECT *
 		FROM INFORMATION_SCHEMA.ROUTINES
+		WHERE ROUTINE_NAME = 'UsersSelectAll'
+		)
+	DROP PROCEDURE UsersSelectAll
+GO
+
+CREATE PROCEDURE UsersSelectAll
+AS
+BEGIN
+	select UserName
+		,Email
+	from AspNetUsers
+END
+GO
+
+IF EXISTS (
+		SELECT *
+		FROM INFORMATION_SCHEMA.ROUTINES
 		WHERE ROUTINE_NAME = 'WipeTables'
 		)
 	DROP PROCEDURE WipeTables
@@ -65,29 +82,26 @@ BEGIN
 END
 GO
 
---IF EXISTS (
---		SELECT *
---		FROM INFORMATION_SCHEMA.ROUTINES
---		WHERE ROUTINE_NAME = 'SalesReport'
---		)
---	DROP PROCEDURE SalesReport
---GO
+IF EXISTS (
+		SELECT *
+		FROM INFORMATION_SCHEMA.ROUTINES
+		WHERE ROUTINE_NAME = 'SalesReport'
+		)
+	DROP PROCEDURE SalesReport
+GO
 
---CREATE PROCEDURE SalesReport (@UserName NVARCHAR(256), @FromDate DATETIME2, @ToDate DATETIME2)
---AS
---BEGIN
---	SELECT MAX(SP.FirstName + ' ' + SP.LastName) AS [User] -- Change MAX
---		,U.UserName
---		,SUM(S.PurchasePrice) AS TotalSales
---		,COUNT(S.VehicleId) AS TotalVehicles
-		
---	FROM Sales AS S
---	INNER JOIN Vehicles AS V ON S.VehicleId = V.VehicleId
---	INNER JOIN AspNetUsers AS U ON U.Id = V.UserId
---	--WHERE U.UserName = @UserName
---	GROUP BY U.UserName
---END
---GO
+CREATE PROCEDURE SalesReport --(@UserName NVARCHAR(256), @FromDate DATETIME2, @ToDate DATETIME2)
+AS
+BEGIN
+	SELECT U.UserName
+		,SUM(S.PurchasePrice) AS TotalSales
+		,COUNT(S.SaleId) AS TotalVehicles
+	FROM Sales AS S
+	INNER JOIN Vehicles AS V ON S.SaleId = V.SaleId
+	INNER JOIN AspNetUsers AS U ON U.Id = V.UserId
+	GROUP BY U.UserName
+END
+GO
 
 IF EXISTS (
 		SELECT *

@@ -1,6 +1,6 @@
 ﻿namespace CarDealership.Models.Queries
 {
-    public class InventoryReport
+    public class InventoryReportQueryRow
     {
         public string Make        { get; set; }
         public string Model       { get; set; }

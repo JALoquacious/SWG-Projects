@@ -12,6 +12,8 @@ GO
 CREATE PROCEDURE DbReset
 AS
 BEGIN
+	delete from AspNetRoles;
+	delete from AspNetUserRoles;
 	delete from Contacts;
 	delete from Sales;
 	delete from Customers;
@@ -24,17 +26,33 @@ BEGIN
 	delete from ExteriorColors;
 	delete from InteriorColors;
 	delete from BodyStyles;
-	delete from AspNetUsers WHERE Id IN ('00000000-0000-0000-0000-000000000000', '11111111-1111-1111-1111-111111111111');
+	delete from AspNetUsers WHERE Id IN ('00000000-0000-0000-0000-000000000000', '11111111-1111-1111-1111-111111111111', '22222222-2222-2222-2222-222222222222');
 
 	dbcc checkident ('Makes', RESEED, 1)
 	dbcc checkident ('Models', RESEED, 1)
 	dbcc checkident ('Vehicles', RESEED, 1)
+	dbcc checkident ('Sales', RESEED, 1)
+	dbcc checkident ('Specials', RESEED, 1)
+	dbcc checkident ('Customers', RESEED, 1)
 
-	insert into AspNetUsers(Id, EmailConfirmed, PhoneNumberConfirmed, Email, TwoFactorEnabled, LockoutEnabled, AccessFailedCount, UserName)
-	values('00000000-0000-0000-0000-000000000000', 0, 0, 'One1ABC@test.com', 0, 0, 0, 'test1');
-	insert into AspNetUsers(Id, EmailConfirmed, PhoneNumberConfirmed, Email, TwoFactorEnabled, LockoutEnabled, AccessFailedCount, UserName)
-	values('11111111-1111-1111-1111-111111111111', 0, 0, 'Two2XYZ@test.com', 0, 0, 0, 'test2');
+	INSERT INTO AspNetRoles (Id, [Name])
+	VALUES
+	('1', 'admin')
+	,('2', 'sales')
+	,('3', 'disabled')
 
+	insert into AspNetUsers(Id, EmailConfirmed, PhoneNumberConfirmed, Email, TwoFactorEnabled, LockoutEnabled, AccessFailedCount, UserName, FirstName, LastName)
+	values('00000000-0000-0000-0000-000000000000', 0, 0, 'One1ABC@test.com', 0, 0, 0, 'test1', 'Bobby', 'Tables');
+	insert into AspNetUsers(Id, EmailConfirmed, PhoneNumberConfirmed, Email, TwoFactorEnabled, LockoutEnabled, AccessFailedCount, UserName, FirstName, LastName)
+	values('11111111-1111-1111-1111-111111111111', 0, 0, 'Two2DEF@test.com', 0, 0, 0, 'test2', 'Sally', 'Strings');
+	insert into AspNetUsers(Id, EmailConfirmed, PhoneNumberConfirmed, Email, TwoFactorEnabled, LockoutEnabled, AccessFailedCount, UserName, FirstName, LastName)
+	values('22222222-2222-2222-2222-222222222222', 0, 0, 'Three3GHI@test.com', 0, 0, 0, 'test3', 'Davey', 'Delegates');
+
+	INSERT INTO AspNetUserRoles (UserId, RoleId)
+	VALUES
+	('00000000-0000-0000-0000-000000000000', '1')
+	,('11111111-1111-1111-1111-111111111111', '2')
+	,('22222222-2222-2222-2222-222222222222', '3')
 
 	set identity_insert BodyStyles on;
 	INSERT INTO BodyStyles (BodyStyleId, [Name])
@@ -89,6 +107,7 @@ BEGIN
 		,(6, 'Nissan', '11111111-1111-1111-1111-111111111111')
 		,(7, 'Tesla', '11111111-1111-1111-1111-111111111111')
 		,(8, 'Toyota', '11111111-1111-1111-1111-111111111111')
+		,(9, 'Kia', '22222222-2222-2222-2222-222222222222')
 	set identity_insert Makes off;
 
 
@@ -97,36 +116,40 @@ BEGIN
 	VALUES
 		 -- Audi
 		 (1, 1, 'A4', 2017, '00000000-0000-0000-0000-000000000000')
-		,(2, 1, 'Q5', 2015, '00000000-0000-0000-0000-000000000000')
-		,(3, 1, 'R8', 2017, '11111111-1111-1111-1111-111111111111')
+		,(2, 1, 'Q5', 2015, '11111111-1111-1111-1111-111111111111')
+		,(3, 1, 'R8', 2017, '22222222-2222-2222-2222-222222222222')
 		 -- BMW
 		,(4, 2, 'Z4', 2014, '00000000-0000-0000-0000-000000000000')
-		,(5, 2, 'X5', 2017, '00000000-0000-0000-0000-000000000000')
-		,(6, 2, 'M6', 2013, '11111111-1111-1111-1111-111111111111')
+		,(5, 2, 'X5', 2017, '11111111-1111-1111-1111-111111111111')
+		,(6, 2, 'M6', 2013, '22222222-2222-2222-2222-222222222222')
 		 -- Chevrolet
 		,(7, 3, 'Tahoe', 2011, '00000000-0000-0000-0000-000000000000')
-		,(8, 3, 'Colorado', 2012, '00000000-0000-0000-0000-000000000000')
-		,(9, 3, 'Corvette', 2017, '11111111-1111-1111-1111-111111111111')
+		,(8, 3, 'Colorado', 2012, '11111111-1111-1111-1111-111111111111')
+		,(9, 3, 'Corvette', 2017, '22222222-2222-2222-2222-222222222222')
 		 -- Ford
 		,(10, 4, 'F-150', 2003, '00000000-0000-0000-0000-000000000000')
-		,(11, 4, 'Fusion', 2009, '00000000-0000-0000-0000-000000000000')
-		,(12, 4, 'Explorer', 2016, '11111111-1111-1111-1111-111111111111')
+		,(11, 4, 'Fusion', 2009, '11111111-1111-1111-1111-111111111111')
+		,(12, 4, 'Explorer', 2016, '22222222-2222-2222-2222-222222222222')
 		 -- Honda
 		,(13, 5, 'Accord', 2004, '00000000-0000-0000-0000-000000000000')
-		,(14, 5, 'Ridgeline', 2011, '00000000-0000-0000-0000-000000000000')
-		,(15, 5, 'Odyssey', 2010, '11111111-1111-1111-1111-111111111111')
+		,(14, 5, 'Ridgeline', 2011, '11111111-1111-1111-1111-111111111111')
+		,(15, 5, 'Odyssey', 2010, '22222222-2222-2222-2222-222222222222')
 		 -- Nissan
 		,(16, 6, 'GT-R', 2015, '00000000-0000-0000-0000-000000000000')
-		,(17, 6, 'Frontier', 2001, '00000000-0000-0000-0000-000000000000')
-		,(18, 6, 'Pathfinder', 2013, '11111111-1111-1111-1111-111111111111')
+		,(17, 6, 'Frontier', 2001, '11111111-1111-1111-1111-111111111111')
+		,(18, 6, 'Pathfinder', 2013, '22222222-2222-2222-2222-222222222222')
 		 -- Tesla
 		,(19, 7, 'S', 2013, '00000000-0000-0000-0000-000000000000')
-		,(20, 7, 'X', 2016, '00000000-0000-0000-0000-000000000000')
-		,(21, 7, '3', 2018, '11111111-1111-1111-1111-111111111111')
+		,(20, 7, 'X', 2016, '11111111-1111-1111-1111-111111111111')
+		,(21, 7, '3', 2018, '22222222-2222-2222-2222-222222222222')
 		 -- Toyota
 		,(22, 8, 'Land Cruiser', 2009, '00000000-0000-0000-0000-000000000000')
-		,(23, 8, 'Camry', 2012, '00000000-0000-0000-0000-000000000000')
-		,(24, 8, 'Tacoma', 1998, '11111111-1111-1111-1111-111111111111')
+		,(23, 8, 'Camry', 2012, '11111111-1111-1111-1111-111111111111')
+		,(24, 8, 'Tacoma', 1998, '22222222-2222-2222-2222-222222222222')
+		 -- Kia
+		,(25, 9, 'Sedona', 2018, '00000000-0000-0000-0000-000000000000')
+		,(26, 9, 'Optima', 2010, '11111111-1111-1111-1111-111111111111')
+		,(27, 9, 'Soul', 2014, '22222222-2222-2222-2222-222222222222')
 	set identity_insert Models off;
 
 
@@ -256,6 +279,186 @@ BEGIN
 		,0 -- IsAutomatic
 		,1 -- IsFeatured
 		,'bmw_z4.jpg' -- [Image]
+		),
+		(
+		7 -- VehicleId
+		,'22222222-2222-2222-2222-222222222222' -- UserId
+		,22 -- ModelId
+		,3 -- BodyStyleId
+		,1 -- InteriorColorId
+		,4 -- ExteriorColorId
+		,NULL -- SaleId
+		,32000 -- SalePrice
+		,33000 -- MSRP
+		,180000 -- Mileage
+		,'7890123456ABCDEFG' -- VIN
+		,'Rough and tumble.' -- [Description]
+		,1 -- IsUsed
+		,1 -- IsAutomatic
+		,0 -- IsFeatured
+		,'toyota_land-cruiser.jpg' -- [Image]
+		),
+		(
+		8 -- VehicleId
+		,'22222222-2222-2222-2222-222222222222' -- UserId
+		,17 -- ModelId
+		,2 -- BodyStyleId
+		,6 -- InteriorColorId
+		,1 -- ExteriorColorId
+		,NULL -- SaleId
+		,3200 -- SalePrice
+		,3700 -- MSRP
+		,290000 -- Mileage
+		,'7890123456ABCDEFG' -- VIN
+		,'Still has something left to give.' -- [Description]
+		,1 -- IsUsed
+		,0 -- IsAutomatic
+		,0 -- IsFeatured
+		,'nissan_frontier.jpg' -- [Image]
+		),
+		(
+		9 -- VehicleId
+		,'22222222-2222-2222-2222-222222222222' -- UserId
+		,3 -- ModelId
+		,1 -- BodyStyleId
+		,6 -- InteriorColorId
+		,1 -- ExteriorColorId
+		,NULL -- SaleId
+		,160000 -- SalePrice
+		,162900 -- MSRP
+		,12 -- Mileage
+		,'8901234567ABCDEFG' -- VIN
+		,'King of the hill.' -- [Description]
+		,0 -- IsUsed
+		,0 -- IsAutomatic
+		,1 -- IsFeatured
+		,'audi_r8.jpg' -- [Image]
+		),
+		(
+		10 -- VehicleId
+		,'22222222-2222-2222-2222-222222222222' -- UserId
+		,15 -- ModelId
+		,4 -- BodyStyleId
+		,1 -- InteriorColorId
+		,10 -- ExteriorColorId
+		,NULL -- SaleId
+		,18500 -- SalePrice
+		,19500 -- MSRP
+		,105000 -- Mileage
+		,'9012345678ABCDEFG' -- VIN
+		,'Bring the whole crew.' -- [Description]
+		,1 -- IsUsed
+		,1 -- IsAutomatic
+		,1 -- IsFeatured
+		,'honda_odyssey.jpg' -- [Image]
+		),
+		(
+		11 -- VehicleId
+		,'00000000-0000-0000-0000-000000000000' -- UserId
+		,25 -- ModelId
+		,4 -- BodyStyleId
+		,2 -- InteriorColorId
+		,9 -- ExteriorColorId
+		,NULL -- SaleId
+		,25600 -- SalePrice
+		,26900 -- MSRP
+		,100 -- Mileage
+		,'9876543210ABCDEFG' -- VIN
+		,'Even soccer moms can have some style.' -- [Description]
+		,0 -- IsUsed
+		,0 -- IsAutomatic
+		,1 -- IsFeatured
+		,'kia_sedona.jpg' -- [Image]
+		),
+		(
+		12 -- VehicleId
+		,'11111111-1111-1111-1111-111111111111' -- UserId
+		,8 -- ModelId
+		,3 -- BodyStyleId
+		,3 -- InteriorColorId
+		,8 -- ExteriorColorId
+		,NULL -- SaleId
+		,23000 -- SalePrice
+		,25000 -- MSRP
+		,250 -- Mileage
+		,'8765432109ABCDEFG' -- VIN
+		,'Haul the tools and still have room to spare.' -- [Description]
+		,1 -- IsUsed
+		,1 -- IsAutomatic
+		,1 -- IsFeatured
+		,'chevrolet_colorado.jpg' -- [Image]
+		),
+		(
+		13 -- VehicleId
+		,'11111111-1111-1111-1111-111111111111' -- UserId
+		,8 -- ModelId
+		,3 -- BodyStyleId
+		,4 -- InteriorColorId
+		,6 -- ExteriorColorId
+		,NULL -- SaleId
+		,23000 -- SalePrice
+		,25000 -- MSRP
+		,250 -- Mileage
+		,'7654321098ABCEDFG' -- VIN
+		,'Haul the tools and still have room to spare.' -- [Description]
+		,1 -- IsUsed
+		,1 -- IsAutomatic
+		,0 -- IsFeatured
+		,'chevrolet_colorado.jpg' -- [Image]
+		),
+		(
+		14 -- VehicleId
+		,'22222222-2222-2222-2222-222222222222' -- UserId
+		,5 -- ModelId
+		,2 -- BodyStyleId
+		,7 -- InteriorColorId
+		,6 -- ExteriorColorId
+		,NULL -- SaleId
+		,55000 -- SalePrice
+		,56600 -- MSRP
+		,250 -- Mileage
+		,'6543210987ABCDEFG' -- VIN
+		,'Get around the big city or the wild country the same way -- in style.' -- [Description]
+		,0 -- IsUsed
+		,1 -- IsAutomatic
+		,0 -- IsFeatured
+		,'bmw_x5.jpg' -- [Image]
+		),
+		(
+		15 -- VehicleId
+		,'22222222-2222-2222-2222-222222222222' -- UserId
+		,23 -- ModelId
+		,1 -- BodyStyleId
+		,2 -- InteriorColorId
+		,5 -- ExteriorColorId
+		,NULL -- SaleId
+		,22000 -- SalePrice
+		,23840 -- MSRP
+		,90000 -- Mileage
+		,'5432109876ABCDEFG' -- VIN
+		,'Dependability you can count on.' -- [Description]
+		,1 -- IsUsed
+		,0 -- IsAutomatic
+		,1 -- IsFeatured
+		,'toyota_camry.jpg' -- [Image]
+		),
+		(
+		16 -- VehicleId
+		,'00000000-0000-0000-0000-000000000000' -- UserId
+		,18 -- ModelId
+		,2 -- BodyStyleId
+		,1 -- InteriorColorId
+		,2 -- ExteriorColorId
+		,NULL -- SaleId
+		,24000 -- SalePrice
+		,25000 -- MSRP
+		,90000 -- Mileage
+		,'4321098765ABCDEFG' -- VIN
+		,'Find your path.' -- [Description]
+		,1 -- IsUsed
+		,1 -- IsAutomatic
+		,1 -- IsFeatured
+		,'nissan_pathfinder.jpg' -- [Image]
 		)
 	set identity_insert Vehicles off;
 
@@ -331,6 +534,30 @@ BEGIN
 		,'Podunk' -- City
 		,'KY' -- StateId
 		,'75204' -- Zip
+		),
+		(
+		2
+		,'11111111-1111-1111-1111-111111111111' -- UserId
+		,'Clark Kent' -- [Name]
+		,NULL -- Phone
+		,'kent@dailyplanet.com' -- Email
+		,'123 Exchange Street' -- Street1
+		,'Apt. B' -- Street2
+		,'New Ohio' -- City
+		,'OH' -- StateId
+		,'12345' -- Zip
+		),
+		(
+		3
+		,'11111111-1111-1111-1111-111111111111' -- UserId
+		,'Johnny Loops' -- [Name]
+		,NULL -- Phone
+		,'johnny@loops.com' -- Email
+		,'123 South Street' -- Street1
+		,'Apt. 1' -- Street2
+		,'Loopville' -- City
+		,'MN' -- StateId
+		,'54321' -- Zip
 		)
 	set identity_insert Customers off;
 
@@ -358,8 +585,24 @@ BEGIN
 		,1 -- CustomerId
 		,'00000000-0000-0000-0000-000000000000' -- UserId
 		,1 -- PaymentTypeId
-		,23740 -- PurchasePrice
+		,11000 -- PurchasePrice
 		,'4/1/2017' -- [Date]
+		)
+		,(
+		2 -- SaleId
+		,2 -- CustomerId
+		,'11111111-1111-1111-1111-111111111111' -- UserId
+		,2 -- PaymentTypeId
+		,22000 -- PurchasePrice
+		,'4/2/2017' -- [Date]
+		)
+		,(
+		3 -- SaleId
+		,3 -- CustomerId
+		,'22222222-2222-2222-2222-222222222222' -- UserId
+		,3 -- PaymentTypeId
+		,33000 -- PurchasePrice
+		,'4/3/2017' -- [Date]
 		)
 	set identity_insert Sales off;
 
@@ -378,6 +621,13 @@ BEGIN
 		,NULL
 		,'cornelius@grandcentral.com'
 		,'Just how good is that coffee that comes with the special?'
+		)
+		,(
+		2
+		,'John Rockefeller'
+		,NULL
+		,'rockefeller@thebank.com'
+		,'I''m deeply interested in that No Shirt Special and the Audi R8...'
 		)
 	set identity_insert Contacts off;
 

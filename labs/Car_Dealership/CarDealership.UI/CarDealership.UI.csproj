@@ -207,9 +207,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201704030052236_init.cs" />
-    <Compile Include="Migrations\201704030052236_init.Designer.cs">
-      <DependentUpon>201704030052236_init.cs</DependentUpon>
+    <Compile Include="Migrations\201704131737166_init.cs" />
+    <Compile Include="Migrations\201704131737166_init.Designer.cs">
+      <DependentUpon>201704131737166_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -222,6 +222,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ModelAddViewModel.cs" />
     <Compile Include="Models\PurchaseAddViewModel.cs" />
+    <Compile Include="Models\SalesReportViewModel.cs" />
     <Compile Include="Models\SpecialAddViewModel.cs" />
     <Compile Include="Models\UserAddViewModel.cs" />
     <Compile Include="Models\UserAdminViewModel.cs" />
@@ -355,6 +356,8 @@
     <Content Include="Views\Admin\Vehicles.cshtml" />
     <Content Include="Views\Admin\EditVehicle.cshtml" />
     <Content Include="Views\Admin\Users.cshtml" />
+    <Content Include="Views\Reports\Inventory.cshtml" />
+    <Content Include="Views\Reports\Sales.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -369,11 +372,6 @@
     <Content Include="Scripts\jquery-3.1.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201704030052236_init.resx">
-      <DependentUpon>201704030052236_init.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\CarDealership.DAL\CarDealership.DAL.csproj">
       <Project>{05c029b3-effc-4c66-973b-8f36620d4db8}</Project>
       <Name>CarDealership.DAL</Name>
@@ -382,6 +380,11 @@
       <Project>{af6a90f5-c176-413f-8933-3d871bb69e1e}</Project>
       <Name>CarDealership.Models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201704131737166_init.resx">
+      <DependentUpon>201704131737166_init.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,0 +1,61 @@
+﻿@model CarDealership.UI.Models.SalesReportViewModel
+
+@{
+    ViewBag.Title = "Sales Report";
+}
+
+<h2>Sales Report</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <div class="panel panel-body text-center search-panel">
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group form-inline">
+                    @Html.LabelFor(m => m.UserId, "Quick Search")
+                    @Html.DropDownListFor(m => m.UserId, Model.Users, "No Max", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.UserId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group form-inline">
+                    @Html.LabelFor(m => m.FromDate, "From Date")
+                    @Html.EditorFor(m => m.FromDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(m => m.FromDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <div class="form-group form-inline">
+                    @Html.LabelFor(m => m.ToDate, "To Date")
+                    @Html.EditorFor(m => m.ToDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(m => m.ToDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4 col-md-offset-4">
+                <input id="search-btn" type="submit" value="Search" class="btn btn-custom" />
+            </div>
+        </div>
+    </div>
+}
+
+
+<div class="row">
+    <h4>Search Results</h4>
+    <table class="table table-striped table-hover table-bordered">
+        <thead>
+            <tr>
+                <th>User Name</th>
+                <th>Total Sales</th>
+                <th>Total Vehicles</th>
+            </tr>
+        </thead>
+        @foreach (var row in Model.Sales)
+        {
+            <tr>
+                <td>@row.UserName</td>
+                <td>@row.TotalSales</td>
+                <td>@row.TotalVehicles</td>
+            </tr>
+        }
+    </table>
+</div>

@@ -44,10 +44,10 @@
   <ItemGroup>
     <Compile Include="Enums\Condition.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Queries\InventoryReport.cs" />
+    <Compile Include="Queries\InventoryReportQueryRow.cs" />
     <Compile Include="Queries\MakeUserQueryRow.cs" />
     <Compile Include="Queries\ModelUserQueryRow.cs" />
-    <Compile Include="Queries\SalesReport.cs" />
+    <Compile Include="Queries\SalesReportQueryRow.cs" />
     <Compile Include="Queries\VehicleDetail.cs" />
     <Compile Include="Queries\VehicleFeatured.cs" />
     <Compile Include="Queries\VehicleSearchParameters.cs" />

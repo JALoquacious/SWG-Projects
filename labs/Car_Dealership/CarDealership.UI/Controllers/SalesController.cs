@@ -1,12 +1,30 @@
 ﻿using CarDealership.DAL.Factories;
 using CarDealership.UI.Models;
 using CarDealership.UI.Utilities;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using System.Web;
 using System.Web.Mvc;
 
 namespace CarDealership.UI.Controllers
 {
     public class SalesController : Controller
     {
+        private ApplicationUserManager _userManager;
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+
+        [Authorize]
         [HttpGet]
         public ActionResult Index()
         {
@@ -15,6 +33,7 @@ namespace CarDealership.UI.Controllers
             return View(vm);
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult Purchase(int id)
         {
@@ -24,27 +43,24 @@ namespace CarDealership.UI.Controllers
 
             vm.States = new SelectList(stateRepo.GetAll(), "StateId", "Name");
             vm.VehicleDetail = vehicleRepo.GetDetailById(id);
-            //vm.Customer.UserId = "00000000-0000-0000-0000-000000000000"; // load ASP.Net User here
+            vm.Customer.UserId = User.Identity.GetUserId();
 
             return View(vm);
         }
 
+        [Authorize]
         [HttpPost]
         public ActionResult Purchase(PurchaseAddViewModel vm)
         {
-            var adminManager = AdminManagerFactory.GetRepository();
+            var adminManager = AdminManagerFactory.GetManager();
             var vehicleRepo  = VehicleRepositoryFactory.GetRepository();
             vm.VehicleDetail = vehicleRepo.GetDetailById(vm.VehicleDetail.VehicleId);
 
-            if (Request.IsAuthenticated)
-            {
-                ViewBag.UserId = AuthorizeUtilities.GetUserId(this);
-            }
-
             if (ModelState.IsValid)
             {
+                vm.Sale.UserId = User.Identity.GetUserId();
                 adminManager.Purchase(vm.VehicleDetail, vm.Sale, vm.Customer);
-                //vm.Sale.UserId = ViewBag.UserId; get User Id this way?
+
                 return RedirectToAction("Index");
             }
             else
