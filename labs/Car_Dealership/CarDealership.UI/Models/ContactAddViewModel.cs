@@ -11,8 +11,8 @@ namespace CarDealership.UI.Models
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            var errors = new List<ValidationResult>();
-            var namePattern = new Regex(@"^[A-Za-z\'\- ]+$");
+            var errors       = new List<ValidationResult>();
+            var namePattern  = new Regex(@"^[A-Za-z\'\- ]+$");
             var emailPattern = new Regex(@"^.+@[^\.].*\.[a-z]{2,}$");
             var phonePattern = new Regex(
                 @"^\d?[\-)(\.]{0,2}(\d{3})[\-)(.]?[\-)(.]?(\d{3})[\-)(.]?(\d{4})$");

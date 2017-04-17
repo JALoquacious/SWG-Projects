@@ -1,6 +1,7 @@
 ﻿using CarDealership.DAL.Factories;
 using CarDealership.Models.Tables;
 using CarDealership.UI.Models;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace CarDealership.UI.Controllers
@@ -10,8 +11,10 @@ namespace CarDealership.UI.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var featuredList = VehicleRepositoryFactory.GetRepository().GetFeatured();
-            return View(featuredList);
+            var vm = new HomeIndexViewModel();
+            vm.Vehicles = VehicleRepositoryFactory.GetRepository().GetFeatured().ToList();
+            vm.Specials = SpecialRepositoryFactory.GetRepository().GetAll().ToList();
+            return View(vm);
         }
 
         [HttpGet]
