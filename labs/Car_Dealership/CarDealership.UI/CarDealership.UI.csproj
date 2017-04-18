@@ -228,6 +228,7 @@
     <Compile Include="Models\UserAddViewModel.cs" />
     <Compile Include="Models\UserAdminViewModel.cs" />
     <Compile Include="Models\UserEditViewModel.cs" />
+    <Compile Include="Models\UserReportViewModel.cs" />
     <Compile Include="Models\VehicleAdminViewModel.cs" />
     <Compile Include="Models\VehicleSearchViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

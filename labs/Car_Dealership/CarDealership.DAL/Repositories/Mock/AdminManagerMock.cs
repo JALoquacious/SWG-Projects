@@ -23,6 +23,11 @@ namespace CarDealership.DAL.Repositories.Mock
             throw new NotImplementedException();
         }
 
+        public IEnumerable<UserReportQueryRow> GetUserReport()
+        {
+            throw new NotImplementedException();
+        }
+
         public void Purchase(VehicleDetail vehicleDetail, Sale sale, Customer customer)
         {
             throw new NotImplementedException();

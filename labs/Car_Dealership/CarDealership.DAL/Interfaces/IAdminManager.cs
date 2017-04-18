@@ -7,6 +7,7 @@ namespace CarDealership.DAL.Interfaces
 {
     public interface IAdminManager
     {
+        IEnumerable<UserReportQueryRow> GetUserReport();
         IEnumerable<SalesReportQueryRow> GetSalesReport();
         IEnumerable<SalesReportQueryRow> FilterSalesReport(string user, DateTime? fromDate, DateTime? toDate);
         IEnumerable<InventoryReportQueryRow> GetInventoryReport(bool isUsed);

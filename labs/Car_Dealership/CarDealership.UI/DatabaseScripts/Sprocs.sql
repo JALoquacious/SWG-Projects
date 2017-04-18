@@ -38,17 +38,22 @@ GO
 IF EXISTS (
 		SELECT *
 		FROM INFORMATION_SCHEMA.ROUTINES
-		WHERE ROUTINE_NAME = 'UsersSelectAll'
+		WHERE ROUTINE_NAME = 'UserReport'
 		)
-	DROP PROCEDURE UsersSelectAll
+	DROP PROCEDURE UserReport
 GO
 
-CREATE PROCEDURE UsersSelectAll
+CREATE PROCEDURE UserReport
 AS
 BEGIN
-	select UserName
+	SELECT U.Id 
+		,FirstName
+		,LastName
 		,Email
-	from AspNetUsers
+		,R.[Name] AS [Role]
+	FROM AspNetUsers AS U
+	INNER JOIN AspNetUserRoles AS UR ON UR.UserId = U.Id
+	INNER JOIN AspNetRoles AS R ON R.Id = UR.RoleId
 END
 GO
 

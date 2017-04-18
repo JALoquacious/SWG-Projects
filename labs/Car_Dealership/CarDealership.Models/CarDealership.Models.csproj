@@ -48,6 +48,7 @@
     <Compile Include="Queries\MakeUserQueryRow.cs" />
     <Compile Include="Queries\ModelUserQueryRow.cs" />
     <Compile Include="Queries\SalesReportQueryRow.cs" />
+    <Compile Include="Queries\UserReportQueryRow.cs" />
     <Compile Include="Queries\VehicleDetail.cs" />
     <Compile Include="Queries\VehicleFeatured.cs" />
     <Compile Include="Queries\VehicleSearchParameters.cs" />

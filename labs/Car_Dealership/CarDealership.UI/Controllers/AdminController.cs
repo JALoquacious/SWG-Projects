@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace CarDealership.UI.Controllers
 {
+    //[Authorize(Roles = "admin")]
     public class AdminController : Controller
     {
         private ApplicationUserManager _userManager;
@@ -27,8 +28,7 @@ namespace CarDealership.UI.Controllers
                 _userManager = value;
             }
         }
-
-        [Authorize]
+        
         [HttpGet]
         public ActionResult Specials()
         {
@@ -41,7 +41,6 @@ namespace CarDealership.UI.Controllers
             return View(vm);
         }
 
-        [Authorize]
         [HttpPost]
         public ActionResult Specials(Special newSpecial)
         {
@@ -55,7 +54,6 @@ namespace CarDealership.UI.Controllers
             return View(newSpecial);
         }
 
-        [Authorize]
         [HttpGet]
         public ActionResult Vehicles()
         {
@@ -64,7 +62,6 @@ namespace CarDealership.UI.Controllers
             return View(vm);
         }
 
-        [Authorize]
         [HttpGet]
         public ActionResult Makes()
         {
@@ -76,7 +73,6 @@ namespace CarDealership.UI.Controllers
             return View(vm);
         }
 
-        [Authorize]
         [HttpPost]
         public ActionResult Makes(MakeAddViewModel vm)
         {
@@ -101,7 +97,6 @@ namespace CarDealership.UI.Controllers
             }
         }
 
-        [Authorize]
         [HttpGet]
         public ActionResult Models()
         {
@@ -115,7 +110,6 @@ namespace CarDealership.UI.Controllers
             return View(vm);
         }
 
-        [Authorize]
         [HttpPost]
         public ActionResult Models(ModelAddViewModel vm)
         {
@@ -146,7 +140,6 @@ namespace CarDealership.UI.Controllers
             }
         }
 
-        [Authorize]
         [HttpGet]
         public ActionResult AddVehicle()
         {
@@ -163,7 +156,6 @@ namespace CarDealership.UI.Controllers
             return View(vm);
         }
 
-        [Authorize]
         [HttpPost]
         public ActionResult AddVehicle(VehicleAdminViewModel vm)
         {
@@ -217,7 +209,6 @@ namespace CarDealership.UI.Controllers
             }
         }
 
-        [Authorize]
         [HttpGet]
         public ActionResult EditVehicle(int id)
         {
@@ -235,7 +226,6 @@ namespace CarDealership.UI.Controllers
             return View(vm);
         }
 
-        [Authorize]
         [HttpPost]
         public ActionResult EditVehicle(VehicleAdminViewModel vm)
         {
@@ -261,22 +251,22 @@ namespace CarDealership.UI.Controllers
             
         }
 
-        [Authorize]
         [HttpGet]
         public ActionResult Users()
         {
-            return View();
+            var vm   = new UserReportViewModel();
+            vm.Users = AdminManagerFactory.GetManager().GetUserReport();
+
+            return View(vm);
         }
 
-        [Authorize]
         [HttpGet]
         public ActionResult AddUser()
         {
             var vm = new UserAddViewModel();
             return View(vm);
         }
-
-        [Authorize]
+        
         [HttpPost]
         public ActionResult AddUser(UserAddViewModel vm)
         {
@@ -327,8 +317,7 @@ namespace CarDealership.UI.Controllers
                 return View(vm);
             }
         }
-
-        [Authorize]
+        
         [HttpGet]
         public ActionResult EditUser(string id)
         {
@@ -339,8 +328,7 @@ namespace CarDealership.UI.Controllers
 
             return View(vm);
         }
-
-        [Authorize]
+        
         [HttpPost]
         public ActionResult EditUser(UserEditViewModel vm)
         {

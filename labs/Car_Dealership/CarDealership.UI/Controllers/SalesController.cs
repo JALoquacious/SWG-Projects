@@ -1,6 +1,5 @@
 ﻿using CarDealership.DAL.Factories;
 using CarDealership.UI.Models;
-using CarDealership.UI.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System.Web;
@@ -8,6 +7,7 @@ using System.Web.Mvc;
 
 namespace CarDealership.UI.Controllers
 {
+    [Authorize(Roles = "sales")]
     public class SalesController : Controller
     {
         private ApplicationUserManager _userManager;
@@ -24,7 +24,6 @@ namespace CarDealership.UI.Controllers
             }
         }
 
-        [Authorize]
         [HttpGet]
         public ActionResult Index()
         {
@@ -33,7 +32,6 @@ namespace CarDealership.UI.Controllers
             return View(vm);
         }
 
-        [Authorize]
         [HttpGet]
         public ActionResult Purchase(int id)
         {
@@ -48,7 +46,6 @@ namespace CarDealership.UI.Controllers
             return View(vm);
         }
 
-        [Authorize]
         [HttpPost]
         public ActionResult Purchase(PurchaseAddViewModel vm)
         {

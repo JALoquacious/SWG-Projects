@@ -10,6 +10,35 @@ namespace CarDealership.DAL.Repositories.ADO
 {
     public class AdminManagerADO : IAdminManager
     {
+        public IEnumerable<UserReportQueryRow> GetUserReport()
+        {
+            var users = new List<UserReportQueryRow>();
+
+            using (var cn = new SqlConnection(Settings.GetConnectionString()))
+            {
+                var cmd = new SqlCommand("UserReport", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cn.Open();
+
+                using (SqlDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    {
+                        var row       = new UserReportQueryRow();
+                        row.FirstName = dr["FirstName"].ToString();
+                        row.LastName  = dr["LastName"].ToString();
+                        row.Email     = dr["Email"].ToString();
+                        row.Role      = dr["Role"].ToString();
+                        row.Id        = dr["Id"].ToString();
+
+                        users.Add(row);
+                    }
+                }
+            }
+            return users;
+        }
+
         public IEnumerable<InventoryReportQueryRow> GetInventoryReport(bool isUsed)
         {
             var inventories = new List<InventoryReportQueryRow>();

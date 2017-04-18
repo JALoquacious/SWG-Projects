@@ -10,9 +10,9 @@ namespace CarDealership.UI.Models
         {
             Roles = new List<SelectListItem>()
             {
-                new SelectListItem() { Value = "admin"   , Text = "Admin"    },
-                new SelectListItem() { Value = "sales"   , Text = "Sales"    },
-                new SelectListItem() { Value = "disabled", Text = "Disabled" }
+                new SelectListItem() { Value = "Admin"   , Text = "Admin"    },
+                new SelectListItem() { Value = "Sales"   , Text = "Sales"    },
+                new SelectListItem() { Value = "Disabled", Text = "Disabled" }
             };
         }
 
