@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace CarDealership.UI.Controllers
 {
-    [Authorize(Roles = "sales")]
+    //[Authorize(Roles = "sales")]
     public class SalesController : Controller
     {
         private ApplicationUserManager _userManager;

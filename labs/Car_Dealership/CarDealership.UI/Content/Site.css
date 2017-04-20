@@ -219,3 +219,12 @@ table {
 #user-table {
     margin-top: 2em;
 }
+
+.padding-top-left-1em {
+    padding-top: 2%;
+    padding-left: 2%;
+}
+
+.details-btn {
+    width: 100%;
+}

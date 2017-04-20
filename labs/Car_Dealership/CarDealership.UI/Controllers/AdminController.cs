@@ -281,7 +281,7 @@ namespace CarDealership.UI.Controllers
                     FirstName = vm.FirstName,
                     LastName  = vm.LastName,
                     Email     = vm.Email,
-                    UserName  = vm.Email
+                    UserName  = vm.FirstName + vm.LastName
                 };
 
                 userManager.PasswordValidator = new PasswordValidator()
@@ -321,9 +321,13 @@ namespace CarDealership.UI.Controllers
         [HttpGet]
         public ActionResult EditUser(string id)
         {
-            var context = HttpContext.GetOwinContext().Get<ApplicationDbContext>();
-            var vm      = new UserEditViewModel();
-            vm.User     = context.Users.FirstOrDefault(u => u.Id == id);
+            var context  = HttpContext.GetOwinContext().Get<ApplicationDbContext>();
+            var vm       = new UserEditViewModel();
+
+            vm.User      = context.Users.FirstOrDefault(u => u.Id == id);
+            vm.FirstName = vm.User.FirstName;
+            vm.LastName  = vm.User.LastName;
+            vm.Email     = vm.User.Email;
 
             return View(vm);
         }
@@ -336,12 +340,12 @@ namespace CarDealership.UI.Controllers
                 var context     = HttpContext.GetOwinContext().Get<ApplicationDbContext>();
                 var userStore   = new UserStore<ApplicationUser>(context);
                 var userManager = new UserManager<ApplicationUser>(userStore);
+                var user        = userManager.Users.FirstOrDefault(u => u.Id == vm.User.Id);
 
-                var user = userManager.Users.FirstOrDefault(u => u.Id == vm.User.Id);
                 user.FirstName = vm.FirstName;
                 user.LastName  = vm.LastName;
                 user.Email     = vm.Email;
-                user.UserName  = vm.Email;
+                user.UserName  = vm.FirstName + vm.LastName;
 
                 userManager.PasswordValidator = new PasswordValidator()
                 {
