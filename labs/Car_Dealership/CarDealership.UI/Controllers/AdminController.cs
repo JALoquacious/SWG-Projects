@@ -322,9 +322,8 @@ namespace CarDealership.UI.Controllers
         public ActionResult EditUser(string id)
         {
             var context = HttpContext.GetOwinContext().Get<ApplicationDbContext>();
-            var user    = context.Users.FirstOrDefault(u => u.Id == id);
             var vm      = new UserEditViewModel();
-            vm.User     = user;
+            vm.User     = context.Users.FirstOrDefault(u => u.Id == id);
 
             return View(vm);
         }
