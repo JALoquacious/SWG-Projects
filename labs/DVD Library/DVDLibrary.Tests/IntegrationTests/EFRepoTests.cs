@@ -1,4 +1,4 @@
-﻿using DVDLibrary.Data;
+﻿using DVDLibrary.Data.Repositories;
 using NUnit.Framework;
 using System.Configuration;
 using System.Data.SqlClient;
