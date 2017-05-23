@@ -459,6 +459,78 @@ BEGIN
 		,1 -- IsAutomatic
 		,1 -- IsFeatured
 		,'nissan_pathfinder.jpg' -- [Image]
+		),
+		(
+		17 -- VehicleId
+		,'00000000-0000-0000-0000-000000000000' -- UserId
+		,26 -- ModelId
+		,1 -- BodyStyleId
+		,3 -- InteriorColorId
+		,2 -- ExteriorColorId
+		,NULL -- SaleId
+		,16500 -- SalePrice
+		,17500 -- MSRP
+		,105000 -- Mileage
+		,'3210987654ABCDEFG' -- VIN
+		,'Optimize your commute.' -- [Description]
+		,1 -- IsUsed
+		,1 -- IsAutomatic
+		,0 -- IsFeatured
+		,'kia_optima.jpg' -- [Image]
+		),
+		(
+		18 -- VehicleId
+		,'22222222-2222-2222-2222-222222222222' -- UserId
+		,10 -- ModelId
+		,3 -- BodyStyleId
+		,4 -- InteriorColorId
+		,3 -- ExteriorColorId
+		,NULL -- SaleId
+		,16500 -- SalePrice
+		,17500 -- MSRP
+		,105000 -- Mileage
+		,'2109876543ABCDEFG' -- VIN
+		,'America''s best-selling truck.' -- [Description]
+		,1 -- IsUsed
+		,0 -- IsAutomatic
+		,1 -- IsFeatured
+		,'ford_f150.jpg' -- [Image]
+		),
+		(
+		19 -- VehicleId
+		,'11111111-1111-1111-1111-111111111111' -- UserId
+		,20 -- ModelId
+		,2 -- BodyStyleId
+		,5 -- InteriorColorId
+		,4 -- ExteriorColorId
+		,NULL -- SaleId
+		,70500 -- SalePrice
+		,72500 -- MSRP
+		,9000 -- Mileage
+		,'1098765432ABCDEFG' -- VIN
+		,'Quiet as a mouse; powerful as a bear.' -- [Description]
+		,1 -- IsUsed
+		,1 -- IsAutomatic
+		,0 -- IsFeatured
+		,'tesla_x.jpg' -- [Image]
+		),
+		(
+		20 -- VehicleId
+		,'00000000-0000-0000-0000-000000000000' -- UserId
+		,2 -- ModelId
+		,2 -- BodyStyleId
+		,6 -- InteriorColorId
+		,5 -- ExteriorColorId
+		,NULL -- SaleId
+		,35000 -- SalePrice
+		,36000 -- MSRP
+		,20000 -- Mileage
+		,'0987654321ABCDEFG' -- VIN
+		,'Refinement and class in a smooth package.' -- [Description]
+		,1 -- IsUsed
+		,1 -- IsAutomatic
+		,1 -- IsFeatured
+		,'audi_q5.jpg' -- [Image]
 		)
 	SET IDENTITY_INSERT Vehicles OFF;
 
@@ -472,7 +544,7 @@ BEGIN
 	VALUES (
 		 1
 		,'Free cup o'' joe'
-		,'Get a steaming hot cup of cOFFee with the purchase of a new car.'
+		,'Get a steaming hot cup of coffee with the purchase of a new car.'
 		)
 		,(
 		 2

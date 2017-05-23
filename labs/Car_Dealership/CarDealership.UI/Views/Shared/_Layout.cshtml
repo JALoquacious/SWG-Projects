@@ -27,13 +27,11 @@
                     <li>@Html.ActionLink("Specials", "Specials", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
 
-                    @*Authentication needs to be changed*@
                     @if (Request.IsAuthenticated && User.IsInRole("sales"))
                     {
                         <li>@Html.ActionLink("Sales", "Index", "Sales")</li>
                     }
-
-                    @*Authentication needs to be changed*@
+                    
                     @if (Request.IsAuthenticated && User.IsInRole("admin"))
                     {
                         <li>@Html.ActionLink("Sales", "Index", "Sales")</li>

@@ -1,5 +1,4 @@
 ﻿@model CarDealership.UI.Models.PurchaseAddViewModel
-
 @{
     ViewBag.Title = "Purchase Vehicle";
 }
@@ -100,6 +99,7 @@
 
 @using (Html.BeginForm())
 {
+    @Html.AntiForgeryToken()
     @Html.HiddenFor(m => m.Customer.UserId)
     @Html.HiddenFor(m => m.Sale.UserId)
     @Html.HiddenFor(m => m.VehicleDetail.VehicleId)

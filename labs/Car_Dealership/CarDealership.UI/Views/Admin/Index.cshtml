@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Admin</h2>
+
+<p>
+    @Html.ActionLink("Makes", "Makes", routeValues: null, htmlAttributes: null)
+</p>
+<br />
+<p>
+    @Html.ActionLink("Models", "Models", routeValues: null, htmlAttributes: null)
+</p>
+<br />
+<p>
+    @Html.ActionLink("Users", "Users", routeValues: null, htmlAttributes: null)
+    <ul>
+        <li>@Html.ActionLink("Add User", "AddUser", routeValues: null, htmlAttributes: null)</li>
+    </ul>
+</p>
+<br />
+<p>
+    @Html.ActionLink("Vehicles", "Vehicles", routeValues: null, htmlAttributes: null)
+    <ul>
+        <li>@Html.ActionLink("Add Vehicle", "AddVehicle", routeValues: null, htmlAttributes: null)</li>
+    </ul>
+</p>

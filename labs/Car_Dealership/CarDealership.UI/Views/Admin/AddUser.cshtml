@@ -1,4 +1,5 @@
 ﻿@model CarDealership.UI.Models.UserAddViewModel
+
 @{
     ViewBag.Title = "Add User";
 }
@@ -7,6 +8,7 @@
 
 @using (Html.BeginForm())
 {
+    @Html.AntiForgeryToken()
     <div class="row">
         <div class="form-group col-xs-12 col-md-6">
             @Html.LabelFor(m => m.FirstName, "First Name", htmlAttributes: new { @class = "control-label" })

@@ -1,12 +1,10 @@
 ﻿function getModelsByMake(makeId) {
-    console.log("getModelsByMake");
     $.ajax({
         url: 'http://localhost:59373/api/vehicles/models/makes/' + makeId,
         type: 'GET',
         contentType: "application/json"
     })
         .done(function (data) {
-            console.log("done");
             let modelList = $('#Vehicle_ModelId');
 
             modelList.empty();

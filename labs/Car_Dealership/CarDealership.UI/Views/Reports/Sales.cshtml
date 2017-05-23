@@ -1,5 +1,4 @@
 ﻿@model CarDealership.UI.Models.SalesReportViewModel
-
 @{
     ViewBag.Title = "Sales Report";
 }
@@ -8,6 +7,7 @@
 
 @using (Html.BeginForm())
 {
+    @Html.AntiForgeryToken()
     <div class="row">
         <div class="panel panel-body text-center search-panel">
             <div class="col-xs-12 col-md-4">

@@ -1,5 +1,4 @@
 ﻿@model CarDealership.UI.Models.VehicleAdminViewModel
-
 @{
     ViewBag.Title = "Edit Vehicle";
 }
@@ -10,6 +9,7 @@
 
 @using (Html.BeginForm())
 {
+    @Html.AntiForgeryToken()
     <div class="row">
         <div class="form-group col-xs-12 col-md-4">
             @Html.LabelFor(m => m.Model.MakeId, "Make", htmlAttributes: new { @class = "control-label" })

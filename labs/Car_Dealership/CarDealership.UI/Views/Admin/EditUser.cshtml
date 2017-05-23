@@ -1,4 +1,5 @@
 ﻿@model CarDealership.UI.Models.UserEditViewModel
+
 @{
     ViewBag.Title = "Edit User";
 }
@@ -6,6 +7,7 @@
 
 @using (Html.BeginForm())
 {
+    @Html.AntiForgeryToken()
     @Html.HiddenFor(m => m.User.Id)
     <div class="row">
         <div class="form-group col-xs-12 col-md-6">

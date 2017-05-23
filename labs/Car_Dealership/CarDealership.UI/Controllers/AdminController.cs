@@ -28,7 +28,13 @@ namespace CarDealership.UI.Controllers
                 _userManager = value;
             }
         }
-        
+
+        [HttpGet]
+        public ActionResult Index()
+        {
+            return View();
+        }
+
         [HttpGet]
         public ActionResult Specials()
         {

@@ -1,5 +1,4 @@
 ﻿@model CarDealership.UI.Models.ModelAddViewModel
-
 @{
     ViewBag.Title = "Models";
 }
@@ -11,6 +10,7 @@
     <div class="panel panel-body text-center search-panel">
         @using (Html.BeginForm())
             {
+            @Html.AntiForgeryToken()
             <div class="col-xs-12 col-md-6">
                 <div class="form-group form-inline">
                     @Html.LabelFor(m => m.NewModelName, "New Model")
